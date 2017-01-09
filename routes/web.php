@@ -38,6 +38,7 @@ Route::group(['prefix' => 'api/'], function ()
     Route::resource('basket', 'BasketController');
     Route::resource('city', 'CityController');
     Route::resource('event', 'EventController');
+    Route::resource('related_event', 'RelatedEventController');
     Route::resource('holiday', 'HolidayController');
     Route::resource('hotel', 'HotelController');
     Route::resource('photographer', 'PhotographerController');

@@ -3,15 +3,18 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Support\FilterPaginateOrder;
 
 class Hotel extends Model
 {
+    use FilterPaginateOrder;
+
     protected $fillable = [
         'hotel', 'picture', 'description', 'city_id'
     ];
 
     protected $filter = [
-        'id', 'hotel', 'picture', 'description', 'created_at',
+        'id', 'hotel', 'city_id', 'picture', 'description', 'created_at',
         'city.id', 'city.city', 'city.picture', 'city.description', 'city.cost', 'city.created_at'
     ];
 
@@ -21,10 +24,14 @@ class Hotel extends Model
             'hotel' => '',
             'picture' => '',
             'description' => '',
-            'city_id' => 'Select',
-            'cities' => [
-                City::initalize()
-            ]
+            'city_id' => 'Select'
         ];
     }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
+    }
+
+
 }

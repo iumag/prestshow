@@ -3,28 +3,27 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Support\FilterPaginateOrder;
 
 class Transport extends Model
 {
+    use FilterPaginateOrder;
+
     protected $fillable = [
-        'hotel', 'picture', 'description', 'city_id', 'cost'
+        'transport', 'picture', 'description',  'cost'
     ];
 
     protected $filter = [
-        'id', 'hotel', 'picture', 'description', 'city_id', 'cost', 'created_at'
+        'id', 'transport', 'picture', 'description', 'cost', 'created_at'
     ];
 
     public static function initalize()
     {
         return [
-            'hotel' => '',
+            'transport' => '',
             'picture' => '',
             'description' => '',
-            'city_id' => 'Select',
-            'cost' => '',
-            'cities' => [
-                City::initalize()
-            ]
+            'cost' => ''
         ];
     }
 }

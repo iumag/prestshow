@@ -26,4 +26,14 @@ class City extends Model
             'cost' => ''
         ];
     }
+
+    public function hotel()
+    {
+        return $this->HasMany(Hotel::class);
+    }
+
+    public function related_event()
+    {
+        return $this->HasMany(RelatedEvent::class);
+    }
 }

@@ -88,7 +88,7 @@ class CityController extends Controller
 
         return response()
             ->json([
-                'saved' => true
+                'deleted' => true
             ]);
     }
 }

@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Support\FilterPaginateOrder;
 
 class Holiday extends Model
 {
+    use FilterPaginateOrder;
+
     protected $fillable = [
         'name', 'picture', 'description', 'cost'
     ];

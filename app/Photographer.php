@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Support\FilterPaginateOrder;
 
 class Photographer extends Model
 {
+    use FilterPaginateOrder;
+
     protected $fillable = [
         'photographer', 'picture', 'description', 'cost'
     ];
