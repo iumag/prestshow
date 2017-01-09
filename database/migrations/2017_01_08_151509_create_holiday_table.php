@@ -17,6 +17,7 @@ class CreateHolidayTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('picture');
+            $table->decimal('cost');
             $table->timestamps();
         });
     }
