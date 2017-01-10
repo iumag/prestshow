@@ -47,7 +47,7 @@ class RelatedEventController extends Controller
 
     public function show($id)
     {
-        $related_event = RelatedEvent::findOrFail($id);
+        $related_event = RelatedEvent::with('city', 'event')->findOrFail($id);
 
         return response()
             ->json([
