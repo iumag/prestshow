@@ -42,7 +42,7 @@ Route::group(['prefix' => 'api/'], function ()
     Route::resource('holiday', 'HolidayController');
     Route::resource('hotel', 'HotelController');
     Route::resource('photographer', 'PhotographerController');
-    Route::resource('transport', 'PhotographerController');
+    Route::resource('transport', 'TransportController');
 });
 
 

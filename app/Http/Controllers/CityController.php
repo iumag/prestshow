@@ -57,7 +57,7 @@ class CityController extends Controller
 
         return response()
             ->json([
-                'model' => $city,
+                'form' => $city,
                 'option' => ''
             ]);
     }

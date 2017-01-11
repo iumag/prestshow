@@ -57,7 +57,7 @@ class PhotographerController extends Controller
 
         return response()
             ->json([
-                'model' => $photographer,
+                'form' => $photographer,
                 'option' => ''
             ]);
     }

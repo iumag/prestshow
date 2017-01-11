@@ -13,4 +13,12 @@
 </div>
 </body>
 <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
+<script>
+    var title = {
+        'hotel': '{{trans('admin.hotel')}}',
+        'capacity': '{{trans('panel.truck.table.capacity')}}',
+        'model': '{{trans('panel.truck.table.model')}}',
+        'volume': '{{trans('panel.truck.table.volume')}}'
+    };
+</script>
 </html>

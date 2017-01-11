@@ -3,12 +3,13 @@
         <template scope="props">
             <tr>
                 <td>{{props.item.id}}</td>
-                <td>{{props.item.event}}</td>
-                <td><img :src="'/img/event/' + props.item.picture"></td>
+                <td>{{props.item.city}}</td>
+                <td><img :src="'/img/city/' + props.item.picture"></td>
                 <td>{{props.item.description}}</td>
+                <td>{{props.item.cost}}</td>
                 <td>{{props.item.created_at}}</td>
                 <td>
-                    <router-link class="edit-modal btn btn-success" :to="'/event/' + props.item.id + '/edit'">
+                    <router-link class="edit-modal btn btn-success" :to="'/city/' + props.item.id + '/edit'">
                         <span class="glyphicon glyphicon-edit"></span> Edit
                     </router-link>
                     <button class="edit-modal btn btn-danger" @click="deleteItem(props.item.id)">
@@ -23,24 +24,25 @@
     import DataViewer from '../../components/DataViewer.vue'
     import axios from 'axios'
     export default {
-        name: 'EventIndex',
+        name: 'CityIndex',
         data() {
             return {
-                title: 'Events',
-                source: '/api/event',
-                create: '/event/create',
-                resource: 'event',
-                redirect: '/event',
+                title: 'City',
+                source: '/api/city',
+                create: '/city/create',
+                resource: 'city',
+                redirect: '/city',
                 thead: [
                     {title: 'Id', key: 'id', sort: true},
-                    {title: 'Event', key: 'event', sort: true},
+                    {title: 'City', key: 'city', sort: true},
                     {title: 'Picture', key: 'picture', sort: true},
                     {title: 'Description', key: 'description', sort: true},
+                    {title: 'Cost', key: 'cost', sort: true},
                     {title: 'Created At', key: 'created_at', sort: true},
                     {title: 'Actions', sort: false}
                 ],
                 filter: [
-                    'id', 'event', 'picture', 'description'
+                    'id', 'city', 'picture', 'description', 'cost'
                 ]
             }
         },
@@ -48,21 +50,21 @@
             DataViewer
         },
         watch: {
-          '$route' : 'fetchData'
+            '$route' : 'fetchData'
         },
         methods: {
             deleteItem(item){
                 var vm = this
                 vm.$router.push(vm.redirect)
                 /*axios.delete(`/api/${this.resource}/${item}`)
-                    .then(function (response) {
-                        if (response.data.deleted) {
+                 .then(function (response) {
+                 if (response.data.deleted) {
 
-                        }
-                    })
-                    .catch(function (error) {
-                        console.log(error)
-                    })*/
+                 }
+                 })
+                 .catch(function (error) {
+                 console.log(error)
+                 })*/
             }
         }
     }

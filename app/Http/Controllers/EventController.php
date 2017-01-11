@@ -56,7 +56,7 @@ class EventController extends Controller
 
         return response()
             ->json([
-                'model' => $event,
+                'form' => $event,
                 'option' => ''
             ]);
     }
@@ -69,8 +69,8 @@ class EventController extends Controller
             'description' => 'required',
         ]);
 
-        $city = City::findOrFail($id);
-        $city->update($request->all());
+        $event = Event::findOrFail($id);
+        $event->update($request->all());
 
         return response()
             ->json([

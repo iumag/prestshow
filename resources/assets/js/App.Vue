@@ -14,20 +14,25 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li><a href="#">Корзина</a></li>
-                        <li><a href="#">Города</a></li>
+                        <li>
+                            <router-link to="/city">Города</router-link>
+                        </li>
                         <li>
                             <router-link to="/event">Мероприятия</router-link>
                         </li>
                         <li><a href="#">Мероприятия города</a></li>
                         <li><a href="#">Отели</a></li>
-                        <li><a href="#">Фотография</a></li>
-                        <li><a href="#">Транспорт</a></li>
+                        <li>
+                            <router-link to="/photographer">Фотография</router-link>
+                        </li>
+                        <li>
+                            <router-link to="/transport">Транспорт</router-link>
+                        </li>
                     </ul>
                 </div>
             </div>
         </div>
         <router-view></router-view>
     </div>
-
-
 </template>
+

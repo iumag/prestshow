@@ -43,7 +43,7 @@ class TransportController extends Controller
 
     public function show($id)
     {
-        $transport = Photographer::findOrFail($id);
+        $transport = Transport::findOrFail($id);
 
         return response()
             ->json([
@@ -57,7 +57,7 @@ class TransportController extends Controller
 
         return response()
             ->json([
-                'model' => $transport,
+                'form' => $transport,
                 'option' => ''
             ]);
     }
@@ -82,7 +82,7 @@ class TransportController extends Controller
 
     public function destroy($id)
     {
-        $transport = Photographer::findOrFail($id);
+        $transport = Transport::findOrFail($id);
 
         $transport->delete();
 

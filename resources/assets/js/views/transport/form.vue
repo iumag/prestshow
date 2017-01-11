@@ -10,9 +10,9 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label>Event</label>
-                                <input type="text" class="form-control" v-model="form.event">
-                                <small class="text-danger" v-if="errors.event">{{errors.event[0]}}</small>
+                                <label>Transport</label>
+                                <input type="text" class="form-control" v-model="form.transport">
+                                <small class="text-danger" v-if="errors.transport">{{errors.transport[0]}}</small>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -20,6 +20,11 @@
                                 <label>Picture</label>
                                 <input type="text" class="form-control" v-model="form.picture">
                                 <small class="text-danger" v-if="errors.picture">{{errors.picture[0]}}</small>
+                            </div>
+                            <div class="form-group">
+                                <label>Cost</label>
+                                <input type="text" class="form-control" v-model="form.cost">
+                                <small class="text-danger" v-if="errors.cost">{{errors.cost[0]}}</small>
                             </div>
                         </div>
                         <div class="col-sm-4">
@@ -47,17 +52,17 @@
                 errors: {},
                 option: {},
                 title: 'Create',
-                initialize: '/api/event/create',
-                redirect: '/event',
-                store: '/api/event',
+                initialize: '/api/transport/create',
+                redirect: '/transport',
+                store: '/api/transport',
                 method: 'post'
             }
         },
         beforeMount() {
             if (this.$route.meta.mode === 'edit') {
                 this.title = 'Edit'
-                this.initialize = '/api/event/' + this.$route.params.id + '/edit'
-                this.store = '/api/event/' + this.$route.params.id
+                this.initialize = '/api/transport/' + this.$route.params.id + '/edit'
+                this.store = '/api/transport/' + this.$route.params.id
                 this.method = 'put'
             }
             this.fetchData()
