@@ -51,11 +51,11 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <slot v-for="item in model.data" :item="item"></slot>
+                    <slot :model="model"></slot>
                     </tbody>
                 </table>
             </div>
-            <div class="panel-footer pagination-footer" v-if="this.model.total >= 10">
+            <div class="panel-footer pagination-footer" v-if="showfooter && this.model.total >= 10">
                 <div class="pagination-item">
                     <span>Per page: </span>
                     <select v-model="params.per_page" @change="fetchData">
@@ -85,7 +85,7 @@
     import Vue from 'vue'
     import axios from 'axios'
     export default {
-        props: ['source', 'thead', 'filter', 'create', 'title'],
+        props: ['source', 'thead', 'filter', 'create', 'title', 'showfooter'],
         data() {
             return {
                 showFilter: false,
