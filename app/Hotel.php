@@ -10,11 +10,11 @@ class Hotel extends Model
     use FilterPaginateOrder;
 
     protected $fillable = [
-        'hotel', 'picture', 'description', 'city_id'
+        'hotel', 'picture', 'description', 'city_id', 'cost'
     ];
 
     protected $filter = [
-        'id', 'hotel', 'city_id', 'picture', 'description', 'created_at',
+        'id', 'hotel', 'city_id', 'cost', 'picture', 'description', 'created_at',
         'city.id', 'city.city', 'city.picture', 'city.description', 'city.cost', 'city.created_at'
     ];
 
@@ -22,6 +22,7 @@ class Hotel extends Model
     {
         return [
             'hotel' => '',
+            'cost' => '',
             'picture' => '',
             'description' => '',
             'city_id' => 'Select'

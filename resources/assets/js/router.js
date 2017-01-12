@@ -16,7 +16,10 @@ const router = new VueRouter({
         {path: '/transport/:id/edit', component: require('./views/transport/form.vue'), meta: {mode: 'edit'}},
         {path: '/photographer', component: require('./views/photographer/index.vue')},
         {path: '/photographer/create', component: require('./views/photographer/form.vue')},
-        {path: '/photographer/:id/edit', component: require('./views/photographer/form.vue'), meta: {mode: 'edit'}}
+        {path: '/photographer/:id/edit', component: require('./views/photographer/form.vue'), meta: {mode: 'edit'}},
+        {path: '/hotel', component: require('./views/hotel/index.vue')},
+        {path: '/hotel/create', component: require('./views/hotel/form.vue')},
+        {path: '/hotel/:id/edit', component: require('./views/hotel/form.vue'), meta: {mode: 'edit'}}
     ]
 })
 

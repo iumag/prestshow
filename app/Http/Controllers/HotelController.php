@@ -61,7 +61,7 @@ class HotelController extends Controller
 
         return response()
             ->json([
-                'model' => $hotel,
+                'form' => $hotel,
                 'option' => [
                     'cities' => City::orderBy('city')->get()
                 ]
