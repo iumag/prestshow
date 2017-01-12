@@ -19,7 +19,10 @@ const router = new VueRouter({
         {path: '/photographer/:id/edit', component: require('./views/photographer/form.vue'), meta: {mode: 'edit'}},
         {path: '/hotel', component: require('./views/hotel/index.vue')},
         {path: '/hotel/create', component: require('./views/hotel/form.vue')},
-        {path: '/hotel/:id/edit', component: require('./views/hotel/form.vue'), meta: {mode: 'edit'}}
+        {path: '/hotel/:id/edit', component: require('./views/hotel/form.vue'), meta: {mode: 'edit'}},
+        {path: '/related_event', component: require('./views/related_event/index.vue')},
+        {path: '/related_event/create', component: require('./views/related_event/form.vue')},
+        {path: '/related_event/:id/edit', component: require('./views/related_event/form.vue'), meta: {mode: 'edit'}}
     ]
 })
 

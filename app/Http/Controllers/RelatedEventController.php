@@ -61,7 +61,7 @@ class RelatedEventController extends Controller
 
         return response()
             ->json([
-                'model' => $related_event,
+                'form' => $related_event,
                 'option' => [
                     'cities' => City::orderBy('city')->get(),
                     'events' => Event::orderBy('event')->get()
