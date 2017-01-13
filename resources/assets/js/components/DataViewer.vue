@@ -51,7 +51,7 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <slot :model="model"></slot>
+                    <slot :cost="cost" :model="model"></slot>
                     </tbody>
                 </table>
             </div>
@@ -92,6 +92,7 @@
                 model: {
                     data: []
                 },
+                cost: [],
                 params: {
                     column: 'id',
                     direction: 'desc',
@@ -150,6 +151,7 @@
                 axios.get(this.buildURL())
                     .then(function (response) {
                         Vue.set(vm.$data, 'model', response.data.model)
+                        Vue.set(vm.$data, 'cost', response.data.cost)
                     })
                     .catch(function (error) {
                         console.log(error)

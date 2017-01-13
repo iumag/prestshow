@@ -36,4 +36,9 @@ class City extends Model
     {
         return $this->HasMany(RelatedEvent::class);
     }
+
+    public function basket_items()
+    {
+        return $this->morphMany(BasketItem::class, 'entity');
+    }
 }

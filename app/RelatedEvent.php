@@ -37,4 +37,9 @@ class RelatedEvent extends Model
     {
         return $this->belongsTo(City::class);
     }
+
+    public function basket_item()
+    {
+        return $this->morphOne(BasketItem::class);
+    }
 }

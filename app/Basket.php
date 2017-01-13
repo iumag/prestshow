@@ -3,9 +3,12 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Support\FilterPaginateOrder;
 
 class Basket extends Model
 {
+    use FilterPaginateOrder;
+
     protected $fillable = [
         'FIO', 'email', 'phone', 'message'
     ];
@@ -20,7 +23,15 @@ class Basket extends Model
             'FIO' => '',
             'email' => '',
             'phone' => '',
-            'message' => ''
+            'message' => '',
+            'items' => [
+                BasketItem::initalize()
+            ]
         ];
+    }
+
+    public function items()
+    {
+        return $this->hasMany(BasketItem::class);
     }
 }

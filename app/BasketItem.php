@@ -7,21 +7,23 @@ use Illuminate\Database\Eloquent\Model;
 class BasketItem extends Model
 {
     protected $fillable = [
-        'basket_id', 'basket_type'
+        'entity_id', 'entity_type'
     ];
 
     protected $filter = [
-        'id', 'basket_id', 'basket_type', 'created_at'
+        'id', 'entity_id', 'entity_type', 'created_at'
     ];
 
     public static function initalize()
     {
         return [
-            'basket_id' => 'Select',
-            'basket_type' => 'Select',
-            'basket' => [],
-            'basket' => [],
-            'message' => ''
+            'entity_id' => 'Select',
+            'entity_type' => 'Select'
         ];
+    }
+
+    public function entity()
+    {
+        return $this->morphTo();
     }
 }

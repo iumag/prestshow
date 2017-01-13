@@ -26,4 +26,9 @@ class Photographer extends Model
             'cost' => ''
         ];
     }
+
+    public function basket_item()
+    {
+        return $this->morphOne(BasketItem::class);
+    }
 }
