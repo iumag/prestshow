@@ -14,13 +14,13 @@ class BasketController extends Controller
         $basket = Basket::with('items.entity')->FilterPaginateOrder();
         $cost = 0;
         $cost_array = array();
-        foreach($basket->items() as $items){
-            foreach($items->items as $item) {
+        foreach ($basket->items() as $items) {
+            foreach ($items->items as $item) {
                 $entity = BasketItem::find($item->id);
                 $cost += $entity->entity->cost;
             }
-            array_push($cost_array,$cost);
-            $entity_array = 0;
+            array_push($cost_array, $cost);
+            $cost = 0;
         }
         return response()
             ->json([
@@ -37,18 +37,27 @@ class BasketController extends Controller
     public function show($id)
     {
         $basket = Basket::with('items.entity')->findOrFail($id);
-//        dd($basket);
-//        foreach($basket->items as $item){
-//            $entity = BasketItem::find($item->id);
-//            $entity_array[] = $entity->entity;
-//        }
-//
-//        dd($entity_array);
+
 
         return response()
             ->json([
                 'model' => $basket,
                 'option' => ''
+            ]);
+    }
+
+    public function destroy($id)
+    {
+        $basket = Basket::findOrFail($id);
+
+        BasketItem::whereBasketId($basket->id)
+            ->delete();
+
+        $basket->delete();
+
+        return response()
+            ->json([
+                'deleted' => true
             ]);
     }
 }

@@ -14,7 +14,7 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <router-link to="/basket">Корзина</router-link>
+                            <router-link to="/">Корзина</router-link>
                         </li>
                         <li>
                             <router-link to="/city">Города</router-link>

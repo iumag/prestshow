@@ -1,22 +1,27 @@
 <template>
-    <div class="panel panel-default">
-        <div class="panel-heading">
-            <span class="panel-title">{{model.title}}</span>
-            <div>
-                <button class="btn btn-danger btn-sm" @click="remove">Delete</button>
+    <div>
+        <h1 class="page-header">Dashboard</h1>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <span class="panel-title"><h3>{{model.FIO}}</h3></span>
+                <div>
+                    <button class="btn btn-danger btn-sm" @click="remove">Delete</button>
+                </div>
             </div>
-        </div>
-        <div class="panel-body">
-            <div class="row">
-                <div class="col-sm-4">
-                    <label>FIO</label>
-                    <p>{{model.FIO}}</p>
-                    <label>Email</label>
-                    <p>{{model.email}}</p>
-                    <label>Phone</label>
-                    <p>{{model.phone}}</p>
-                    <label>Message</label>
-                    <pre>{{model.message}}</pre>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <label>FIO</label>
+                        <p>{{model.FIO}}</p>
+                        <label>Email</label>
+                        <p>{{model.email}}</p>
+                    </div>
+                    <div class="col-sm-6">
+                        <label>Phone</label>
+                        <p>{{model.phone}}</p>
+                        <label>Message</label>
+                        <pre>{{model.message}}</pre>
+                    </div>
                 </div>
             </div>
             <table class="table table-striped table-bordered">
@@ -34,6 +39,14 @@
                     <td>{{item.entity.cost}}</td>
                 </tr>
                 </tbody>
+                <tfoot>
+                <tr class="text-uppercase text-info" rowspan="2">
+                    <td>
+                        <h3>Sub Total<h3/>
+                    </td>
+                    <td colspan="2" class="text-right"><h3>{{subTotal}}</h3></td>
+                </tr>
+                </tfoot>
             </table>
         </div>
     </div>
@@ -51,7 +64,7 @@
                     items: []
                 },
                 resource: 'basket',
-                redirect: '/basket'
+                redirect: '/'
             }
         },
         beforeMount() {
@@ -59,6 +72,13 @@
         },
         watch: {
             '$route': 'fetchData'
+        },
+        computed: {
+            subTotal() {
+                return this.model.items.reduce(function (carry, item) {
+                    return carry + parseFloat(item.entity.cost)
+                }, 0)
+            }
         },
         methods: {
             remove(){

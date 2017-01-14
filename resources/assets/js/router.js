@@ -23,7 +23,7 @@ const router = new VueRouter({
         {path: '/related_event', component: require('./views/related_event/index.vue')},
         {path: '/related_event/create', component: require('./views/related_event/form.vue')},
         {path: '/related_event/:id/edit', component: require('./views/related_event/form.vue'), meta: {mode: 'edit'}},
-        {path: '/basket', component: require('./views/basket/index.vue')},
+        {path: '/', component: require('./views/basket/index.vue')},
         {path: '/basket/:id', component: require('./views/basket/show.vue')},
     ]
 })

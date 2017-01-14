@@ -5,7 +5,7 @@
             <div class="panel-heading">
                 <span class="panel-title">{{title}}</span>
                 <div>
-                    <router-link :to="create" class="btn btn-primary btn-sm">Create</router-link>
+                    <router-link :to="create" class="btn btn-primary btn-sm" v-if="title != 'Basket'">Create</router-link>
                     <button class="btn btn-default btn-sm" @click="showFilter = !showFilter">F</button>
                 </div>
             </div>
