@@ -11,8 +11,8 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label>Transport</label>
-                                <input type="text" class="form-control" v-model="form.transport">
-                                <small class="text-danger" v-if="errors.transport">{{errors.transport[0]}}</small>
+                                <input type="text" class="form-control" v-model="form.name">
+                                <small class="text-danger" v-if="errors.name">{{errors.name[0]}}</small>
                             </div>
                         </div>
                         <div class="col-sm-4">

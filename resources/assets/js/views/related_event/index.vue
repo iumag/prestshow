@@ -3,8 +3,8 @@
         <template scope="props">
             <tr v-for="(item,index) in props.model.data">
                 <td>{{item.id}}</td>
-                <td>{{item.event.event}}</td>
-                <td>{{item.city.city}}</td>
+                <td>{{item.event.name}}</td>
+                <td>{{item.city.name}}</td>
                 <td>{{item.cost}}</td>
                 <td>{{item.created_at}}</td>
                 <td>

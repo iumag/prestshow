@@ -13,7 +13,7 @@
                                 <label>City</label>
                                 <select class="form-control" v-model="form.city_id">
                                     <option>Select</option>
-                                    <option v-for="city in option.cities" :value="city.id">{{city.city}}</option>
+                                    <option v-for="city in option.cities" :value="city.id">{{city.name}}</option>
                                 </select>
                                 <small class="text-danger" v-if="errors.city_id">{{errors.city_id[0]}}</small>
                             </div>
@@ -21,7 +21,7 @@
                                 <label>Event</label>
                                 <select class="form-control" v-model="form.event_id">
                                     <option>Select</option>
-                                    <option v-for="event in option.events" :value="event.id">{{event.event}}</option>
+                                    <option v-for="event in option.events" :value="event.id">{{event.name}}</option>
                                 </select>
                                 <small class="text-danger" v-if="errors.event_id">{{errors.event_id[0]}}</small>
                             </div>

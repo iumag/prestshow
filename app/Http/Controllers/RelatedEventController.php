@@ -63,8 +63,8 @@ class RelatedEventController extends Controller
             ->json([
                 'form' => $related_event,
                 'option' => [
-                    'cities' => City::orderBy('city')->get(),
-                    'events' => Event::orderBy('event')->get()
+                    'cities' => City::orderBy('name')->get(),
+                    'events' => Event::orderBy('name')->get()
                 ]
             ]);
     }

@@ -11,8 +11,8 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label>City</label>
-                                <input type="text" class="form-control" v-model="form.photographer">
-                                <small class="text-danger" v-if="errors.photographer">{{errors.photographer[0]}}</small>
+                                <input type="text" class="form-control" v-model="form.name">
+                                <small class="text-danger" v-if="errors.name">{{errors.name[0]}}</small>
                             </div>
                         </div>
                         <div class="col-sm-4">

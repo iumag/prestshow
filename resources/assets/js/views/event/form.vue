@@ -11,8 +11,8 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label>Event</label>
-                                <input type="text" class="form-control" v-model="form.event">
-                                <small class="text-danger" v-if="errors.event">{{errors.event[0]}}</small>
+                                <input type="text" class="form-control" v-model="form.name">
+                                <small class="text-danger" v-if="errors.name">{{errors.name[0]}}</small>
                             </div>
                         </div>
                         <div class="col-sm-4">

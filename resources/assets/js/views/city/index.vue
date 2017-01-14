@@ -3,7 +3,7 @@
         <template scope="props">
             <tr v-for="(item,index) in props.model.data">
                 <td>{{item.id}}</td>
-                <td>{{item.city}}</td>
+                <td>{{item.name}}</td>
                 <td><img :src="'/img/city/' + item.picture"></td>
                 <td>{{item.description}}</td>
                 <td>{{item.cost}}</td>

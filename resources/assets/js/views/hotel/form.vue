@@ -11,14 +11,14 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label>Hotel</label>
-                                <input type="text" class="form-control" v-model="form.hotel">
-                                <small class="text-danger" v-if="errors.hotel">{{errors.hotel[0]}}</small>
+                                <input type="text" class="form-control" v-model="form.name">
+                                <small class="text-danger" v-if="errors.name">{{errors.name[0]}}</small>
                             </div>
                             <div class="form-group">
                                 <label>City</label>
                                 <select class="form-control" v-model="form.city_id">
                                     <option>Select</option>
-                                    <option v-for="city in option.cities" :value="city.id">{{city.city}}</option>
+                                    <option v-for="city in option.cities" :value="city.id">{{city.name}}</option>
                                 </select>
                                 <small class="text-danger" v-if="errors.hotel">{{errors.city_id[0]}}</small>
                             </div>

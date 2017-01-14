@@ -22,7 +22,7 @@ class HotelController extends Controller
             ->json([
                 'form' => Hotel::initalize(),
                 'option' => [
-                    'cities' => City::orderBy('city')->get()
+                    'cities' => City::orderBy('name')->get()
                 ]
             ]);
     }
@@ -63,7 +63,7 @@ class HotelController extends Controller
             ->json([
                 'form' => $hotel,
                 'option' => [
-                    'cities' => City::orderBy('city')->get()
+                    'cities' => City::orderBy('name')->get()
                 ]
             ]);
     }

@@ -12,14 +12,14 @@ class BasketController extends Controller
     public function index()
     {
         $basket = Basket::with('items.entity')->FilterPaginateOrder();
-        $entity_array = 0;
+        $cost = 0;
         $cost_array = array();
         foreach($basket->items() as $items){
             foreach($items->items as $item) {
                 $entity = BasketItem::find($item->id);
-                $entity_array += $entity->entity->cost;
+                $cost += $entity->entity->cost;
             }
-            array_push($cost_array,$entity_array);
+            array_push($cost_array,$cost);
             $entity_array = 0;
         }
         return response()
@@ -37,17 +37,17 @@ class BasketController extends Controller
     public function show($id)
     {
         $basket = Basket::with('items.entity')->findOrFail($id);
-        dd($basket);
-        foreach($basket->items as $item){
-            $entity = BasketItem::find($item->id);
-            $entity_array[] = $entity->entity;
-        }
-
-        dd($entity_array);
+//        dd($basket);
+//        foreach($basket->items as $item){
+//            $entity = BasketItem::find($item->id);
+//            $entity_array[] = $entity->entity;
+//        }
+//
+//        dd($entity_array);
 
         return response()
             ->json([
-                'form' => $basket,
+                'model' => $basket,
                 'option' => ''
             ]);
     }
