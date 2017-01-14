@@ -10,17 +10,17 @@ class City extends Model
     use FilterPaginateOrder;
 
     protected $fillable = [
-        'city', 'picture', 'description', 'cost'
+        'name', 'picture', 'description', 'cost'
     ];
 
     protected $filter = [
-        'id', 'city', 'picture', 'description', 'cost', 'created_at'
+        'id', 'name', 'picture', 'description', 'cost', 'created_at'
     ];
 
     public static function initalize()
     {
         return [
-            'city' => '',
+            'name' => '',
             'picture' => '',
             'description' => '',
             'cost' => ''

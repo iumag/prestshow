@@ -10,18 +10,18 @@ class Hotel extends Model
     use FilterPaginateOrder;
 
     protected $fillable = [
-        'hotel', 'picture', 'description', 'city_id', 'cost'
+        'name', 'picture', 'description', 'city_id', 'cost'
     ];
 
     protected $filter = [
-        'id', 'hotel', 'city_id', 'cost', 'picture', 'description', 'created_at',
-        'city.id', 'city.city', 'city.picture', 'city.description', 'city.cost', 'city.created_at'
+        'id', 'name', 'city_id', 'cost', 'picture', 'description', 'created_at',
+        'city.id', 'city.name', 'city.picture', 'city.description', 'city.cost', 'city.created_at'
     ];
 
     public static function initalize()
     {
         return [
-            'hotel' => '',
+            'name' => '',
             'cost' => '',
             'picture' => '',
             'description' => '',

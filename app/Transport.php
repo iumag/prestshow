@@ -10,17 +10,17 @@ class Transport extends Model
     use FilterPaginateOrder;
 
     protected $fillable = [
-        'transport', 'picture', 'description',  'cost'
+        'name', 'picture', 'description',  'cost'
     ];
 
     protected $filter = [
-        'id', 'transport', 'picture', 'description', 'cost', 'created_at'
+        'id', 'name', 'picture', 'description', 'cost', 'created_at'
     ];
 
     public static function initalize()
     {
         return [
-            'transport' => '',
+            'name' => '',
             'picture' => '',
             'description' => '',
             'cost' => ''

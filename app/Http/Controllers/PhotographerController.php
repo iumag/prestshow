@@ -27,7 +27,7 @@ class PhotographerController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'photographer' => 'required',
+            'name' => 'required',
             'picture' => 'required',
             'description' => 'required',
             'cost' => 'required|numeric|min:0'
@@ -65,7 +65,7 @@ class PhotographerController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'photographer' => 'required',
+            'name' => 'required',
             'picture' => 'required',
             'description' => 'required',
             'cost' => 'required|numeric|min:0',

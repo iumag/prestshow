@@ -15,8 +15,8 @@ class RelatedEvent extends Model
 
     protected $filter = [
         'id', 'city_id', 'event_id', 'cost', 'created_at',
-        'city.id', 'city.city', 'city.picture', 'city.description', 'city.cost', 'city.created_at',
-        'event.id', 'event.event', 'event.picture', 'event.description', 'event.created_at'
+        'city.id', 'city.name', 'city.picture', 'city.description', 'city.cost', 'city.created_at',
+        'event.id', 'event.name', 'event.picture', 'event.description', 'event.created_at'
     ];
 
     public static function initalize()

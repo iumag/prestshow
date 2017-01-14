@@ -30,7 +30,7 @@ class HotelController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'hotel' => 'required',
+            'name' => 'required',
             'picture' => 'required',
             'description' => 'required',
             'city_id' => 'required|exists:cities,id',
@@ -71,7 +71,7 @@ class HotelController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'hotel' => 'required',
+            'name' => 'required',
             'picture' => 'required',
             'description' => 'required',
             'city_id' => 'required|exists:cities,id',

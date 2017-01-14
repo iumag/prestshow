@@ -27,7 +27,7 @@ class EventController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, [
-            'event' => 'required',
+            'name' => 'required',
             'picture' => 'required',
             'description' => 'required',
         ]);
@@ -64,7 +64,7 @@ class EventController extends Controller
     public function update(Request $request, $id)
     {
         $this->validate($request, [
-            'event' => 'required',
+            'name' => 'required',
             'picture' => 'required',
             'description' => 'required',
         ]);

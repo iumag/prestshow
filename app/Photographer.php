@@ -10,17 +10,17 @@ class Photographer extends Model
     use FilterPaginateOrder;
 
     protected $fillable = [
-        'photographer', 'picture', 'description', 'cost'
+        'name', 'picture', 'description', 'cost'
     ];
 
     protected $filter = [
-        'id', 'photographer', 'picture', 'description', 'cost', 'created_at'
+        'id', 'name', 'picture', 'description', 'cost', 'created_at'
     ];
 
     public static function initalize()
     {
         return [
-            'photographer' => '',
+            'name' => '',
             'picture' => '',
             'description' => '',
             'cost' => ''

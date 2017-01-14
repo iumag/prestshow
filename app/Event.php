@@ -11,17 +11,17 @@ class Event extends Model
     use FilterPaginateOrder;
 
     protected $fillable = [
-        'event', 'picture', 'description'
+        'name', 'picture', 'description'
     ];
 
     protected $filter = [
-        'id', 'event', 'picture', 'description', 'created_at'
+        'id', 'name', 'picture', 'description', 'created_at'
     ];
 
     public static function initalize()
     {
         return [
-            'event' => '',
+            'name' => '',
             'picture' => '',
             'description' => ''
         ];
