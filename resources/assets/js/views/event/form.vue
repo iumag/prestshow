@@ -22,10 +22,12 @@
                                 <small class="text-danger" v-if="errors.picture">{{errors.picture[0]}}</small>
                             </div>
                         </div>
-                        <div class="col-sm-4">
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-12">
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea class="form-control" v-model="form.description"></textarea>
+                                <textarea class="form-control" name="text" v-model="form.description"></textarea>
                                 <small class="text-danger" v-if="errors.description">{{errors.description[0]}}</small>
                             </div>
                         </div>
@@ -61,6 +63,9 @@
                 this.method = 'put'
             }
             this.fetchData()
+        },
+        mounted(){
+            CKEDITOR.replace("text")
         },
         watch: {
             '$route': 'fetchData'

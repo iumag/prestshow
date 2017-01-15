@@ -6,6 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Laravel</title>
     <link rel="stylesheet" type="text/css" href="{{asset('css/app.css')}}">
+    <script
+            src="http://code.jquery.com/jquery-2.2.4.js"
+            integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI="
+            crossorigin="anonymous"></script>
+    <script src="{{asset('ckeditor/ckeditor.js')}}"></script>
+    <script src="{{asset('js/fileinput.js')}}"></script>
 </head>
 <body>
 <div class="container">
