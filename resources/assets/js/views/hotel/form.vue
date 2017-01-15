@@ -36,8 +36,8 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea class="form-control" name="text" v-model="form.description"></textarea>
-                                <small class="text-danger" v-if="errors.description">{{errors.description[0]}}
+                                <ckeditor v-model="form.description" name="description" :height="'300px'"
+                                          :toolbar="[['Format']]"></ckeditor>
                                 </small>
                             </div>
                         </div>
@@ -52,6 +52,8 @@
     import Vue from 'vue'
     import axios from 'axios'
     import LoadImage from '../../components/LoadImage.vue'
+    import Ckeditor from '../../components/ckeditor.vue'
+
     export default{
         name: 'EventForm',
         data() {
@@ -74,9 +76,6 @@
                 this.method = 'put'
             }
             this.fetchData()
-        },
-        mounted(){
-            CKEDITOR.replace("text")
         },
         watch: {
             '$route': 'fetchData'
@@ -106,6 +105,6 @@
                     })
             }
         },
-        components: {LoadImage}
+        components: {LoadImage, Ckeditor}
     }
 </script>

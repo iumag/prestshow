@@ -11,14 +11,14 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label>City</label>
-                                <input type="text" class="form-control" v-model="form.name">
+                                <input type="text" name="name" class="form-control" v-model="form.name">
                                 <small class="text-danger" v-if="errors.name">{{errors.name[0]}}</small>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label>Cost</label>
-                                <input type="text" class="form-control" v-model="form.cost">
+                                <input type="text" name="cost" class="form-control" v-model="form.cost">
                                 <small class="text-danger" v-if="errors.cost">{{errors.cost[0]}}</small>
                             </div>
                         </div>
@@ -28,8 +28,8 @@
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label>Description</label>
-                                <textarea class="form-control" name="text" v-model="form.description"></textarea>
-                                <small class="text-danger" v-if="errors.description">{{errors.description[0]}}</small>
+                                <ckeditor v-model="form.description" name="description" :height="'300px'"
+                                          :toolbar="[['Format']]"></ckeditor>
                             </div>
                         </div>
                     </div>
@@ -43,6 +43,7 @@
     import Vue from 'vue'
     import axios from 'axios'
     import LoadImage from '../../components/LoadImage.vue'
+    import Ckeditor from '../../components/ckeditor.vue'
     export default{
         name: 'EventForm',
         data() {
@@ -67,7 +68,7 @@
             this.fetchData()
         },
         mounted(){
-            CKEDITOR.replace("text")
+
         },
         watch: {
             '$route': 'fetchData'
@@ -79,6 +80,9 @@
                     .then(function (response) {
                         Vue.set(vm.$data, 'form', response.data.form)
                         Vue.set(vm.$data, 'option', response.data.option)
+//                        Vue.nextTick(function() {
+//                            CKEDITOR.replace("description")
+//                        })
                     })
                     .catch(function (error) {
                         console.log(error)
@@ -97,6 +101,6 @@
                     })
             }
         },
-        components: {LoadImage}
+        components: {LoadImage, Ckeditor}
     }
 </script>
