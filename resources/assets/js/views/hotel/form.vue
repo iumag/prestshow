@@ -25,28 +25,24 @@
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label>Picture</label>
-                                <input type="text" class="form-control" v-model="form.picture">
-                                <small class="text-danger" v-if="errors.picture">{{errors.picture[0]}}</small>
-                            </div>
-                            <div class="form-group">
                                 <label>Cost</label>
                                 <input type="text" class="form-control" v-model="form.cost">
                                 <small class="text-danger" v-if="errors.cost">{{errors.cost[0]}}</small>
                             </div>
                         </div>
+                        <load-image></load-image>
                     </div>
-                        <div class="row">
-                            <div class="col-sm-12">
-                                <div class="form-group">
-                                    <label>Description</label>
-                                    <textarea class="form-control" name="text" v-model="form.description"></textarea>
-                                    <small class="text-danger" v-if="errors.description">{{errors.description[0]}}
-                                    </small>
-                                </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Description</label>
+                                <textarea class="form-control" name="text" v-model="form.description"></textarea>
+                                <small class="text-danger" v-if="errors.description">{{errors.description[0]}}
+                                </small>
                             </div>
                         </div>
-                        <button class="btn btn-success">Save</button>
+                    </div>
+                    <button class="btn btn-success">Save</button>
                 </form>
             </div>
         </div>
@@ -55,6 +51,7 @@
 <script>
     import Vue from 'vue'
     import axios from 'axios'
+    import LoadImage from '../../components/LoadImage.vue'
     export default{
         name: 'EventForm',
         data() {
@@ -108,6 +105,7 @@
                         console.log(error)
                     })
             }
-        }
+        },
+        components: {LoadImage}
     }
 </script>

@@ -15,13 +15,7 @@
                                 <small class="text-danger" v-if="errors.name">{{errors.name[0]}}</small>
                             </div>
                         </div>
-                        <div class="col-sm-4">
-                            <div class="form-group">
-                                <label>Picture</label>
-                                <input type="text" class="form-control" v-model="form.picture">
-                                <small class="text-danger" v-if="errors.picture">{{errors.picture[0]}}</small>
-                            </div>
-                        </div>
+<load-image></load-image>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
@@ -41,6 +35,8 @@
 <script>
     import Vue from 'vue'
     import axios from 'axios'
+    import LoadImage from '../../components/LoadImage.vue'
+
     export default{
         name: 'EventForm',
         data() {
@@ -94,6 +90,7 @@
                         console.log(error)
                     })
             }
-        }
+        },
+        components: {LoadImage}
     }
 </script>
