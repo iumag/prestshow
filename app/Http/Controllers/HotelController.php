@@ -31,13 +31,33 @@ class HotelController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'picture' => 'required',
+            'picture' => 'image',
             'description' => 'required',
             'city_id' => 'required|exists:cities,id',
             'cost' => 'required|numeric|min:0'
         ]);
 
-        $hotel = Hotel::create($request->all());
+        $image = $request->file('picture');
+
+        if (isset($image)) {
+            if ($image->isValid()) {
+
+                $name = $image->getClientOriginalName();
+
+                $image->move('../public/img/hotel', $name);
+
+            }
+        }else{
+            $name = '';
+        }
+
+        $hotel = Hotel::create([
+            'name' => $request->get('name'),
+            'cost' => $request->get('cost'),
+            'city_id' => $request->get('city_id'),
+            'description' => $request->get('description'),
+            'picture' => $name
+        ]);
 
         return response()
             ->json([
@@ -72,14 +92,34 @@ class HotelController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'picture' => 'required',
+            'picture' => 'image',
             'description' => 'required',
             'city_id' => 'required|exists:cities,id',
             'cost' => 'required|numeric|min:0'
         ]);
 
+        $image = $request->file('picture');
+
         $hotel = Hotel::findOrFail($id);
-        $hotel->update($request->all());
+
+        if (isset($image)) {
+            if ($image->isValid()) {
+
+                $name = $image->getClientOriginalName();
+
+                $image->move('../public/img/hotel', $name);
+            }
+        } else {
+            $name = $hotel->picture;
+        }
+
+        $hotel->update([
+            'name' => $request->get('name'),
+            'cost' => $request->get('cost'),
+            'city_id' => $request->get('city_id'),
+            'description' => $request->get('description'),
+            'picture' => $name
+        ]);
 
         return response()
             ->json([

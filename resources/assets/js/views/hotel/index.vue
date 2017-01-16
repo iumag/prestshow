@@ -4,8 +4,8 @@
             <tr v-for="(item,index) in props.model.data">
                 <td>{{item.id}}</td>
                 <td>{{item.name}}</td>
-                <td>{{item.city.city}}</td>
-                <td><img :src="'/img/city/' + item.picture"></td>
+                <td>{{item.city.name}}</td>
+                <td><img :src="'/img/hotel/' + item.picture"></td>
                 <td>{{item.description}}</td>
                 <td>{{item.cost}}</td>
                 <td>{{item.created_at}}</td>
