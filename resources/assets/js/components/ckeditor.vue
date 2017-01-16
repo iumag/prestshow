@@ -1,6 +1,6 @@
 <template>
     <div class="ckeditor">
-        <textarea :id="id" :value="value"></textarea>
+        <textarea :id="id" name="description" :value="value"></textarea>
     </div>
 </template>
 <script>
@@ -37,7 +37,7 @@
         },
         mounted () {
             const ckeditorId = this.id
-            console.log(this.extraplugins)
+
             const ckeditorConfig = {
 
                 language: this.language,

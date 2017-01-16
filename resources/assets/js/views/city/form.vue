@@ -7,6 +7,7 @@
             </div>
             <div class="panel-body">
                 <form class="form" @submit.prevent="save">
+                    <input type="hidden" name="_method" value="put" />
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
@@ -63,7 +64,6 @@
                 this.title = 'Edit'
                 this.initialize = '/api/city/' + this.$route.params.id + '/edit'
                 this.store = '/api/city/' + this.$route.params.id
-                this.method = 'put'
             }
             this.fetchData()
         },
@@ -90,7 +90,9 @@
             },
             save() {
                 var vm = this
-                axios[this.method](this.store, this.form)
+                var form = document.querySelector('form');
+                var formdata = new FormData(form)
+                axios[this.method](this.store, formdata)
                     .then(function (response) {
                         if (response.data.saved) {
                             vm.$router.push(vm.redirect)

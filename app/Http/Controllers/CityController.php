@@ -28,17 +28,33 @@ class CityController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'picture' => 'required',
+            'picture' => 'required|image',
             'description' => 'required',
             'cost' => 'required|numeric|min:0',
         ]);
 
-        $city = City::create($request->all());
+        $image = $request->file('picture');
+
+        if ($image->isValid()) {
+
+            $name = $image->getClientOriginalName();
+
+            $image->move('../public/img/city', $name);
+
+        }
+
+        $city = City::create([
+            'name' => $request->get('name'),
+            'cost' => $request->get('cost'),
+            'description' => $request->get('description'),
+            'picture' => $name
+        ]);
 
         return response()
             ->json([
                 'saved' => true
             ]);
+
     }
 
     public function show($id)
@@ -64,15 +80,35 @@ class CityController extends Controller
 
     public function update(Request $request, $id)
     {
+
         $this->validate($request, [
             'name' => 'required',
-            'picture' => 'required',
+            'picture' => 'image',
             'description' => 'required',
             'cost' => 'required|numeric|min:0',
         ]);
 
+        $image = $request->file('picture');
+
         $city = City::findOrFail($id);
-        $city->update($request->all());
+
+        if (isset($image)) {
+            if ($image->isValid()) {
+
+                $name = $image->getClientOriginalName();
+
+                $image->move('../public/img/city', $name);
+            }
+        } else {
+            $name = $city->picture;
+        }
+
+        $city->update([
+            'name' => $request->get('name'),
+            'cost' => $request->get('cost'),
+            'description' => $request->get('description'),
+            'picture' => $name
+        ]);
 
         return response()
             ->json([
