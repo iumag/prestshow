@@ -7,7 +7,7 @@
             </div>
             <div class="panel-body">
                 <form class="form" @submit.prevent="save">
-                    <input type="hidden" name="_method" value="put" />
+                    <input type="hidden" name="_method" value="put" v-if = "title === 'Edit'" />
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">

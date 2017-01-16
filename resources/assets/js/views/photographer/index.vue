@@ -34,7 +34,7 @@
                 showfooter: true,
                 thead: [
                     {title: 'Id', key: 'id', sort: true},
-                    {title: 'Photographer', key: 'photographer', sort: true},
+                    {title: 'Photographer', key: 'name', sort: true},
                     {title: 'Picture', key: 'picture', sort: false},
                     {title: 'Description', key: 'description', sort: true},
                     {title: 'Cost', key: 'cost', sort: true},
@@ -42,7 +42,7 @@
                     {title: 'Actions', sort: false}
                 ],
                 filter: [
-                    'id', 'photographer', 'picture', 'description', 'cost'
+                    'id', 'name', 'picture', 'description', 'cost'
                 ]
             }
         },
@@ -52,7 +52,6 @@
         methods: {
             deleteItem(item){
                 var vm = this
-                vm.$router.push(vm.redirect)
                 axios.delete(`/api/${this.resource}/${item}`)
                  .then(function (response) {
                  if (response.data.deleted) {

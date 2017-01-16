@@ -28,12 +28,31 @@ class PhotographerController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'picture' => 'required',
+            'picture' => 'image',
             'description' => 'required',
             'cost' => 'required|numeric|min:0'
         ]);
 
-        $photographer = Photographer::create($request->all());
+        $image = $request->file('picture');
+
+        if (isset($image)) {
+            if ($image->isValid()) {
+
+                $name = $image->getClientOriginalName();
+
+                $image->move('../public/img/photographer', $name);
+
+            }
+        } else {
+            $name = '';
+        }
+
+        $photographer = Photographer::create([
+            'name' => $request->get('name'),
+            'cost' => $request->get('cost'),
+            'description' => $request->get('description'),
+            'picture' => $name
+        ]);
 
         return response()
             ->json([
@@ -64,15 +83,35 @@ class PhotographerController extends Controller
 
     public function update(Request $request, $id)
     {
+
         $this->validate($request, [
             'name' => 'required',
-            'picture' => 'required',
+            'picture' => 'image',
             'description' => 'required',
             'cost' => 'required|numeric|min:0',
         ]);
 
+        $image = $request->file('picture');
+
         $photographer = Photographer::findOrFail($id);
-        $photographer->update($request->all());
+
+        if (isset($image)) {
+            if ($image->isValid()) {
+
+                $name = $image->getClientOriginalName();
+
+                $image->move('../public/img/photographer', $name);
+            }
+        } else {
+            $name = $photographer->picture;
+        }
+
+        $photographer->update([
+            'name' => $request->get('name'),
+            'cost' => $request->get('cost'),
+            'description' => $request->get('description'),
+            'picture' => $name
+        ]);
 
         return response()
             ->json([

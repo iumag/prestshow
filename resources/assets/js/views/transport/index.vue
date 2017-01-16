@@ -52,7 +52,6 @@
         methods: {
             deleteItem(item){
                 var vm = this
-                vm.$router.push(vm.redirect)
                 axios.delete(`/api/${this.resource}/${item}`)
                  .then(function (response) {
                  if (response.data.deleted) {

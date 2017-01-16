@@ -28,12 +28,31 @@ class TransportController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'picture' => 'required',
+            'picture' => 'image',
             'description' => 'required',
             'cost' => 'required|numeric|min:0'
         ]);
 
-        $transport = Transport::create($request->all());
+        $image = $request->file('picture');
+
+        if (isset($image)) {
+            if ($image->isValid()) {
+
+                $name = $image->getClientOriginalName();
+
+                $image->move('../public/img/transport', $name);
+
+            }
+        } else {
+            $name = '';
+        }
+
+        $transport = Transport::create([
+            'name' => $request->get('name'),
+            'cost' => $request->get('cost'),
+            'description' => $request->get('description'),
+            'picture' => $name
+        ]);
 
         return response()
             ->json([
@@ -66,13 +85,32 @@ class TransportController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'picture' => 'required',
+            'picture' => 'image',
             'description' => 'required',
             'cost' => 'required|numeric|min:0',
         ]);
 
+        $image = $request->file('picture');
+
         $transport = Transport::findOrFail($id);
-        $transport->update($request->all());
+
+        if (isset($image)) {
+            if ($image->isValid()) {
+
+                $name = $image->getClientOriginalName();
+
+                $image->move('../public/img/transport', $name);
+            }
+        } else {
+            $name = $transport->picture;
+        }
+
+        $transport->update([
+            'name' => $request->get('name'),
+            'cost' => $request->get('cost'),
+            'description' => $request->get('description'),
+            'picture' => $name
+        ]);
 
         return response()
             ->json([
