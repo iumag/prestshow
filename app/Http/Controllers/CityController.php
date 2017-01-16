@@ -35,12 +35,16 @@ class CityController extends Controller
 
         $image = $request->file('picture');
 
-        if ($image->isValid()) {
+        if (isset($image)) {
+            if ($image->isValid()) {
 
-            $name = $image->getClientOriginalName();
+                $name = $image->getClientOriginalName();
 
-            $image->move('../public/img/city', $name);
+                $image->move('../public/img/city', $name);
 
+            }
+        }else{
+            $name = '';
         }
 
         $city = City::create([

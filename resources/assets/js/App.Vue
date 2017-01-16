@@ -34,6 +34,9 @@
                         <li>
                             <router-link to="/transport">Транспорт</router-link>
                         </li>
+                        <li>
+                            <router-link to="/holiday">Праздник</router-link>
+                        </li>
                     </ul>
                 </div>
             </div>

@@ -2,7 +2,7 @@
     <div class="col-sm-3">
         <div id="kv-avatar-errors-2" class="center-block" style="width:800px;display:none"></div>
         <div class="kv-avatar center-block" style="width:200px">
-            <input id="avatar-2" name="avatar-2" type="file" class="file-loading">
+            <input id="avatar-2" name="picture" type="file" class="file-loading">
         </div>
         <!-- include other inputs if needed and include a form submit (save) button -->
     </div>

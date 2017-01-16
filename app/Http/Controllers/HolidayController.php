@@ -28,12 +28,29 @@ class HolidayController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'picture' => 'required',
-            'description' => 'required',
+            'picture' => 'image',
             'cost' => 'required|numeric|min:0'
         ]);
 
-        $holiday = Holiday::create($request->all());
+        $image = $request->file('picture');
+
+        if (isset($image)) {
+            if ($image->isValid()) {
+
+                $name = $image->getClientOriginalName();
+
+                $image->move('../public/img/holiday', $name);
+
+            }
+        } else {
+            $name = '';
+        }
+
+        $holiday = Holiday::create([
+            'name' => $request->get('name'),
+            'cost' => $request->get('cost'),
+            'picture' => $name
+        ]);
 
         return response()
             ->json([
@@ -57,7 +74,7 @@ class HolidayController extends Controller
 
         return response()
             ->json([
-                'model' => $holiday,
+                'form' => $holiday,
                 'option' => ''
             ]);
     }
@@ -66,13 +83,33 @@ class HolidayController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'picture' => 'required',
-            'description' => 'required',
-            'cost' => 'required|numeric|min:0',
+            'picture' => 'image',
+            'cost' => 'required|numeric|min:0'
         ]);
 
         $holiday = Holiday::findOrFail($id);
-        $holiday->update($request->all());
+
+        $image = $request->file('picture');
+
+
+        if (isset($image)) {
+            if ($image->isValid()) {
+
+                $name = $image->getClientOriginalName();
+
+                $image->move('../public/img/holiday', $name);
+
+            }
+        } else {
+            $name = $holiday->picture;
+        }
+
+
+        $holiday->update([
+            'name' => $request->get('name'),
+            'cost' => $request->get('cost'),
+            'picture' => $name
+        ]);
 
         return response()
             ->json([
