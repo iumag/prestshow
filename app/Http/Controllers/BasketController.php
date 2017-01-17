@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Basket;
 use App\BasketItem;
-use App\City;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BasketController extends Controller
 {
@@ -37,11 +36,21 @@ class BasketController extends Controller
     public function show($id)
     {
         $basket = Basket::with('items.entity')->findOrFail($id);
+        $index = 0;
+
+        foreach ($basket->items as $item) {
+            if ($item->entity_type == 'related_event') {
+                $idevent = $basket->items[$index]->entity->event_id;
+                break;
+            }
+            $index++;
+        }
 
 
         return response()
             ->json([
                 'model' => $basket,
+                'event' => DB::table('events')->select('name')->where('id', '=', $idevent)->get(),
                 'option' => ''
             ]);
     }

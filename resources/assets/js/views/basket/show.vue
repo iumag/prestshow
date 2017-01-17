@@ -35,7 +35,7 @@
                 <tbody>
                 <tr v-for="item in model.items">
                     <td>{{item.entity_type}}</td>
-                    <td>{{item.entity.name}}</td>
+                    <td>{{item.entity.name || event[0].name}}</td>
                     <td>{{item.entity.cost}}</td>
                 </tr>
                 </tbody>
@@ -63,6 +63,7 @@
                     customer: {},
                     items: []
                 },
+                event: '',
                 resource: 'basket',
                 redirect: '/'
             }
@@ -99,6 +100,7 @@
                 axios.get(`/api/${this.resource}/${this.$route.params.id}`)
                     .then(function (response) {
                         Vue.set(vm.$data, 'model', response.data.model)
+                        Vue.set(vm.$data, 'event', response.data.event)
                     })
                     .catch(function (error) {
                         console.log(error)
