@@ -34,7 +34,7 @@
                 showfooter: true,
                 thead: [
                     {title: 'Id', key: 'id', sort: true},
-                    {title: 'Transport', key: 'transport', sort: true},
+                    {title: 'Transport', key: 'name', sort: true},
                     {title: 'Picture', key: 'picture', sort: false},
                     {title: 'Description', key: 'description', sort: true},
                     {title: 'Cost', key: 'cost', sort: true},

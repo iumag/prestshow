@@ -33,7 +33,7 @@
                 showfooter: true,
                 thead: [
                     {title: 'Id', key: 'id', sort: true},
-                    {title: 'Event', key: 'event', sort: true},
+                    {title: 'Event', key: 'name', sort: true},
                     {title: 'Picture', key: 'picture', sort: false},
                     {title: 'Description', key: 'description', sort: true},
                     {title: 'Created At', key: 'created_at', sort: true},

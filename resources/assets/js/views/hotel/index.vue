@@ -35,7 +35,7 @@
                 showfooter: true,
                 thead: [
                     {title: 'Id', key: 'id', sort: true},
-                    {title: 'Hotel', key: 'hotel', sort: true},
+                    {title: 'Hotel', key: 'name', sort: true},
                     {title: 'City', key: 'city', sort: true},
                     {title: 'Picture', key: 'picture', sort: false},
                     {title: 'Description', key: 'description', sort: true},
