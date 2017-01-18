@@ -1,0 +1,25 @@
+<template>
+    <div>
+        <div class="clearfix colelem" id="pu8555"><!-- group -->
+            <div class="browser_width grpelem" id="u8555-bw">
+                <div id="u8555"><!-- simple frame --></div>
+            </div>
+            <div class="grpelem" id="u8557"><!-- simple frame --></div>
+            <div class="grpelem" id="u8558"><!-- simple frame --></div>
+            <a class="anchor_item grpelem" id="nocleg"></a>
+        </div>
+        <div class="clearfix colelem" id="pu8556-4"><!-- group -->
+            <div class="clearfix mse_pre_init" id="u8556-4"><!-- content -->
+                <p>CZY POTRZEBUJESZ NOCLEG?</p>
+            </div>
+            <a class="nonblock nontext Button anim_swing rounded-corners clearfix mse_pre_init" id="buttonu8559"
+               href="index.html#hotel"><!-- container box -->
+                <div class="clearfix grpelem" id="u8560-4"><!-- content --><p>Tak</p></div>
+            </a>
+            <a class="nonblock nontext Button anim_swing rounded-corners clearfix mse_pre_init" id="buttonu8561"
+               href="index.html#o-transporcie"><!-- container box -->
+                <div class="clearfix grpelem" id="u8562-4"><!-- content --><p>Nie</p></div>
+            </a>
+        </div>
+    </div>
+</template>

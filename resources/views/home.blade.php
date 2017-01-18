@@ -19,6 +19,7 @@
     <div id="root"></div>
 </div>
 </body>
+
 <script type="text/javascript" src="{{asset('js/app.js')}}"></script>
 <script>
     var title = {
