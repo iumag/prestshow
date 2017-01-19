@@ -11,12 +11,15 @@ class BasketController extends Controller
     public function index()
     {
         $basket = Basket::with('items.entity')->FilterPaginateOrder();
+
         $cost = 0;
         $cost_array = array();
         foreach ($basket->items() as $items) {
             foreach ($items->items as $item) {
-                $entity = BasketItem::find($item->id);
-                $cost += $entity->entity->cost;
+                $entity = BasketItem::findOrFail($item->id);
+                if(isset($entity->entity->cost)){
+                    $cost += $entity->entity->cost;
+                }
             }
             array_push($cost_array, $cost);
             $cost = 0;
