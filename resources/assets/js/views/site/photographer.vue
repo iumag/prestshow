@@ -8,19 +8,20 @@
         </div>
         <div class="grpelem" id="u23603"><!-- simple frame --></div>
         <a class="anchor_item grpelem" id="fotograf"></a>
-        <div class="grpelem" id="u23602"><!-- simple frame --></div>
+
         <div class="wrap" style="
     margin-top: 335px;
 ">
-            <div v-for="item in model.data">
+            <div class="photowrap" v-for="item in model.data">
+                <a class="nonblock nontext anim_swing clearfix grpelem" id="texttr" href="index.html#o-transporcie">
+                    <!-- content --><p>{{item.name}}</p></a>
                 <a class="nonblock nontext anim_swing rounded-corners gradient clip_frame clearfix grpelem" id="u17826"
                    href="index.html#o-transporcie"><!-- image --><img class="position_content" id="u17826_img"
                                                                       :src="'img/photographer/'+item.picture" alt="" width="305"
                                                                       height="202"/></a>
-                <a class="nonblock nontext anim_swing clearfix grpelem" id="u17814-4" href="index.html#o-transporcie">
-                    <!-- content --><p>{{item.name}}</p></a>
             </div>
         </div>
+        <div class="grpelem" id="u23602"><!-- simple frame --></div>
     </div>
 </template>
 
