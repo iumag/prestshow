@@ -36,12 +36,17 @@ class BasketController extends Controller
     public function show($id)
     {
         $basket = Basket::with('items.entity')->findOrFail($id);
+        $test = Basket::with('items.entity')->with(['items' => function ($query) {
+            $query->where('entity_type', '=', 'related_event')->with('entity.event');
+        }])->findOrFail($id);
+
         $index = 0;
 
         foreach ($basket->items as $item) {
             if ($item->entity_type == 'related_event') {
                 $idevent = $basket->items[$index]->entity->event_id;
-                break;
+                $event_name[] = DB::table('events')->select('name')->where('id', '=', $idevent)->get()[0];
+
             }
             $index++;
         }
@@ -50,7 +55,7 @@ class BasketController extends Controller
         return response()
             ->json([
                 'model' => $basket,
-                'event' => DB::table('events')->select('name')->where('id', '=', $idevent)->get(),
+                'event' => $test,
                 'option' => ''
             ]);
     }

@@ -18,36 +18,27 @@
                     </div>
                     <a class="anchor_item grpelem" id="glowna"></a>
                 </div>
-
                 <site-header></site-header>
-
                 <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7622"
-                   href="index.html#glowna">
-                    <!-- simple frame --></a>
+                   href="index.html#glowna"><!-- simple frame --></a>
                 <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7623"
-                   href="index.html#swieta">
-                    <!-- simple frame --></a>
+                   href="index.html#swieta"><!-- simple frame --></a>
                 <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7624"
-                   href="index.html#miasto">
-                    <!-- simple frame --></a>
+                   href="index.html#miasto"><!-- simple frame --></a>
                 <a class="nonblock nontext Button anim_swing rounded-corners clearfix colelem" id="buttonu7617"
                    href="index.html#swieta"><!-- container box -->
                     <div class="clearfix grpelem" id="u7618-4"><!-- content --><p>Co chcesz zorganizować?</p></div>
                 </a>
                 <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7625"
-                   href="index.html#atrakcji">
-                    <!-- simple frame --></a>
+                   href="index.html#atrakcji"><!-- simple frame --></a>
                 <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7626"
-                   href="index.html#nocleg">
-                    <!-- simple frame --></a>
+                   href="index.html#nocleg"><!-- simple frame --></a>
                 <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7627"
-                   href="index.html#hotel">
-                    <!-- simple frame --></a>
+                   href="index.html#hotel"><!-- simple frame --></a>
                 <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7628"
-                   href="index.html#o-transporcie"><!-- simple frame --></a>
+                   href="index.html#fotograf"><!-- simple frame --></a>
                 <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u19811"
-                   href="index.html#fotograf">
-                    <!-- simple frame --></a>
+                   href="index.html#o-transporcie"><!-- simple frame --></a>
                 <div class="size_fixed colelem" id="u15365"><!-- custom html -->
 
                     <!-- This Adobe Muse widget was created by the team at MuseFree.com -->
@@ -59,17 +50,16 @@
 
                 </div>
                 <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u19814"
-                   href="index.html#cena">
-                    <!-- simple frame --></a>
+                   href="index.html#cena"><!-- simple frame --></a>
                 <holiday></holiday>
                 <city></city>
                 <event></event>
-
                 <is-hotel></is-hotel>
                 <hotel></hotel>
+                <photographer></photographer>
                 <is-transport></is-transport>
                 <transport></transport>
-<cena></cena>
+                <cena></cena>
                 <div class="verticalspacer" data-offset-top="8854" data-content-above-spacer="8853"
                      data-content-below-spacer="0"></div>
             </div>
@@ -82,6 +72,9 @@
             <img class="preload" src="images/u17826-r-grad.png" alt=""/>
             <![endif]-->
         </div>
+        <!-- JS includes -->
+
+
     </div>
 </template>
 
@@ -95,7 +88,13 @@
     import IsTransport from './views/site/istransport.vue'
     import Transport from './views/site/transport.vue'
     import Cena from './views/site/cena.vue'
+    import Photographer from './views/site/photographer.vue'
     export default {
-        components: {SiteHeader, Holiday, City, Event, IsHotel, Hotel, IsTransport, Transport, Cena}
+        components: {SiteHeader, Holiday, City, Event, IsHotel, Hotel, IsTransport, Transport, Cena, Photographer},
+        data() {
+            return {
+                test: true
+            }
+        }
     }
 </script>

@@ -33,9 +33,14 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr v-for="item in model.items">
+                <tr v-for="item in model.items" v-if="item.entity_type!='related_event'">
                     <td>{{item.entity_type}}</td>
-                    <td>{{item.entity.name || event[0].name}}</td>
+                    <td>{{item.entity.name}}</td>
+                    <td>{{item.entity.cost}}</td>
+                </tr>
+                <tr v-for="item in event.items">
+                    <td>{{item.entity_type}}</td>
+                    <td>{{item.entity.event.name}}</td>
                     <td>{{item.entity.cost}}</td>
                 </tr>
                 </tbody>
@@ -65,7 +70,8 @@
                 },
                 event: '',
                 resource: 'basket',
-                redirect: '/'
+                redirect: '/',
+                index: -1
             }
         },
         beforeMount() {
@@ -105,6 +111,12 @@
                     .catch(function (error) {
                         console.log(error)
                     })
+            },
+            AddIndex() {
+                if(this.event.length-1>this.index) {
+                    this.index += 1
+                    return this.index
+                }
             }
         }
     }
