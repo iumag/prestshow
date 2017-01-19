@@ -3948,8 +3948,7 @@
     background-color: transparent;
     border-radius: 50px 0px 50px 0px;
     position: relative;
-    margin-right: -10000px;
-    margin-top: 365px;
+    /* margin-top: 365px; */
     left: 213px;
 }
 
@@ -3960,7 +3959,6 @@
     background: linear-gradient(to right, rgba(0, 0, 0, 0.3), #000000 100%);
     width: 305px;
     min-height: 0px;
-    margin: 365px -10000px 0px 0px;
 }
 
 #u17826_img {
@@ -4006,9 +4004,9 @@
     font-family: coda, sans-serif;
     font-weight: 400;
     position: relative;
-    margin-right: -10000px;
-    margin-top: 301px;
-    left: 260px;
+    /* margin-right: -10000px; */
+    margin-top: -69px;
+    /* left: 260px; */
 }
 
 #u17937-4 {
@@ -5958,4 +5956,39 @@ body {
 .city {
     padding-left: 80px;
     padding-bottom: 26px;
+}
+
+.fotowrap {
+    z-index: 269;
+    width: 305px;
+    background-color: transparent;
+    border-radius: 50px 0px 50px 0px;
+    position: relative;
+    margin-top: 365px;
+    left: 213px;
+}.fotowrap {
+     background: transparent url("../images/u17826-r-grad.png") repeat-y left top;
+     background: -webkit-gradient(linear, left center, right center, from(rgba(0, 0, 0, 0.3)), color-stop(100%, #000000));
+     background: -webkit-linear-gradient(left, rgba(0, 0, 0, 0.3), #000000 100%);
+     background: linear-gradient(to right, rgba(0, 0, 0, 0.3), #000000 100%);
+     width: 305px;
+     min-height: 0px;
+     /* margin: 365px -10000px 0px 0px; */
+ }
+
+.foto {
+    z-index: 273;
+    width: 214px;
+    min-height: 65px;
+    background-color: transparent;
+    text-align: center;
+    font-size: 48px;
+    line-height: 58px;
+    color: #FFFFFF;
+    font-family: coda, sans-serif;
+    font-weight: 400;
+    position: relative;
+    /* margin-right: -10000px; */
+    margin-top: 301px;
+    /* left: 260px; */
 }

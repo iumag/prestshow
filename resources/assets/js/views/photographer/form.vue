@@ -11,7 +11,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label>City</label>
+                                <label>Name</label>
                                 <input type="text" name="name" class="form-control" v-model="form.name">
                                 <small class="text-danger" v-if="errors.name">{{errors.name[0]}}</small>
                             </div>
