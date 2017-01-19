@@ -7,44 +7,23 @@
                     <div class="clearfix colelem" id="u8139-4"><!-- content -->
                         <p>GDZIE?</p>
                     </div>
-                    <div class="clearfix colelem" id="ppu19243"><!-- group -->
-                        <div class="clearfix grpelem" id="pu19243"><!-- group -->
-                            <div class="gradient rounded-corners clip_frame clearfix grpelem" id="u19243"><!-- image -->
-                                <img class="position_content" id="u19243_img" src="images/warszawa2.jpg" alt="" width="407" height="268"/>
+                    <div class="wrap">
+                        <div class="clearfix grpelem city" v-for="item in model.data"><!-- group -->
+                            <div class="gradient rounded-corners clip_frame clearfix grpelem citywrap"><!-- image -->
+                                <a class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
+                                   id="buttonu24047" href="index.html#atrakcji"><!-- container box -->
+                                    <div class="clearfix grpelem" id="u24048-4"><!-- content --><p>Czytać więcej</p></div>
+                                </a>
+                                <a class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
+                                   id="buttonu19832" href="index.html#atrakcji"><!-- container box -->
+                                    <div class="clearfix grpelem" id="u19833-4"><!-- content --><p>Wybrać</p></div>
+                                </a>
+                                <div class="clearfix grpelem" id="u19250-4"><!-- content -->
+                                    <p>{{item.name}}</p>
+                                </div>
+                                <img class="position_content" id="u19243_img" :src="'img/city/'+item.picture" alt=""
+                                     width="407" height="268"/>
                             </div>
-                            <a class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem" id="buttonu24047" href="index.html#atrakcji"><!-- container box --><div class="clearfix grpelem" id="u24048-4"><!-- content --><p>Czytać więcej</p></div></a>
-                            <a class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem" id="buttonu19832" href="index.html#atrakcji"><!-- container box --><div class="clearfix grpelem" id="u19833-4"><!-- content --><p>Wybrać</p></div></a>
-                            <div class="clearfix grpelem" id="u19250-4"><!-- content -->
-                                <p>Wroclaw</p>
-                            </div>
-                        </div>
-                        <div class="gradient rounded-corners clip_frame clearfix grpelem" id="u19114"><!-- image -->
-                            <img class="position_content" id="u19114_img" src="images/warszawa2.jpg" alt="" width="407" height="268"/>
-                        </div>
-                        <a class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem" id="buttonu19826" href="index.html#atrakcji"><!-- container box --><div class="clearfix grpelem" id="u19827-4"><!-- content --><p>Wybrać</p></div></a>
-                        <a class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem" id="buttonu24041" href="index.html#atrakcji"><!-- container box --><div class="clearfix grpelem" id="u24042-4"><!-- content --><p>Czytać więcej</p></div></a>
-                        <div class="clearfix grpelem" id="u19116-4"><!-- content -->
-                            <p>Warszawa</p>
-                        </div>
-                    </div>
-                    <div class="clearfix colelem" id="ppu19623"><!-- group -->
-                        <div class="clearfix grpelem" id="pu19623"><!-- group -->
-                            <div class="gradient rounded-corners clip_frame clearfix grpelem" id="u19623"><!-- image -->
-                                <img class="position_content" id="u19623_img" src="images/warszawa2.jpg" alt="" width="407" height="268"/>
-                            </div>
-                            <a class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem" id="buttonu24053" href="index.html#atrakcji"><!-- container box --><div class="clearfix grpelem" id="u24054-4"><!-- content --><p>Czytać więcej</p></div></a>
-                            <a class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem" id="buttonu19838" href="index.html#atrakcji"><!-- container box --><div class="clearfix grpelem" id="u19839-4"><!-- content --><p>Wybrać</p></div></a>
-                            <div class="clearfix grpelem" id="u19630-4"><!-- content -->
-                                <p>Warszawa</p>
-                            </div>
-                        </div>
-                        <div class="gradient rounded-corners clip_frame clearfix grpelem" id="u19372"><!-- image -->
-                            <img class="position_content" id="u19372_img" src="images/warszawa2.jpg" alt="" width="407" height="268"/>
-                        </div>
-                        <a class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem" id="buttonu24059" href="index.html#atrakcji"><!-- container box --><div class="clearfix grpelem" id="u24060-4"><!-- content --><p>Czytać więcej</p></div></a>
-                        <a class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem" id="buttonu19844" href="index.html#atrakcji"><!-- container box --><div class="clearfix grpelem" id="u19845-4"><!-- content --><p>Wybrać</p></div></a>
-                        <div class="clearfix grpelem" id="u19382-4"><!-- content -->
-                            <p>Kraków</p>
                         </div>
                     </div>
                 </div>
@@ -52,3 +31,46 @@
         </div>
     </div>
 </template>
+
+<script>
+    import axios from 'axios'
+    import Vue from 'vue'
+    export default {
+        data() {
+            return {
+                model: {
+                    data: []
+                },
+                params: {
+                    column: 'id',
+                    direction: 'desc',
+                    per_page: 10,
+                    page: 1,
+                    search_column: 'id',
+                    search_operator: 'equal_to',
+                    search_query_1: '',
+                    search_query_2: ''
+                },
+            }
+        },
+        beforeMount() {
+            this.fetchData()
+        },
+        methods: {
+            fetchData() {
+                var vm = this
+                axios.get(this.buildURL())
+                    .then(function(response){
+                        Vue.set(vm.$data, 'model', response.data.model)
+                    })
+                    .catch(function(error){
+                        console.log(error)
+                    })
+            },
+            buildURL() {
+                var p = this.params
+                return `/api/city?column=${p.column}&direction=${p.direction}&page=${p.page}&search_column=${p.search_column}&search_operator=${p.search_operator}&search_query_1=${p.search_query_1}&search_query_2=${p.search_query_2}`
+            }
+        }
+    }
+</script>
