@@ -14,7 +14,7 @@
                                    id="buttonu24047" href="index.html#atrakcji"><!-- container box -->
                                     <div class="clearfix grpelem" id="u24048-4"><!-- content --><p>Czytać więcej</p></div>
                                 </a>
-                                <a class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
+                                <a @click="item.show = !item.show" class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
                                    id="buttonu19832" href="index.html#atrakcji"><!-- container box -->
                                     <div class="clearfix grpelem" id="u19833-4"><!-- content --><p>Wybrać</p></div>
                                 </a>
@@ -51,6 +51,7 @@
                     search_query_1: '',
                     search_query_2: ''
                 },
+                total: 0
             }
         },
         beforeMount() {
@@ -61,6 +62,9 @@
                 var vm = this
                 axios.get(this.buildURL())
                     .then(function(response){
+                        response.data.model.data.forEach(function (item, i, arr) {
+                            item.show = false
+                        });
                         Vue.set(vm.$data, 'model', response.data.model)
                     })
                     .catch(function(error){
@@ -70,6 +74,16 @@
             buildURL() {
                 var p = this.params
                 return `/api/city?column=${p.column}&direction=${p.direction}&page=${p.page}&search_column=${p.search_column}&search_operator=${p.search_operator}&search_query_1=${p.search_query_1}&search_query_2=${p.search_query_2}`
+            },
+            Total(){
+                var result = this.model.data.reduce(function (carry, item) {
+                    if (item.show) {
+                        carry += parseFloat(item.cost)
+                    }
+                    return carry
+                }, 0)
+                this.total = result
+                console.log(this.total)
             }
         }
     }

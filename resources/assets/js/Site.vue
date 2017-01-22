@@ -1,4 +1,4 @@
-<template>
+<template xmlns="http://www.w3.org/1999/html">
     <div id="site">
 
         <!--HTML Widget code-->
@@ -27,7 +27,7 @@
                    href="index.html#miasto"><!-- simple frame --></a>
                 <a class="nonblock nontext Button anim_swing rounded-corners clearfix colelem" id="buttonu7617"
                    href="index.html#swieta"><!-- container box -->
-                    <div class="clearfix grpelem" id="u7618-4"><!-- content --><p>Co chcesz zorganizować?</p></div>
+                    <div class="clearfix grpelem" id="u7618-4"><!-- content --><p><button @click="getChildTotals()">Co chcesz zorganizować?</button></p></div>
                 </a>
                 <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7625"
                    href="index.html#atrakcji"><!-- simple frame --></a>
@@ -51,15 +51,17 @@
                 </div>
                 <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u19814"
                    href="index.html#cena"><!-- simple frame --></a>
-                <holiday></holiday>
-                <city></city>
-                <event></event>
+                <holiday ref="holiday"></holiday>
+                <city ref="city"></city>
+                <event ref="event"></event>
                 <is-hotel></is-hotel>
-                <hotel></hotel>
-                <photographer></photographer>
+                <hotel ref="hotel"></hotel>
+                <photographer ref="photographer"></photographer>
                 <is-transport></is-transport>
-                <transport></transport>
+                <transport ref="transport"></transport>
+
                 <cena></cena>
+
                 <div class="verticalspacer" data-offset-top="8854" data-content-above-spacer="8853"
                      data-content-below-spacer="0"></div>
             </div>
@@ -94,6 +96,13 @@
         data() {
             return {
                 test: true
+            }
+        },
+        methods: {
+            getChildTotals() {
+                let holiday = this.$refs.holiday.Total()
+                let city = this.$refs.city.Total()
+                let event = this.$refs.event.Total()
             }
         }
     }
