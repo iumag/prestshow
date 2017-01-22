@@ -15,8 +15,8 @@
             <div class="photowrap" v-for="item in model.data">
                 <a class="nonblock nontext anim_swing clearfix grpelem" id="texttr" href="index.html#o-transporcie">
                     <!-- content --><p>{{item.name}}</p></a>
-                <a @click="item.show = !item.show" class="nonblock nontext anim_swing rounded-corners gradient clip_frame clearfix grpelem" id="u17826"
-                   href="index.html#o-transporcie"><!-- image --><img class="position_content" id="u17826_img"
+                <a @click="ShowMethod(item)" class="nonblock nontext anim_swing rounded-corners gradient clip_frame clearfix grpelem" id="u17826"
+                   href="#o-transporcie"><!-- image --><img class="position_content" id="u17826_img"
                                                                       :src="'img/photographer/'+item.picture" alt=""
                                                                       width="305"
                                                                       height="202"/></a>
@@ -60,6 +60,15 @@
                     .catch(function (error) {
                         console.log(error)
                     })
+            },
+            ShowMethod(item){
+                item.show = !item.show
+                this.$parent.$emit('loadElement', 'is_transport');
+                return this.model.data.reduce(function (carry, item2) {
+                    if (item != item2) {
+                        item2.show = false
+                    }
+                }, 0)
             },
             Total(){
                 var result = this.model.data.reduce(function (carry, item) {

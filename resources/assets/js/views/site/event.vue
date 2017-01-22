@@ -14,15 +14,15 @@
             <div id="u15327"><!-- simple frame --></div>
         </div>
         <div class="wrap">
-            <div class="clearfix grpelem holiday" v-for="item in model.data" @click="item.show = !item.show"><!-- group -->
+            <div class="clearfix grpelem holiday" v-for="item in model.data" @click="ShowMethod(item)"><!-- group -->
                 <div class="pointer_cursor rounded-corners clearfix grpelem" id="u10782" v-if="item.show === false"><!-- column -->
 
                     <a class="nonblock nontext anim_swing clip_frame colelem" id="u10915"
-                       href="index.html#miasto"><!-- image --><img class="block" id="u10915_img"
+                       Z><!-- image --><img class="block" id="u10915_img"
                                                                    :src="'img/event/' + item.event.picture"
                                                                    alt="" width="39" height="38"/></a>
                     <a class="nonblock nontext anim_swing clearfix colelem" id="u10914-4"
-                       href="index.html#miasto"><!-- content --><p>{{item.event.name}}</p></a>
+                       ><!-- content --><p>{{item.event.name}}</p></a>
                 </div>
                 <div v-else class="Container rounded-corners clearfix grpelem wp-panel wp-panel-active"
                      id="u12112" role="tabpanel" aria-labelledby="u12117"><!-- group -->
@@ -71,6 +71,10 @@
                     .catch(function(error){
                         console.log(error)
                     })
+            },
+            ShowMethod(item){
+                item.show = !item.show
+                this.$parent.$emit('loadElement', 'is_hotel');
             },
             Total() {
                 var result = this.model.data.reduce(function (carry, item) {

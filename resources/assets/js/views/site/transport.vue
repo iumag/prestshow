@@ -9,7 +9,7 @@
             <div class="transportwrap" v-for="item in model.data">
                 <a class="nonblock nontext anim_swing clearfix grpelem" id="u17814-4" href="index.html#o-transporcie">
                     <!-- content --><p>{{item.name}}</p></a>
-                <a @click="item.show = !item.show"
+                <a @click="ShowMethod(item)"
                    class="nonblock nontext anim_swing rounded-corners gradient clip_frame clearfix grpelem" id="fototr"
                    href="index.html#o-transporcie"><!-- image --><img class="position_content" id="u17826_img"
                                                                       :src="'img/transport/'+item.picture" alt=""
@@ -59,6 +59,14 @@
             buildURL() {
                 var p = this.params
                 return `/api/transport?column=${p.column}&direction=${p.direction}&page=${p.page}&search_column=${p.search_column}&search_operator=${p.search_operator}&search_query_1=${p.search_query_1}&search_query_2=${p.search_query_2}`
+            },
+            ShowMethod(item){
+                item.show = !item.show()
+                return this.model.data.reduce(function (carry, item2) {
+                    if (item != item2) {
+                        item2.show = false
+                    }
+                }, 0)
             },
             Total(){
                 var result = this.model.data.reduce(function (carry, item) {

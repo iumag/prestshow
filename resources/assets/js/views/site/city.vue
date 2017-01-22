@@ -14,8 +14,8 @@
                                    id="buttonu24047" href="index.html#atrakcji"><!-- container box -->
                                     <div class="clearfix grpelem" id="u24048-4"><!-- content --><p>Czytać więcej</p></div>
                                 </a>
-                                <a @click="item.show = !item.show" class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
-                                   id="buttonu19832" href="index.html#atrakcji"><!-- container box -->
+                                <a @click="ShowMethod(item)" class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
+                                   href="#atrakcji" id="buttonu19832"><!-- container box -->
                                     <div class="clearfix grpelem" id="u19833-4"><!-- content --><p>Wybrać</p></div>
                                 </a>
                                 <div class="clearfix grpelem" id="u19250-4"><!-- content -->
@@ -70,6 +70,15 @@
                     .catch(function(error){
                         console.log(error)
                     })
+            },
+            ShowMethod(item){
+                item.show = !item.show
+                this.$parent.$emit('loadElement', 'event');
+                return this.model.data.reduce(function (carry, item2) {
+                    if (item != item2) {
+                        item2.show = false
+                    }
+                }, 0)
             },
             buildURL() {
                 var p = this.params

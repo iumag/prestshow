@@ -3,10 +3,10 @@
         <a class="anchor_item grpelem" id="swieta"></a>
         <div class="browser_width grpelem" id="u7669-bw">
             <div class="pointer_cursor" id="u7669"><!-- column -->
-                <a class="block anim_swing" href="index.html#miasto"></a>
+                <a class="block anim_swing" href="#miasto"></a>
 
                 <div class="clearfix" id="u7669_align_to_page">
-                    <a class="nonblock nontext clearfix colelem" id="u7670-4" href="http://www.musefree.com">
+                    <a class="nonblock nontext clearfix colelem" id="u7670-4" >
                         <!-- content --><p>uroczystości</p></a>
                 </div>
                 <div class="wrap">
@@ -17,12 +17,12 @@
                             <!-- column -->
                             <a class="nonblock nontext anim_swing clip_frame colelem"
                                id="u10915"
-                               href="index.html#miasto"><!-- image --><img class="block" id="u10915_img"
+                               href="#miasto"><!-- image --><img class="block" id="u10915_img"
                                                                            :src="'img/holiday/' + item.picture"
                                                                            alt="" width="39" height="38"/></a>
                             <a class="nonblock nontext anim_swing clearfix colelem"
                                id="u10914-4"
-                               href="index.html#miasto"><!-- content --><p>{{item.name}}</p></a>
+                               href="#miasto"><!-- content --><p>{{item.name}}</p></a>
                         </div>
                         <div v-else class="Container rounded-corners clearfix grpelem wp-panel wp-panel-active"
                              id="u12112" role="tabpanel" aria-labelledby="u12117"><!-- group -->

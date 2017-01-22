@@ -105,9 +105,9 @@
                     city: false,
                     event: false,
                     photographer: false,
-                    ishotel: false,
+                    is_hotel: false,
                     hotel: false,
-                    istransport: false,
+                    is_transport: false,
                     transport: false
                 }
             }
