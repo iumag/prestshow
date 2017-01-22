@@ -67,6 +67,7 @@
         methods: {
             ShowMethod(item){
                 item.show = !item.show
+                this.$parent.$emit('loadElement', 'city');
                 return this.model.data.reduce(function (carry, item2) {
                     if (item != item2) {
                         item2.show = false

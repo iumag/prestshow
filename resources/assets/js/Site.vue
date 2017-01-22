@@ -27,7 +27,11 @@
                    href="index.html#miasto"><!-- simple frame --></a>
                 <a class="nonblock nontext Button anim_swing rounded-corners clearfix colelem" id="buttonu7617"
                    href="index.html#swieta"><!-- container box -->
-                    <div class="clearfix grpelem" id="u7618-4"><!-- content --><p><button @click="getChildTotals()">Co chcesz zorganizować?</button></p></div>
+                    <div class="clearfix grpelem" id="u7618-4"><!-- content -->
+                        <p>
+                            <button @click="getChildTotals()">Co chcesz zorganizować?</button>
+                        </p>
+                    </div>
                 </a>
                 <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7625"
                    href="index.html#atrakcji"><!-- simple frame --></a>
@@ -52,13 +56,13 @@
                 <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u19814"
                    href="index.html#cena"><!-- simple frame --></a>
                 <holiday ref="holiday"></holiday>
-                <city ref="city"></city>
-                <event ref="event"></event>
-                <is-hotel></is-hotel>
-                <hotel ref="hotel"></hotel>
-                <photographer ref="photographer"></photographer>
-                <is-transport></is-transport>
-                <transport ref="transport"></transport>
+                <city v-if="showElement['city']" ref="city"></city>
+                <event v-if="showElement['event']" ref="event"></event>
+                <is-hotel v-if="showElement['is_hotel']"></is-hotel>
+                <hotel v-if="showElement['hotel']" ref="hotel"></hotel>
+                <photographer v-if="showElement['photographer']" ref="photographer"></photographer>
+                <is-transport v-if="showElement['is_transport']"></is-transport>
+                <transport v-if="showElement['transport']" ref="transport"></transport>
 
                 <cena></cena>
 
@@ -92,19 +96,36 @@
     import Cena from './views/site/cena.vue'
     import Photographer from './views/site/photographer.vue'
     export default {
+        props: ['showCity'],
         components: {SiteHeader, Holiday, City, Event, IsHotel, Hotel, IsTransport, Transport, Cena, Photographer},
         data() {
             return {
-                test: true
+                test: true,
+                showElement: {
+                    city: false,
+                    event: false,
+                    photographer: false,
+                    ishotel: false,
+                    hotel: false,
+                    istransport: false,
+                    transport: false
+                }
             }
+        },
+        created(){
+            this.$on('loadElement', function(element) {
+                this.showElement[element] = true
+            })
         },
         methods: {
             getChildTotals() {
+                this.showElement[city] = true
                 let holiday = this.$refs.holiday.Total()
                 let city = this.$refs.city.Total()
                 let event = this.$refs.event.Total()
                 let photographer = this.$refs.photographer.Total()
-            }
+                let transport = this.$refs.transport.Total()
+            },
         }
     }
 </script>
