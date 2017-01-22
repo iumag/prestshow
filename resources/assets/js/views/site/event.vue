@@ -14,15 +14,19 @@
             <div id="u15327"><!-- simple frame --></div>
         </div>
         <div class="wrap">
-            <div class="clearfix grpelem holiday" v-for="item in model.data"><!-- group -->
-                <div class="pointer_cursor rounded-corners clearfix grpelem" id="u10782"><!-- column -->
-                    <a class="block anim_swing" href="index.html#miasto"></a>
+            <div class="clearfix grpelem holiday" v-for="item in model.data" @click="item.show = !item.show"><!-- group -->
+                <div class="pointer_cursor rounded-corners clearfix grpelem" id="u10782" v-if="item.show === false"><!-- column -->
+
                     <a class="nonblock nontext anim_swing clip_frame colelem" id="u10915"
                        href="index.html#miasto"><!-- image --><img class="block" id="u10915_img"
-                                                                   :src="'img/holiday/' + item.picture"
+                                                                   :src="'img/event/' + item.event.picture"
                                                                    alt="" width="39" height="38"/></a>
                     <a class="nonblock nontext anim_swing clearfix colelem" id="u10914-4"
-                       href="index.html#miasto"><!-- content --><p>{{item.name}}</p></a>
+                       href="index.html#miasto"><!-- content --><p>{{item.event.name}}</p></a>
+                </div>
+                <div v-else class="Container rounded-corners clearfix grpelem wp-panel wp-panel-active"
+                     id="u12112" role="tabpanel" aria-labelledby="u12117"><!-- group -->
+                    <div class="rounded-corners grpelem" id="u12113"><!-- simple frame --></div>
                 </div>
             </div>
         </div>
@@ -41,13 +45,14 @@
                 params: {
                     column: 'id',
                     direction: 'desc',
-                    per_page: 10,
+                    per_page: 10000,
                     page: 1,
                     search_column: 'id',
                     search_operator: 'equal_to',
                     search_query_1: '',
                     search_query_2: ''
                 },
+                total: 0
             }
         },
         beforeMount() {
@@ -58,15 +63,28 @@
                 var vm = this
                 axios.get(this.buildURL())
                     .then(function(response){
+                        response.data.model.data.forEach(function (item, i, arr) {
+                            item.show = false
+                        });
                         Vue.set(vm.$data, 'model', response.data.model)
                     })
                     .catch(function(error){
                         console.log(error)
                     })
             },
+            Total() {
+                var result = this.model.data.reduce(function (carry, item) {
+                    if (item.show) {
+                        carry += parseFloat(item.cost)
+                    }
+                    return carry
+                }, 0)
+                this.total = result
+                console.log(this.total)
+            },
             buildURL() {
                 var p = this.params
-                return `/api/holiday?column=${p.column}&direction=${p.direction}&page=${p.page}&search_column=${p.search_column}&search_operator=${p.search_operator}&search_query_1=${p.search_query_1}&search_query_2=${p.search_query_2}`
+                return `/api/related_event?per_page=${p.per_page}&column=${p.column}&direction=${p.direction}&page=${p.page}&search_column=${p.search_column}&search_operator=${p.search_operator}&search_query_1=${p.search_query_1}&search_query_2=${p.search_query_2}`
             }
         }
     }
