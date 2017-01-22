@@ -10,15 +10,23 @@
                         <!-- content --><p>uroczystości</p></a>
                 </div>
                 <div class="wrap">
-                    <div class="clearfix grpelem holiday" v-for="item in model.data"><!-- group -->
-                        <div class="pointer_cursor rounded-corners clearfix grpelem" id="u10782"><!-- column -->
-                            <a class="block anim_swing" href="index.html#miasto"></a>
-                            <a class="nonblock nontext anim_swing clip_frame colelem" id="u10915"
+                    <div class="clearfix grpelem holiday"
+                         v-for="(item,index) in model.data" @click="ShowMethod(item)"><!-- group -->
+                        <div v-if="item.show === false" :data-cost="item.cost"
+                             class="pointer_cursor rounded-corners clearfix grpelem" id="u10782">
+                            <!-- column -->
+                            <a class="nonblock nontext anim_swing clip_frame colelem"
+                               id="u10915"
                                href="index.html#miasto"><!-- image --><img class="block" id="u10915_img"
                                                                            :src="'img/holiday/' + item.picture"
                                                                            alt="" width="39" height="38"/></a>
-                            <a class="nonblock nontext anim_swing clearfix colelem" id="u10914-4"
+                            <a class="nonblock nontext anim_swing clearfix colelem"
+                               id="u10914-4"
                                href="index.html#miasto"><!-- content --><p>{{item.name}}</p></a>
+                        </div>
+                        <div v-else class="Container rounded-corners clearfix grpelem wp-panel wp-panel-active"
+                             id="u12112" role="tabpanel" aria-labelledby="u12117"><!-- group -->
+                            <div class="rounded-corners grpelem" id="u12113"><!-- simple frame --></div>
                         </div>
                     </div>
                 </div>
@@ -34,7 +42,9 @@
         data() {
             return {
                 model: {
-                    data: []
+                    data: [
+                        {show: true}
+                    ],
                 },
                 params: {
                     column: 'id',
@@ -46,21 +56,50 @@
                     search_query_1: '',
                     search_query_2: ''
                 },
+                total: 0
             }
         },
+        computed: {},
         beforeMount() {
             this.fetchData()
+
         },
         methods: {
+            ShowMethod(item){
+                item.show = !item.show
+                return this.model.data.reduce(function (carry, item2) {
+                    if (item != item2) {
+                        item2.show = false
+                    }
+                }, 0)
+            },
             fetchData() {
                 var vm = this
                 axios.get(this.buildURL())
-                    .then(function(response){
+                    .then(function (response) {
+                        response.data.model.data.forEach(function (item, i, arr) {
+                            item.show = false
+                        });
                         Vue.set(vm.$data, 'model', response.data.model)
                     })
-                    .catch(function(error){
+                    .catch(function (error) {
                         console.log(error)
                     })
+            },
+            Total() {
+                var result = this.model.data.reduce(function (carry, item) {
+                    if (item.show) {
+                        carry += parseFloat(item.cost)
+                    }
+                    return carry
+                }, 0)
+                this.total = result
+                console.log(this.total)
+            },
+            Test() {
+                return this.model.data.reduce(function (carry, item) {
+                    console.log(item.show)
+                }, 0)
             },
             buildURL() {
                 var p = this.params
