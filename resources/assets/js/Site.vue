@@ -103,6 +103,7 @@
                 let holiday = this.$refs.holiday.Total()
                 let city = this.$refs.city.Total()
                 let event = this.$refs.event.Total()
+                let photographer = this.$refs.photographer.Total()
             }
         }
     }

@@ -15,9 +15,10 @@
             <div class="photowrap" v-for="item in model.data">
                 <a class="nonblock nontext anim_swing clearfix grpelem" id="texttr" href="index.html#o-transporcie">
                     <!-- content --><p>{{item.name}}</p></a>
-                <a class="nonblock nontext anim_swing rounded-corners gradient clip_frame clearfix grpelem" id="u17826"
+                <a @click="item.show = !item.show" class="nonblock nontext anim_swing rounded-corners gradient clip_frame clearfix grpelem" id="u17826"
                    href="index.html#o-transporcie"><!-- image --><img class="position_content" id="u17826_img"
-                                                                      :src="'img/photographer/'+item.picture" alt="" width="305"
+                                                                      :src="'img/photographer/'+item.picture" alt=""
+                                                                      width="305"
                                                                       height="202"/></a>
             </div>
         </div>
@@ -53,12 +54,22 @@
             fetchData() {
                 var vm = this
                 axios.get(this.buildURL())
-                    .then(function(response){
+                    .then(function (response) {
                         Vue.set(vm.$data, 'model', response.data.model)
                     })
-                    .catch(function(error){
+                    .catch(function (error) {
                         console.log(error)
                     })
+            },
+            Total(){
+                var result = this.model.data.reduce(function (carry, item) {
+                    if (item.show) {
+                        carry += parseFloat(item.cost)
+                    }
+                    return carry
+                }, 0)
+                this.total = result
+                console.log(this.total)
             },
             buildURL() {
                 var p = this.params
