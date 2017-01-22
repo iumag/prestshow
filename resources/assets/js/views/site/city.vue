@@ -4,27 +4,35 @@
         <div class="browser_width grpelem" id="u8138-bw">
             <div id="u8138"><!-- column -->
                 <div class="clearfix" id="u8138_align_to_page">
-                    <div class="clearfix colelem" id="u8139-4"><!-- content -->
-                        <p>GDZIE?</p>
-                    </div>
-                    <div class="wrap">
-                        <div class="clearfix grpelem city" v-for="item in model.data"><!-- group -->
-                            <div class="gradient rounded-corners clip_frame clearfix grpelem citywrap"><!-- image -->
-                                <a class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
-                                   id="buttonu24047" href="index.html#atrakcji"><!-- container box -->
-                                    <div class="clearfix grpelem" id="u24048-4"><!-- content --><p>Czytać więcej</p></div>
-                                </a>
-                                <a @click="ShowMethod(item)" class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
-                                   href="#atrakcji" id="buttonu19832"><!-- container box -->
-                                    <div class="clearfix grpelem" id="u19833-4"><!-- content --><p>Wybrać</p></div>
-                                </a>
-                                <div class="clearfix grpelem" id="u19250-4"><!-- content -->
-                                    <p>{{item.name}}</p>
-                                </div>
-                                <img class="position_content" id="u19243_img" :src="'img/city/'+item.picture" alt=""
-                                     width="407" height="268"/>
-                            </div>
+
+                        <div class="clearfix colelem" id="u8139-4"><!-- content -->
+                            <p>GDZIE?</p>
                         </div>
+
+                    <div class="wrap">
+                        <transition-group name="list-complete" tag="div">
+                            <div v-for="item in model.data" v-bind:key="item"
+                                 class="clearfix grpelem city list-complete-item"><!-- group -->
+                                <div class="gradient rounded-corners clip_frame clearfix grpelem citywrap">
+                                    <!-- image -->
+                                    <a class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
+                                       id="buttonu24047" href="index.html#atrakcji"><!-- container box -->
+                                        <div class="clearfix grpelem" id="u24048-4"><!-- content --><p>Czytać więcej</p>
+                                        </div>
+                                    </a>
+                                    <a @click="ShowMethod(item)"
+                                       class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
+                                       href="#atrakcji" id="buttonu19832"><!-- container box -->
+                                        <div class="clearfix grpelem" id="u19833-4"><!-- content --><p>Wybrać</p></div>
+                                    </a>
+                                    <div class="clearfix grpelem" id="u19250-4"><!-- content -->
+                                        <p>{{item.name}}</p>
+                                    </div>
+                                    <img class="position_content" id="u19243_img" :src="'img/city/'+item.picture" alt=""
+                                         width="407" height="268"/>
+                                </div>
+                            </div>
+                        </transition-group>
                     </div>
                 </div>
             </div>
@@ -61,13 +69,13 @@
             fetchData() {
                 var vm = this
                 axios.get(this.buildURL())
-                    .then(function(response){
+                    .then(function (response) {
                         response.data.model.data.forEach(function (item, i, arr) {
                             item.show = false
                         });
                         Vue.set(vm.$data, 'model', response.data.model)
                     })
-                    .catch(function(error){
+                    .catch(function (error) {
                         console.log(error)
                     })
             },

@@ -2,11 +2,11 @@
     <div id="site">
 
         <!--HTML Widget code-->
-        <video id="bgvidu7616" loop preload="auto" muted poster="assets/videopng.png" autoplay
-               style="position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: -1000; background: url(assets/videopng.png) no-repeat; background-size: cover;">
-            <source src="assets/videoweb.webm" type="video/webm">
-            <source src="assets/videomp.mp4" type="video/mp4">
-        </video>
+        <!--<video id="bgvidu7616" loop preload="auto" muted poster="assets/videopng.png" autoplay-->
+               <!--style="position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: -1000; background: url(assets/videopng.png) no-repeat; background-size: cover;">-->
+            <!--<source src="assets/videoweb.webm" type="video/webm">-->
+            <!--<source src="assets/videomp.mp4" type="video/mp4">-->
+        <!--</video>-->
         <span style="opacity: .05">
   <div style="background-image: url(assets/pattern-dots.png);position:fixed;opacity: 0.8;left: 0px;top: 0px;width: 100%;height: 100%;z-index: -999;"></div>
 </span>
@@ -56,7 +56,11 @@
                 <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u19814"
                    href="index.html#cena"><!-- simple frame --></a>
                 <holiday ref="holiday"></holiday>
-                <city v-if="showElement['city']" ref="city"></city>
+                <transition
+                        name="custom-classes-transition"
+                        enter-active-class="animated flash"
+                        leave-active-class="animated bounceOutRight"
+                ><city v-if="showElement['city']" ref="city"></city></transition>
                 <event v-if="showElement['event']" ref="event"></event>
                 <is-hotel v-if="showElement['is_hotel']"></is-hotel>
                 <hotel v-if="showElement['hotel']" ref="hotel"></hotel>
@@ -85,6 +89,7 @@
 </template>
 
 <script>
+    require('es6-promise').polyfill();
     import SiteHeader from './views/site/header.vue'
     import Holiday from './views/site/holiday.vue'
     import City from './views/site/city.vue'

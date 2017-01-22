@@ -21,6 +21,7 @@
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="{{asset('css/site_global.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('css/index.css')}}" id="pagesheet"/>
+    <link href="https://unpkg.com/animate.css@3.5.1/animate.min.css" rel="stylesheet" type="text/css">
     <!-- Other scripts -->
     <script type="text/javascript">
         var __adobewebfontsappname__ = "muse";

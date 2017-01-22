@@ -6111,3 +6111,34 @@ body {
     border-radius: 0px 30px 0px 30px;
     position: relative;
 }
+.list-complete-item {
+    transition: all 2s;
+    display: inline-block;
+    margin-right: 10px;
+}
+.list-complete-enter:nth-child(2n)
+    /* .list-complete-leave-active для <2.1.8 */ {
+    opacity: 0;
+    transform: translateX(360px);
+}
+
+.list-complete-enter
+    /* .list-complete-leave-active для <2.1.8 */ {
+    opacity: 0;
+    transform: translateX(-360px);
+}
+
+.list-complete-leave-active {
+    position: absolute;
+}
+
+.bounce{
+    transition: all 1s;
+    display: inline-block;
+    margin-right: 10px;
+}
+
+.bounce-enter, .bounce-leave-to{
+    opacity: 0;
+    transform: translateX(-360px);
+}
