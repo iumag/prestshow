@@ -12,15 +12,19 @@
         <div class="wrap" style="
     margin-top: 335px;
 ">
-            <div class="photowrap" v-for="item in model.data">
-                <a class="nonblock nontext anim_swing clearfix grpelem" id="texttr" href="index.html#o-transporcie">
-                    <!-- content --><p>{{item.name}}</p></a>
-                <a @click="ShowMethod(item)" class="nonblock nontext anim_swing rounded-corners gradient clip_frame clearfix grpelem" id="u17826"
-                   href="#o-transporcie"><!-- image --><img class="position_content" id="u17826_img"
-                                                                      :src="'img/photographer/'+item.picture" alt=""
-                                                                      width="305"
-                                                                      height="202"/></a>
-            </div>
+            <transition-group name="photographer-complete" tag="div">
+                <div class="photowrap photographer-complete-item"  v-bind:key="item" v-for="item in model.data">
+                    <a class="nonblock nontext anim_swing clearfix grpelem" id="texttr" href="index.html#o-transporcie">
+                        <!-- content --><p>{{item.name}}</p></a>
+                    <a @click="ShowMethod(item)"
+                       class="nonblock nontext anim_swing rounded-corners gradient clip_frame clearfix grpelem"
+                       id="u17826"
+                       href="#o-transporcie"><!-- image --><img class="position_content" id="u17826_img"
+                                                                :src="'img/photographer/'+item.picture" alt=""
+                                                                width="305"
+                                                                height="202"/></a>
+                </div>
+            </transition-group>
         </div>
         <div class="grpelem" id="u23602"><!-- simple frame --></div>
     </div>
