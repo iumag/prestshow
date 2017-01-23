@@ -6,16 +6,19 @@
         <div class="wrap" style="
     margin-top: 335px;
 ">
-            <div class="transportwrap" v-for="item in model.data">
-                <a class="nonblock nontext anim_swing clearfix grpelem" id="u17814-4" href="index.html#o-transporcie">
-                    <!-- content --><p>{{item.name}}</p></a>
-                <a @click="ShowMethod(item)"
-                   class="nonblock nontext anim_swing rounded-corners gradient clip_frame clearfix grpelem" id="fototr"
-                   href="index.html#o-transporcie"><!-- image --><img class="position_content" id="u17826_img"
-                                                                      :src="'img/transport/'+item.picture" alt=""
-                                                                      width="305"
-                                                                      height="202"/></a>
-            </div>
+            <transition-group name="transport-complete" tag="div">
+                <div class="transportwrap transport-complete-item"  v-bind:key="item" v-for="item in model.data">
+                    <a class="nonblock nontext anim_swing clearfix grpelem" id="u17814-4">
+                        <!-- content --><p>{{item.name}}</p></a>
+                    <a @click="ShowMethod(item)"
+                       class="nonblock nontext anim_swing rounded-corners gradient clip_frame clearfix grpelem"
+                       id="fototr"
+                    ><!-- image --><img class="position_content" id="u17826_img"
+                                        :src="'img/transport/'+item.picture" alt=""
+                                        width="305"
+                                        height="202"/></a>
+                </div>
+            </transition-group>
         </div>
         <a class="anchor_item grpelem" id="typy-transportu"></a>
     </div>
