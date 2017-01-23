@@ -13,22 +13,26 @@
         <div class="browser_width grpelem" id="u15327-bw">
             <div id="u15327"><!-- simple frame --></div>
         </div>
-        <div class="wrap">
-            <div class="clearfix grpelem holiday" v-for="item in model.data" @click="ShowMethod(item)"><!-- group -->
-                <div class="pointer_cursor rounded-corners clearfix grpelem" id="u10782" v-if="item.show === false"><!-- column -->
+        <div class="wrap" style="padding-top: 200px; padding-left: 60px">
+            <transition-group name="event-complete" tag="div">
+                <div class="clearfix grpelem holiday event-complete-item" v-for="item in model.data" v-bind:key="item"
+                     @click="ShowMethod(item)"><!-- group -->
+                    <div class="pointer_cursor rounded-corners clearfix grpelem" id="u10782"
+                         v-if="item.show === false"><!-- column -->
 
-                    <a class="nonblock nontext anim_swing clip_frame colelem" id="u10915"
-                       Z><!-- image --><img class="block" id="u10915_img"
-                                                                   :src="'img/event/' + item.event.picture"
-                                                                   alt="" width="39" height="38"/></a>
-                    <a class="nonblock nontext anim_swing clearfix colelem" id="u10914-4"
-                       ><!-- content --><p>{{item.event.name}}</p></a>
+                        <a class="nonblock nontext anim_swing clip_frame colelem" id="u10915"
+                           Z><!-- image --><img class="block" id="u10915_img"
+                                                :src="'img/event/' + item.event.picture"
+                                                alt="" width="39" height="38"/></a>
+                        <a class="nonblock nontext anim_swing clearfix colelem" id="u10914-4"
+                        ><!-- content --><p>{{item.event.name}}</p></a>
+                    </div>
+                    <div v-else class="Container rounded-corners clearfix grpelem wp-panel wp-panel-active"
+                         id="u12112" role="tabpanel" aria-labelledby="u12117"><!-- group -->
+                        <div class="rounded-corners grpelem" id="u12113"><!-- simple frame --></div>
+                    </div>
                 </div>
-                <div v-else class="Container rounded-corners clearfix grpelem wp-panel wp-panel-active"
-                     id="u12112" role="tabpanel" aria-labelledby="u12117"><!-- group -->
-                    <div class="rounded-corners grpelem" id="u12113"><!-- simple frame --></div>
-                </div>
-            </div>
+            </transition-group>
         </div>
     </div>
 </template>
@@ -62,13 +66,13 @@
             fetchData() {
                 var vm = this
                 axios.get(this.buildURL())
-                    .then(function(response){
+                    .then(function (response) {
                         response.data.model.data.forEach(function (item, i, arr) {
                             item.show = false
                         });
                         Vue.set(vm.$data, 'model', response.data.model)
                     })
-                    .catch(function(error){
+                    .catch(function (error) {
                         console.log(error)
                     })
             },
