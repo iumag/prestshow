@@ -3,9 +3,9 @@
 
         <!--HTML Widget code-->
         <!--<video id="bgvidu7616" loop preload="auto" muted poster="assets/videopng.png" autoplay-->
-               <!--style="position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: -1000; background: url(assets/videopng.png) no-repeat; background-size: cover;">-->
-            <!--<source src="assets/videoweb.webm" type="video/webm">-->
-            <!--<source src="assets/videomp.mp4" type="video/mp4">-->
+        <!--style="position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: -1000; background: url(assets/videopng.png) no-repeat; background-size: cover;">-->
+        <!--<source src="assets/videoweb.webm" type="video/webm">-->
+        <!--<source src="assets/videomp.mp4" type="video/mp4">-->
         <!--</video>-->
         <span style="opacity: .05">
   <div style="background-image: url(assets/pattern-dots.png);position:fixed;opacity: 0.8;left: 0px;top: 0px;width: 100%;height: 100%;z-index: -999;"></div>
@@ -60,13 +60,19 @@
                         name="custom-classes-transition"
                         enter-active-class="animated flash"
                         leave-active-class="animated bounceOutRight"
-                ><city v-if="showElement['city']" ref="city"></city></transition>
+                >
+                    <city v-if="showElement['city']" ref="city"></city>
+                </transition>
                 <event v-if="showElement['event']" ref="event"></event>
                 <is-hotel v-if="showElement['is_hotel']"></is-hotel>
                 <hotel v-if="showElement['hotel']" ref="hotel"></hotel>
                 <photographer v-if="showElement['photographer']" ref="photographer"></photographer>
-                <is-transport v-if="showElement['is_transport']"></is-transport>
+                <transition name="bounce">
+                    <is-transport v-if="showElement['is_transport']"></is-transport>
+                </transition>
+
                 <transport v-if="showElement['transport']" ref="transport"></transport>
+
 
                 <cena></cena>
 
@@ -114,12 +120,24 @@
                     hotel: false,
                     is_transport: false,
                     transport: false
+                },
+                scrollElement: {
+                    city: '#miasto',
+                    event: '#atrakcji',
+                    hotel: '#hotel',
+                    photographer: '#fotograf',
+                    is_transport: '#o-transporcie',
+                    transport: '#pu16487'
                 }
             }
         },
         created(){
-            this.$on('loadElement', function(element) {
+            this.$on('loadElement', function (element) {
                 this.showElement[element] = true
+                var elm = this.scrollElement[element]
+                setTimeout(function () {
+                    $("html,body").animate({scrollTop: $(elm).offset().top}, 1000)
+                }, 1000);
             })
         },
         methods: {
