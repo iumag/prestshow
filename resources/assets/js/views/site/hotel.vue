@@ -9,40 +9,25 @@
                 </div>
             </div>
         </div>
+
         <div class="SlideShowWidget clearfix grpelem" id="slideshowu8584"><!-- none box -->
+            <transition name="sliderhotel">
             <div class="popup_anchor" id="u8601popup">
                 <div class="SlideShowContentPanel clearfix" id="u8601"><!-- stack box -->
                     <div class="SSSlide rounded-corners clip_frame grpelem" id="u8602"><!-- image -->
-                        <img class="block ImageInclude" id="u8602_img" data-src="images/zaleski-1-crop-u8602.jpg"
-                             src="images/blank.gif" alt="" data-width="609" data-height="365"/>
+                        <img class="block ImageInclude" id="u8602_img"
+                             :src="image" alt=""/>
                     </div>
-                    <div class="SSSlide invi rounded-corners clip_frame clearfix grpelem" id="u8612"><!-- image -->
-                        <img class="ImageInclude position_content" id="u8612_img"
-                             data-src="images/vishukani-goteli-v-odesi-2.jpg" src="images/blank.gif" alt=""
-                             data-width="615" data-height="404"/>
-                    </div>
-                    <div class="SSSlide invi rounded-corners clip_frame clearfix grpelem" id="u8606"><!-- image -->
-                        <img class="ImageInclude position_content" id="u8606_img" data-src="images/yg-600x450.jpg"
-                             src="images/blank.gif" alt="" data-width="600" data-height="450"/>
-                    </div>
-                    <div class="SSSlide invi rounded-corners clip_frame clearfix grpelem" id="u8610"><!-- image -->
-                        <img class="ImageInclude position_content" id="u8610_img"
-                             data-src="images/65333_800x600_istoriya4.jpg" src="images/blank.gif" alt=""
-                             data-width="678" data-height="371"/>
-                    </div>
-                    <div class="SSSlide invi rounded-corners clip_frame grpelem" id="u8604"><!-- image -->
-                        <img class="block ImageInclude" id="u8604_img" data-src="images/zaleski-1-crop-u8604.jpg"
-                             src="images/blank.gif" alt="" data-width="609" data-height="365"/>
-                    </div>
-                    <div class="SSSlide invi rounded-corners clip_frame clearfix grpelem" id="u8608"><!-- image -->
-                        <img class="ImageInclude position_content" id="u8608_img" data-src="images/foto_1.jpg"
-                             src="images/blank.gif" alt="" data-width="615" data-height="393"/>
-                    </div>
+
+
                 </div>
             </div>
+            </transition>
+
             <div class="popup_anchor" id="u8586popup">
                 <div class="SSSlideLinks clearfix" id="u8586"><!-- horizontal-rows box -->
-                    <div class="hotelitem SSSlideLink rounded-corners clip_frame clearfix grpelem"
+                    <div @click="ChangeItem(item)"
+                         class="hotelitem SSSlideLink rounded-corners clip_frame clearfix grpelem"
                          v-for="item in model.data"><!-- image -->
                         <img class="position_content" :src="'img/hotel/' + item.picture" alt="" width="131"
                              height="117"/>
@@ -51,24 +36,22 @@
             </div>
         </div>
         <a @click="ShowMethod()" class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
-           id="buttonu8626"
-           href="#fotograf"><!-- container box -->
+           id="buttonu8626"><!-- container box -->
             <div class="clearfix grpelem" id="u8627-4"><!-- content --><p>WYBRAĆ</p></div>
         </a>
         <div class="PamphletWidget clearfix grpelem" id="pamphletu15202"><!-- none box -->
-            <div class="popup_anchor" id="u15205popup">
-                <div class="ContainerGroup clearfix" id="u15205"><!-- none box -->
-                    <div class="Container invi rounded-corners clearfix grpelem" id="u15211"><!-- group -->
-                        <div class="clearfix grpelem" id="u15301-5"><!-- content -->
-                            <p>Kraków (łac. Cracovia) – miasto położone w południowej Polsce nad Wisłą, drugie w kraju
-                                pod względem liczby mieszkańców[1][5] i powierzchni[1], stolica Polski do 1795 r. i
-                                miasto koronacyjne oraz nekropolia królów Polski, od 1000 roku. <span id="u15301-2">Kraków (łac. Cracovia) – miasto położone w południowej Polsce nad Wisłą, drugie w kraju pod względem liczby mieszkańców[1][5] i powierzchni[1], stolica Polski do 1795 r. i miasto koronacyjne oraz nekropolia królów Polski, od 1000 roku</span>
-                            </p>
+            <transition name="sliderhotel">
+                <div class="popup_anchor" id="u15205popup" v-show="show_description">
+                    <div class="ContainerGroup clearfix" id="u15205"><!-- none box -->
+                        <div class="Container rounded-corners clearfix grpelem" id="u15211"><!-- group -->
+                            <div class="clearfix grpelem" id="u15301-5" v-html="description">
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="ThumbGroup clearfix grpelem" id="u15223"><!-- none box -->
+            </transition>
+            <div class="ThumbGroup clearfix grpelem" id="u15223" @click="show_description = !show_description">
+                <!-- none box -->
                 <div class="popup_anchor">
                     <div class="Thumb popup_element rounded-corners clearfix" id="u15226"><!-- group -->
                         <div class="Button rounded-corners clearfix grpelem" id="buttonu15295"><!-- container box -->
@@ -91,9 +74,7 @@
         data() {
             return {
                 model: {
-                    data: [
-                        {show: true}
-                    ],
+                    data: [],
                 },
                 params: {
                     column: 'id',
@@ -105,7 +86,11 @@
                     search_query_1: '',
                     search_query_2: ''
                 },
-                show: []
+
+                image: 'images/blank.gif',
+                description: '',
+                cost: 0,
+                show_description: false
             }
         },
         beforeMount() {
@@ -116,24 +101,28 @@
                 var vm = this
                 axios.get(this.buildURL())
                     .then(function (response) {
+                        var picture = response.data.model.data[0].picture
+                        vm.$data.description = response.data.model.data[0].description
+                        vm.$data.image = 'img/hotel/' + picture
+                        //console.log( response.data.model.data[0].show)
                         Vue.set(vm.$data, 'model', response.data.model)
                     })
                     .catch(function (error) {
                         console.log(error)
                     })
+
             },
-            ShowMethod(item){
-                item.show = !item.show
+            ShowMethod(){
                 this.$parent.$emit('loadElement', 'photographer');
-                return this.model.data.reduce(function (carry, item2) {
-                    if (item != item2) {
-                        item2.show = false
-                    }
-                }, 0)
             },
             buildURL() {
                 var p = this.params
                 return `/api/hotel?column=${p.column}&direction=${p.direction}&page=${p.page}&search_column=${p.search_column}&search_operator=${p.search_operator}&search_query_1=${p.search_query_1}&search_query_2=${p.search_query_2}`
+            },
+            ChangeItem(item){
+                this.image = 'img/hotel/' + item.picture
+                this.description = item.description
+                this.cost = item.cost
             }
         }
     }

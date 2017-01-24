@@ -7,16 +7,19 @@
     margin-top: 335px;
 ">
             <transition-group name="transport-complete" tag="div">
-                <div class="transportwrap transport-complete-item"  v-bind:key="item" v-for="item in model.data">
+                <div class="transportwrap transport-complete-item" v-bind:key="item" v-for="item in model.data">
                     <a class="nonblock nontext anim_swing clearfix grpelem" id="u17814-4">
                         <!-- content --><p>{{item.name}}</p></a>
-                    <a @click="ShowMethod(item)"
-                       class="nonblock nontext anim_swing rounded-corners gradient clip_frame clearfix grpelem"
-                       id="fototr"
-                    ><!-- image --><img class="position_content" id="u17826_img"
-                                        :src="'img/transport/'+item.picture" alt=""
-                                        width="305"
-                                        height="202"/></a>
+                    <!--<div v-if="item.show===false">-->
+                        <a @click="ShowMethod(item)"
+                           class="nonblock nontext anim_swing rounded-corners gradient clip_frame clearfix grpelem"
+                           id="fototr"
+                        ><!-- image --><img class="position_content" id="u17826_img"
+                                            :src="'img/transport/'+item.picture" alt=""
+                                            width="305"
+                                            height="202"/></a>
+                    <!--</div>-->
+                    <!--<div v-else class="selecttr" v-else></div>-->
                 </div>
             </transition-group>
         </div>
@@ -53,6 +56,9 @@
                 var vm = this
                 axios.get(this.buildURL())
                     .then(function (response) {
+                        response.data.model.data.forEach(function (item, i, arr) {
+                            item.show = false
+                        });
                         Vue.set(vm.$data, 'model', response.data.model)
                     })
                     .catch(function (error) {
@@ -64,7 +70,8 @@
                 return `/api/transport?column=${p.column}&direction=${p.direction}&page=${p.page}&search_column=${p.search_column}&search_operator=${p.search_operator}&search_query_1=${p.search_query_1}&search_query_2=${p.search_query_2}`
             },
             ShowMethod(item){
-                item.show = !item.show()
+                item.show = !item.show
+                this.$parent.$emit('loadElement', 'cena');
                 return this.model.data.reduce(function (carry, item2) {
                     if (item != item2) {
                         item2.show = false

@@ -10,13 +10,13 @@
                     </div>
                     <div class="clearfix colelem" id="pbuttonu15774"><!-- group -->
                         <a @click="ShowMethod(true)"
-                           href="#typy-transportu" class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
+                           class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
                            id="buttonu15774"
                         ><!-- container box -->
                             <div class="clearfix grpelem" id="u15775-4"><!-- content --><p>Tak</p></div>
                         </a>
                         <a @click="ShowMethod(false)"
-                           href="#fotograf" class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem" id="buttonu15780"
+                           class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem" id="buttonu15780"
                         ><!-- container box -->
                             <div class="clearfix grpelem" id="u15781-4"><!-- content --><p>Nie</p></div>
                         </a>

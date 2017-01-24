@@ -5,9 +5,9 @@
             <div id="u8138"><!-- column -->
                 <div class="clearfix" id="u8138_align_to_page">
 
-                        <div class="clearfix colelem" id="u8139-4"><!-- content -->
-                            <p>GDZIE?</p>
-                        </div>
+                    <div class="clearfix colelem" id="u8139-4"><!-- content -->
+                        <p>GDZIE?</p>
+                    </div>
 
                     <div class="wrap">
                         <transition-group name="list-complete" tag="div">
@@ -16,13 +16,13 @@
                                 <div class="gradient rounded-corners clip_frame clearfix grpelem citywrap">
                                     <!-- image -->
                                     <a class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
-                                       id="buttonu24047" href="index.html#atrakcji"><!-- container box -->
+                                       id="buttonu24047"><!-- container box -->
                                         <div class="clearfix grpelem" id="u24048-4"><!-- content --><p>Czytać więcej</p>
                                         </div>
                                     </a>
                                     <a @click="ShowMethod(item)"
                                        class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
-                                       href="#atrakcji" id="buttonu19832"><!-- container box -->
+                                       id="buttonu19832"><!-- container box -->
                                         <div class="clearfix grpelem" id="u19833-4"><!-- content --><p>Wybrać</p></div>
                                     </a>
                                     <div class="clearfix grpelem" id="u19250-4"><!-- content -->
