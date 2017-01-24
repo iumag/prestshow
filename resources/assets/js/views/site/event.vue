@@ -13,26 +13,33 @@
         <div class="browser_width grpelem" id="u15327-bw">
             <div id="u15327"><!-- simple frame --></div>
         </div>
-        <div class="wrap" style="padding-top: 200px; padding-left: 60px">
-            <transition-group name="event-complete" tag="div">
-                <div class="clearfix grpelem holiday event-complete-item" v-for="item in model.data" v-bind:key="item"
-                     @click="ShowMethod(item)"><!-- group -->
-                    <div class="pointer_cursor rounded-corners clearfix grpelem" id="u10782"
-                         v-if="item.show === false"><!-- column -->
+        <div v-for="n in 2">
+            <div :id="'prodow'+n" class="wrap" style="padding-top: 200px;" :data-test="n"
+                 v-bind:class="[n===1 ? wrap_left : '', wrap]">
+                    <div class="clearfix grpelem holiday event-complete-item" v-for="(item,index) in model.data"
+                         v-bind:key="item"
+                         @click="ShowMethod(item)"
+                         v-if="(index<n*15 && n===1) || (n>1 && index>=(n-1)*15)"><!-- group -->
+                        <div class="pointer_cursor rounded-corners clearfix grpelem" id="u10782"
+                             v-if="item.show === false"><!-- column -->
 
-                        <a class="nonblock nontext anim_swing clip_frame colelem" id="u10915"
-                           Z><!-- image --><img class="block" id="u10915_img"
-                                                :src="'img/event/' + item.event.picture"
-                                                alt="" width="39" height="38"/></a>
-                        <a class="nonblock nontext anim_swing clearfix colelem" id="u10914-4"
-                        ><!-- content --><p>{{item.event.name}}</p></a>
+                            <a class="nonblock nontext anim_swing clip_frame colelem" id="u10915"
+                               Z><!-- image --><img class="block" id="u10915_img"
+                                                    :src="'img/event/' + item.event.picture"
+                                                    alt="" width="39" height="38"/></a>
+                            <a class="nonblock nontext anim_swing clearfix colelem" id="u10914-4"
+                            ><!-- content --><p>{{item.event.name}}</p></a>
+                        </div>
+                        <div v-else class="Container rounded-corners clearfix grpelem wp-panel wp-panel-active"
+                             id="u12112" role="tabpanel" aria-labelledby="u12117"><!-- group -->
+                            <div class="rounded-corners grpelem" id="u12113"><!-- simple frame --></div>
+                        </div>
                     </div>
-                    <div v-else class="Container rounded-corners clearfix grpelem wp-panel wp-panel-active"
-                         id="u12112" role="tabpanel" aria-labelledby="u12117"><!-- group -->
-                        <div class="rounded-corners grpelem" id="u12113"><!-- simple frame --></div>
-                    </div>
-                </div>
-            </transition-group>
+            </div>
+            <a v-if="n != 2" class="nonblock nontext anim_swing clip_frame grpelem" id="u9420" @click="Scroll(n)">
+                <!-- image --><img
+                    class="block" id="u9420_img" src="images/down-arrow-crop-u9420.png?crc=4075218507" alt="" width="52"
+                    height="31"></a>
         </div>
     </div>
 </template>
@@ -56,7 +63,9 @@
                     search_query_1: '',
                     search_query_2: ''
                 },
-                total: 0
+                total: 0,
+                wrap_left: "wrap_left",
+                wrap: "wrap"
             }
         },
         beforeMount() {
@@ -89,6 +98,9 @@
                 }, 0)
                 this.total = result
                 console.log(this.total)
+            },
+            Scroll(n){
+                $("html,body").animate({scrollTop: $("#prodow"+(n+1)).offset().top}, 1000)
             },
             buildURL() {
                 var p = this.params
