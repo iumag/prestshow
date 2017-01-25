@@ -3,9 +3,9 @@
 
         <!--HTML Widget code-->
         <video id="bgvidu7616" loop preload="auto" muted poster="assets/videopng.png" autoplay
-        style="position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: -1000; background: url(assets/videopng.png) no-repeat; background-size: cover;">
-        <source src="assets/videoweb.webm" type="video/webm">
-        <source src="assets/videomp.mp4" type="video/mp4">
+               style="position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: -1000; background: url(assets/videopng.png) no-repeat; background-size: cover;">
+            <source src="assets/videoweb.webm" type="video/webm">
+            <source src="assets/videomp.mp4" type="video/mp4">
         </video>
         <span style="opacity: .05">
   <div style="background-image: url(assets/pattern-dots.png);position:fixed;opacity: 0.8;left: 0px;top: 0px;width: 100%;height: 100%;z-index: -999;"></div>
@@ -29,7 +29,7 @@
                    href="index.html#swieta"><!-- container box -->
                     <div class="clearfix grpelem" id="u7618-4"><!-- content -->
                         <p>
-                            <button @click="getChildTotals()">Co chcesz zorganizować?</button>
+                            <button @click="getCity()">Co chcesz zorganizować?</button>
                         </p>
                     </div>
                 </a>
@@ -152,6 +152,10 @@
                 let photographer = this.$refs.photographer.Total()
                 let transport = this.$refs.transport.Total()
             },
+            getCity(){
+                let getCity = this.$refs.city.getCity()
+                console.log(getCity)
+            }
         }
     }
 </script>

@@ -1242,6 +1242,7 @@
     margin-right: -10000px;
     margin-top: 187px;
     left: 21px;
+    cursor: pointer;
 }
 
 #buttonu24047:hover {
@@ -1293,6 +1294,7 @@
     margin-right: -10000px;
     margin-top: 187px;
     left: 207px;
+    cursor: pointer;
 }
 
 #buttonu19832:hover {
@@ -3283,6 +3285,7 @@
     margin-right: -10000px;
     margin-top: 22px;
     left: 40px;
+    cursor: pointer;
 }
 
 #buttonu8559:hover #u8560-4 {
@@ -3309,6 +3312,7 @@
     margin-right: -10000px;
     margin-top: 402px;
     left: 703px;
+    cursor: pointer;
 }
 
 #buttonu8561:hover {
@@ -3708,6 +3712,7 @@
     margin-right: -10000px;
     margin-top: 499px;
     left: 800px;
+    cursor: pointer;
 }
 
 #buttonu8626:hover {
@@ -4141,6 +4146,7 @@
     padding-bottom: 12px;
     position: relative;
     margin-right: -10000px;
+    cursor: pointer;
 }
 
 #buttonu15774:hover {
@@ -4191,6 +4197,7 @@
     position: relative;
     margin-right: -10000px;
     left: 355px;
+    cursor: pointer;
 }
 
 #buttonu15780:hover {
@@ -6051,6 +6058,7 @@ body {
     position: relative;
     /* margin-top: 365px; */
     left: 103px;
+    cursor: pointer;
 }
 
 .selecttr {
@@ -6160,11 +6168,11 @@ body {
 }
 
 .event-complete-enter
-     /* .list-complete-leave-active для <2.1.8 */
- {
-     opacity: 0;
-     transform: translateX(-360px);
- }
+    /* .list-complete-leave-active для <2.1.8 */
+{
+    opacity: 0;
+    transform: translateX(-360px);
+}
 
 .event-complete-leave-active {
     position: absolute;

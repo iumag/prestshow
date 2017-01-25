@@ -88,6 +88,13 @@
                     }
                 }, 0)
             },
+            getCity() {
+                return this.model.data.reduce(function (carry, item) {
+                    if (item.show) {
+                        return item
+                    }
+                }, 0)
+            },
             buildURL() {
                 var p = this.params
                 return `/api/city?column=${p.column}&direction=${p.direction}&page=${p.page}&search_column=${p.search_column}&search_operator=${p.search_operator}&search_query_1=${p.search_query_1}&search_query_2=${p.search_query_2}`

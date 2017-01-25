@@ -21,7 +21,6 @@
     <!-- CSS -->
     <link rel="stylesheet" type="text/css" href="{{asset('css/site_global.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('css/index.css')}}" id="pagesheet"/>
-    <link href="https://unpkg.com/animate.css@3.5.1/animate.min.css" rel="stylesheet" type="text/css">
     <!-- Other scripts -->
     <script type="text/javascript">
         var __adobewebfontsappname__ = "muse";
@@ -135,5 +134,5 @@
 <script src="scripts/require.js" type="text/javascript" async data-main="scripts/museconfig.js" onload="if (requirejs) requirejs.onError = function(requireType, requireModule) { if (requireType && requireType.toString && requireType.toString().indexOf && 0 <= requireType.toString().indexOf('#scripterror')) window.Muse.assets.check(); }" onerror="window.Muse.assets.check();"></script>
 
 <!--HTML Widget code-->
-<script type="text/javascript" src="{{asset('js/app.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/site.js')}}"></script>
 </html>
