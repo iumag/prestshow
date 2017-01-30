@@ -64,10 +64,10 @@
                     <city v-if="showElement['city']" ref="city"></city>
                 </transition>
                 <transition name="eventdiv">
-                    <event v-if="showElement['event']" ref="event"></event>
+                    <event v-if="showElement['event']" :city_id="city.id" ref="event"></event>
                 </transition>
                 <is-hotel v-if="showElement['is_hotel']"></is-hotel>
-                <hotel v-if="showElement['hotel']" ref="hotel"></hotel>
+                <hotel v-if="showElement['hotel']" :city_id="city.id" ref="hotel"></hotel>
                 <photographer v-if="showElement['photographer']" ref="photographer"></photographer>
                 <transition name="bounce">
                     <is-transport v-if="showElement['is_transport']"></is-transport>
@@ -336,13 +336,13 @@
             return {
                 test: true,
                 showElement: {
-                    city: true,
-                    event: true,
-                    photographer: true,
-                    is_hotel: true,
-                    hotel: true,
-                    is_transport: true,
-                    transport: true
+                    city: false,
+                    event: false,
+                    photographer: false,
+                    is_hotel: false,
+                    hotel: false,
+                    is_transport: false,
+                    transport: false
                 },
                 scrollElement: {
                     city: '#miasto',

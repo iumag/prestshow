@@ -71,6 +71,11 @@
     import axios from 'axios'
     import Vue from 'vue'
     export default {
+        props: {
+            city_id: {
+                type: Number
+            }
+        },
         data() {
             return {
                 model: {
@@ -81,9 +86,9 @@
                     direction: 'desc',
                     per_page: 10,
                     page: 1,
-                    search_column: 'id',
+                    search_column: 'city_id',
                     search_operator: 'equal_to',
-                    search_query_1: '',
+                    search_query_1: this.city_id,
                     search_query_2: ''
                 },
 
