@@ -81,6 +81,7 @@
             },
             ShowMethod(item){
                 item.show = !item.show
+                this.$parent.$emit('getCity', item);
                 this.$parent.$emit('loadElement', 'event');
                 return this.model.data.reduce(function (carry, item2) {
                     if (item != item2) {

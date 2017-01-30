@@ -90,7 +90,8 @@
                 image: 'images/blank.gif',
                 description: '',
                 cost: 0,
-                show_description: false
+                show_description: false,
+                item_hotel: ''
             }
         },
         beforeMount() {
@@ -113,6 +114,7 @@
 
             },
             ShowMethod(){
+                this.$parent.$emit('getHotel', this.item_hotel);
                 this.$parent.$emit('loadElement', 'photographer');
             },
             buildURL() {
@@ -120,6 +122,7 @@
                 return `/api/hotel?column=${p.column}&direction=${p.direction}&page=${p.page}&search_column=${p.search_column}&search_operator=${p.search_operator}&search_query_1=${p.search_query_1}&search_query_2=${p.search_query_2}`
             },
             ChangeItem(item){
+                this.item_hotel = item
                 this.image = 'img/hotel/' + item.picture
                 this.description = item.description
                 this.cost = item.cost

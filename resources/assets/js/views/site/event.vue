@@ -87,6 +87,13 @@
             },
             ShowMethod(item){
                 item.show = !item.show
+                let items = [];
+                this.model.data.forEach(function (item2) {
+                    if (item2.show) {
+                        items.push(item2)
+                    }
+                });
+                this.$parent.$emit('getEvent', items);
                 this.$parent.$emit('loadElement', 'is_hotel');
             },
             Total() {

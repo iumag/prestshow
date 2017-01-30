@@ -71,6 +71,7 @@
             },
             ShowMethod(item){
                 item.show = !item.show
+                this.$parent.$emit('getTransport', item);
                 this.$parent.$emit('loadElement', 'cena');
                 return this.model.data.reduce(function (carry, item2) {
                     if (item != item2) {
