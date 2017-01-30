@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Basket;
 use App\BasketItem;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class BasketController extends Controller
@@ -17,7 +18,7 @@ class BasketController extends Controller
         foreach ($basket->items() as $items) {
             foreach ($items->items as $item) {
                 $entity = BasketItem::findOrFail($item->id);
-                if(isset($entity->entity->cost)){
+                if (isset($entity->entity->cost)) {
                     $cost += $entity->entity->cost;
                 }
             }
@@ -31,9 +32,49 @@ class BasketController extends Controller
             ]);
     }
 
-    public function store()
+    public function store(Request $request)
     {
+//        $this->validate($request, [
+//            'FIO' => 'required',
+//            'email' => 'required|email',
+//            'phone' => 'required|regex:/^\+?[0-9]{7,12}$/',
+//            'message' => 'required',
+//            'items' => '',
+//        ]);
 
+        $entity = ['city' => '', 'holiday' => '', 'related_event' => '', 'hotel' => '', 'transport' => '', 'photographer' => ''];
+        $entity_all = array();
+
+        $basket = Basket::create([
+            'FIO' => $request->get('FIO'),
+            'email' => $request->get('email'),
+            'phone' => $request->get('phone'),
+            'message' => $request->get('message')
+        ]);
+
+
+        foreach ($request->all() as $key => $value) {
+            if (array_key_exists($key, $entity)) {
+                if($key != 'related_event') {
+                    $basket->items()->save(new BasketItem([
+                        'entity_id' => $value,
+                        'entity_type' => $key
+                    ]));
+                }else{
+                    foreach ($value as $related_event){
+                        $basket->items()->save(new BasketItem([
+                            'entity_id' => $related_event,
+                            'entity_type' => $key
+                        ]));
+                    }
+                }
+            }
+        }
+
+        return response()
+            ->json([
+                'saved' => true
+            ]);
     }
 
     public function show($id)
