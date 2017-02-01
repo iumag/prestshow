@@ -67,7 +67,6 @@
             },
             ShowMethod(item){
                 item.show = !item.show
-                this.$parent.$emit('getPhotographer', item);
                 this.$parent.$emit('loadElement', 'is_transport');
                 return this.model.data.reduce(function (carry, item2) {
                     if (item != item2) {

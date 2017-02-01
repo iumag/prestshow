@@ -48,11 +48,6 @@
     import axios from 'axios'
     import Vue from 'vue'
     export default {
-        props: {
-            city_id: {
-                type: Number
-            }
-        },
         data() {
             return {
                 model: {
@@ -63,9 +58,9 @@
                     direction: 'desc',
                     per_page: 10000,
                     page: 1,
-                    search_column: 'city_id',
+                    search_column: 'id',
                     search_operator: 'equal_to',
-                    search_query_1: this.city_id,
+                    search_query_1: '',
                     search_query_2: ''
                 },
                 total: 0,
@@ -92,13 +87,6 @@
             },
             ShowMethod(item){
                 item.show = !item.show
-                let items = [];
-                this.model.data.forEach(function (item2) {
-                    if (item2.show) {
-                        items.push(item2)
-                    }
-                });
-                this.$parent.$emit('getEvent', items);
                 this.$parent.$emit('loadElement', 'is_hotel');
             },
             Total() {

@@ -71,11 +71,6 @@
     import axios from 'axios'
     import Vue from 'vue'
     export default {
-        props: {
-            city_id: {
-                type: Number
-            }
-        },
         data() {
             return {
                 model: {
@@ -86,17 +81,16 @@
                     direction: 'desc',
                     per_page: 10,
                     page: 1,
-                    search_column: 'city_id',
+                    search_column: 'id',
                     search_operator: 'equal_to',
-                    search_query_1: this.city_id,
+                    search_query_1: '',
                     search_query_2: ''
                 },
 
                 image: 'images/blank.gif',
                 description: '',
                 cost: 0,
-                show_description: false,
-                item_hotel: ''
+                show_description: false
             }
         },
         beforeMount() {
@@ -119,7 +113,6 @@
 
             },
             ShowMethod(){
-                this.$parent.$emit('getHotel', this.item_hotel);
                 this.$parent.$emit('loadElement', 'photographer');
             },
             buildURL() {
@@ -127,7 +120,6 @@
                 return `/api/hotel?column=${p.column}&direction=${p.direction}&page=${p.page}&search_column=${p.search_column}&search_operator=${p.search_operator}&search_query_1=${p.search_query_1}&search_query_2=${p.search_query_2}`
             },
             ChangeItem(item){
-                this.item_hotel = item
                 this.image = 'img/hotel/' + item.picture
                 this.description = item.description
                 this.cost = item.cost
