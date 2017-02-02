@@ -20,29 +20,35 @@
                 </div>
                 <site-header></site-header>
                 <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7622"
-                   href="index.html#glowna"><!-- simple frame --></a>
+                   href="#glowna"><!-- simple frame --></a>
                 <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7623"
-                   href="index.html#swieta"><!-- simple frame --></a>
-                <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7624"
-                   href="index.html#miasto"><!-- simple frame --></a>
+                   href="#swieta"><!-- simple frame --></a>
+                <a v-show="showElement['city']" class="nonblock nontext anim_swing rounded-corners pinned-colelem"
+                   id="u7624"
+                   href="#miasto"><!-- simple frame --></a>
                 <a class="nonblock nontext Button anim_swing rounded-corners clearfix colelem" id="buttonu7617"
-                   href="index.html#swieta"><!-- container box -->
+                   href="#swieta"><!-- container box -->
                     <div class="clearfix grpelem" id="u7618-4"><!-- content -->
                         <p>
-                            <button @click="getCity()">Co chcesz zorganizować?</button>
+                            Co chcesz zorganizować?
                         </p>
                     </div>
                 </a>
-                <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7625"
-                   href="index.html#atrakcji"><!-- simple frame --></a>
-                <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7626"
-                   href="index.html#nocleg"><!-- simple frame --></a>
-                <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7627"
-                   href="index.html#hotel"><!-- simple frame --></a>
-                <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7628"
-                   href="index.html#fotograf"><!-- simple frame --></a>
-                <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u19811"
-                   href="index.html#o-transporcie"><!-- simple frame --></a>
+                <a v-show="showElement['event']" class="nonblock nontext anim_swing rounded-corners pinned-colelem"
+                   id="u7625"
+                   href="#atrakcji"><!-- simple frame --></a>
+                <a v-show="showElement['is_hotel']" class="nonblock nontext anim_swing rounded-corners pinned-colelem"
+                   id="u7626"
+                   href="#nocleg"><!-- simple frame --></a>
+                <a v-show="showElement['hotel']" class="nonblock nontext anim_swing rounded-corners pinned-colelem"
+                   id="u7627"
+                   href="#hotel"><!-- simple frame --></a>
+                <a v-show="showElement['photographer']"
+                   class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7628"
+                   href="#fotograf"><!-- simple frame --></a>
+                <a v-show="showElement['is_transport']"
+                   class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u19811"
+                   href="#o-transporcie"><!-- simple frame --></a>
                 <div class="size_fixed colelem" id="u15365"><!-- custom html -->
 
                     <!-- This Adobe Muse widget was created by the team at MuseFree.com -->
@@ -53,8 +59,9 @@
                     </div>
 
                 </div>
-                <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u19814"
-                   href="index.html#cena"><!-- simple frame --></a>
+                <a v-if="showElement['cena']" class="nonblock nontext anim_swing rounded-corners pinned-colelem"
+                   id="u19814"
+                   href="#cena"><!-- simple frame --></a>
                 <holiday ref="holiday"></holiday>
                 <transition
                         name="custom-classes-transition"
@@ -69,14 +76,14 @@
                 <is-hotel v-if="showElement['is_hotel']"></is-hotel>
                 <hotel v-if="showElement['hotel']" :city_id="city.id" ref="hotel"></hotel>
                 <photographer v-if="showElement['photographer']" ref="photographer"></photographer>
-                <transition name="bounce">
+                <!--<transition name="bounce">-->
                     <is-transport v-if="showElement['is_transport']"></is-transport>
-                </transition>
+                <!--</transition>-->
 
                 <transport v-if="showElement['transport']" ref="transport"></transport>
 
 
-                <div class="clearfix colelem" id="pcena"><!-- group -->
+                <div v-show="showElement['cena']" class="clearfix colelem" id="pcena"><!-- group -->
                     <a class="anchor_item grpelem" id="cena"></a>
                     <div class="browser_width grpelem" id="u16514-bw">
                         <div id="u16514"><!-- column -->
@@ -85,214 +92,186 @@
                                     <p>cena</p>
                                 </div>
                                 <form class="form" @submit.prevent="save">
+                                    <div class="clearfix grpelem" id="ppu15527-4"><!-- column -->
+                                        <div class="clearfix colelem" id="pu15527-4"><!-- group -->
+                                            <div class="clearfix grpelem" id="u15527-4"><!-- content -->
+                                                <p>Miasto:</p>
+                                            </div>
+                                            <div class="clearfix grpelem" id="u15526-4"><!-- content -->
+                                                <p>{{city.name}}</p>
+                                                <div id="u15539" class="clearfix colelem">
+                                                    <div id="u15541" class="rounded-corners clearfix grpelem">
+                                                        <div id="u15540-4" class="clearfix grpelem"><p>+</p></div>
+                                                    </div>
+                                                </div>
+                                                <input type="hidden" name="city" :value="city.id">
+                                            </div>
+                                        </div>
+                                        <div class="clearfix colelem" id="pu15524-4"><!-- group -->
+                                            <div class="clearfix grpelem" id="u15524-4"><!-- content -->
+                                                <p>Uroczystość:</p>
+                                            </div>
+                                            <div class="clearfix grpelem" id="u15526-4"><!-- content -->
+                                                <div class="entityitem">{{holiday.name}}</div>
+                                                <div class="spaceitem">{{holiday.cost}} ZL</div>
+                                                <div id="u15539" class="clearfix colelem">
+                                                    <div id="u15541" class="rounded-corners clearfix grpelem">
+                                                        <div id="u15540-4" class="clearfix grpelem"><p>+</p></div>
+                                                    </div>
+                                                </div>
+                                                </p>
+                                                <input type="hidden" name="holiday" :value="holiday.id">
+                                            </div>
+                                        </div>
+                                        <div class="clearfix colelem" id="u15528"><!-- column -->
+                                            <div class="clearfix colelem" id="pu15532-4"><!-- group -->
+                                                <div class="clearfix grpelem" id="u15532-4"><!-- content -->
+                                                    <p>Atrakcji:</p>
+                                                </div>
+                                            </div>
+                                            <div class="clearfix grpelem" id="u15526-4" v-for="event in events">
+                                                <!-- content -->
+                                                <div class="entityitem">{{event.event.name}}</div>
+                                                <div class="spaceitem">{{event.cost}} ZL</div>
+                                                <div id="u15539" class="clearfix colelem">
+                                                    <div id="u15541" class="rounded-corners clearfix grpelem">
+                                                        <div id="u15540-4" class="clearfix grpelem"><p>+</p></div>
+                                                    </div>
+                                                </div>
+                                                </p>
+                                                <input type="hidden" name="related_event[]" :value="event.id">
+                                            </div>
+                                        </div>
+                                        <div class="clearfix colelem" id="u15535"><!-- group -->
+                                            <div class="clearfix grpelem" id="u15536-4"><!-- content -->
+                                                <p>Hotel:</p>
+                                            </div>
+                                            <div class="clearfix grpelem" id="u15526-4"><!-- content -->
+                                                <div class="entityitem">{{hotel.name}}</div>
+                                                <div class="spaceitem">{{hotel.cost}} ZL</div>
+                                                <div id="u15539" class="clearfix colelem">
+                                                    <div id="u15541" class="rounded-corners clearfix grpelem">
+                                                        <div id="u15540-4" class="clearfix grpelem"><p>+</p></div>
+                                                    </div>
+                                                </div>
+                                                </p>
+                                                <input type="hidden" name="hotel" :value="hotel.id">
+                                            </div>
+                                        </div>
+                                        <div class="clearfix colelem" id="u19760"><!-- group -->
+                                            <div class="clearfix grpelem" id="u19762-4"><!-- content -->
+                                                <p>Transport:</p>
+                                            </div>
+                                            <div class="clearfix grpelem" id="u15526-4"><!-- content -->
+                                                <div class="entityitem">{{transport.name}}</div>
+                                                <div class="spaceitem">{{transport.cost}} ZL</div>
+                                                <div id="u15539" class="clearfix colelem">
+                                                    <div id="u15541" class="rounded-corners clearfix grpelem">
+                                                        <div id="u15540-4" class="clearfix grpelem"><p>+</p></div>
+                                                    </div>
+                                                </div>
+                                                </p>
+                                                <input type="hidden" name="transport" :value="transport.id">
+                                            </div>
+                                        </div>
+                                        <div class="clearfix colelem" id="u19772"><!-- group -->
+                                            <div class="clearfix grpelem" id="u19774-4"><!-- content -->
+                                                <p>Fotograf:</p>
+                                            </div>
+                                            <div class="clearfix grpelem" id="u15526-4"><!-- content -->
+                                                <div class="entityitem">{{photographer.name}}</div>
+                                                <div class="spaceitem">{{photographer.cost}} ZL</div>
+                                                <div id="u15539" class="clearfix colelem">
+                                                    <div id="u15541" class="rounded-corners clearfix grpelem">
+                                                        <div id="u15540-4" class="clearfix grpelem"><p>+</p></div>
+                                                    </div>
+                                                </div>
+                                                </p>
+                                                <input type="hidden" name="photographer" :value="photographer.id">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix colelem" id="pu15533-5"><!-- group -->
+                                        <div class="rounded-corners clearfix grpelem" id="u15533-5"><!-- content -->
+                                            <p><span id="u15533">&nbsp;&nbsp;&nbsp;&nbsp; SUMA </span></p>
+                                        </div>
+                                        <div class="rounded-corners clearfix grpelem" id="u15534-3"><!-- content -->
+                                            <p>&nbsp;</p>
+                                        </div>
+                                        <div class="clearfix grpelem" id="u15538-4"><!-- content -->
+                                            <p>{{getAllCost}} ZL</p>
+                                        </div>
+                                        <div class="clearfix grpelem" id="u16847-4"><!-- content -->
+                                            <p>Także możesz się skontaktować z menadżerem telefonicznie: +123123123</p>
+                                        </div>
+                                    </div>
                                     <div class="clearfix colelem" id="pppu15527-4"><!-- group -->
-                                        <div class="clearfix grpelem" id="ppu15527-4"><!-- column -->
-                                            <div class="clearfix colelem" id="pu15527-4"><!-- group -->
-                                                <div class="clearfix grpelem" id="u15527-4"><!-- content -->
-                                                    <p>Miasto:</p>
-                                                </div>
-                                                <div class="clearfix grpelem" id="u15526-4"><!-- content -->
-                                                    <p>{{city.name}}</p>
-                                                    <input type="hidden" name="city" :value="city.id">
-                                                </div>
-                                            </div>
-                                            <div class="clearfix colelem" id="pu15524-4"><!-- group -->
-                                                <div class="clearfix grpelem" id="u15524-4"><!-- content -->
-                                                    <p>Uroczystość:</p>
-                                                </div>
-                                                <div class="clearfix grpelem" id="u15525-4"><!-- content -->
-                                                    <p>{{holiday.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        {{holiday.cost}} ZL</p>
-                                                    <input type="hidden" name="holiday" :value="holiday.id">
-                                                </div>
-                                            </div>
-                                            <div class="clearfix colelem" id="u15528"><!-- column -->
-                                                <div class="clearfix colelem" id="pu15532-4"><!-- group -->
-                                                    <div class="clearfix grpelem" id="u15532-4"><!-- content -->
-                                                        <p>Atrakcji:</p>
-                                                    </div>
-                                                </div>
-                                                <div class="clearfix grpelem" id="u15531-4" v-for="event in events">
-                                                    <!-- content -->
-                                                    <p>{{event.event.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        {{event.cost}} ZL</p>
-                                                    <input type="hidden" name="related_event[]" :value="event.id">
-                                                </div>
-                                            </div>
-                                            <div class="clearfix colelem" id="u15535"><!-- group -->
-                                                <div class="clearfix grpelem" id="u15536-4"><!-- content -->
-                                                    <p>Hotel:</p>
-                                                </div>
-                                                <div class="clearfix grpelem" id="u15537-4"><!-- content -->
-                                                    <p>{{hotel.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        {{hotel.cost}} ZL</p>
-                                                    <input type="hidden" name="hotel" :value="hotel.id">
-                                                </div>
-                                            </div>
-                                            <div class="clearfix colelem" id="u19760"><!-- group -->
-                                                <div class="clearfix grpelem" id="u19762-4"><!-- content -->
-                                                    <p>Transport:</p>
-                                                </div>
-                                                <div class="clearfix grpelem" id="u19761-4"><!-- content -->
-                                                    <p>{{transport.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        {{transport.cost}} ZL</p>
-                                                    <input type="hidden" name="transport" :value="transport.id">
-                                                </div>
-                                            </div>
-                                            <div class="clearfix colelem" id="u19772"><!-- group -->
-                                                <div class="clearfix grpelem" id="u19774-4"><!-- content -->
-                                                    <p>Fotograf:</p>
-                                                </div>
-                                                <div class="clearfix grpelem" id="u19773-4"><!-- content -->
-                                                    <p>{{photographer.name}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                                        {{photographer.cost}} ZL</p>
-                                                    <input type="hidden" name="photographer" :value="photographer.id">
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="clearfix grpelem" id="pu15539"><!-- column -->
-                                            <div class="clearfix colelem" id="u15539"><!-- group -->
-                                                <div class="rounded-corners clearfix grpelem" id="u15541"><!-- group -->
-                                                    <div class="clearfix grpelem" id="u15540-4"><!-- content -->
-                                                        <p>+</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="clearfix colelem" id="u19784"><!-- group -->
-                                                <div class="rounded-corners clearfix grpelem" id="u19786"><!-- group -->
-                                                    <div class="clearfix grpelem" id="u19785-4"><!-- content -->
-                                                        <p>+</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="clearfix colelem" id="u19793"><!-- group -->
-                                                <div class="rounded-corners clearfix grpelem" id="u19794"><!-- group -->
-                                                    <div class="clearfix grpelem" id="u19795-4"><!-- content -->
-                                                        <p>+</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="clearfix colelem" id="u24087"><!-- group -->
-                                                <div class="rounded-corners clearfix grpelem" id="u24089"><!-- group -->
-                                                    <div class="clearfix grpelem" id="u24088-4"><!-- content -->
-                                                        <p>+</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="clearfix colelem" id="u15551"><!-- group -->
-                                                <div class="rounded-corners clearfix grpelem" id="u15552"><!-- group -->
-                                                    <div class="clearfix grpelem" id="u15553-4"><!-- content -->
-                                                        <p>+</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="clearfix colelem" id="u15554"><!-- group -->
-                                                <div class="rounded-corners clearfix grpelem" id="u15555"><!-- group -->
-                                                    <div class="clearfix grpelem" id="u15556-4"><!-- content -->
-                                                        <p>+</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="clearfix colelem" id="u19802"><!-- group -->
-                                                <div class="rounded-corners clearfix grpelem" id="u19804"><!-- group -->
-                                                    <div class="clearfix grpelem" id="u19803-4"><!-- content -->
-                                                        <p>+</p>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+
+
                                         <div class="clearfix grpelem" id="u15558"><!-- group -->
                                             <div class="clearfix grpelem" id="u15559"><!-- group -->
-                                                <div class="rounded-corners clearfix grpelem" id="u15560"><!-- group -->
-                                                    <a class="nonblock nontext clearfix grpelem" id="u15582-4"
-                                                       href="http://www.musefree.com"><!-- content --><p>Podtwierdzenie
-                                                        zamówienia</p></a>
+
+                                                <div class="fld-grp clearfix grpelem" id="widgetu15578"
+                                                     data-required="true" data-type="email"><!-- none box -->
+                                                    <span class="fld-input NoWrap actAsDiv clearfix grpelem"
+                                                          id="u15580-4"><!-- content --><input class="wrapped-input"
+                                                                                               type="email"
+                                                                                               spellcheck="false"
+                                                                                               id="widgetu15578_input"
+                                                                                               name="email"
+                                                                                               tabindex="2"/><label
+                                                            class="wrapped-input fld-prompt"
+                                                            id="widgetu15578_prompt"
+                                                            for="widgetu15578_input"><span
+                                                            class="actAsPara">Enter Email</span></label></span>
                                                 </div>
 
-                                                    <!-- none box -->
-                                                    <div class="clearfix grpelem" id="u15573-4"><!-- content -->
-                                                        <p>Submitting Form...</p>
-                                                    </div>
-                                                    <div class="clearfix grpelem" id="u15566-4"><!-- content -->
-                                                        <p>The server encountered an error.</p>
-                                                    </div>
-                                                    <div class="clearfix grpelem" id="u15572-4"><!-- content -->
-                                                        <p>Form received.</p>
-                                                    </div>
-                                                    <div class="fld-grp clearfix grpelem" id="widgetu15578"
-                                                         data-required="true" data-type="email"><!-- none box -->
-                                                        <span class="fld-input NoWrap actAsDiv clearfix grpelem"
-                                                              id="u15580-4"><!-- content --><input class="wrapped-input"
-                                                                                                   type="email"
-                                                                                                   spellcheck="false"
-                                                                                                   id="widgetu15578_input"
-                                                                                                   name="email"
-                                                                                                   tabindex="2"/><label
-                                                                class="wrapped-input fld-prompt"
-                                                                id="widgetu15578_prompt"
-                                                                for="widgetu15578_input"><span
-                                                                class="actAsPara">Enter Email</span></label></span>
-                                                    </div>
-                                                    <button class="submit-btn NoWrap grpelem" id="u15567-13">ZAMÓWIĆ
-                                                    </button>
 
-                                                    <div class="fld-grp clearfix grpelem" id="widgetu15562"
-                                                         data-required="true"><!-- none box -->
-                                                        <span class="fld-textarea actAsDiv clearfix grpelem"
-                                                              id="u15563-4"><!-- content --><textarea
-                                                                class="wrapped-input" id="widgetu15562_input"
-                                                                name="message" tabindex="4"></textarea><label
-                                                                class="wrapped-input fld-prompt"
-                                                                id="widgetu15562_prompt"
-                                                                for="widgetu15562_input"><span class="actAsPara">Enter Your Message</span></label></span>
-                                                    </div>
-                                                    <div class="fld-grp clearfix grpelem" id="widgetu15574"
-                                                         data-required="true"><!-- none box -->
-                                                        <span class="fld-input NoWrap actAsDiv clearfix grpelem"
-                                                              id="u15576-4"><!-- content --><input class="wrapped-input"
-                                                                                                   type="text"
-                                                                                                   spellcheck="false"
-                                                                                                   id="widgetu15574_input"
-                                                                                                   name="FIO"
-                                                                                                   tabindex="1"/><label
-                                                                class="wrapped-input fld-prompt"
-                                                                id="widgetu15574_prompt"
-                                                                for="widgetu15574_input"><span
-                                                                class="actAsPara">Enter Name</span></label></span>
-                                                    </div>
-                                                    <div class="fld-grp clearfix grpelem" id="widgetu15568"
-                                                         data-required="true"><!-- none box -->
-                                                        <span class="fld-input NoWrap actAsDiv clearfix grpelem"
-                                                              id="u15569-4"><!-- content --><input class="wrapped-input"
-                                                                                                   type="tel"
-                                                                                                   spellcheck="false"
-                                                                                                   id="widgetu15568_input"
-                                                                                                   name="phone"
-                                                                                                   tabindex="3"/><label
-                                                                class="wrapped-input fld-prompt"
-                                                                id="widgetu15568_prompt"
-                                                                for="widgetu15568_input"><span class="actAsPara">Enter Phone Number</span></label></span>
-                                                    </div>
-
+                                                <div class="fld-grp clearfix grpelem" id="widgetu15562"
+                                                     data-required="true"><!-- none box -->
+                                                    <span class="fld-textarea actAsDiv clearfix grpelem"
+                                                          id="u15563-4"><!-- content --><textarea
+                                                            class="wrapped-input" id="widgetu15562_input"
+                                                            name="message" tabindex="4"></textarea><label
+                                                            class="wrapped-input fld-prompt"
+                                                            id="widgetu15562_prompt"
+                                                            for="widgetu15562_input"><span class="actAsPara">Enter Your Message</span></label></span>
+                                                </div>
+                                                <div class="fld-grp clearfix grpelem" id="widgetu15574"
+                                                     data-required="true"><!-- none box -->
+                                                    <span class="fld-input NoWrap actAsDiv clearfix grpelem"
+                                                          id="u15576-4"><!-- content --><input class="wrapped-input"
+                                                                                               type="text"
+                                                                                               spellcheck="false"
+                                                                                               id="widgetu15574_input"
+                                                                                               name="FIO"
+                                                                                               tabindex="1"/><label
+                                                            class="wrapped-input fld-prompt"
+                                                            id="widgetu15574_prompt"
+                                                            for="widgetu15574_input"><span
+                                                            class="actAsPara">Enter Name</span></label></span>
+                                                </div>
+                                                <div class="fld-grp clearfix grpelem" id="widgetu15568"
+                                                     data-required="true"><!-- none box -->
+                                                    <span class="fld-input NoWrap actAsDiv clearfix grpelem"
+                                                          id="u15569-4"><!-- content --><input class="wrapped-input"
+                                                                                               type="tel"
+                                                                                               spellcheck="false"
+                                                                                               id="widgetu15568_input"
+                                                                                               name="phone"
+                                                                                               tabindex="3"/><label
+                                                            class="wrapped-input fld-prompt"
+                                                            id="widgetu15568_prompt"
+                                                            for="widgetu15568_input"><span class="actAsPara">Enter Phone Number</span></label></span>
+                                                </div>
+                                                <button class="submit-btn NoWrap grpelem" id="u15567-13">ZAMÓWIĆ
+                                                </button>
                                             </div>
                                         </div>
 
                                     </div>
                                 </form>
-                                <div class="clearfix colelem" id="pu15533-5"><!-- group -->
-                                    <div class="rounded-corners clearfix grpelem" id="u15533-5"><!-- content -->
-                                        <p><span id="u15533">&nbsp;&nbsp;&nbsp;&nbsp; SUMA </span></p>
-                                    </div>
-                                    <div class="rounded-corners clearfix grpelem" id="u15534-3"><!-- content -->
-                                        <p>&nbsp;</p>
-                                    </div>
-                                    <div class="clearfix grpelem" id="u15538-4"><!-- content -->
-                                        <p>{{getAllCost}} ZL</p>
-                                    </div>
-                                    <div class="clearfix grpelem" id="u16847-4"><!-- content -->
-                                        <p>Także możesz się skontaktować z menadżerem telefonicznie: +123123123</p>
-                                    </div>
-                                </div>
+
                             </div>
                         </div>
                     </div>
@@ -342,7 +321,8 @@
                     is_hotel: false,
                     hotel: false,
                     is_transport: false,
-                    transport: false
+                    transport: false,
+                    cena: false
                 },
                 scrollElement: {
                     city: '#miasto',

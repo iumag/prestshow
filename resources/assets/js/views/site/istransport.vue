@@ -35,6 +35,8 @@
             ShowMethod(change){
                 if (change) {
                     this.$parent.$emit('loadElement', 'transport');
+                }else{
+                    this.$parent.$emit('loadElement', 'cena');
                 }
             }
         }

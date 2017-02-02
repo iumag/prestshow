@@ -102,6 +102,12 @@
         beforeMount() {
             this.fetchData()
         },
+        updated() {
+            if (this.city_id != this.params.search_query_1) {
+                this.params.search_query_1 = this.city_id
+                this.fetchData()
+            }
+        },
         methods: {
             fetchData() {
                 var vm = this
@@ -110,6 +116,7 @@
                         var picture = response.data.model.data[0].picture
                         vm.$data.description = response.data.model.data[0].description
                         vm.$data.image = 'img/hotel/' + picture
+                        vm.$data.item_hotel = response.data.model.data[0]
                         //console.log( response.data.model.data[0].show)
                         Vue.set(vm.$data, 'model', response.data.model)
                     })
