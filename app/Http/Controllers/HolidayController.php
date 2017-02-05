@@ -29,7 +29,8 @@ class HolidayController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'picture' => 'image',
-            'cost' => 'required|numeric|min:0'
+            'cost' => 'required|numeric|min:0',
+            'description' => 'required'
         ]);
 
         $image = $request->file('picture');
@@ -49,6 +50,7 @@ class HolidayController extends Controller
         $holiday = Holiday::create([
             'name' => $request->get('name'),
             'cost' => $request->get('cost'),
+            'description' => $request->get('description'),
             'picture' => $name
         ]);
 
@@ -84,7 +86,8 @@ class HolidayController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'picture' => 'image',
-            'cost' => 'required|numeric|min:0'
+            'cost' => 'required|numeric|min:0',
+            'description' => 'required'
         ]);
 
         $holiday = Holiday::findOrFail($id);
@@ -108,6 +111,7 @@ class HolidayController extends Controller
         $holiday->update([
             'name' => $request->get('name'),
             'cost' => $request->get('cost'),
+            'description' => $request->get('description'),
             'picture' => $name
         ]);
 

@@ -25,6 +25,15 @@
                         </div>
                         <load-image></load-image>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>Description</label>
+                                <ckeditor v-model="form.description" name="description" :height="'300px'"
+                                          :toolbar="[['Format']]"></ckeditor>
+                            </div>
+                        </div>
+                    </div>
                     <button class="btn btn-success">Save</button>
                 </form>
             </div>

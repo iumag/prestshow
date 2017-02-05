@@ -5,8 +5,8 @@
                 <td>{{item.id}}</td>
                 <td>{{item.name}}</td>
                 <td>{{item.city.name}}</td>
-                <td><img :src="'/img/hotel/' + item.picture"></td>
-                <td>{{item.description}}</td>
+                <td><img width=100 height=100 :src="'/img/hotel/' + item.picture"></td>
+                <td v-html="item.description"></td>
                 <td>{{item.cost}}</td>
                 <td>{{item.created_at}}</td>
                 <td>
