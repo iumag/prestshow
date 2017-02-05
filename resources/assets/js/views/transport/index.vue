@@ -5,7 +5,7 @@
                 <td>{{item.id}}</td>
                 <td>{{item.name}}</td>
                 <td><img :src="'/img/transport/' + item.picture"></td>
-                <td>{{item.description}}</td>
+                <td v-html="item.description"></td>
                 <td>{{item.cost}}</td>
                 <td>{{item.created_at}}</td>
                 <td>

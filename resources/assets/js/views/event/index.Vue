@@ -5,7 +5,7 @@
                 <td>{{item.id}}</td>
                 <td>{{item.name}}</td>
                 <td><img :src="'/img/event/' + item.picture"></td>
-                <td>{{item.description}}</td>
+                <td v-html="item.description"></td>
                 <td>{{item.created_at}}</td>
                 <td>
                     <router-link class="edit-modal btn btn-success" :to="'/event/' + item.id + '/edit'">
