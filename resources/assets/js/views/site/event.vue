@@ -18,9 +18,28 @@
                  v-bind:class="[n===1 ? wrap_left : '', wrap]">
                 <div class="clearfix grpelem holiday event-complete-item" v-for="(item,index) in model.data"
                      v-bind:key="item"
-                     @click="ShowMethod(item)"
                      v-if="(index<n*15 && n===1) || (n>1 && index>=(n-1)*15)"><!-- group -->
-                    <div class="pointer_cursor rounded-corners clearfix grpelem" id="u10782"
+                    <div id="pamphletu16085" @click="showModal(item)"><!-- none box -->
+                        <div class="ThumbGroup clearfix grpelem" id="u16107"><!-- none box -->
+                            <div class="popup_anchor">
+                                <div class="Thumb popup_element rounded-corners clearfix wp-tab-active" id="u16108"
+                                     role="button" tabindex="0" aria-haspopup="true" aria-controls="u16087">
+                                    <!-- group -->
+                                    <div class="clip_frame grpelem" id="u16109"><!-- image -->
+                                        <img class="block" id="u16109_img" src="images/inform.png?crc=157975575" alt=""
+                                             width="78" height="59">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="popup_anchor" id="u16086popup">
+
+                        </div>
+                        <div class="popup_anchor">
+
+                        </div>
+                    </div>
+                    <div @click="ShowMethod(item)" class="pointer_cursor rounded-corners clearfix grpelem" id="u10782"
                          v-if="item.show === false"><!-- column -->
 
                         <a class="nonblock nontext anim_swing clip_frame colelem" id="u10915"
@@ -30,7 +49,8 @@
                         <a class="nonblock nontext anim_swing clearfix colelem" id="u10914-4"
                         ><!-- content --><p>{{item.event.name}}</p></a>
                     </div>
-                    <div v-else class="Container rounded-corners clearfix grpelem wp-panel wp-panel-active"
+                    <div v-else @click="ShowMethod(item)"
+                         class="Container rounded-corners clearfix grpelem wp-panel wp-panel-active"
                          id="u12112" role="tabpanel" aria-labelledby="u12117"><!-- group -->
                         <div class="rounded-corners grpelem" id="u12113"><!-- simple frame --></div>
                     </div>
@@ -41,6 +61,9 @@
                     class="block" id="u9420_img" src="images/down-arrow-crop-u9420.png?crc=4075218507" alt="" width="52"
                     height="31"></a>
         </div>
+        <a @click="scrollh()" class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem" id="buttonu8269"><!-- container box -->
+            <div class="clearfix grpelem" id="u8270-4"><!-- content --><p>Przejść do następnego kroku</p></div>
+        </a>
     </div>
 </template>
 
@@ -84,6 +107,9 @@
             }
         },
         methods: {
+            showModal(item){
+                this.$parent.$emit('modalEvent', item);
+            },
             fetchData() {
                 var vm = this
                 axios.get(this.buildURL())
@@ -91,7 +117,7 @@
                         response.data.model.data.forEach(function (item, i, arr) {
                             item.show = false
                         });
-                        var total_round = Math.round(response.data.model.total/15)
+                        var total_round = Math.round(response.data.model.total / 15)
                         vm.$data.total = total_round
                         console.log(vm.$data.total)
                         Vue.set(vm.$data, 'model', response.data.model)
@@ -110,6 +136,9 @@
                 });
                 this.$parent.$emit('getEvent', items);
                 this.$parent.$emit('loadElement', 'is_hotel');
+            },
+            scrollh(){
+              this.$parent.scroll('is_hotel')
             },
             Scroll(n){
                 $("html,body").animate({scrollTop: $("#prodow" + (n + 1)).offset().top}, 1000)

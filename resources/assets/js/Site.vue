@@ -46,9 +46,8 @@
                 <a v-show="showElement['photographer']"
                    class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7628"
                    href="#fotograf"><!-- simple frame --></a>
-                <a v-show="showElement['is_transport']"
-                   class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u19811"
-                   href="#o-transporcie"><!-- simple frame --></a>
+
+
                 <div class="size_fixed colelem" id="u15365"><!-- custom html -->
 
                     <!-- This Adobe Muse widget was created by the team at MuseFree.com -->
@@ -59,6 +58,12 @@
                     </div>
 
                 </div>
+                <a v-show="showElement['is_transport']"
+                   class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="istransportpage"
+                   href="#po-transporcie"><!-- simple frame --></a>
+                <a v-show="showElement['transport']"
+                   class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="transportpage"
+                   href="#pu16487"><!-- simple frame --></a>
                 <a v-if="showElement['cena']" class="nonblock nontext anim_swing rounded-corners pinned-colelem"
                    id="u19814"
                    href="#cena"><!-- simple frame --></a>
@@ -76,9 +81,9 @@
                 <is-hotel v-if="showElement['is_hotel']"></is-hotel>
                 <hotel v-if="showElement['hotel']" :city_id="city.id" ref="hotel"></hotel>
                 <photographer v-if="showElement['photographer']" ref="photographer"></photographer>
-                <!--<transition name="bounce">-->
-                    <is-transport v-if="showElement['is_transport']"></is-transport>
-                <!--</transition>-->
+
+                <is-transport v-if="showElement['is_transport']"></is-transport>
+
 
                 <transport v-if="showElement['transport']" ref="transport"></transport>
 
@@ -99,11 +104,7 @@
                                             </div>
                                             <div class="clearfix grpelem" id="u15526-4"><!-- content -->
                                                 <p>{{city.name}}</p>
-                                                <div id="u15539" class="clearfix colelem">
-                                                    <div id="u15541" class="rounded-corners clearfix grpelem">
-                                                        <div id="u15540-4" class="clearfix grpelem"><p>+</p></div>
-                                                    </div>
-                                                </div>
+
                                                 <input type="hidden" name="city" :value="city.id">
                                             </div>
                                         </div>
@@ -114,11 +115,7 @@
                                             <div class="clearfix grpelem" id="u15526-4"><!-- content -->
                                                 <div class="entityitem">{{holiday.name}}</div>
                                                 <div class="spaceitem">{{holiday.cost}} ZL</div>
-                                                <div id="u15539" class="clearfix colelem">
-                                                    <div id="u15541" class="rounded-corners clearfix grpelem">
-                                                        <div id="u15540-4" class="clearfix grpelem"><p>+</p></div>
-                                                    </div>
-                                                </div>
+
                                                 </p>
                                                 <input type="hidden" name="holiday" :value="holiday.id">
                                             </div>
@@ -129,12 +126,14 @@
                                                     <p>Atrakcji:</p>
                                                 </div>
                                             </div>
-                                            <div class="clearfix grpelem" id="u15526-4" v-for="event in events">
+                                            <div class="clearfix grpelem" id="u15526-4"
+                                                 v-for="(event, index) in events">
                                                 <!-- content -->
                                                 <div class="entityitem">{{event.event.name}}</div>
                                                 <div class="spaceitem">{{event.cost}} ZL</div>
                                                 <div id="u15539" class="clearfix colelem">
-                                                    <div id="u15541" class="rounded-corners clearfix grpelem">
+                                                    <div @click="delete_entity(index, event)" id="u15541"
+                                                         class="rounded-corners clearfix grpelem">
                                                         <div id="u15540-4" class="clearfix grpelem"><p>+</p></div>
                                                     </div>
                                                 </div>
@@ -149,11 +148,7 @@
                                             <div class="clearfix grpelem" id="u15526-4"><!-- content -->
                                                 <div class="entityitem">{{hotel.name}}</div>
                                                 <div class="spaceitem">{{hotel.cost}} ZL</div>
-                                                <div id="u15539" class="clearfix colelem">
-                                                    <div id="u15541" class="rounded-corners clearfix grpelem">
-                                                        <div id="u15540-4" class="clearfix grpelem"><p>+</p></div>
-                                                    </div>
-                                                </div>
+
                                                 </p>
                                                 <input type="hidden" name="hotel" :value="hotel.id">
                                             </div>
@@ -165,11 +160,7 @@
                                             <div class="clearfix grpelem" id="u15526-4"><!-- content -->
                                                 <div class="entityitem">{{transport.name}}</div>
                                                 <div class="spaceitem">{{transport.cost}} ZL</div>
-                                                <div id="u15539" class="clearfix colelem">
-                                                    <div id="u15541" class="rounded-corners clearfix grpelem">
-                                                        <div id="u15540-4" class="clearfix grpelem"><p>+</p></div>
-                                                    </div>
-                                                </div>
+
                                                 </p>
                                                 <input type="hidden" name="transport" :value="transport.id">
                                             </div>
@@ -181,11 +172,7 @@
                                             <div class="clearfix grpelem" id="u15526-4"><!-- content -->
                                                 <div class="entityitem">{{photographer.name}}</div>
                                                 <div class="spaceitem">{{photographer.cost}} ZL</div>
-                                                <div id="u15539" class="clearfix colelem">
-                                                    <div id="u15541" class="rounded-corners clearfix grpelem">
-                                                        <div id="u15540-4" class="clearfix grpelem"><p>+</p></div>
-                                                    </div>
-                                                </div>
+
                                                 </p>
                                                 <input type="hidden" name="photographer" :value="photographer.id">
                                             </div>
@@ -219,11 +206,11 @@
                                                                                                spellcheck="false"
                                                                                                id="widgetu15578_input"
                                                                                                name="email"
-                                                                                               tabindex="2"/><label
+                                                                                               tabindex="2"
+                                                                                               placeholder="Enter Email"/><label
                                                             class="wrapped-input fld-prompt"
                                                             id="widgetu15578_prompt"
-                                                            for="widgetu15578_input"><span
-                                                            class="actAsPara">Enter Email</span></label></span>
+                                                            for="widgetu15578_input"></label></span>
                                                 </div>
 
 
@@ -232,10 +219,11 @@
                                                     <span class="fld-textarea actAsDiv clearfix grpelem"
                                                           id="u15563-4"><!-- content --><textarea
                                                             class="wrapped-input" id="widgetu15562_input"
-                                                            name="message" tabindex="4"></textarea><label
+                                                            name="message" tabindex="4"
+                                                            placeholder="Enter Your Message"></textarea><label
                                                             class="wrapped-input fld-prompt"
                                                             id="widgetu15562_prompt"
-                                                            for="widgetu15562_input"><span class="actAsPara">Enter Your Message</span></label></span>
+                                                            for="widgetu15562_input"></label></span>
                                                 </div>
                                                 <div class="fld-grp clearfix grpelem" id="widgetu15574"
                                                      data-required="true"><!-- none box -->
@@ -245,11 +233,11 @@
                                                                                                spellcheck="false"
                                                                                                id="widgetu15574_input"
                                                                                                name="FIO"
-                                                                                               tabindex="1"/><label
+                                                                                               tabindex="1"
+                                                                                               placeholder="Enter Name"/><label
                                                             class="wrapped-input fld-prompt"
                                                             id="widgetu15574_prompt"
-                                                            for="widgetu15574_input"><span
-                                                            class="actAsPara">Enter Name</span></label></span>
+                                                            for="widgetu15574_input"></label></span>
                                                 </div>
                                                 <div class="fld-grp clearfix grpelem" id="widgetu15568"
                                                      data-required="true"><!-- none box -->
@@ -259,10 +247,11 @@
                                                                                                spellcheck="false"
                                                                                                id="widgetu15568_input"
                                                                                                name="phone"
-                                                                                               tabindex="3"/><label
+                                                                                               tabindex="3"
+                                                                                               placeholder="Enter Phone Number"/><label
                                                             class="wrapped-input fld-prompt"
                                                             id="widgetu15568_prompt"
-                                                            for="widgetu15568_input"><span class="actAsPara">Enter Phone Number</span></label></span>
+                                                            for="widgetu15568_input"></label></span>
                                                 </div>
                                                 <button class="submit-btn NoWrap grpelem" id="u15567-13">ZAMÓWIĆ
                                                 </button>
@@ -290,7 +279,120 @@
             <![endif]-->
         </div>
         <!-- JS includes -->
+        <!--<div v-show="modal" style="position: absolute; top: -192px; left: 0px; z-index: 100001; width: 1905px; height: 8858px;">-->
+        <!--<div style="position: absolute; top: 0px; left: 0px;">-->
+        <!--<div id="u16086"-->
+        <!--style="left: 0px; top: 0px; width: auto; height: auto; padding: 0px; margin: 0px; z-index: auto;">-->
+        <!--<div class="overlayWedge" style="width: 1905px; height: 8858px;"></div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="LightboxContent" role="dialog" tabindex="0"-->
+        <!--style="position: absolute; left: 539px; top: 2423px; outline: none;">-->
+        <!--<div class="ContainerGroup rgba-background clearfix"-->
+        <!--style="width: 827px; height: 545px; position: absolute; padding: 0px; left: 0px; top: 0px; border-width: 0px; background: none;">-->
+        <!--&lt;!&ndash; stack box &ndash;&gt;-->
 
+        <!--<div class="Container rounded-corners clearfix grpelem wp-panel wp-panel-active" id="u16087"-->
+        <!--role="tabpanel" aria-labelledby="u16108" style="position: absolute; left: 0px; top: 0px;">-->
+        <!--&lt;!&ndash; column &ndash;&gt;-->
+        <!--<div class="clearfix colelem" id="pu16095-4">&lt;!&ndash; group &ndash;&gt;-->
+        <!--<div class="clearfix grpelem" id="u16095-4">&lt;!&ndash; content &ndash;&gt;-->
+        <!--<p>Dyskoteka</p>-->
+        <!--</div>-->
+        <!--<div class="clearfix grpelem" id="u16094-4">&lt;!&ndash; content &ndash;&gt;-->
+        <!--<p>20 zl</p>-->
+        <!--</div>-->
+        <!--<div class="PamphletWidget clearfix grpelem" id="pamphletu18669">&lt;!&ndash; none box &ndash;&gt;-->
+        <!--<div class="ThumbGroup clearfix grpelem" id="u18672">&lt;!&ndash; none box &ndash;&gt;-->
+        <!--<div class="popup_anchor">-->
+        <!--<div class="Thumb popup_element clearfix" id="u18673" role="button" tabindex="0"-->
+        <!--aria-haspopup="true" aria-controls="u18679">&lt;!&ndash; group &ndash;&gt;-->
+        <!--<div class="clip_frame grpelem" id="u18674">&lt;!&ndash; image &ndash;&gt;-->
+        <!--<img class="block" id="u18674_img"-->
+        <!--src="images/shopping-cart%20(1)2.png?crc=3274255" alt="" width="32"-->
+        <!--height="32">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="popup_anchor" id="u18678popup">-->
+        <!--<div class="ContainerGroup clearfix" id="u18678" style="width: 0px; height: 0px;">-->
+        <!--&lt;!&ndash; none box &ndash;&gt;-->
+        <!--<div class="Container clearfix grpelem wp-panel" id="u18679" role="tabpanel"-->
+        <!--aria-labelledby="u18673" style="display: none;">&lt;!&ndash; group &ndash;&gt;-->
+        <!--<div class="clip_frame grpelem" id="u18680">&lt;!&ndash; image &ndash;&gt;-->
+        <!--<img class="block" id="u18680_img"-->
+        <!--src="images/shopping-cart-verified-symbol.png?crc=3775434275"-->
+        <!--alt="" width="32" height="32">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="clearfix colelem" id="u16098-4">&lt;!&ndash; content &ndash;&gt;-->
+        <!--<p>Disco is a genre of dance music containing elements of funk, soul, pop, and salsa. It-->
+        <!--achieved popularity during the mid-1970s to the early 1980s. Its initial audiences in-->
+        <!--the U.S. were club-goers from the gay, African American, Italian American,[1] Latino,-->
+        <!--and psychedelic communities in Philadelphia and New York City during the late 1960s and-->
+        <!--early 1970s.</p>-->
+        <!--</div>-->
+        <!--<div class="clearfix colelem" id="pu16099">&lt;!&ndash; group &ndash;&gt;-->
+        <!--<div class="clip_frame grpelem" id="u16099">&lt;!&ndash; image &ndash;&gt;-->
+        <!--<img class="block" id="u16099_img" src="images/disco-vinyl.jpg?crc=371783842" alt=""-->
+        <!--width="147" height="110">-->
+        <!--</div>-->
+        <!--<div class="clip_frame grpelem" id="u16101">&lt;!&ndash; image &ndash;&gt;-->
+        <!--<img class="block" id="u16101_img" src="images/disco-vinyl.jpg?crc=371783842" alt=""-->
+        <!--width="147" height="110">-->
+        <!--</div>-->
+        <!--<div class="clip_frame grpelem" id="u16088">&lt;!&ndash; image &ndash;&gt;-->
+        <!--<img class="block" id="u16088_img" src="images/disco-vinyl.jpg?crc=371783842" alt=""-->
+        <!--width="147" height="110">-->
+        <!--</div>-->
+        <!--<div class="clip_frame grpelem" id="u19633">&lt;!&ndash; image &ndash;&gt;-->
+        <!--<img class="block" id="u19633_img" src="images/disco-vinyl.jpg?crc=371783842" alt=""-->
+        <!--width="147" height="110">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div class="clearfix colelem" id="pu16096">&lt;!&ndash; group &ndash;&gt;-->
+        <!--<div class="clip_frame grpelem" id="u16096">&lt;!&ndash; image &ndash;&gt;-->
+        <!--<img class="block" id="u16096_img" src="images/50-crop-u16096.jpg?crc=4293059140" alt=""-->
+        <!--width="319" height="132">-->
+        <!--</div>-->
+        <!--<div class="clip_frame grpelem" id="u16090">&lt;!&ndash; image &ndash;&gt;-->
+        <!--<img class="block" id="u16090_img" src="images/music-player-play.png?crc=4129989825"-->
+        <!--alt="" width="32" height="32">-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--<div @click="closeModal()" class="PamphletCloseButton PamphletLightboxPart popup_element clearfix" id="u16105" tabindex="0"-->
+        <!--role="button" aria-label="close" style="top: -29px; left: 828px;">&lt;!&ndash; group &ndash;&gt;-->
+        <!--<div class="clearfix grpelem" id="u16106-4">&lt;!&ndash; content &ndash;&gt;-->
+        <!--<p>x</p>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <div v-show="modal" class="dm-overlay" id="win1">
+            <div class="dm-table">
+                <div class="dm-cell">
+                    <div class="dm-modal">
+                        <div class="dm-modal-desc">
+                            <span class="modal_cost">{{modal_item.cost}} ZL</span>
+                            <img @click="showModal(modal_item)" class="block" id="u18674_img"
+                                 v-bind:src="[modal_item.show ? cart_img2 : cart_img1]" alt="" width="32" height="32">
+                            <a @click="closeModal(modal_scroll, modal_item)" class="close"></a>
+                        </div>
+                        <div v-if="!modal_item.event" class="name_modal"><p>{{modal_item.name}}</p></div>
+                        <div v-else class="name_modal"><p>{{modal_item.event.name}}</p></div>
+                        <div class="desc_modal" v-html="modal_item.description"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </div>
 </template>
@@ -313,7 +415,9 @@
         components: {SiteHeader, Holiday, City, Event, IsHotel, Hotel, IsTransport, Transport, Cena, Photographer},
         data() {
             return {
-                test: true,
+                modal: false,
+                modal_item: '',
+                modal_scroll: '',
                 showElement: {
                     city: false,
                     event: false,
@@ -322,14 +426,15 @@
                     hotel: false,
                     is_transport: false,
                     transport: false,
-                    cena: false
+                    cena: true
                 },
                 scrollElement: {
                     city: '#miasto',
                     event: '#atrakcji',
+                    is_hotel: '#nocleg',
                     hotel: '#hotel',
                     photographer: '#fotograf',
-                    is_transport: '#o-transporcie',
+                    is_transport: '#po-transporcie',
                     transport: '#pu16487',
                     cena: '#cena'
                 },
@@ -355,7 +460,9 @@
                 initialize: '/api/basket/create',
                 redirect: '/basket',
                 store: '/api/basket',
-                method: 'post'
+                method: 'post',
+                cart_img1: 'images/shopping-cart (1)2.png',
+                cart_img2: 'images/shopping-cart-verified-symbol.png'
             }
         },
         computed: {
@@ -373,10 +480,12 @@
         created(){
             this.$on('loadElement', function (element) {
                 this.showElement[element] = true
-                var elm = this.scrollElement[element]
-                setTimeout(function () {
-                    $("html,body").animate({scrollTop: $(elm).offset().top}, 1000)
-                }, 1000);
+                if ((this.showElement['photographer'] == true) && (element == 'is_hotel')) {
+                    this.showElement['cena'] = true
+                }
+                if (element != 'is_hotel') {
+                    this.scroll(element)
+                }
             })
             this.$on('getCity', function (element) {
                 this.city = element
@@ -396,15 +505,59 @@
             this.$on('getEvent', function (element) {
                 this.events = element
             })
+            this.$on('modalHoliday', function (element) {
+                this.modal_item = element
+                this.modal = true
+                this.modal_scroll = 'city'
+            })
+            this.$on('modalEvent', function (element) {
+                this.modal_item = element
+                this.modal = true
+                this.modal_scroll = 'is_hotel'
+            })
+            this.$on('modalPhotographer', function (element) {
+                this.modal_item = element
+                this.modal = true
+                this.modal_scroll = 'is_transport'
+            })
+            this.$on('modalTransport', function (element) {
+                this.modal_item = element
+                this.modal = true
+                this.modal_scroll = 'cena'
+            })
+            this.$on('modalCity', function (element) {
+                this.modal_item = element
+                this.modal = true
+                this.modal_scroll = 'event'
+            })
         },
         methods: {
-            getChildTotals() {
-                this.showElement[city] = true
-                let holiday = this.$refs.holiday.Total()
-                let city = this.$refs.city.Total()
-                let event = this.$refs.event.Total()
-                let photographer = this.$refs.photographer.Total()
-                let transport = this.$refs.transport.Total()
+            closeModal(element, item){
+                this.modal = false
+                this.showElement[element] = true
+                if ((element != 'is_hotel') && (this.modal_item.show == true)) {
+                    this.scroll(element)
+                    console.log(this.modal_item.show)
+                }
+                if ((this.showElement['photographer'] == true) && (element == 'is_hotel')) {
+                    this.showElement['cena'] = true
+                }
+                if (element === 'event') this.city = item
+                if (element === 'city') this.holiday = item
+                if (element === 'is_hotel') {
+                    this.events.push(item)
+                }
+                if (element === 'is_transport') this.photographer = item
+                if (element === 'cena') this.transport = item
+            },
+            showModal(item){
+                item.show = !item.show
+            },
+            scroll(element){
+                var elm = this.scrollElement[element]
+                setTimeout(function () {
+                    $("html,body").animate({scrollTop: $(elm).offset().top}, 1000)
+                }, 1000);
             },
             save(){
                 var vm = this
@@ -419,6 +572,17 @@
                     .catch(function (error) {
                         console.log(error)
                     })
+            },
+            delete_entity(id, event){
+                this.events.splice(id, 1)
+                this.$refs.event.ShowMethod(event)
+                if (this.events.length == 0) {
+                    this.showElement['cena'] = false
+                    console.log(this.showElement['cena'])
+                    setTimeout(function () {
+                        $("html,body").animate({scrollTop: $('#atrakcji').offset().top}, 1000)
+                    }, 1000);
+                }
             }
         }
     }

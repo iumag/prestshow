@@ -11,8 +11,24 @@
                 </div>
                 <div class="wrap">
                     <div class="clearfix grpelem holiday"
-                         v-for="(item,index) in model.data" @click="ShowMethod(item)"><!-- group -->
-                        <div v-if="item.show === false" :data-cost="item.cost"
+                         v-for="(item,index) in model.data" v-bind:key="item"><!-- group -->
+                        <div id="pamphletu16085" @click="showModal(item)">
+                            <div id="u16107" class="ThumbGroup clearfix grpelem">
+                                <div class="popup_anchor">
+                                    <div id="u16108" role="button" tabindex="0" aria-haspopup="true"
+                                         aria-controls="u16087"
+                                         class="Thumb popup_element rounded-corners clearfix wp-tab-active">
+                                        <div id="u16109" class="clip_frame grpelem"><img id="u16109_img"
+                                                                                         src="images/inform.png?crc=157975575"
+                                                                                         alt="" width="78" height="59"
+                                                                                         class="block"></div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="u16086popup" class="popup_anchor"></div>
+                            <div class="popup_anchor"></div>
+                        </div>
+                        <div  @click="ShowMethod(item)" v-if="item.show === false" :data-cost="item.cost"
                              class="pointer_cursor rounded-corners clearfix grpelem" id="u10782">
                             <!-- column -->
                             <a class="nonblock nontext anim_swing clip_frame colelem"
@@ -74,6 +90,9 @@
                         item2.show = false
                     }
                 }, 0)
+            },
+            showModal(item){
+                this.$parent.$emit('modalHoliday', item);
             },
             fetchData() {
                 var vm = this

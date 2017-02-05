@@ -17,7 +17,8 @@
                                     <!-- image -->
                                     <a class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
                                        id="buttonu24047"><!-- container box -->
-                                        <div class="clearfix grpelem" id="u24048-4"><!-- content --><p>Czytać więcej</p>
+                                        <div class="clearfix grpelem" id="u24048-4" @click="showModal(item)">
+                                            <!-- content --><p>Czytać więcej</p>
                                         </div>
                                     </a>
                                     <a @click="ShowMethod(item)"
@@ -95,6 +96,9 @@
                         return item
                     }
                 }, 0)
+            },
+            showModal(item){
+                this.$parent.$emit('modalCity', item);
             },
             buildURL() {
                 var p = this.params

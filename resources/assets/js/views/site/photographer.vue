@@ -14,8 +14,25 @@
 ">
             <transition-group name="photographer-complete" tag="div">
                 <div class="photowrap photographer-complete-item"  v-bind:key="item" v-for="item in model.data">
-                    <a class="nonblock nontext anim_swing clearfix grpelem" id="texttr" href="index.html#o-transporcie">
+                    <a class="nonblock nontext anim_swing clearfix grpelem" id="texttr" href="#o-transporcie">
                         <!-- content --><p>{{item.name}}</p></a>
+                    <div @click="showModal(item)" class="PamphletWidget clearfix grpelem" id="pamphletu17790"><!-- none box -->
+                        <div class="ThumbGroup clearfix grpelem" id="u17810"><!-- none box -->
+                            <div class="popup_anchor">
+                                <div class="Thumb popup_element rounded-corners clearfix wp-tab-active" id="u17811" role="button" tabindex="0" aria-haspopup="true" aria-controls="u17796"><!-- group -->
+                                    <div class="clip_frame grpelem" id="u17812"><!-- image -->
+                                        <img class="block" id="u17812_img" src="images/info.png?crc=3898747697" alt="" width="28" height="45">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="popup_anchor" id="u17795popup">
+
+                        </div>
+                        <div class="popup_anchor">
+
+                        </div>
+                    </div>
                     <a @click="ShowMethod(item)"
                        class="nonblock nontext anim_swing rounded-corners gradient clip_frame clearfix grpelem"
                        id="u17826"
@@ -59,11 +76,17 @@
                 var vm = this
                 axios.get(this.buildURL())
                     .then(function (response) {
+                        response.data.model.data.forEach(function (item, i, arr) {
+                            item.show = false
+                        });
                         Vue.set(vm.$data, 'model', response.data.model)
                     })
                     .catch(function (error) {
                         console.log(error)
                     })
+            },
+            showModal(item){
+                this.$parent.$emit('modalPhotographer', item);
             },
             ShowMethod(item){
                 item.show = !item.show

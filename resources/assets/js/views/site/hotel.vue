@@ -136,8 +136,9 @@
             ChangeItem(item){
                 this.item_hotel = item
                 this.image = 'img/hotel/' + item.picture
-                this.description = item.description
+                //this.description = item.description
                 this.cost = item.cost
+                this.show_description = false
             }
         }
     }
