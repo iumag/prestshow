@@ -28,7 +28,7 @@ class PhotographerController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'picture' => 'image',
+            'picture' => 'required|image',
             'description' => 'required',
             'cost' => 'required|numeric|min:0'
         ]);

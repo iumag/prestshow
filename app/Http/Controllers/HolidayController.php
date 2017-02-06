@@ -28,7 +28,7 @@ class HolidayController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'picture' => 'image',
+            'picture' => 'required|image',
             'cost' => 'required|numeric|min:0',
             'description' => 'required'
         ]);
@@ -85,7 +85,7 @@ class HolidayController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'picture' => 'image',
+            'picture' => 'required|image',
             'cost' => 'required|numeric|min:0',
             'description' => 'required'
         ]);

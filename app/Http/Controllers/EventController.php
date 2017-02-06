@@ -28,7 +28,7 @@ class EventController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'picture' => 'image',
+            'picture' => 'required|image',
             'description' => 'required',
         ]);
 
@@ -83,7 +83,7 @@ class EventController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'picture' => 'image',
+            'picture' => 'required|image',
             'description' => 'required',
         ]);
 

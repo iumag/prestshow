@@ -34,13 +34,12 @@ class BasketController extends Controller
 
     public function store(Request $request)
     {
-//        $this->validate($request, [
-//            'FIO' => 'required',
-//            'email' => 'required|email',
-//            'phone' => 'required|regex:/^\+?[0-9]{7,12}$/',
-//            'message' => 'required',
-//            'items' => '',
-//        ]);
+        $this->validate($request, [
+            'FIO' => 'required',
+            'email' => 'required|email',
+            'phone' => 'required|regex:/^\+?[0-9]{7,12}$/',
+            'message' => 'required'
+        ]);
 
         $entity = ['city' => '', 'holiday' => '', 'related_event' => '', 'hotel' => '', 'transport' => '', 'photographer' => ''];
         $entity_all = array();

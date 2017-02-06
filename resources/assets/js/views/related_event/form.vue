@@ -93,7 +93,7 @@
                         }
                     })
                     .catch(function (error) {
-                        console.log(error)
+                        Vue.set(vm.$data, 'errors', error.response.data)
                     })
             }
         }

@@ -31,7 +31,7 @@ class HotelController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'picture' => 'image',
+            'picture' => 'required|image',
             'description' => 'required',
             'city_id' => 'required|exists:cities,id',
             'cost' => 'required|numeric|min:0'
@@ -92,7 +92,7 @@ class HotelController extends Controller
     {
         $this->validate($request, [
             'name' => 'required',
-            'picture' => 'image',
+            'picture' => 'required|image',
             'description' => 'required',
             'city_id' => 'required|exists:cities,id',
             'cost' => 'required|numeric|min:0'

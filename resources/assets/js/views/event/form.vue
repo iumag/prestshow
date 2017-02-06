@@ -17,13 +17,16 @@
                             </div>
                         </div>
                         <load-image></load-image>
+                        <small class="text-danger" v-if="errors.name">{{errors.picture[0]}}</small>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label>Description</label>
+                                <small class="text-danger" v-if="errors.name">{{errors.description[0]}}</small>
                                 <ckeditor v-model="form.description" name="description" :height="'300px'"
                                           :toolbar="[['Format']]"></ckeditor>
+
                             </div>
                         </div>
                     </div>
@@ -86,7 +89,7 @@
                         }
                     })
                     .catch(function (error) {
-                        console.log(error)
+                        Vue.set(vm.$data, 'errors', error.response.data)
                     })
             }
         },
