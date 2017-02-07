@@ -20,7 +20,7 @@
                         <div class="ThumbGroup clearfix grpelem" id="u17810"><!-- none box -->
                             <div class="popup_anchor">
                                 <div class="Thumb popup_element rounded-corners clearfix wp-tab-active" id="u17811" role="button" tabindex="0" aria-haspopup="true" aria-controls="u17796"><!-- group -->
-                                    <div class="clip_frame grpelem" id="u17812"><!-- image -->
+                                    <div class="clip_frame grpelem" id="u17812FOTO"><!-- image -->
                                         <img class="block" id="u17812_img" src="images/info.png?crc=3898747697" alt="" width="28" height="45">
                                     </div>
                                 </div>

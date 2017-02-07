@@ -200,14 +200,15 @@
 
                                                 <div class="fld-grp clearfix grpelem" id="widgetu15578"
                                                      data-required="true" data-type="email"><!-- none box -->
-                                                    <span class="fld-input NoWrap actAsDiv clearfix grpelem"
-                                                          id="u15580-4"><!-- content --><input class="wrapped-input"
-                                                                                               type="email"
-                                                                                               spellcheck="false"
-                                                                                               id="widgetu15578_input"
-                                                                                               name="email"
-                                                                                               tabindex="2"
-                                                                                               placeholder="Enter Email"/><label
+                                                    <span id="u15580-4"
+                                                          v-bind:class="[errors.email ? errorcart : '', 'fld-input NoWrap actAsDiv clearfix grpelem']"
+                                                    ><!-- content --><input class="wrapped-input"
+                                                                            type="email"
+                                                                            spellcheck="false"
+                                                                            id="widgetu15578_input"
+                                                                            name="email"
+                                                                            tabindex="2"
+                                                                            placeholder="Enter Email"/><label
                                                             class="wrapped-input fld-prompt"
                                                             id="widgetu15578_prompt"
                                                             for="widgetu15578_input"></label></span>
@@ -216,7 +217,7 @@
 
                                                 <div class="fld-grp clearfix grpelem" id="widgetu15562"
                                                      data-required="true"><!-- none box -->
-                                                    <span class="fld-textarea actAsDiv clearfix grpelem"
+                                                    <span v-bind:class="[errors.message ? errorcart : '', 'fld-input NoWrap actAsDiv clearfix grpelem']"
                                                           id="u15563-4"><!-- content --><textarea
                                                             class="wrapped-input" id="widgetu15562_input"
                                                             name="message" tabindex="4"
@@ -227,7 +228,7 @@
                                                 </div>
                                                 <div class="fld-grp clearfix grpelem" id="widgetu15574"
                                                      data-required="true"><!-- none box -->
-                                                    <span class="fld-input NoWrap actAsDiv clearfix grpelem"
+                                                    <span v-bind:class="[errors.FIO ? errorcart : '', 'fld-input NoWrap actAsDiv clearfix grpelem']"
                                                           id="u15576-4"><!-- content --><input class="wrapped-input"
                                                                                                type="text"
                                                                                                spellcheck="false"
@@ -241,7 +242,7 @@
                                                 </div>
                                                 <div class="fld-grp clearfix grpelem" id="widgetu15568"
                                                      data-required="true"><!-- none box -->
-                                                    <span class="fld-input NoWrap actAsDiv clearfix grpelem"
+                                                    <span v-bind:class="[errors.phone ? errorcart : '', 'fld-input NoWrap actAsDiv clearfix grpelem']"
                                                           id="u15569-4"><!-- content --><input class="wrapped-input"
                                                                                                type="tel"
                                                                                                spellcheck="false"
@@ -253,6 +254,7 @@
                                                             id="widgetu15568_prompt"
                                                             for="widgetu15568_input"></label></span>
                                                 </div>
+                                                <div v-if="errors.FIO || errors.email || errors.phone || errors.message" class="error_desc">Wypełnij wszystkie pola</div>
                                                 <button class="submit-btn NoWrap grpelem" id="u15567-13">ZAMÓWIĆ
                                                 </button>
                                             </div>
@@ -279,102 +281,6 @@
             <![endif]-->
         </div>
         <!-- JS includes -->
-        <!--<div v-show="modal" style="position: absolute; top: -192px; left: 0px; z-index: 100001; width: 1905px; height: 8858px;">-->
-        <!--<div style="position: absolute; top: 0px; left: 0px;">-->
-        <!--<div id="u16086"-->
-        <!--style="left: 0px; top: 0px; width: auto; height: auto; padding: 0px; margin: 0px; z-index: auto;">-->
-        <!--<div class="overlayWedge" style="width: 1905px; height: 8858px;"></div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="LightboxContent" role="dialog" tabindex="0"-->
-        <!--style="position: absolute; left: 539px; top: 2423px; outline: none;">-->
-        <!--<div class="ContainerGroup rgba-background clearfix"-->
-        <!--style="width: 827px; height: 545px; position: absolute; padding: 0px; left: 0px; top: 0px; border-width: 0px; background: none;">-->
-        <!--&lt;!&ndash; stack box &ndash;&gt;-->
-
-        <!--<div class="Container rounded-corners clearfix grpelem wp-panel wp-panel-active" id="u16087"-->
-        <!--role="tabpanel" aria-labelledby="u16108" style="position: absolute; left: 0px; top: 0px;">-->
-        <!--&lt;!&ndash; column &ndash;&gt;-->
-        <!--<div class="clearfix colelem" id="pu16095-4">&lt;!&ndash; group &ndash;&gt;-->
-        <!--<div class="clearfix grpelem" id="u16095-4">&lt;!&ndash; content &ndash;&gt;-->
-        <!--<p>Dyskoteka</p>-->
-        <!--</div>-->
-        <!--<div class="clearfix grpelem" id="u16094-4">&lt;!&ndash; content &ndash;&gt;-->
-        <!--<p>20 zl</p>-->
-        <!--</div>-->
-        <!--<div class="PamphletWidget clearfix grpelem" id="pamphletu18669">&lt;!&ndash; none box &ndash;&gt;-->
-        <!--<div class="ThumbGroup clearfix grpelem" id="u18672">&lt;!&ndash; none box &ndash;&gt;-->
-        <!--<div class="popup_anchor">-->
-        <!--<div class="Thumb popup_element clearfix" id="u18673" role="button" tabindex="0"-->
-        <!--aria-haspopup="true" aria-controls="u18679">&lt;!&ndash; group &ndash;&gt;-->
-        <!--<div class="clip_frame grpelem" id="u18674">&lt;!&ndash; image &ndash;&gt;-->
-        <!--<img class="block" id="u18674_img"-->
-        <!--src="images/shopping-cart%20(1)2.png?crc=3274255" alt="" width="32"-->
-        <!--height="32">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="popup_anchor" id="u18678popup">-->
-        <!--<div class="ContainerGroup clearfix" id="u18678" style="width: 0px; height: 0px;">-->
-        <!--&lt;!&ndash; none box &ndash;&gt;-->
-        <!--<div class="Container clearfix grpelem wp-panel" id="u18679" role="tabpanel"-->
-        <!--aria-labelledby="u18673" style="display: none;">&lt;!&ndash; group &ndash;&gt;-->
-        <!--<div class="clip_frame grpelem" id="u18680">&lt;!&ndash; image &ndash;&gt;-->
-        <!--<img class="block" id="u18680_img"-->
-        <!--src="images/shopping-cart-verified-symbol.png?crc=3775434275"-->
-        <!--alt="" width="32" height="32">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="clearfix colelem" id="u16098-4">&lt;!&ndash; content &ndash;&gt;-->
-        <!--<p>Disco is a genre of dance music containing elements of funk, soul, pop, and salsa. It-->
-        <!--achieved popularity during the mid-1970s to the early 1980s. Its initial audiences in-->
-        <!--the U.S. were club-goers from the gay, African American, Italian American,[1] Latino,-->
-        <!--and psychedelic communities in Philadelphia and New York City during the late 1960s and-->
-        <!--early 1970s.</p>-->
-        <!--</div>-->
-        <!--<div class="clearfix colelem" id="pu16099">&lt;!&ndash; group &ndash;&gt;-->
-        <!--<div class="clip_frame grpelem" id="u16099">&lt;!&ndash; image &ndash;&gt;-->
-        <!--<img class="block" id="u16099_img" src="images/disco-vinyl.jpg?crc=371783842" alt=""-->
-        <!--width="147" height="110">-->
-        <!--</div>-->
-        <!--<div class="clip_frame grpelem" id="u16101">&lt;!&ndash; image &ndash;&gt;-->
-        <!--<img class="block" id="u16101_img" src="images/disco-vinyl.jpg?crc=371783842" alt=""-->
-        <!--width="147" height="110">-->
-        <!--</div>-->
-        <!--<div class="clip_frame grpelem" id="u16088">&lt;!&ndash; image &ndash;&gt;-->
-        <!--<img class="block" id="u16088_img" src="images/disco-vinyl.jpg?crc=371783842" alt=""-->
-        <!--width="147" height="110">-->
-        <!--</div>-->
-        <!--<div class="clip_frame grpelem" id="u19633">&lt;!&ndash; image &ndash;&gt;-->
-        <!--<img class="block" id="u19633_img" src="images/disco-vinyl.jpg?crc=371783842" alt=""-->
-        <!--width="147" height="110">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div class="clearfix colelem" id="pu16096">&lt;!&ndash; group &ndash;&gt;-->
-        <!--<div class="clip_frame grpelem" id="u16096">&lt;!&ndash; image &ndash;&gt;-->
-        <!--<img class="block" id="u16096_img" src="images/50-crop-u16096.jpg?crc=4293059140" alt=""-->
-        <!--width="319" height="132">-->
-        <!--</div>-->
-        <!--<div class="clip_frame grpelem" id="u16090">&lt;!&ndash; image &ndash;&gt;-->
-        <!--<img class="block" id="u16090_img" src="images/music-player-play.png?crc=4129989825"-->
-        <!--alt="" width="32" height="32">-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--<div @click="closeModal()" class="PamphletCloseButton PamphletLightboxPart popup_element clearfix" id="u16105" tabindex="0"-->
-        <!--role="button" aria-label="close" style="top: -29px; left: 828px;">&lt;!&ndash; group &ndash;&gt;-->
-        <!--<div class="clearfix grpelem" id="u16106-4">&lt;!&ndash; content &ndash;&gt;-->
-        <!--<p>x</p>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
 
         <div v-show="modal" class="dm-overlay" id="win1">
             <div class="dm-table">
@@ -389,6 +295,16 @@
                         <div v-if="!modal_item.event" class="name_modal"><p>{{modal_item.name}}</p></div>
                         <div v-else class="name_modal"><p>{{modal_item.event.name}}</p></div>
                         <div class="desc_modal" v-html="modal_item.description"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div v-show="success_bye" class="dm-overlay" id="win1">
+            <div class="dm-table">
+                <div class="dm-cell">
+                    <div class="dm-modal">
+                        <div class="name_modal"><p>Skutecznie</p></div>
                     </div>
                 </div>
             </div>
@@ -410,14 +326,18 @@
     import Cena from './views/site/cena.vue'
     import Photographer from './views/site/photographer.vue'
     import axios from 'axios'
+    import Vue from 'vue'
     export default {
         props: ['showCity'],
         components: {SiteHeader, Holiday, City, Event, IsHotel, Hotel, IsTransport, Transport, Cena, Photographer},
         data() {
             return {
+                errors: {},
                 modal: false,
+                success_bye: false,
                 modal_item: '',
                 modal_scroll: '',
+                errorcart: 'errorcart',
                 showElement: {
                     city: false,
                     event: false,
@@ -426,7 +346,7 @@
                     hotel: false,
                     is_transport: false,
                     transport: false,
-                    cena: true
+                    cena: false
                 },
                 scrollElement: {
                     city: '#miasto',
@@ -566,11 +486,17 @@
                 axios[this.method](this.store, formdata)
                     .then(function (response) {
                         if (response.data.saved) {
-                            vm.$router.push(vm.redirect)
+                            this.success_bye = true
+                            for (var item in this.showElement) {
+                                this.showElement[item] = false
+                            }
+                            setTimeout(function () {
+                                this.success_bye = false
+                            }.bind(this), 5000)
                         }
                     })
                     .catch(function (error) {
-                        console.log(error)
+                        Vue.set(vm.$data, 'errors', error.response.data)
                     })
             },
             delete_entity(id, event){
