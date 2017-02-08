@@ -9,6 +9,7 @@ class TransportController extends Controller
 {
     public function index()
     {
+
         return response()
             ->json([
                 'model' => Transport::filterPaginateOrder()
@@ -26,6 +27,8 @@ class TransportController extends Controller
 
     public function store(Request $request)
     {
+        $language = app()->getLocale();
+
         $this->validate($request, [
             'name' => 'required',
             'picture' => 'required|image',
@@ -48,11 +51,14 @@ class TransportController extends Controller
         }
 
         $transport = Transport::create([
-            'name' => $request->get('name'),
             'cost' => $request->get('cost'),
-            'description' => $request->get('description'),
             'picture' => $name
         ]);
+
+        $transport->translateOrNew($language)->name = $request->get('name');
+        $transport->translateOrNew($language)->description = $request->get('description');
+
+        $transport->save();
 
         return response()
             ->json([
@@ -72,6 +78,7 @@ class TransportController extends Controller
 
     public function edit($id)
     {
+
         $transport = Transport::findOrFail($id);
 
         return response()
@@ -83,9 +90,11 @@ class TransportController extends Controller
 
     public function update(Request $request, $id)
     {
+        $language = app()->getLocale();
+
         $this->validate($request, [
             'name' => 'required',
-            'picture' => 'required|image',
+            'picture' => 'image',
             'description' => 'required',
             'cost' => 'required|numeric|min:0',
         ]);
@@ -106,11 +115,14 @@ class TransportController extends Controller
         }
 
         $transport->update([
-            'name' => $request->get('name'),
             'cost' => $request->get('cost'),
-            'description' => $request->get('description'),
             'picture' => $name
         ]);
+
+        $transport->translateOrNew($language)->name = $request->get('name');
+        $transport->translateOrNew($language)->description = $request->get('description');
+
+        $transport->save();
 
         return response()
             ->json([

@@ -6,6 +6,7 @@ use App\City;
 use App\Event;
 use Illuminate\Http\Request;
 use App\RelatedEvent;
+use Illuminate\Support\Facades\DB;
 
 class RelatedEventController extends Controller
 {
@@ -19,12 +20,20 @@ class RelatedEventController extends Controller
 
     public function create()
     {
+        $language = app()->getLocale();
+
         return response()
             ->json([
                 'form' => RelatedEvent::initalize(),
                 'option' => [
-                    'cities' => City::orderBy('name')->get(),
-                    'events' => Event::orderBy('name')->get()
+                    'cities' => DB::table('cities')
+                        ->join('city_translations', 'cities.id', '=', 'city_translations.city_id')
+                        ->where('city_translations.locale','=',$language)
+                        ->get(),
+                    'events' => DB::table('events')
+                        ->join('event_translations', 'events.id', '=', 'event_translations.event_id')
+                        ->where('event_translations.locale','=',$language)
+                        ->get()
                 ]
             ]);
     }
@@ -59,12 +68,20 @@ class RelatedEventController extends Controller
     {
         $related_event = RelatedEvent::findOrFail($id);
 
+        $language = app()->getLocale();
+
         return response()
             ->json([
                 'form' => $related_event,
                 'option' => [
-                    'cities' => City::orderBy('name')->get(),
-                    'events' => Event::orderBy('name')->get()
+                    'cities' => DB::table('cities')
+                        ->join('city_translations', 'cities.id', '=', 'city_translations.city_id')
+                        ->where('city_translations.locale','=',$language)
+                        ->get(),
+                    'events' => DB::table('events')
+                        ->join('event_translations', 'events.id', '=', 'event_translations.event_id')
+                        ->where('event_translations.locale','=',$language)
+                        ->get()
                 ]
             ]);
     }

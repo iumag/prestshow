@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\City;
 
+
 class CityController extends Controller
 {
     public function index()
     {
+
         return response()
             ->json([
                 'model' => City::FilterPaginateOrder()
@@ -17,6 +19,7 @@ class CityController extends Controller
 
     public function create()
     {
+
         return response()
             ->json([
                 'form' => City::initalize(),
@@ -26,6 +29,8 @@ class CityController extends Controller
 
     public function store(Request $request)
     {
+        $language = app()->getLocale();
+
         $this->validate($request, [
             'name' => 'required',
             'picture' => 'required|image',
@@ -48,11 +53,14 @@ class CityController extends Controller
         }
 
         $city = City::create([
-            'name' => $request->get('name'),
             'cost' => $request->get('cost'),
-            'description' => $request->get('description'),
             'picture' => $name
         ]);
+
+        $city->translateOrNew($language)->name = $request->get('name');
+        $city->translateOrNew($language)->description = $request->get('description');
+
+        $city->save();
 
         return response()
             ->json([
@@ -73,6 +81,7 @@ class CityController extends Controller
 
     public function edit($id)
     {
+
         $city = City::findOrFail($id);
 
         return response()
@@ -84,10 +93,12 @@ class CityController extends Controller
 
     public function update(Request $request, $id)
     {
+        $language = app()->getLocale();
+
 
         $this->validate($request, [
             'name' => 'required',
-            'picture' => 'required|image',
+            'picture' => 'image',
             'description' => 'required',
             'cost' => 'required|numeric|min:0',
         ]);
@@ -113,6 +124,11 @@ class CityController extends Controller
             'description' => $request->get('description'),
             'picture' => $name
         ]);
+
+        $city->translateOrNew($language)->name = $request->get('name');
+        $city->translateOrNew($language)->description = $request->get('description');
+
+        $city->save();
 
         return response()
             ->json([

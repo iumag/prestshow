@@ -45,5 +45,12 @@ Route::group(['prefix' => 'api/'], function ()
     Route::resource('transport', 'TransportController');
 });
 
-
 Route::get('/admin/index', 'AdminController@index');
+
+
+Route::post('/language', array (
+    'Middleware' => 'LanguageSwitcher',
+    'uses'=>'LanguageController@index'
+));
+
+

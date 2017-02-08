@@ -7,7 +7,10 @@ use App\Support\FilterPaginateOrder;
 
 class City extends Model
 {
+    use \Dimsav\Translatable\Translatable;
     use FilterPaginateOrder;
+
+    public $translatedAttributes = ['name', 'description'];
 
     protected $fillable = [
         'name', 'picture', 'description', 'cost'

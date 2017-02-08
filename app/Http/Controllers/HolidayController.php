@@ -9,6 +9,7 @@ class HolidayController extends Controller
 {
     public function index()
     {
+
         return response()
             ->json([
                 'model' => Holiday::filterPaginateOrder()
@@ -26,6 +27,8 @@ class HolidayController extends Controller
 
     public function store(Request $request)
     {
+        $language = app()->getLocale();
+
         $this->validate($request, [
             'name' => 'required',
             'picture' => 'required|image',
@@ -48,11 +51,14 @@ class HolidayController extends Controller
         }
 
         $holiday = Holiday::create([
-            'name' => $request->get('name'),
             'cost' => $request->get('cost'),
-            'description' => $request->get('description'),
             'picture' => $name
         ]);
+
+        $holiday->translateOrNew($language)->name = $request->get('name');
+        $holiday->translateOrNew($language)->description = $request->get('description');
+
+        $holiday->save();
 
         return response()
             ->json([
@@ -72,8 +78,9 @@ class HolidayController extends Controller
 
     public function edit($id)
     {
-        $holiday = Holiday::findOrFail($id);
 
+
+        $holiday = Holiday::findOrFail($id);
         return response()
             ->json([
                 'form' => $holiday,
@@ -83,9 +90,11 @@ class HolidayController extends Controller
 
     public function update(Request $request, $id)
     {
+        $language = app()->getLocale();
+
         $this->validate($request, [
             'name' => 'required',
-            'picture' => 'required|image',
+            'picture' => 'image',
             'cost' => 'required|numeric|min:0',
             'description' => 'required'
         ]);
@@ -109,11 +118,14 @@ class HolidayController extends Controller
 
 
         $holiday->update([
-            'name' => $request->get('name'),
             'cost' => $request->get('cost'),
-            'description' => $request->get('description'),
             'picture' => $name
         ]);
+
+        $holiday->translateOrNew($language)->name = $request->get('name');
+        $holiday->translateOrNew($language)->description = $request->get('description');
+
+        $holiday->save();
 
         return response()
             ->json([

@@ -2,16 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use ClassPreloader\Config;
 use Illuminate\Http\Request;
 use App\Event;
+use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Session;
 
 class EventController extends Controller
 {
     public function index()
     {
+
         return response()
             ->json([
-                'model' => Event::filterPaginateOrder()
+                'model' => Event::filterPaginateOrder(),
             ]);
     }
 
@@ -26,6 +30,8 @@ class EventController extends Controller
 
     public function store(Request $request)
     {
+        $language = app()->getLocale();
+
         $this->validate($request, [
             'name' => 'required',
             'picture' => 'required|image',
@@ -47,10 +53,13 @@ class EventController extends Controller
         }
 
         $event = Event::create([
-            'name' => $request->get('name'),
-            'description' => $request->get('description'),
             'picture' => $name
         ]);
+
+        $event->translateOrNew($language)->name = $request->get('name');
+        $event->translateOrNew($language)->description = $request->get('description');
+
+        $event->save();
 
         return response()
             ->json([
@@ -70,6 +79,7 @@ class EventController extends Controller
 
     public function edit($id)
     {
+
         $event = Event::findOrFail($id);
 
         return response()
@@ -81,9 +91,11 @@ class EventController extends Controller
 
     public function update(Request $request, $id)
     {
+        $language = app()->getLocale();
+
         $this->validate($request, [
             'name' => 'required',
-            'picture' => 'required|image',
+            'picture' => 'image',
             'description' => 'required',
         ]);
 
@@ -104,10 +116,13 @@ class EventController extends Controller
 
 
         $event->update([
-            'name' => $request->get('name'),
-            'description' => $request->get('description'),
             'picture' => $name
         ]);
+
+        $event->translateOrNew($language)->name = $request->get('name');
+        $event->translateOrNew($language)->description = $request->get('description');
+
+        $event->update();
 
         return response()
             ->json([

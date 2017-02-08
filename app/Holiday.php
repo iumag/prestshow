@@ -8,6 +8,9 @@ use App\Support\FilterPaginateOrder;
 class Holiday extends Model
 {
     use FilterPaginateOrder;
+    use \Dimsav\Translatable\Translatable;
+
+    public $translatedAttributes = ['name', 'description'];
 
     protected $fillable = [
         'name', 'picture', 'description', 'cost'

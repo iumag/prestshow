@@ -12,6 +12,14 @@
                     <a class="navbar-brand" href="#">PrestShow</a>
                 </div>
                 <div class="navbar-collapse collapse">
+                    <form action="/language" id="language" method="post">
+                        <select name="locale">
+                            <option value="pl">Poland</option>
+                            <option value="en">English</option>
+                            <option value="ru">Russian</option>
+                        </select>
+                        <input type="submit" value="Submit">
+                    </form>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
                             <router-link to="/">Корзина</router-link>

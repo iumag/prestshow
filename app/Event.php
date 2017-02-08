@@ -7,8 +7,10 @@ use App\Support\FilterPaginateOrder;
 
 class Event extends Model
 {
-
+    use \Dimsav\Translatable\Translatable;
     use FilterPaginateOrder;
+
+    public $translatedAttributes = ['name', 'description'];
 
     protected $fillable = [
         'name', 'picture', 'description'

@@ -26,6 +26,8 @@ class PhotographerController extends Controller
 
     public function store(Request $request)
     {
+        $language = app()->getLocale();
+
         $this->validate($request, [
             'name' => 'required',
             'picture' => 'required|image',
@@ -48,11 +50,14 @@ class PhotographerController extends Controller
         }
 
         $photographer = Photographer::create([
-            'name' => $request->get('name'),
             'cost' => $request->get('cost'),
-            'description' => $request->get('description'),
             'picture' => $name
         ]);
+
+        $photographer->translateOrNew($language)->name = $request->get('name');
+        $photographer->translateOrNew($language)->description = $request->get('description');
+
+        $photographer->save();
 
         return response()
             ->json([
@@ -72,6 +77,7 @@ class PhotographerController extends Controller
 
     public function edit($id)
     {
+
         $photographer = Photographer::findOrFail($id);
 
         return response()
@@ -83,6 +89,8 @@ class PhotographerController extends Controller
 
     public function update(Request $request, $id)
     {
+        $language = app()->getLocale();
+
 
         $this->validate($request, [
             'name' => 'required',
@@ -107,11 +115,14 @@ class PhotographerController extends Controller
         }
 
         $photographer->update([
-            'name' => $request->get('name'),
             'cost' => $request->get('cost'),
-            'description' => $request->get('description'),
             'picture' => $name
         ]);
+
+        $photographer->translateOrNew($language)->name = $request->get('name');
+        $photographer->translateOrNew($language)->description = $request->get('description');
+
+        $photographer->save();
 
         return response()
             ->json([

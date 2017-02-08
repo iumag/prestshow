@@ -6,7 +6,7 @@
                 {{title}}
             </div>
             <div class="panel-body">
-                <form class="form" @submit.prevent="save">
+                <form class="form" id="form_data" @submit.prevent="save">
                     <input type="hidden" name="_method" value="put" v-if = "title === 'Edit'"/>
                     <div class="row">
                         <div class="col-sm-4">
@@ -24,13 +24,13 @@
                             </div>
                         </div>
                         <load-image></load-image>
-                        <small class="text-danger" v-if="errors.name">{{errors.picture[0]}}</small>
+                        <small class="text-danger" v-if="errors.picture">{{errors.picture[0]}}</small>
                     </div>
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label>Description</label>
-                                <small class="text-danger" v-if="errors.name">{{errors.description[0]}}</small>
+                                <small class="text-danger" v-if="errors.description">{{errors.description[0]}}</small>
                                 <ckeditor v-model="form.description" name="description" :height="'300px'"
                                           :toolbar="[['Format']]"></ckeditor>
                             </div>
@@ -92,7 +92,7 @@
             },
             save() {
                 var vm = this
-                var form = document.querySelector('form');
+                var form = document.querySelector('#form_data');
                 var formdata = new FormData(form)
                 axios[this.method](this.store, formdata)
                     .then(function (response) {

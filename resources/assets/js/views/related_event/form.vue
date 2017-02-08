@@ -6,7 +6,7 @@
                 {{title}}
             </div>
             <div class="panel-body">
-                <form class="form" @submit.prevent="save">
+                <form class="form" id="form_data" @submit.prevent="save">
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">

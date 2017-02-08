@@ -77,7 +77,7 @@ return [
     |
     */
 
-    'locale' => 'ru',
+    'locale' => 'en',
 
     /*
     |--------------------------------------------------------------------------
@@ -162,6 +162,7 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
+        Dimsav\Translatable\TranslatableServiceProvider::class,
 
         /*
          * Package Service Providers...
