@@ -28,11 +28,11 @@ class RelatedEventController extends Controller
                 'option' => [
                     'cities' => DB::table('cities')
                         ->join('city_translations', 'cities.id', '=', 'city_translations.city_id')
-                        ->where('city_translations.locale','=',$language)
+                        ->where('city_translations.locale', '=', $language)
                         ->get(),
                     'events' => DB::table('events')
                         ->join('event_translations', 'events.id', '=', 'event_translations.event_id')
-                        ->where('event_translations.locale','=',$language)
+                        ->where('event_translations.locale', '=', $language)
                         ->get()
                 ]
             ]);
@@ -40,18 +40,45 @@ class RelatedEventController extends Controller
 
     public function store(Request $request)
     {
-        $this->validate($request, [
-            'city_id' => 'required|exists:cities,id',
-            'event_id' => 'required|exists:events,id',
-            'cost' => 'required|numeric|min:0'
-        ]);
-
-        $related_event = RelatedEvent::create($request->all());
-
-        return response()
-            ->json([
-                'saved' => true
+//        event.*.event_id' => 'required|exists:events,id',
+        $events = $request->get('event');
+        $costs = $request->get('cost');
+        $index = 0;
+        if (is_array($events)) {
+            $this->validate($request, [
+                'city_id' => 'required|exists:cities,id',
+                'event.*.event_id' => 'required|exists:events,id',
+                'cost.*.cost' => 'required|numeric|min:0'
             ]);
+
+            foreach ($events as $event) {
+
+                $related_event = RelatedEvent::create([
+                    'city_id' => $request->get('city_id'),
+                    'event_id' => $event['event_id'],
+                    'cost' => $costs[$index]['cost']
+                ]);
+                $index++;
+            }
+            return response()
+                ->json([
+                    'saved' => true
+                ]);
+        } else {
+            $this->validate($request, [
+                'city_id' => 'required|exists:cities,id',
+                'event_id' => 'required|exists:events,id',
+                'cost' => 'required|numeric|min:0'
+            ]);
+
+            $related_event = RelatedEvent::create($request->all());
+
+            return response()
+                ->json([
+                    'saved' => true
+                ]);
+        }
+
     }
 
     public function show($id)
@@ -76,11 +103,11 @@ class RelatedEventController extends Controller
                 'option' => [
                     'cities' => DB::table('cities')
                         ->join('city_translations', 'cities.id', '=', 'city_translations.city_id')
-                        ->where('city_translations.locale','=',$language)
+                        ->where('city_translations.locale', '=', $language)
                         ->get(),
                     'events' => DB::table('events')
                         ->join('event_translations', 'events.id', '=', 'event_translations.event_id')
-                        ->where('event_translations.locale','=',$language)
+                        ->where('event_translations.locale', '=', $language)
                         ->get()
                 ]
             ]);

@@ -25,6 +25,7 @@ const router = new VueRouter({
         {path: '/hotel/:id/edit', component: require('./views/hotel/form.vue'), meta: {mode: 'edit'}},
         {path: '/related_event', component: require('./views/related_event/index.vue')},
         {path: '/related_event/create', component: require('./views/related_event/form.vue')},
+        {path: '/related_event/create_all', component: require('./views/related_event/form2.vue')},
         {path: '/related_event/:id/edit', component: require('./views/related_event/form.vue'), meta: {mode: 'edit'}},
         {path: '/', component: require('./views/basket/index.vue')},
         {path: '/basket/:id', component: require('./views/basket/show.vue')},

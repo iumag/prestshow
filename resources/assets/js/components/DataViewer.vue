@@ -7,6 +7,8 @@
                 <div>
                     <router-link :to="create" class="btn btn-primary btn-sm" v-if="title != 'Basket'">Create
                     </router-link>
+                    <router-link :to="'/related_event/create_all'" class="btn btn-success btn-sm" v-if="title === 'Related Event'">Create All
+                    </router-link>
                     <button class="btn btn-default btn-sm" @click="showFilter = !showFilter">F</button>
                 </div>
             </div>
