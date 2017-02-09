@@ -15,7 +15,7 @@
                                  class="clearfix grpelem city list-complete-item"><!-- group -->
                                 <div class="gradient rounded-corners clip_frame clearfix grpelem citywrap">
                                     <!-- image -->
-                                    <a class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
+                                    <a v-if="item.description" class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
                                        id="buttonu24047"><!-- container box -->
                                         <div class="clearfix grpelem" id="u24048-4" @click="showModal(item)">
                                             <!-- content --><p>Czytać więcej</p>

@@ -33,7 +33,6 @@ class HolidayController extends Controller
             'name' => 'required',
             'picture' => 'required|image',
             'cost' => 'required|numeric|min:0',
-            'description' => 'required'
         ]);
 
         $image = $request->file('picture');
@@ -96,7 +95,6 @@ class HolidayController extends Controller
             'name' => 'required',
             'picture' => 'image',
             'cost' => 'required|numeric|min:0',
-            'description' => 'required'
         ]);
 
         $holiday = Holiday::findOrFail($id);

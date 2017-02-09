@@ -32,7 +32,6 @@ class TransportController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'picture' => 'required|image',
-            'description' => 'required',
             'cost' => 'required|numeric|min:0'
         ]);
 
@@ -95,7 +94,6 @@ class TransportController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'picture' => 'image',
-            'description' => 'required',
             'cost' => 'required|numeric|min:0',
         ]);
 

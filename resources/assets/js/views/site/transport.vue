@@ -8,7 +8,7 @@
 ">
             <transition-group name="transport-complete" tag="div">
                 <div class="transportwrap transport-complete-item" v-bind:key="item" v-for="item in model.data">
-                    <div @click="showModal(item)" class="PamphletWidget clearfix grpelem" id="pamphletu17791"><!-- none box -->
+                    <div v-if="item.description" @click="showModal(item)" class="PamphletWidget clearfix grpelem" id="pamphletu17791"><!-- none box -->
                         <div class="ThumbGroup clearfix grpelem" id="u17810"><!-- none box -->
                             <div class="popup_anchor">
                                 <div class="Thumb popup_element rounded-corners clearfix wp-tab-active" id="u17811" role="button" tabindex="0" aria-haspopup="true" aria-controls="u17796"><!-- group -->

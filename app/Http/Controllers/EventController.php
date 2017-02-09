@@ -35,7 +35,6 @@ class EventController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'picture' => 'required|image',
-            'description' => 'required',
         ]);
 
         $image = $request->file('picture');
@@ -96,7 +95,6 @@ class EventController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'picture' => 'image',
-            'description' => 'required',
         ]);
 
         $image = $request->file('picture');

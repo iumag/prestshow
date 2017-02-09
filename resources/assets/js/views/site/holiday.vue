@@ -12,7 +12,7 @@
                 <div class="wrap">
                     <div class="clearfix grpelem holiday"
                          v-for="(item,index) in model.data" v-bind:key="item"><!-- group -->
-                        <div id="pamphletu16085" @click="showModal(item)">
+                        <div v-if="item.description" id="pamphletu16085" @click="showModal(item)">
                             <div id="u16107" class="ThumbGroup clearfix grpelem">
                                 <div class="popup_anchor">
                                     <div id="u16108" role="button" tabindex="0" aria-haspopup="true"

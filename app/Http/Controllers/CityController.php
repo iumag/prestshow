@@ -34,7 +34,6 @@ class CityController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'picture' => 'required|image',
-            'description' => 'required',
             'cost' => 'required|numeric|min:0',
         ]);
 
@@ -99,7 +98,6 @@ class CityController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'picture' => 'image',
-            'description' => 'required',
             'cost' => 'required|numeric|min:0',
         ]);
 

@@ -298,7 +298,7 @@
                     <div class="dm-modal">
                         <div class="dm-modal-desc">
                             <span class="modal_cost">{{modal_item.cost}} ZL</span>
-                            <img @click="showModal(modal_item)" class="block" id="u18674_img"
+                            <img title="Do koszyka" @click="showModal(modal_item)" class="block" id="u18674_img"
                                  v-bind:src="[modal_item.show ? cart_img2 : cart_img1]" alt="" width="32" height="32">
                             <a @click="closeModal(modal_scroll, modal_item)" class="close"></a>
                         </div>
