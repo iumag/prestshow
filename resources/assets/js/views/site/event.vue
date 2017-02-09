@@ -56,18 +56,20 @@
                     </div>
                 </div>
             </div>
-            <a v-if="n != 2" class="nonblock nontext anim_swing clip_frame grpelem" id="u9420" @click="Scroll(n)">
+            <a v-if="n != 1" class="nonblock nontext anim_swing clip_frame grpelem" id="u9420" @click="Scroll(n)">
                 <!-- image --><img
                     class="block" id="u9420_img" src="images/down-arrow-crop-u9420.png?crc=4075218507" alt="" width="52"
                     height="31"></a>
         </div>
-        <a @click="scrollh()" class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem" id="buttonu8269"><!-- container box -->
+        <a @click="scrollh()" class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
+           id="buttonu8269"><!-- container box -->
             <div class="clearfix grpelem" id="u8270-4"><!-- content --><p>Przejść do następnego kroku</p></div>
         </a>
     </div>
 </template>
 
 <script>
+
     import axios from 'axios'
     import Vue from 'vue'
     export default {
@@ -118,6 +120,9 @@
                             item.show = false
                         });
                         var total_round = Math.round(response.data.model.total / 15)
+                        if ((response.data.model.total > 0) && (total_round == 0)) {
+                            total_round = 1
+                        }
                         vm.$data.total = total_round
                         console.log(vm.$data.total)
                         Vue.set(vm.$data, 'model', response.data.model)
@@ -138,7 +143,7 @@
                 this.$parent.$emit('loadElement', 'is_hotel');
             },
             scrollh(){
-              this.$parent.scroll('is_hotel')
+                this.$parent.scroll('is_hotel')
             },
             Scroll(n){
                 $("html,body").animate({scrollTop: $("#prodow" + (n + 1)).offset().top}, 1000)
@@ -149,4 +154,6 @@
             }
         }
     }
+
+
 </script>

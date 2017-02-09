@@ -14,7 +14,7 @@
 ">
             <transition-group name="photographer-complete" tag="div">
                 <div class="photowrap photographer-complete-item"  v-bind:key="item" v-for="item in model.data">
-                    <a class="nonblock nontext anim_swing clearfix grpelem" id="texttr" href="#o-transporcie">
+                    <a class="nonblock nontext anim_swing clearfix grpelem" id="texttr">
                         <!-- content --><p>{{item.name}}</p></a>
                     <div @click="showModal(item)" class="PamphletWidget clearfix grpelem" id="pamphletu17790"><!-- none box -->
                         <div class="ThumbGroup clearfix grpelem" id="u17810"><!-- none box -->
@@ -35,8 +35,7 @@
                     </div>
                     <a @click="ShowMethod(item)"
                        class="nonblock nontext anim_swing rounded-corners gradient clip_frame clearfix grpelem"
-                       id="u17826"
-                       href="#o-transporcie"><!-- image --><img class="position_content" id="u17826_img"
+                       id="u17826"><!-- image --><img class="position_content" id="u17826_img"
                                                                 :src="'img/photographer/'+item.picture" alt=""
                                                                 width="305"
                                                                 height="202"/></a>

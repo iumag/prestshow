@@ -1,4 +1,5 @@
 <template>
+    
     <div class="clearfix colelem" id="pu8555"><!-- group -->
         <div class="browser_width grpelem" id="u8555-bw">
             <div id="u8555"><!-- simple frame --></div>

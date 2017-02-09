@@ -16,7 +16,6 @@
                         <select name="locale">
                             <option value="pl">Poland</option>
                             <option value="en">English</option>
-                            <option value="ru">Russian</option>
                         </select>
                         <input type="submit" value="Submit">
                     </form>

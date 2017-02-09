@@ -96,7 +96,7 @@
                                 <div class="clearfix colelem" id="u15557-4"><!-- content -->
                                     <p>cena</p>
                                 </div>
-                                <form class="form" @submit.prevent="save">
+                                <form  id="form_data" class="form" @submit.prevent="save">
                                     <div class="clearfix grpelem" id="ppu15527-4"><!-- column -->
                                         <div class="clearfix colelem" id="pu15527-4"><!-- group -->
                                             <div class="clearfix grpelem" id="u15527-4"><!-- content -->
@@ -148,7 +148,12 @@
                                             <div class="clearfix grpelem" id="u15526-4"><!-- content -->
                                                 <div class="entityitem">{{hotel.name}}</div>
                                                 <div class="spaceitem">{{hotel.cost}} ZL</div>
-
+                                                <div id="u15539" class="clearfix colelem">
+                                                    <div @click="delete_item('hotel')" id="u15541"
+                                                         class="rounded-corners clearfix grpelem">
+                                                        <div id="u15540-4" class="clearfix grpelem"><p>+</p></div>
+                                                    </div>
+                                                </div>
                                                 </p>
                                                 <input type="hidden" name="hotel" :value="hotel.id">
                                             </div>
@@ -160,7 +165,12 @@
                                             <div class="clearfix grpelem" id="u15526-4"><!-- content -->
                                                 <div class="entityitem">{{transport.name}}</div>
                                                 <div class="spaceitem">{{transport.cost}} ZL</div>
-
+                                                <div id="u15539" class="clearfix colelem">
+                                                    <div @click="delete_item('transport')" id="u15541"
+                                                         class="rounded-corners clearfix grpelem">
+                                                        <div id="u15540-4" class="clearfix grpelem"><p>+</p></div>
+                                                    </div>
+                                                </div>
                                                 </p>
                                                 <input type="hidden" name="transport" :value="transport.id">
                                             </div>
@@ -350,7 +360,7 @@
                 },
                 scrollElement: {
                     city: '#miasto',
-                    event: '#atrakcji',
+                    event: '#u8547-4',
                     is_hotel: '#nocleg',
                     hotel: '#hotel',
                     photographer: '#fotograf',
@@ -475,17 +485,22 @@
             },
             scroll(element){
                 var elm = this.scrollElement[element]
+                var x = 0 // offset
+                if (element === 'event') {
+                    x = 150
+                }
                 setTimeout(function () {
-                    $("html,body").animate({scrollTop: $(elm).offset().top}, 1000)
+                    $("html,body").animate({scrollTop: $(elm).offset().top - x}, 1000)
                 }, 1000);
             },
             save(){
                 var vm = this
-                var form = document.querySelector('form');
+                var form = document.querySelector('#form_data');
                 var formdata = new FormData(form)
                 axios[this.method](this.store, formdata)
                     .then(function (response) {
-                        if (response.data.saved) {
+                        var saved = response.data.saved
+                        if (saved) {
                             this.success_bye = true
                             for (var item in this.showElement) {
                                 this.showElement[item] = false
@@ -494,7 +509,7 @@
                                 this.success_bye = false
                             }.bind(this), 5000)
                         }
-                    })
+                    }.bind(this))
                     .catch(function (error) {
                         Vue.set(vm.$data, 'errors', error.response.data)
                     })
@@ -508,6 +523,13 @@
                     setTimeout(function () {
                         $("html,body").animate({scrollTop: $('#atrakcji').offset().top}, 1000)
                     }, 1000);
+                }
+            },
+            delete_item(entity){
+                if (entity === 'hotel'){
+                    this.hotel['cost'] = 0
+                }else if(entity === 'transport'){
+                    this.transport['cost'] = 0
                 }
             }
         }

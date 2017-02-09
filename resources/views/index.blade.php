@@ -4,7 +4,9 @@
 
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
     <meta name="generator" content="2015.2.1.352"/>
-    <meta name="viewport" content="user-scalable=no">
+    <!-- <meta name="viewport" content="user-scalable=no"> -->
+    <meta name="viewport" content="width=device-width">
+
     <script type="text/javascript">
         // Update the 'nojs'/'js' class on the html node
         document.documentElement.className = document.documentElement.className.replace(/\bnojs\b/g, 'js');
@@ -93,8 +95,8 @@
     </style>
 
 </head>
-<body>
 
+<body>
 <div id="site"></div>
 
 
