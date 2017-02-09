@@ -14,12 +14,20 @@ class LanguageController extends Controller
 {
     public function index()
     {
-        if (!\Session::has('locale')){
+        if (!\Session::has('locale')) {
             \Session::put('locale', Input::get('locale'));
-        }else{
+        } else {
             Session::set('locale', Input::get('locale'));
         }
         App::setLocale(Session::has('locale') ? Session::get('locale') : Config::get('app.locale'));
         return Redirect::back();
+    }
+
+    public function getLanguage()
+    {
+        return response()
+            ->json([
+               'language' => app()->getLocale()
+            ]);
     }
 }

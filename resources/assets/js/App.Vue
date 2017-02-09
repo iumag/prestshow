@@ -14,8 +14,10 @@
                 <div class="navbar-collapse collapse">
                     <form action="/language" id="language" method="post">
                         <select name="locale">
-                            <option value="pl">Poland</option>
-                            <option value="en">English</option>
+                            <option v-if="language === 'pl'" selected value="pl">Poland</option>
+                            <option v-else value="pl">Poland</option>
+                            <option v-if="language === 'en'" selected value="en">English</option>
+                            <option v-else value="en">English</option>
                         </select>
                         <input type="submit" value="Submit">
                     </form>
@@ -51,4 +53,32 @@
         <router-view></router-view>
     </div>
 </template>
+
+<script>
+    import axios from 'axios'
+    import Vue from 'vue'
+
+    export default{
+        data() {
+            return {
+                language: 'pl'
+            }
+        },
+        beforeMount() {
+            this.getLanguage()
+        },
+        methods: {
+            getLanguage() {
+                var vm = this
+                axios.get('/language/get')
+                    .then(function (response) {
+                        Vue.set(vm.$data, 'language', response.data.language)
+                    })
+                    .catch(function (error) {
+                        console.log(error)
+                    })
+            }
+        }
+    }
+</script>
 

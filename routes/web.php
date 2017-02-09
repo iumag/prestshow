@@ -47,6 +47,8 @@ Route::group(['prefix' => 'api/'], function ()
 
 Route::get('/admin/index', 'AdminController@index');
 
+Route::get('/language/get', 'LanguageController@getLanguage');
+
 
 Route::post('/language', array (
     'Middleware' => 'LanguageSwitcher',

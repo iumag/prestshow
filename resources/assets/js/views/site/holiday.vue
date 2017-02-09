@@ -31,14 +31,12 @@
                         <div  @click="ShowMethod(item)" v-if="item.show === false" :data-cost="item.cost"
                              class="pointer_cursor rounded-corners clearfix grpelem" id="u10782">
                             <!-- column -->
-                            <a class="nonblock nontext anim_swing clip_frame colelem"
-                               id="u10915"
-                            ><!-- image --><img class="block" id="u10915_img"
+                            <!-- image --><div id="u10915"><img class="block" id="u10915_img"
                                                 :src="'img/holiday/' + item.picture"
-                                                alt="" width="39" height="38"/></a>
-                            <a class="nonblock nontext anim_swing clearfix colelem"
+                                                                      alt="" width="39" height="38"/></div>
+                            <p class="nonblock nontext anim_swing clearfix colelem"
                                id="u10914-4"
-                            ><!-- content --><p>{{item.name}}</p></a>
+                            ><!-- content -->{{item.name}}</p>
                         </div>
                         <div v-else class="Container rounded-corners clearfix grpelem wp-panel wp-panel-active"
                              id="u12112" role="tabpanel" aria-labelledby="u12117"><!-- group -->

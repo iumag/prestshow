@@ -413,7 +413,8 @@
     height: 90px;
 }
 
-div#u10782 {}
+div#u10782 {
+}
 
 #u10915 {
     z-index: 675;
@@ -2816,6 +2817,8 @@ div#u10782 {}
     background: #F0F0F0 url("../images/pattern-89ds.jpg") repeat left top;
 }
 
+#u10915_img {/* margin-left: 30px */}
+
 #u13253 {
     z-index: 469;
     width: 41px;
@@ -3808,7 +3811,7 @@ div#u10782 {}
     border-color: #ff0000 !important;
 }
 
-.error_desc{
+.error_desc {
     width: 661px;
     /* display: table-column-group; */
     height: 21px;
@@ -4835,7 +4838,7 @@ div#u10782 {}
     left: 1px;
 }
 
-#u17812FOTO{
+#u17812FOTO {
     z-index: 1098;
     width: 28px;
     background-color: transparent;
@@ -6850,7 +6853,6 @@ body {
         display: none
     }
 
-
     /* heder start*/
     #u10537 {
         height: 120px;
@@ -7390,7 +7392,6 @@ body {
     }
 
     /*forma */
-
     #u16514-bw {
         margin-top: 25px;
     }
@@ -7572,8 +7573,6 @@ body {
         height: 100%;
     }
 
-
-
     #widgetu15562_input, #widgetu15562_prompt {
         width: 100%;
         height: 100%;
@@ -7686,7 +7685,6 @@ body {
         margin-top: -10px;
     }
 
-
     /* I */
     .popup_element {
         z-index: 100000;
@@ -7708,7 +7706,7 @@ body {
         top: -19px;
     }
 
-    #u17812FOTO{
+    #u17812FOTO {
         z-index: 1098;
         width: 83px;
         height: 151px;
@@ -7718,10 +7716,8 @@ body {
         top: 291px;
     }
 
-
-
     /* dich kruglaia*/
-    #prodow1{
+    #prodow1 {
         padding-top: 1897px !important;
         width: 1060px !important;
         height: 1580px !important;
@@ -7743,16 +7739,14 @@ body {
         left: 45%;
         z-index: 9999;
     }
+
     #buttonu8269 {
         margin-top: 0px;
     }
 
-    body{
+    body {
         overflow-x: hidden;
 
     }
-
-
-
 
 }
