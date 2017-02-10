@@ -11,10 +11,10 @@
                 <td>{{item.created_at}}</td>
                 <td>
                     <router-link class="edit-modal btn btn-success" :to="'/hotel/' + item.id + '/edit'">
-                        <span class="glyphicon glyphicon-edit"></span> Edit
+                        <span class="glyphicon glyphicon-edit"></span> {{localization.edit}}
                     </router-link>
                     <button class="edit-modal btn btn-danger" @click="deleteItem(item.id,index);props.model.data.splice(index,1);props.model.total <= 10 ? showfooter = false : showfooter = true;">
-                        <span class="glyphicon glyphicon-trash"></span> Delete
+                        <span class="glyphicon glyphicon-trash"></span> {{localization.delete}}
                     </button>
                 </td>
             </tr>
@@ -24,9 +24,11 @@
 <script>
     import DataViewer from '../../components/DataViewer.vue'
     import axios from 'axios'
+    import language from '../../language'
     export default {
         name: 'HotelIndex',
         data() {
+            var localization = language.data().language
             return {
                 title: 'Hotel',
                 source: '/api/hotel',
@@ -35,18 +37,19 @@
                 showfooter: true,
                 thead: [
                     {title: 'Id', key: 'id', sort: true},
-                    {title: 'Hotel', key: 'name', sort: true},
-                    {title: 'City', key: 'city', sort: true},
-                    {title: 'Picture', key: 'picture', sort: false},
-                    {title: 'Description', key: 'description', sort: true},
-                    {title: 'Cost', key: 'cost', sort: true},
-                    {title: 'Created At', key: 'created_at', sort: true},
-                    {title: 'Actions', sort: false}
+                    {title: localization.hotel, key: 'name', sort: true},
+                    {title: localization.city, key: 'city', sort: true},
+                    {title: localization.picture, key: 'picture', sort: false},
+                    {title: localization.description, key: 'description', sort: true},
+                    {title: localization.cost, key: 'cost', sort: true},
+                    {title: localization.created_at, key: 'created_at', sort: true},
+                    {title: localization.actions, sort: false}
                 ],
                 filter: [
                     'id', 'hotel', 'picture', 'description', 'cost',
                     'city.id', 'city.city', 'city.picture', 'city.description', 'city.cost'
-                ]
+                ],
+                localization: localization
             }
         },
         components: {

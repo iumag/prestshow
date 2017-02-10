@@ -9,7 +9,7 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" href="#">PrestShow</a>
+                    <a class="navbar-brand" href="#">{{localization.site_name}}</a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <form action="/language" id="language" method="post">
@@ -23,28 +23,28 @@
                     </form>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
-                            <router-link to="/">Корзина</router-link>
+                            <router-link to="/">{{localization.cart}}</router-link>
                         </li>
                         <li>
-                            <router-link to="/city">Города</router-link>
+                            <router-link to="/city">{{localization.city}}</router-link>
                         </li>
                         <li>
-                            <router-link to="/event">Мероприятия</router-link>
+                            <router-link to="/event">{{localization.event}}</router-link>
                         </li>
                         <li>
-                            <router-link to="/related_event">Мероприятия города</router-link>
+                            <router-link to="/related_event">{{localization.related_event}}</router-link>
                         </li>
                         <li>
-                            <router-link to="/hotel">Отели</router-link>
+                            <router-link to="/hotel">{{localization.hotel}}</router-link>
                         </li>
                         <li>
-                            <router-link to="/photographer">Фотография</router-link>
+                            <router-link to="/photographer">{{localization.photographer}}</router-link>
                         </li>
                         <li>
-                            <router-link to="/transport">Транспорт</router-link>
+                            <router-link to="/transport">{{localization.transport}}</router-link>
                         </li>
                         <li>
-                            <router-link to="/holiday">Праздник</router-link>
+                            <router-link to="/holiday">{{localization.holiday}}</router-link>
                         </li>
                     </ul>
                 </div>
@@ -57,11 +57,14 @@
 <script>
     import axios from 'axios'
     import Vue from 'vue'
+    import language from './language'
 
     export default{
         data() {
+            var localization = language.data().language
             return {
-                language: 'pl'
+                language: 'pl',
+                localization: localization
             }
         },
         beforeMount() {

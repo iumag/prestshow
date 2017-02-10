@@ -29,15 +29,15 @@
                             </div>
                             <div class="col-sm-1">
                                 <input v-if="event.check === false" disabled type="text" class="form-control"
-                                       placeholder="Cost">
-                                <input v-else type="text" class="form-control" name="cost[][cost]" placeholder="Cost">
+                                       :placeholder="localization.cost">
+                                <input v-else type="text" class="form-control" name="cost[][cost]" :placeholder="localization.cost">
                             </div>
                             <div class="col-sm-1">
                                 <input type="checkbox" class="form-control" @click="event.check = !event.check">
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-success">Save</button>
+                    <button class="btn btn-success">{{localization.save}}</button>
                 </form>
             </div>
         </div>
@@ -46,9 +46,11 @@
 <script>
     import Vue from 'vue'
     import axios from 'axios'
+    import language from '../../language'
     export default{
         name: 'RelatedForm',
         data() {
+            var localization = language.data().language
             return {
                 form: {},
                 errors: {},
@@ -57,7 +59,8 @@
                 initialize: '/api/related_event/create',
                 redirect: '/related_event',
                 store: '/api/related_event',
-                method: 'post'
+                method: 'post',
+                localization: localization
             }
         },
         beforeMount() {

@@ -9,10 +9,10 @@
                 <td>{{item.created_at}}</td>
                 <td>
                     <router-link class="edit-modal btn btn-success" :to="'/event/' + item.id + '/edit'">
-                        <span class="glyphicon glyphicon-edit"></span> Edit
+                        <span class="glyphicon glyphicon-edit"></span> {{localization.edit}}
                     </router-link>
                     <button class="edit-modal btn btn-danger" @click="deleteItem(item.id,index);props.model.data.splice(index,1);props.model.total <= 10 ? showfooter = false : showfooter = true;">
-                        <span class="glyphicon glyphicon-trash"></span> Delete
+                        <span class="glyphicon glyphicon-trash"></span> {{localization.delete}}
                     </button>
                 </td>
             </tr>
@@ -22,9 +22,11 @@
 <script>
     import DataViewer from '../../components/DataViewer.vue'
     import axios from 'axios'
+    import language from '../../language'
     export default {
         name: 'EventIndex',
         data() {
+            var localization = language.data().language
             return {
                 title: 'Events',
                 source: '/api/event',
@@ -33,15 +35,16 @@
                 showfooter: true,
                 thead: [
                     {title: 'Id', key: 'id', sort: true},
-                    {title: 'Event', key: 'name', sort: true},
-                    {title: 'Picture', key: 'picture', sort: false},
-                    {title: 'Description', key: 'description', sort: true},
-                    {title: 'Created At', key: 'created_at', sort: true},
-                    {title: 'Actions', sort: false}
+                    {title: localization.event, key: 'name', sort: true},
+                    {title: localization.picture, key: 'picture', sort: false},
+                    {title: localization.description, key: 'description', sort: true},
+                    {title: localization.created_at, key: 'created_at', sort: true},
+                    {title: localization.actions, sort: false}
                 ],
                 filter: [
-                    'id', 'event', 'picture', 'description'
-                ]
+                    'id', 'name', 'picture', 'description'
+                ],
+                localization: localization
             }
         },
         components: {

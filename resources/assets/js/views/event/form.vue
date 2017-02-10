@@ -7,11 +7,11 @@
             </div>
             <div class="panel-body">
                 <form class="form" id="form_data" @submit.prevent="save">
-                    <input type="hidden" name="_method" value="put" v-if = "title === 'Edit'" />
+                    <input type="hidden" name="_method" value="put" v-if="title === 'Edit'"/>
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label>Event</label>
+                                <label>{{localization.event}}</label>
                                 <input type="text" name="name" class="form-control" v-model="form.name">
                                 <small class="text-danger" v-if="errors.name">{{errors.name[0]}}</small>
                             </div>
@@ -22,7 +22,7 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label>Description</label>
+                                <label>{{localization.description}}</label>
                                 <small class="text-danger" v-if="errors.description">{{errors.description[0]}}</small>
                                 <ckeditor v-model="form.description" name="description" :height="'300px'"
                                           :toolbar="[['Format']]"></ckeditor>
@@ -30,7 +30,26 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-success">Save</button>
+                    <div class="row" id="test">
+                        <div class="col-sm-11">
+                            <div class="form-group">
+                                <label class="control-label">Picture</label>
+                                <input name="input4[]" type="file" class="input-4 file-loading" data-show-preview="false">
+
+                            </div>
+                        </div>
+                        <div class="col-sm-1" style="margin-top: 26px">
+                            <div class="form-group">
+                                <a @click="addPicture()" class="btn btn-success">+</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <button class="btn btn-success">{{localization.save}}</button>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -41,9 +60,11 @@
     import axios from 'axios'
     import LoadImage from '../../components/LoadImage.vue'
     import Ckeditor from '../../components/ckeditor.vue'
+    import language from '../../language'
     export default{
         name: 'EventForm',
         data() {
+            var localization = language.data().language
             return {
                 form: {},
                 errors: {},
@@ -52,7 +73,20 @@
                 initialize: '/api/event/create',
                 redirect: '/event',
                 store: '/api/event',
-                method: 'post'
+                method: 'post',
+                picture_add: ` <div class="col-sm-11">
+                            <div class="form-group">
+                                <label class="control-label">Picture</label>
+                                <input name="input4[]" type="file" class="input-4 file-loading" data-show-preview="false">
+
+                            </div>
+                        </div>
+                        <div class="col-sm-1" style="margin-top: 26px">
+                            <div class="form-group">
+                                <a @click="addPicture()" class="btn btn-success">+</a>
+                            </div>
+                        </div>`,
+                localization: localization
             }
         },
         beforeMount() {
@@ -63,10 +97,17 @@
             }
             this.fetchData()
         },
+        mounted(){
+            $(".input-4").fileinput({showCaption: false, showUpload: false});
+        },
         watch: {
             '$route': 'fetchData'
         },
         methods: {
+            addPicture(){
+                $('#test').append(this.picture_add)
+                $(".input-4").fileinput({showCaption: false, showUpload: false});
+            },
             fetchData() {
                 var vm = this
                 axios.get(this.initialize)

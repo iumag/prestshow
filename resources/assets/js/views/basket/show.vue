@@ -5,21 +5,21 @@
             <div class="panel-heading">
                 <span class="panel-title"><h3>{{model.FIO}}</h3></span>
                 <div>
-                    <button class="btn btn-danger btn-sm" @click="remove">Delete</button>
+                    <button class="btn btn-danger btn-sm" @click="remove">{{localization.delete}}</button>
                 </div>
             </div>
             <div class="panel-body">
                 <div class="row">
                     <div class="col-sm-6">
-                        <label>FIO</label>
+                        <label>{{localization.basket_FIO}}</label>
                         <p>{{model.FIO}}</p>
-                        <label>Email</label>
+                        <label>{{localization.basket_email}}</label>
                         <p>{{model.email}}</p>
                     </div>
                     <div class="col-sm-6">
-                        <label>Phone</label>
+                        <label>{{localization.basket_phone}}</label>
                         <p>{{model.phone}}</p>
-                        <label>Message</label>
+                        <label>{{localization.basket_message}}</label>
                         <pre>{{model.message}}</pre>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                 <tfoot>
                 <tr class="text-uppercase text-info" rowspan="2">
                     <td>
-                        <h3>Sub Total<h3/>
+                        <h3>{{localization.sub_total}}</h3>
                     </td>
                     <td colspan="2" class="text-right"><h3>{{subTotal}}</h3></td>
                 </tr>
@@ -60,9 +60,11 @@
 <script>
     import Vue from 'vue'
     import axios from 'axios'
+    import language from '../../language'
     export default {
         name: 'BasketShow',
         data(){
+            var localization = language.data().language
             return {
                 model: {
                     customer: {},
@@ -71,7 +73,8 @@
                 event: '',
                 resource: 'basket',
                 redirect: '/',
-                index: -1
+                index: -1,
+                localization: localization
             }
         },
         beforeMount() {

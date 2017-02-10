@@ -12,11 +12,11 @@
                 <td>{{item.created_at}}</td>
                 <td>
                     <router-link class="edit-modal btn btn-success" :to="'/basket/' + item.id">
-                        <span class="glyphicon glyphicon-edit"></span> Show
+                        <span class="glyphicon glyphicon-edit"></span> {{localization.show}}
                     </router-link>
                     <button class="edit-modal btn btn-danger"
                             @click="deleteItem(item.id,index);props.model.data.splice(index,1);props.model.total <= 10 ? showfooter = false : showfooter = true;">
-                        <span class="glyphicon glyphicon-trash"></span> Delete
+                        <span class="glyphicon glyphicon-trash"></span> {{localization.delete}}
                     </button>
                 </td>
             </tr>
@@ -26,9 +26,11 @@
 <script>
     import DataViewer from '../../components/DataViewer.vue'
     import axios from 'axios'
+    import language from '../../language'
     export default {
         name: 'CityIndex',
         data() {
+            var localization = language.data().language
             return {
                 title: 'Basket',
                 source: '/api/basket',
@@ -36,19 +38,20 @@
                 resource: 'basket',
                 showfooter: true,
                 thead: [
-                    {title: 'Id', key: 'id', sort: true},
-                    {title: 'FIO', key: 'FIO', sort: true},
-                    {title: 'Email', key: 'email', sort: false},
-                    {title: 'Phone', key: 'message', sort: true},
-                    {title: 'Message', key: 'message', sort: true},
-                    {title: 'Cost', key: 'cost', sort: true},
-                    {title: 'Created At', key: 'created_at', sort: true},
-                    {title: 'Actions', sort: false}
+                    {title: 'id', key: 'id', sort: true},
+                    {title: localization.basket_FIO, key: 'FIO', sort: true},
+                    {title: localization.basket_email, key: 'email', sort: false},
+                    {title: localization.basket_phone, key: 'message', sort: true},
+                    {title: localization.basket_message, key: 'message', sort: true},
+                    {title: localization.cost, key: 'cost', sort: true},
+                    {title: localization.created_at, key: 'created_at', sort: true},
+                    {title: localization.actions, sort: false}
                 ],
                 filter: [
                     'id', 'fio', 'email', 'phone', 'message', 'cost',
                     'basket_item.id', 'basket_item.basket_id', 'basket_item.entity_type', 'basket_item.entity_id'
-                ]
+                ],
+                localization: localization
             }
         },
         computed: {

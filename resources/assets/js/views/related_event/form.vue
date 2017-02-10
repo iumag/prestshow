@@ -10,7 +10,7 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label>City</label>
+                                <label>{{localization.city}}</label>
                                 <select class="form-control" v-model="form.city_id">
                                     <option>Select</option>
                                     <option v-for="city in option.cities" :value="city.city_id">{{city.name}}</option>
@@ -18,7 +18,7 @@
                                 <small class="text-danger" v-if="errors.city_id">{{errors.city_id[0]}}</small>
                             </div>
                             <div class="form-group">
-                                <label>Event</label>
+                                <label>{{localization.event}}</label>
                                 <select class="form-control" v-model="form.event_id">
                                     <option>Select</option>
                                     <option v-for="event in option.events" :value="event.event_id">{{event.name}}</option>
@@ -29,14 +29,14 @@
 
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label>Cost</label>
+                                <label>{{localization.cost}}</label>
                                 <input type="text" class="form-control" v-model="form.cost">
                                 <small class="text-danger" v-if="errors.cost">{{errors.cost[0]}}</small>
                             </div>
                         </div>
 
                     </div>
-                    <button class="btn btn-success">Save</button>
+                    <button class="btn btn-success">{{localization.save}}</button>
             </div>
             </form>
         </div>
@@ -46,9 +46,11 @@
 <script>
     import Vue from 'vue'
     import axios from 'axios'
+    import language from '../../language'
     export default{
         name: 'RelatedForm',
         data() {
+            var localization = language.data().language
             return {
                 form: {},
                 errors: {},
@@ -57,7 +59,8 @@
                 initialize: '/api/related_event/create',
                 redirect: '/related_event',
                 store: '/api/related_event',
-                method: 'post'
+                method: 'post',
+                localization: localization
             }
         },
         beforeMount() {

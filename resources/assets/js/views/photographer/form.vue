@@ -11,14 +11,14 @@
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label>Name</label>
+                                <label>{{localization.name}}</label>
                                 <input type="text" name="name" class="form-control" v-model="form.name">
                                 <small class="text-danger" v-if="errors.name">{{errors.name[0]}}</small>
                             </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">
-                                <label>Cost</label>
+                                <label>{{localization.cost}}</label>
                                 <input type="text" name="cost" class="form-control" v-model="form.cost">
                                 <small class="text-danger" v-if="errors.cost">{{errors.cost[0]}}</small>
                             </div>
@@ -29,14 +29,14 @@
                     <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
-                                <label>Description</label>
+                                <label>{{localization.description}}</label>
                                 <small class="text-danger" v-if="errors.description">{{errors.description[0]}}</small>
                                 <ckeditor v-model="form.description" name="description" :height="'300px'"
                                           :toolbar="[['Format']]"></ckeditor>
                             </div>
                         </div>
                     </div>
-                    <button class="btn btn-success">Save</button>
+                    <button class="btn btn-success">{{localization.save}}</button>
                 </form>
             </div>
         </div>
@@ -47,10 +47,12 @@
     import axios from 'axios'
     import LoadImage from '../../components/LoadImage.vue'
     import Ckeditor from '../../components/ckeditor.vue'
+    import language from '../../language'
 
     export default{
         name: 'PhotographerForm',
         data() {
+            var localization = language.data().language
             return {
                 form: {},
                 errors: {},
@@ -59,7 +61,8 @@
                 initialize: '/api/photographer/create',
                 redirect: '/photographer',
                 store: '/api/photographer',
-                method: 'post'
+                method: 'post',
+                localization: localization
             }
         },
         beforeMount() {

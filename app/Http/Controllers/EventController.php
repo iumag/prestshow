@@ -6,16 +6,19 @@ use ClassPreloader\Config;
 use Illuminate\Http\Request;
 use App\Event;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
 class EventController extends Controller
 {
     public function index()
     {
-
+        $language = app()->getLocale();
+        $event = Event::join('event_translations', 'events.id', '=', 'event_translations.event_id')
+            ->where('event_translations.locale', '=', $language);
         return response()
             ->json([
-                'model' => Event::filterPaginateOrder(),
+                'model' => $event->filterPaginateOrder(),
             ]);
     }
 

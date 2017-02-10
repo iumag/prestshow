@@ -5,9 +5,9 @@
             <div class="panel-heading">
                 <span class="panel-title">{{title}}</span>
                 <div>
-                    <router-link :to="create" class="btn btn-primary btn-sm" v-if="title != 'Basket'">Create
+                    <router-link :to="create" class="btn btn-primary btn-sm" v-if="title != 'Basket'">{{localization.create}}
                     </router-link>
-                    <router-link :to="'/related_event/create_all'" class="btn btn-success btn-sm" v-if="title === 'Related Event'">Create All
+                    <router-link :to="'/related_event/create_all'" class="btn btn-success btn-sm" v-if="title === 'Related Event'">{{localization.create_all}}
                     </router-link>
                     <button class="btn btn-default btn-sm" @click="showFilter = !showFilter">F</button>
                 </div>
@@ -33,7 +33,7 @@
                                @keyup.enter="fetchData" placeholder="Search">
                     </div>
                     <div class="filter-btn">
-                        <button class="btn btn-primary btn-sm btn-block" @click="fetchData">Filter</button>
+                        <button class="btn btn-primary btn-sm btn-block" @click="fetchData">{{localization.filter}}</button>
                     </div>
                 </div>
                 <table class="table table-striped">
@@ -60,7 +60,7 @@
             </div>
             <div class="panel-footer pagination-footer" v-if="showfooter && this.model.total >= 10">
                 <div class="pagination-item">
-                    <span>Per page: </span>
+                    <span>{{localization.per_page}}: </span>
                     <select v-model="params.per_page" @change="fetchData">
                         <option>10</option>
                         <option>25</option>
@@ -68,17 +68,17 @@
                     </select>
                 </div>
                 <div class="pagination-item">
-                    <small>Showing {{model.from}} - {{model.to}} of {{model.total}}</small>
+                    <small>{{localization.showing}} {{model.from}} - {{model.to}} of {{model.total}}</small>
                 </div>
                 <div class="pagination-item">
-                    <small>Current page:</small>
+                    <small>{{localization.current_page}}:</small>
                     <input type="text" class="pagination-input" v-model="params.page"
                            @keyup.enter="fetchData">
                     <small> of {{model.last_page}}</small>
                 </div>
                 <div class="pagination-item">
-                    <button @click="prev" class="btn btn-default btn-sm">Prev</button>
-                    <button @click="next" class="btn btn-default btn-sm">Next</button>
+                    <button @click="prev" class="btn btn-default btn-sm">{{localization.prev}}</button>
+                    <button @click="next" class="btn btn-default btn-sm">{{localization.next}}</button>
                 </div>
             </div>
         </div>
@@ -87,9 +87,11 @@
 <script>
     import Vue from 'vue'
     import axios from 'axios'
+    import language from '../language'
     export default {
         props: ['source', 'thead', 'filter', 'create', 'title', 'showfooter'],
         data() {
+            var localization = language.data().language
             return {
                 showFilter: false,
                 model: {
@@ -117,7 +119,8 @@
                     not_in: 'NOT IN',
                     like: 'LIKE',
                     between: 'BETWEEN'
-                }
+                },
+                localization: localization
             }
         },
         beforeMount() {

@@ -9,10 +9,10 @@
                 <td>{{item.created_at}}</td>
                 <td>
                     <router-link class="edit-modal btn btn-success" :to="'/related_event/' + item.id + '/edit'">
-                        <span class="glyphicon glyphicon-edit"></span> Edit
+                        <span class="glyphicon glyphicon-edit"></span> {{localization.edit}}
                     </router-link>
                     <button class="edit-modal btn btn-danger" @click="deleteItem(item.id,index);props.model.data.splice(index,1);props.model.total <= 10 ? showfooter = false : showfooter = true;">
-                        <span class="glyphicon glyphicon-trash"></span> Delete
+                        <span class="glyphicon glyphicon-trash"></span> {{localization.delete}}
                     </button>
                 </td>
             </tr>
@@ -22,9 +22,11 @@
 <script>
     import DataViewer from '../../components/DataViewer.vue'
     import axios from 'axios'
+    import language from '../../language'
     export default {
         name: 'Related_EventIndex',
         data() {
+            var localization = language.data().language
             return {
                 title: 'Related Event',
                 source: '/api/related_event',
@@ -33,18 +35,19 @@
                 showfooter: true,
                 thead: [
                     {title: 'Id', key: 'id', sort: true},
-                    {title: 'Event', key: 'event', sort: true},
-                    {title: 'City', key: 'city', sort: true},
-                    {title: 'Cost', key: 'cost', sort: true},
-                    {title: 'Created At', key: 'created_at', sort: true},
-                    {title: 'Actions', sort: false}
+                    {title: localization.event, key: 'event', sort: true},
+                    {title: localization.city, key: 'city', sort: true},
+                    {title: localization.cost, key: 'cost', sort: true},
+                    {title: localization.created_at, key: 'created_at', sort: true},
+                    {title: localization.actions, sort: false}
                 ],
                 filter: [
                     'id', 'city_id', 'event_id', 'cost', 'created_at',
                     'city.id', 'city.city', 'city.picture', 'city.description', 'city.cost', 'city.created_at',
                     'event.id', 'event.event', 'event.picture', 'event.description', 'event.created_at'
-                ]
-            }
+                ],
+                localization: localization
+        }
         },
         components: {
             DataViewer
