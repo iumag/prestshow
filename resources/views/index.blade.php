@@ -42,6 +42,7 @@
             border-radius: 14px;
             background: transparent;
         }
+		
 
         .u15365 .animated-mouse-pointer {
             position: absolute;

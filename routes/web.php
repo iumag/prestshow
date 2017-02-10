@@ -15,6 +15,26 @@ Route::get('/', function () {
     return view('index');
 });
 
+Route::group(['middleware' => 'language'], function () {
+    Route::get('/pl', function () {
+        Session::set('locale', 'pl');
+        return view('index');
+    });
+});
+
+Route::group(['middleware' => 'language'], function () {
+    Route::get('/en', function () {
+        Session::set('locale', 'en');
+        return view('index');
+    });
+});
+
+//Route::get('/pl', function (){
+//    app()->setLocale('pl');
+//    Debugbar::addMessage('Another message', app()->getLocale());
+//    return view('index');
+//});
+
 Route::group(['middleware' => ['web']], function () {
 
 // Login Routes...
@@ -54,5 +74,7 @@ Route::post('/language', array (
     'Middleware' => 'LanguageSwitcher',
     'uses'=>'LanguageController@index'
 ));
+
+
 
 
