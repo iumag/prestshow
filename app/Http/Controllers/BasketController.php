@@ -54,13 +54,13 @@ class BasketController extends Controller
 
         foreach ($request->all() as $key => $value) {
             if (array_key_exists($key, $entity)) {
-                if($key != 'related_event') {
+                if ($key != 'related_event') {
                     $basket->items()->save(new BasketItem([
                         'entity_id' => $value,
                         'entity_type' => $key
                     ]));
-                }else{
-                    foreach ($value as $related_event){
+                } else {
+                    foreach ($value as $related_event) {
                         $basket->items()->save(new BasketItem([
                             'entity_id' => $related_event,
                             'entity_type' => $key
@@ -78,6 +78,7 @@ class BasketController extends Controller
 
     public function show($id)
     {
+        $language = app()->getLocale();
         $basket = Basket::with('items.entity')->findOrFail($id);
         $test = Basket::with('items.entity')->with(['items' => function ($query) {
             $query->where('entity_type', '=', 'related_event')->with('entity.event');
@@ -85,14 +86,22 @@ class BasketController extends Controller
 
         $index = 0;
 
-        foreach ($basket->items as $item) {
-            if ($item->entity_type == 'related_event') {
-                $idevent = $basket->items[$index]->entity->event_id;
-                $event_name[] = DB::table('events')->select('name')->where('id', '=', $idevent)->get()[0];
-
-            }
-            $index++;
-        }
+//        foreach ($basket->items as $item) {
+//            if ($item->entity_type == 'related_event') {
+//                if ($basket->items[$index]->entity != null) {
+//                    $idevent = $basket->items[$index]->entity->event_id;
+//                    $event_name[] = DB::table('events')
+//                        ->join('event_translations', 'events.id', '=', 'event_translations.event_id')
+//                        ->select('event_translations.name')
+//                        ->where('event_translations.locale', '=', $language)
+//                        ->where('id', '=', $idevent)->get()[0];
+//                }else{
+//
+//                }
+//
+//            }
+//            $index++;
+//        }
 
 
         return response()

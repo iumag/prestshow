@@ -38,7 +38,7 @@
                     <td>{{item.entity.name}}</td>
                     <td>{{item.entity.cost}}</td>
                 </tr>
-                <tr v-for="item in event.items">
+                <tr v-for="item in event.items" v-if="item.entity">
                     <td>{{item.entity_type}}</td>
                     <td>{{item.entity.event.name}}</td>
                     <td>{{item.entity.cost}}</td>
@@ -86,7 +86,11 @@
         computed: {
             subTotal() {
                 return this.model.items.reduce(function (carry, item) {
-                    return carry + parseFloat(item.entity.cost)
+                    if (item.entity) {
+                        return carry + parseFloat(item.entity.cost)
+                    }else{
+                        return carry+0
+                    }
                 }, 0)
             }
         },
@@ -116,7 +120,7 @@
                     })
             },
             AddIndex() {
-                if(this.event.length-1>this.index) {
+                if (this.event.length - 1 > this.index) {
                     this.index += 1
                     return this.index
                 }
