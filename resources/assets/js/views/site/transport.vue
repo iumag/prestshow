@@ -3,9 +3,7 @@
         <div class="browser_width grpelem" id="u16487-bw">
             <div id="u16487"><!-- simple frame --></div>
         </div>
-        <div class="wrap" style="
-    margin-top: 335px;
-">
+        <div class="wrap transport-wrap2">
             <transition-group name="transport-complete" tag="div">
                 <div class="transportwrap transport-complete-item" v-bind:key="item" v-for="item in model.data">
                     <div v-if="item.description" @click="showModal(item)" class="PamphletWidget clearfix grpelem" id="pamphletu17791"><!-- none box -->

@@ -14,7 +14,7 @@
             <div id="u15327"><!-- simple frame --></div>
         </div>
         <div v-for="n in total">
-            <div :id="'prodow'+n" class="wrap" style="padding-top: 200px;" :data-test="n"
+            <div :id="'prodow'+n" class="wrap wrap-padding" :data-test="n"
                  v-bind:class="[n===1 ? wrap_left : '', wrap]">
                 <div class="clearfix grpelem holiday event-complete-item" v-for="(item,index) in model.data"
                      v-bind:key="item"

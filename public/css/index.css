@@ -153,15 +153,15 @@
     border-radius: 44px 0px 44px 0px;
     padding-bottom: 17px;
     margin-left: 289px;
-    margin-top: 213px;
-    position: relative;
+    margin-top: 395px;
+    position: absolute;
 }
 
 #buttonu7617:hover {
     background-color: #000000;
     width: 440px;
     min-height: 0px;
-    margin: 213px 0px 0px 289px;
+
 }
 
 #buttonu7617.ButtonSelected {
@@ -313,8 +313,9 @@
     border-color: transparent;
     background-color: transparent;
     margin-left: 496px;
-    margin-top: 269px;
-    position: relative;
+    /* margin-top: 267px; */
+    position: absolute;
+    bottom: 0;
 }
 
 #u19814 {
@@ -346,9 +347,9 @@
 
 #pswieta {
     z-index: 801;
-    width: 0.01px;
+    /* width: 0.01px; */
     margin-left: -100px;
-    margin-top: 85px;
+    /* margin-top: 85px; */
 }
 
 #u7669 {
@@ -356,7 +357,7 @@
     min-height: 790.8874999999992px;
     padding-bottom: 0px;
     background: #E22F19 url("../images/pattern-89ds.jpg") repeat left top;
-    margin-top: 62px;
+    /* margin-top: 434px; */
 }
 
 #u7669_align_to_page {
@@ -1254,7 +1255,6 @@ div#u10782 {
     background-color: #000000;
     width: 174px;
     min-height: 0px;
-    margin: 187px -10000px 0px 0px;
 }
 
 #u24048-4 {
@@ -1306,7 +1306,7 @@ div#u10782 {
     background-color: #000000;
     width: 174px;
     min-height: 0px;
-    margin: 187px -10000px 0px 0px;
+
 }
 
 #u19833-4 {
@@ -1907,7 +1907,6 @@ div#u10782 {
     padding-bottom: 0px;
     min-height: 47px;
     width: 463px;
-    margin: 11px -10000px 0px 0px;
 }
 
 #buttonu8269.ButtonSelected #u8270-4 {
@@ -3604,7 +3603,6 @@ div#u10782 {
     background-color: #000000;
     width: 174px;
     min-height: 0px;
-    margin: 402px -10000px 0px 0px;
 }
 
 #u8560-4 {
@@ -3657,7 +3655,6 @@ div#u10782 {
     background-color: #000000;
     width: 174px;
     min-height: 0px;
-    margin: 402px -10000px 0px 0px;
 }
 
 #buttonu8559.ButtonSelected, #buttonu8561.ButtonSelected {
@@ -5236,6 +5233,10 @@ div#u10782 {
     /* margin-left: 287px; */
 }
 
+.transport-wrap2{
+    margin-top: 335px;
+}
+
 #ppu15527-4 {
     z-index: 0;
     /* width: 0.01px; */
@@ -6427,7 +6428,7 @@ body {
     z-index: 669;
     width: 130px;
     margin-left: 80px;
-    margin-bottom: 60px;
+    margin-bottom: 23px;
 }
 
 .event {
@@ -6444,6 +6445,7 @@ body {
     flex-direction: row;
     width: 1070px;
     margin: 0 auto;
+    max-width: 1070px;
 }
 
 .spaceitem {
@@ -6844,7 +6846,255 @@ body {
     display: block;
 }
 
-@media screen and (max-width: 1024px) {
+.wrap-padding{
+    padding-top: 200px;
+}
+
+
+@media screen and (max-width: 1024px){
+    body{
+        overflow-x: hidden;
+    }
+    .wrap {
+        width: 1020px;
+    }
+
+    .holiday {
+        margin-left: 65px;
+    }
+
+    .photowrap{
+        padding-left: 155px;
+    }
+
+    .transport-wrap{
+        padding-left: none;
+    }
+
+    #u7622, #u7623, #u7624, #u7625, #u7626, #u7627, #u7628, #u19811, #u19814, #istransportpage, #transportpage {
+        display: none
+    }
+
+    #u7669_align_to_page {
+        padding-top: 64px;
+    }
+
+    #u8138_align_to_page{
+        padding-top: 55px;
+    }
+
+    .transport-wrap2{
+        margin-top: 231px;
+    }
+
+    #u23602{
+        margin-top: -37px;
+    }
+    .citywrap {
+        height: 236px;
+    }
+
+    #buttonu24047 {
+        margin-top: 173px;
+    }
+
+    #buttonu19832 {
+        margin-top: 173px;
+    }
+
+
+    #u8547-4{
+        margin-top: 28px;
+    }
+
+    .wrap-padding{
+        padding-top: 90px;
+    }
+
+    #buttonu8269 {
+        height: 33px;
+    }
+
+    #u8270-4{
+        margin-top: 3px;
+        font-size: 23px;
+    }
+
+    .transportwrap {
+        padding-left: 0;
+    }
+
+    #u16514_align_to_page {
+        padding-top: 28px;
+    }
+
+    #pu15527-4 {
+        margin-top: -22px;
+    }
+
+    #pu15524-4 {
+        margin-top: -11px;
+    }
+
+    #u15528 {
+        margin-top: -10px;
+        padding-bottom: 0px;
+    }
+
+    #u15535 {
+        margin-top: -12px;
+    }
+
+    #u19760 {
+        margin-top: -18px;
+    }
+
+    #u19772 {
+        margin-top: -11px;
+    }
+
+    #pppu15527-4 {
+        margin-top: 0px;
+    }
+}
+
+@media screen and(max-height: 1366px){
+    .holiday {
+        width: 98px;
+    }
+}
+
+/* Настольные компьютеры и ноутбуки ----------- */
+/* Portrait tablets and medium desktops */
+@media (min-width: 1025px) and (max-width: 1400px) {
+    .wrap {
+        width: 1020px;
+    }
+
+    .transport-wrap2{
+        margin-top: 231px;
+    }
+
+    .holiday {
+        margin-left: 65px;
+    }
+
+    .photowrap{
+        padding-left: 155px;
+    }
+
+    .transport-wrap{
+        padding-left: none;
+    }
+
+    #u7622, #u7623, #u7624, #u7625, #u7626, #u7627, #u7628, #u19811, #u19814, #istransportpage, #transportpage {
+        display: none
+    }
+
+    #u7669_align_to_page {
+        padding-top: 64px;
+    }
+
+    #u23602{
+        margin-top: -37px;
+    }
+
+    #u8138_align_to_page{
+        padding-top: 20px;
+    }
+
+    .citywrap {
+        height: 236px;
+    }
+
+    #buttonu24047 {
+        margin-top: 173px;
+    }
+
+    #buttonu19832 {
+        margin-top: 173px;
+    }
+
+    #u8547-4{
+        margin-top: 28px;
+    }
+
+    .wrap-padding{
+        padding-top: 90px;
+    }
+
+    #buttonu8269 {
+        height: 33px;
+    }
+
+    #u8270-4{
+        margin-top: 3px;
+        font-size: 23px;
+    }
+
+    .transportwrap {
+        padding-left: 0;
+    }
+
+
+    #u16514_align_to_page {
+        padding-top: 28px;
+    }
+
+    #pu15527-4 {
+        margin-top: -22px;
+    }
+
+    #pu15524-4 {
+        margin-top: -11px;
+    }
+
+    #u15528 {
+        margin-top: -10px;
+        padding-bottom: 0px;
+    }
+
+    #u15535 {
+        margin-top: -12px;
+    }
+
+    #u19760 {
+        margin-top: -18px;
+    }
+
+    #u19772 {
+        margin-top: -11px;
+    }
+
+    #pppu15527-4 {
+        margin-top: 0px;
+    }
+
+    #u8557{
+        margin-top: 158px;
+    }
+
+    #u8558 {
+        margin-top: 533px;
+    }
+
+    #u8556-4 {
+        margin-top: 236px;
+    }
+
+    #buttonu8559 {
+        margin-top: 364px;
+    }
+
+    #buttonu8561 {
+        margin-top: 362px;
+    }
+
+}
+
+
+
+@media screen and (max-width: 1000px) {
     #u7622.MuseLinkActive, #u7623:hover {
         display: none;
     }

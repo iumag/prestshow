@@ -13,6 +13,7 @@
 
         <div class="clearfix" id="page"><!-- column -->
             <div class="position_content" id="page_position_content">
+                <div style="position: relative; display: block; width: 100%; height: 963px;" id="test">
                 <div class="clearfix colelem" id="pu7616"><!-- group -->
                     <div class="size_fixed grpelem" id="u7616"><!-- custom html -->
                     </div>
@@ -67,258 +68,261 @@
                 <a v-if="showElement['cena']" class="nonblock nontext anim_swing rounded-corners pinned-colelem"
                    id="u19814"
                    href="#cena"><!-- simple frame --></a>
-                <holiday ref="holiday"></holiday>
-                <transition
-                        name="custom-classes-transition"
-                        enter-active-class="animated flash"
-                        leave-active-class="animated bounceOutRight"
-                >
-                    <city v-if="showElement['city']" ref="city"></city>
-                </transition>
-                <transition name="eventdiv">
-                    <event v-if="showElement['event']" :city_id="city.id" ref="event"></event>
-                </transition>
-                <is-hotel v-if="showElement['is_hotel']"></is-hotel>
-                <hotel v-if="showElement['hotel']" :city_id="city.id" ref="hotel"></hotel>
-                <photographer v-if="showElement['photographer']" ref="photographer"></photographer>
+            </div>
+            <holiday ref="holiday"></holiday>
+            <transition
+                    name="custom-classes-transition"
+                    enter-active-class="animated flash"
+                    leave-active-class="animated bounceOutRight"
+            >
+                <city v-if="showElement['city']" ref="city"></city>
+            </transition>
+            <transition name="eventdiv">
+                <event v-if="showElement['event']" :city_id="city.id" ref="event"></event>
+            </transition>
+            <is-hotel v-if="showElement['is_hotel']"></is-hotel>
+            <hotel v-if="showElement['hotel']" :city_id="city.id" ref="hotel"></hotel>
+            <photographer v-if="showElement['photographer']" ref="photographer"></photographer>
 
-                <is-transport v-if="showElement['is_transport']"></is-transport>
-
-
-                <transport v-if="showElement['transport']" ref="transport"></transport>
+            <is-transport v-if="showElement['is_transport']"></is-transport>
 
 
-                <div v-show="showElement['cena']" class="clearfix colelem" id="pcena"><!-- group -->
-                    <a class="anchor_item grpelem" id="cena"></a>
-                    <div class="browser_width grpelem" id="u16514-bw">
-                        <div id="u16514"><!-- column -->
-                            <div class="clearfix" id="u16514_align_to_page">
-                                <div class="clearfix colelem" id="u15557-4"><!-- content -->
-                                    <p>cena</p>
-                                </div>
-                                <form  id="form_data" class="form" @submit.prevent="save">
-                                    <div class="clearfix grpelem" id="ppu15527-4"><!-- column -->
-                                        <div class="clearfix colelem" id="pu15527-4"><!-- group -->
-                                            <div class="clearfix grpelem" id="u15527-4"><!-- content -->
-                                                <p>Miasto:</p>
-                                            </div>
-                                            <div class="clearfix grpelem" id="u15526-4"><!-- content -->
-                                                <p>{{city.name}}</p>
-
-                                                <input type="hidden" name="city" :value="city.id">
-                                            </div>
-                                        </div>
-                                        <div class="clearfix colelem" id="pu15524-4"><!-- group -->
-                                            <div class="clearfix grpelem" id="u15524-4"><!-- content -->
-                                                <p>Uroczystość:</p>
-                                            </div>
-                                            <div class="clearfix grpelem" id="u15526-4"><!-- content -->
-                                                <div class="entityitem">{{holiday.name}}</div>
-                                                <div class="spaceitem">{{holiday.cost}} ZL</div>
-
-                                                </p>
-                                                <input type="hidden" name="holiday" :value="holiday.id">
-                                            </div>
-                                        </div>
-                                        <div class="clearfix colelem" id="u15528"><!-- column -->
-                                            <div class="clearfix colelem" id="pu15532-4"><!-- group -->
-                                                <div class="clearfix grpelem" id="u15532-4"><!-- content -->
-                                                    <p>Atrakcji:</p>
-                                                </div>
-                                            </div>
-                                            <div class="clearfix grpelem" id="u15526-4"
-                                                 v-for="(event, index) in events">
-                                                <!-- content -->
-                                                <div class="entityitem">{{event.event.name}}</div>
-                                                <div class="spaceitem">{{event.cost}} ZL</div>
-                                                <div id="u15539" class="clearfix colelem">
-                                                    <div @click="delete_entity(index, event)" id="u15541"
-                                                         class="rounded-corners clearfix grpelem">
-                                                        <div id="u15540-4" class="clearfix grpelem"><p>+</p></div>
-                                                    </div>
-                                                </div>
-                                                </p>
-                                                <input type="hidden" name="related_event[]" :value="event.id">
-                                            </div>
-                                        </div>
-                                        <div class="clearfix colelem" id="u15535"><!-- group -->
-                                            <div class="clearfix grpelem" id="u15536-4"><!-- content -->
-                                                <p>Hotel:</p>
-                                            </div>
-                                            <div class="clearfix grpelem" id="u15526-4"><!-- content -->
-                                                <div class="entityitem">{{hotel.name}}</div>
-                                                <div class="spaceitem">{{hotel.cost}} ZL</div>
-                                                <div id="u15539" class="clearfix colelem">
-                                                    <div @click="delete_item('hotel')" id="u15541"
-                                                         class="rounded-corners clearfix grpelem">
-                                                        <div id="u15540-4" class="clearfix grpelem"><p>+</p></div>
-                                                    </div>
-                                                </div>
-                                                </p>
-                                                <input type="hidden" name="hotel" :value="hotel.id">
-                                            </div>
-                                        </div>
-                                        <div class="clearfix colelem" id="u19760"><!-- group -->
-                                            <div class="clearfix grpelem" id="u19762-4"><!-- content -->
-                                                <p>Transport:</p>
-                                            </div>
-                                            <div class="clearfix grpelem" id="u15526-4"><!-- content -->
-                                                <div class="entityitem">{{transport.name}}</div>
-                                                <div class="spaceitem">{{transport.cost}} ZL</div>
-                                                <div id="u15539" class="clearfix colelem">
-                                                    <div @click="delete_item('transport')" id="u15541"
-                                                         class="rounded-corners clearfix grpelem">
-                                                        <div id="u15540-4" class="clearfix grpelem"><p>+</p></div>
-                                                    </div>
-                                                </div>
-                                                </p>
-                                                <input type="hidden" name="transport" :value="transport.id">
-                                            </div>
-                                        </div>
-                                        <div class="clearfix colelem" id="u19772"><!-- group -->
-                                            <div class="clearfix grpelem" id="u19774-4"><!-- content -->
-                                                <p>Fotograf:</p>
-                                            </div>
-                                            <div class="clearfix grpelem" id="u15526-4"><!-- content -->
-                                                <div class="entityitem">{{photographer.name}}</div>
-                                                <div class="spaceitem">{{photographer.cost}} ZL</div>
-
-                                                </p>
-                                                <input type="hidden" name="photographer" :value="photographer.id">
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix colelem" id="pu15533-5"><!-- group -->
-                                        <div class="rounded-corners clearfix grpelem" id="u15533-5"><!-- content -->
-                                            <p><span id="u15533">&nbsp;&nbsp;&nbsp;&nbsp; SUMA </span></p>
-                                        </div>
-                                        <div class="rounded-corners clearfix grpelem" id="u15534-3"><!-- content -->
-                                            <p>&nbsp;</p>
-                                        </div>
-                                        <div class="clearfix grpelem" id="u15538-4"><!-- content -->
-                                            <p>{{getAllCost}} ZL</p>
-                                        </div>
-                                        <div class="clearfix grpelem" id="u16847-4"><!-- content -->
-                                            <p>Także możesz się skontaktować z menadżerem telefonicznie: +123123123</p>
-                                        </div>
-                                    </div>
-                                    <div class="clearfix colelem" id="pppu15527-4"><!-- group -->
+            <transport v-if="showElement['transport']" ref="transport"></transport>
 
 
-                                        <div class="clearfix grpelem" id="u15558"><!-- group -->
-                                            <div class="clearfix grpelem" id="u15559"><!-- group -->
-
-                                                <div class="fld-grp clearfix grpelem" id="widgetu15578"
-                                                     data-required="true" data-type="email"><!-- none box -->
-                                                    <span id="u15580-4"
-                                                          v-bind:class="[errors.email ? errorcart : '', 'fld-input NoWrap actAsDiv clearfix grpelem']"
-                                                    ><!-- content --><input class="wrapped-input"
-                                                                            type="email"
-                                                                            spellcheck="false"
-                                                                            id="widgetu15578_input"
-                                                                            name="email"
-                                                                            tabindex="2"
-                                                                            placeholder="Enter Email"/><label
-                                                            class="wrapped-input fld-prompt"
-                                                            id="widgetu15578_prompt"
-                                                            for="widgetu15578_input"></label></span>
-                                                </div>
-
-
-                                                <div class="fld-grp clearfix grpelem" id="widgetu15562"
-                                                     data-required="true"><!-- none box -->
-                                                    <span v-bind:class="[errors.message ? errorcart : '', 'fld-input NoWrap actAsDiv clearfix grpelem']"
-                                                          id="u15563-4"><!-- content --><textarea
-                                                            class="wrapped-input" id="widgetu15562_input"
-                                                            name="message" tabindex="4"
-                                                            placeholder="Enter Your Message"></textarea><label
-                                                            class="wrapped-input fld-prompt"
-                                                            id="widgetu15562_prompt"
-                                                            for="widgetu15562_input"></label></span>
-                                                </div>
-                                                <div class="fld-grp clearfix grpelem" id="widgetu15574"
-                                                     data-required="true"><!-- none box -->
-                                                    <span v-bind:class="[errors.FIO ? errorcart : '', 'fld-input NoWrap actAsDiv clearfix grpelem']"
-                                                          id="u15576-4"><!-- content --><input class="wrapped-input"
-                                                                                               type="text"
-                                                                                               spellcheck="false"
-                                                                                               id="widgetu15574_input"
-                                                                                               name="FIO"
-                                                                                               tabindex="1"
-                                                                                               placeholder="Enter Name"/><label
-                                                            class="wrapped-input fld-prompt"
-                                                            id="widgetu15574_prompt"
-                                                            for="widgetu15574_input"></label></span>
-                                                </div>
-                                                <div class="fld-grp clearfix grpelem" id="widgetu15568"
-                                                     data-required="true"><!-- none box -->
-                                                    <span v-bind:class="[errors.phone ? errorcart : '', 'fld-input NoWrap actAsDiv clearfix grpelem']"
-                                                          id="u15569-4"><!-- content --><input class="wrapped-input"
-                                                                                               type="tel"
-                                                                                               spellcheck="false"
-                                                                                               id="widgetu15568_input"
-                                                                                               name="phone"
-                                                                                               tabindex="3"
-                                                                                               placeholder="Enter Phone Number"/><label
-                                                            class="wrapped-input fld-prompt"
-                                                            id="widgetu15568_prompt"
-                                                            for="widgetu15568_input"></label></span>
-                                                </div>
-                                                <div v-if="errors.FIO || errors.email || errors.phone || errors.message" class="error_desc">Wypełnij wszystkie pola</div>
-                                                <button class="submit-btn NoWrap grpelem" id="u15567-13">ZAMÓWIĆ
-                                                </button>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </form>
-
+            <div v-show="showElement['cena']" class="clearfix colelem" id="pcena"><!-- group -->
+                <a class="anchor_item grpelem" id="cena"></a>
+                <div class="browser_width grpelem" id="u16514-bw">
+                    <div id="u16514"><!-- column -->
+                        <div class="clearfix" id="u16514_align_to_page">
+                            <div class="clearfix colelem" id="u15557-4"><!-- content -->
+                                <p>cena</p>
                             </div>
+                            <form id="form_data" class="form" @submit.prevent="save">
+                                <div class="clearfix grpelem" id="ppu15527-4"><!-- column -->
+                                    <div class="clearfix colelem" id="pu15527-4"><!-- group -->
+                                        <div class="clearfix grpelem" id="u15527-4"><!-- content -->
+                                            <p>Miasto:</p>
+                                        </div>
+                                        <div class="clearfix grpelem" id="u15526-4"><!-- content -->
+                                            <p>{{city.name}}</p>
+
+                                            <input type="hidden" name="city" :value="city.id">
+                                        </div>
+                                    </div>
+                                    <div class="clearfix colelem" id="pu15524-4"><!-- group -->
+                                        <div class="clearfix grpelem" id="u15524-4"><!-- content -->
+                                            <p>Uroczystość:</p>
+                                        </div>
+                                        <div class="clearfix grpelem" id="u15526-4"><!-- content -->
+                                            <div class="entityitem">{{holiday.name}}</div>
+                                            <div class="spaceitem">{{holiday.cost}} ZL</div>
+
+                                            </p>
+                                            <input type="hidden" name="holiday" :value="holiday.id">
+                                        </div>
+                                    </div>
+                                    <div class="clearfix colelem" id="u15528"><!-- column -->
+                                        <div class="clearfix colelem" id="pu15532-4"><!-- group -->
+                                            <div class="clearfix grpelem" id="u15532-4"><!-- content -->
+                                                <p>Atrakcji:</p>
+                                            </div>
+                                        </div>
+                                        <div class="clearfix grpelem" id="u15526-4"
+                                             v-for="(event, index) in events">
+                                            <!-- content -->
+                                            <div class="entityitem">{{event.event.name}}</div>
+                                            <div class="spaceitem">{{event.cost}} ZL</div>
+                                            <div id="u15539" class="clearfix colelem">
+                                                <div @click="delete_entity(index, event)" id="u15541"
+                                                     class="rounded-corners clearfix grpelem">
+                                                    <div id="u15540-4" class="clearfix grpelem"><p>+</p></div>
+                                                </div>
+                                            </div>
+                                            </p>
+                                            <input type="hidden" name="related_event[]" :value="event.id">
+                                        </div>
+                                    </div>
+                                    <div class="clearfix colelem" id="u15535"><!-- group -->
+                                        <div class="clearfix grpelem" id="u15536-4"><!-- content -->
+                                            <p>Hotel:</p>
+                                        </div>
+                                        <div class="clearfix grpelem" id="u15526-4"><!-- content -->
+                                            <div class="entityitem">{{hotel.name}}</div>
+                                            <div class="spaceitem">{{hotel.cost}} ZL</div>
+                                            <div id="u15539" class="clearfix colelem">
+                                                <div @click="delete_item('hotel')" id="u15541"
+                                                     class="rounded-corners clearfix grpelem">
+                                                    <div id="u15540-4" class="clearfix grpelem"><p>+</p></div>
+                                                </div>
+                                            </div>
+                                            </p>
+                                            <input type="hidden" name="hotel" :value="hotel.id">
+                                        </div>
+                                    </div>
+                                    <div class="clearfix colelem" id="u19760"><!-- group -->
+                                        <div class="clearfix grpelem" id="u19762-4"><!-- content -->
+                                            <p>Transport:</p>
+                                        </div>
+                                        <div class="clearfix grpelem" id="u15526-4"><!-- content -->
+                                            <div class="entityitem">{{transport.name}}</div>
+                                            <div class="spaceitem">{{transport.cost}} ZL</div>
+                                            <div id="u15539" class="clearfix colelem">
+                                                <div @click="delete_item('transport')" id="u15541"
+                                                     class="rounded-corners clearfix grpelem">
+                                                    <div id="u15540-4" class="clearfix grpelem"><p>+</p></div>
+                                                </div>
+                                            </div>
+                                            </p>
+                                            <input type="hidden" name="transport" :value="transport.id">
+                                        </div>
+                                    </div>
+                                    <div class="clearfix colelem" id="u19772"><!-- group -->
+                                        <div class="clearfix grpelem" id="u19774-4"><!-- content -->
+                                            <p>Fotograf:</p>
+                                        </div>
+                                        <div class="clearfix grpelem" id="u15526-4"><!-- content -->
+                                            <div class="entityitem">{{photographer.name}}</div>
+                                            <div class="spaceitem">{{photographer.cost}} ZL</div>
+
+                                            </p>
+                                            <input type="hidden" name="photographer" :value="photographer.id">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="clearfix colelem" id="pu15533-5"><!-- group -->
+                                    <div class="rounded-corners clearfix grpelem" id="u15533-5"><!-- content -->
+                                        <p><span id="u15533">&nbsp;&nbsp;&nbsp;&nbsp; SUMA </span></p>
+                                    </div>
+                                    <div class="rounded-corners clearfix grpelem" id="u15534-3"><!-- content -->
+                                        <p>&nbsp;</p>
+                                    </div>
+                                    <div class="clearfix grpelem" id="u15538-4"><!-- content -->
+                                        <p>{{getAllCost}} ZL</p>
+                                    </div>
+                                    <div class="clearfix grpelem" id="u16847-4"><!-- content -->
+                                        <p>Także możesz się skontaktować z menadżerem telefonicznie: +123123123</p>
+                                    </div>
+                                </div>
+                                <div class="clearfix colelem" id="pppu15527-4"><!-- group -->
+
+
+                                    <div class="clearfix grpelem" id="u15558"><!-- group -->
+                                        <div class="clearfix grpelem" id="u15559"><!-- group -->
+
+                                            <div class="fld-grp clearfix grpelem" id="widgetu15578"
+                                                 data-required="true" data-type="email"><!-- none box -->
+                                                <span id="u15580-4"
+                                                      v-bind:class="[errors.email ? errorcart : '', 'fld-input NoWrap actAsDiv clearfix grpelem']"
+                                                ><!-- content --><input class="wrapped-input"
+                                                                        type="email"
+                                                                        spellcheck="false"
+                                                                        id="widgetu15578_input"
+                                                                        name="email"
+                                                                        tabindex="2"
+                                                                        placeholder="Enter Email"/><label
+                                                        class="wrapped-input fld-prompt"
+                                                        id="widgetu15578_prompt"
+                                                        for="widgetu15578_input"></label></span>
+                                            </div>
+
+
+                                            <div class="fld-grp clearfix grpelem" id="widgetu15562"
+                                                 data-required="true"><!-- none box -->
+                                                <span v-bind:class="[errors.message ? errorcart : '', 'fld-input NoWrap actAsDiv clearfix grpelem']"
+                                                      id="u15563-4"><!-- content --><textarea
+                                                        class="wrapped-input" id="widgetu15562_input"
+                                                        name="message" tabindex="4"
+                                                        placeholder="Enter Your Message"></textarea><label
+                                                        class="wrapped-input fld-prompt"
+                                                        id="widgetu15562_prompt"
+                                                        for="widgetu15562_input"></label></span>
+                                            </div>
+                                            <div class="fld-grp clearfix grpelem" id="widgetu15574"
+                                                 data-required="true"><!-- none box -->
+                                                <span v-bind:class="[errors.FIO ? errorcart : '', 'fld-input NoWrap actAsDiv clearfix grpelem']"
+                                                      id="u15576-4"><!-- content --><input class="wrapped-input"
+                                                                                           type="text"
+                                                                                           spellcheck="false"
+                                                                                           id="widgetu15574_input"
+                                                                                           name="FIO"
+                                                                                           tabindex="1"
+                                                                                           placeholder="Enter Name"/><label
+                                                        class="wrapped-input fld-prompt"
+                                                        id="widgetu15574_prompt"
+                                                        for="widgetu15574_input"></label></span>
+                                            </div>
+                                            <div class="fld-grp clearfix grpelem" id="widgetu15568"
+                                                 data-required="true"><!-- none box -->
+                                                <span v-bind:class="[errors.phone ? errorcart : '', 'fld-input NoWrap actAsDiv clearfix grpelem']"
+                                                      id="u15569-4"><!-- content --><input class="wrapped-input"
+                                                                                           type="tel"
+                                                                                           spellcheck="false"
+                                                                                           id="widgetu15568_input"
+                                                                                           name="phone"
+                                                                                           tabindex="3"
+                                                                                           placeholder="Enter Phone Number"/><label
+                                                        class="wrapped-input fld-prompt"
+                                                        id="widgetu15568_prompt"
+                                                        for="widgetu15568_input"></label></span>
+                                            </div>
+                                            <div v-if="errors.FIO || errors.email || errors.phone || errors.message"
+                                                 class="error_desc">Wypełnij wszystkie pola
+                                            </div>
+                                            <button class="submit-btn NoWrap grpelem" id="u15567-13">ZAMÓWIĆ
+                                            </button>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </form>
+
                         </div>
                     </div>
                 </div>
-
-                <div class="verticalspacer" data-offset-top="8854" data-content-above-spacer="8853"
-                     data-content-below-spacer="0"></div>
             </div>
-        </div>
-        <div class="preload_images">
-            <img class="preload" src="images/u15567-13-r.png" alt=""/>
-            <img class="preload" src="images/u15567-13-m.png" alt=""/>
-            <img class="preload" src="images/u15567-13-fs.png" alt=""/>
-            <!--[if lt IE 9]>
-            <img class="preload" src="images/u17826-r-grad.png" alt=""/>
-            <![endif]-->
-        </div>
-        <!-- JS includes -->
 
-        <div v-show="modal" class="dm-overlay" id="win1">
-            <div class="dm-table">
-                <div class="dm-cell">
-                    <div class="dm-modal">
-                        <div class="dm-modal-desc">
-                            <span class="modal_cost">{{modal_item.cost}} ZL</span>
-                            <img title="Do koszyka" @click="showModal(modal_item)" class="block" id="u18674_img"
-                                 v-bind:src="[modal_item.show ? cart_img2 : cart_img1]" alt="" width="32" height="32">
-                            <a @click="closeModal(modal_scroll, modal_item)" class="close"></a>
-                        </div>
-                        <div v-if="!modal_item.event" class="name_modal"><p>{{modal_item.name}}</p></div>
-                        <div v-else class="name_modal"><p>{{modal_item.event.name}}</p></div>
-                        <div class="desc_modal" v-html="modal_item.description"></div>
+            <div class="verticalspacer" data-offset-top="8854" data-content-above-spacer="8853"
+                 data-content-below-spacer="0"></div>
+        </div>
+    </div>
+    <div class="preload_images">
+        <img class="preload" src="images/u15567-13-r.png" alt=""/>
+        <img class="preload" src="images/u15567-13-m.png" alt=""/>
+        <img class="preload" src="images/u15567-13-fs.png" alt=""/>
+        <!--[if lt IE 9]>
+        <img class="preload" src="images/u17826-r-grad.png" alt=""/>
+        <![endif]-->
+    </div>
+    <!-- JS includes -->
+
+    <div v-show="modal" class="dm-overlay" id="win1">
+        <div class="dm-table">
+            <div class="dm-cell">
+                <div class="dm-modal">
+                    <div class="dm-modal-desc">
+                        <span class="modal_cost">{{modal_item.cost}} ZL</span>
+                        <img title="Do koszyka" @click="showModal(modal_item)" class="block" id="u18674_img"
+                             v-bind:src="[modal_item.show ? cart_img2 : cart_img1]" alt="" width="32" height="32">
+                        <a @click="closeModal(modal_scroll, modal_item)" class="close"></a>
                     </div>
+                    <div v-if="!modal_item.event" class="name_modal"><p>{{modal_item.name}}</p></div>
+                    <div v-else class="name_modal"><p>{{modal_item.event.name}}</p></div>
+                    <div class="desc_modal" v-html="modal_item.description"></div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <div v-show="success_bye" class="dm-overlay" id="win1">
-            <div class="dm-table">
-                <div class="dm-cell">
-                    <div class="dm-modal">
-                        <div class="name_modal"><p>Skutecznie</p></div>
-                    </div>
+    <div v-show="success_bye" class="dm-overlay" id="win1">
+        <div class="dm-table">
+            <div class="dm-cell">
+                <div class="dm-modal">
+                    <div class="name_modal"><p>Skutecznie</p></div>
                 </div>
             </div>
         </div>
+    </div>
 
     </div>
 </template>
@@ -360,7 +364,7 @@
                 },
                 scrollElement: {
                     city: '#miasto',
-                    event: '#u8547-4',
+                    event: '#atrakcji',
                     is_hotel: '#nocleg',
                     hotel: '#hotel',
                     photographer: '#fotograf',
@@ -486,8 +490,8 @@
             scroll(element){
                 var elm = this.scrollElement[element]
                 var x = 0 // offset
-                if (element === 'event') {
-                    x = 150
+                if ($(window).width()<=1367) {
+                    x = 30
                 }
                 setTimeout(function () {
                     $("html,body").animate({scrollTop: $(elm).offset().top - x}, 1000)
@@ -526,9 +530,9 @@
                 }
             },
             delete_item(entity){
-                if (entity === 'hotel'){
+                if (entity === 'hotel') {
                     this.hotel['cost'] = 0
-                }else if(entity === 'transport'){
+                } else if (entity === 'transport') {
                     this.transport['cost'] = 0
                 }
             }

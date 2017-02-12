@@ -4,8 +4,8 @@
 
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
     <meta name="generator" content="2015.2.1.352"/>
-    <!-- <meta name="viewport" content="user-scalable=no"> -->
-    <meta name="viewport" content="width=device-width">
+     <meta name="viewport" content="user-scalable=no">
+    <!-- <meta name="viewport" content="width=device-width"> -->
 
     <script type="text/javascript">
         // Update the 'nojs'/'js' class on the html node
@@ -42,7 +42,7 @@
             border-radius: 14px;
             background: transparent;
         }
-		
+
 
         .u15365 .animated-mouse-pointer {
             position: absolute;
@@ -138,4 +138,14 @@
 
 <!--HTML Widget code-->
 <script type="text/javascript" src="{{asset('js/site.js')}}"></script>
+<script>
+    $(document).ready(function(){
+        $('#test').css('height',$(window).height());
+        $('#buttonu7617').css('margin-top',$(window).height()/3);
+    });
+    $(window).resize(function() {
+        $('#test').css('height',$(window).height());
+        $('#buttonu7617').css('margin-top',$(window).height()/3);
+    });
+</script>
 </html>

@@ -14,11 +14,13 @@ class EventController extends Controller
     public function index()
     {
         $language = app()->getLocale();
-        $event = Event::join('event_translations', 'events.id', '=', 'event_translations.event_id')
-            ->where('event_translations.locale', '=', $language);
+//        $event = Event::join('event_translations', 'events.id', '=', 'event_translations.event_id')
+//            ->where('event_translations.locale', '=', $language);
+
+       // dd($event->get());
         return response()
             ->json([
-                'model' => $event->filterPaginateOrder(),
+                'model' => Event::filterPaginateOrder()
             ]);
     }
 
