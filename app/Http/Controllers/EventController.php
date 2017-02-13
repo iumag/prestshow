@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Picture;
 use ClassPreloader\Config;
 use Illuminate\Http\Request;
 use App\Event;
@@ -17,10 +18,10 @@ class EventController extends Controller
 //        $event = Event::join('event_translations', 'events.id', '=', 'event_translations.event_id')
 //            ->where('event_translations.locale', '=', $language);
 
-       // dd($event->get());
+        // dd($event->get());
         return response()
             ->json([
-                'model' => Event::filterPaginateOrder()
+                'model' => Event::with('pictures')->filterPaginateOrder()
             ]);
     }
 
@@ -40,7 +41,9 @@ class EventController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'picture' => 'required|image',
+            'pictures.*.picture' => 'image'
         ]);
+
 
         $image = $request->file('picture');
 
@@ -57,13 +60,33 @@ class EventController extends Controller
         }
 
         $event = Event::create([
-            'picture' => $name
+            'picture' => $name,
+            'video' => $request->get('video')
         ]);
+
+        $pictures = $request->file('pictures');
+
+        if (isset($pictures)) {
+            foreach ($pictures as $picture) {
+                if ($picture['picture']->isValid()) {
+                    $name = $event->id . '_' . date('dmY') . '_' . $picture['picture']->getClientOriginalName();
+                    $picture['picture']->move('../public/img/event/pictures', $name);
+                }
+
+                Picture::create([
+                    'picture_id' => $event->id,
+                    'picture_type' => 'event',
+                    'link' => $name
+                ]);
+            }
+        }
+
 
         $event->translateOrNew($language)->name = $request->get('name');
         $event->translateOrNew($language)->description = $request->get('description');
 
         $event->save();
+
 
         return response()
             ->json([
@@ -84,8 +107,7 @@ class EventController extends Controller
     public function edit($id)
     {
 
-        $event = Event::findOrFail($id);
-
+        $event = Event::with('pictures')->findOrFail($id);
         return response()
             ->json([
                 'form' => $event,
@@ -100,6 +122,7 @@ class EventController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'picture' => 'image',
+            'pictures.*.picture' => 'image'
         ]);
 
         $image = $request->file('picture');
@@ -119,8 +142,28 @@ class EventController extends Controller
 
 
         $event->update([
-            'picture' => $name
+            'picture' => $name,
+            'video' => $request->get('video')
         ]);
+
+        $pictures = $request->file('pictures');
+
+        if (isset($pictures)) {
+            foreach ($pictures as $picture) {
+
+                if ($picture['picture']->isValid()) {
+                    $name = $id . '_' . date('dmY') . '_' . $picture['picture']->getClientOriginalName();
+                    $picture['picture']->move('../public/img/event/pictures', $name);
+                }
+
+                Picture::create([
+                    'picture_id' => $id,
+                    'picture_type' => 'event',
+                    'link' => $name
+                ]);
+            }
+        }
+
 
         $event->translateOrNew($language)->name = $request->get('name');
         $event->translateOrNew($language)->description = $request->get('description');

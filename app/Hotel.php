@@ -41,4 +41,9 @@ class Hotel extends Model
     {
         return $this->morphOne(BasketItem::class);
     }
+
+    public function pictures()
+    {
+        return $this->morphMany(Picture::class, 'picture');
+    }
 }

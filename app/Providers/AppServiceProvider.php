@@ -20,7 +20,8 @@ class AppServiceProvider extends ServiceProvider
             'holiday' => 'App\Holiday',
             'hotel' => 'App\Hotel',
             'photographer' => 'App\Photographer',
-            'transport' => 'App\Transport'
+            'transport' => 'App\Transport',
+            'event' => 'App\Event'
         ]);
     }
 

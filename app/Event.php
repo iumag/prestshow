@@ -13,11 +13,11 @@ class Event extends Model
     public $translatedAttributes = ['name', 'description'];
 
     protected $fillable = [
-        'name', 'picture', 'description'
+        'name', 'picture', 'description', 'video'
     ];
 
     protected $filter = [
-        'id', 'name', 'picture', 'description', 'created_at'
+        'id', 'name', 'picture', 'description', 'video', 'created_at'
     ];
 
     public static function initalize()
@@ -25,12 +25,18 @@ class Event extends Model
         return [
             'name' => '',
             'picture' => '',
-            'description' => ''
+            'description' => '',
+            'video' => ''
         ];
     }
 
     public function related_event()
     {
         return $this->HasMany(RelatedEvent::class);
+    }
+
+    public function pictures()
+    {
+        return $this->morphMany(Picture::class, 'picture');
     }
 }

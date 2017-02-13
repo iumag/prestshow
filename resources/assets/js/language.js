@@ -33,7 +33,9 @@ export default {
                 picture: 'Picture',
                 description: 'Description',
                 name: 'name',
-                save: 'Save'
+                save: 'Save',
+                video: 'Video',
+                count_pictures: 'pictures'
             }
         }
     }

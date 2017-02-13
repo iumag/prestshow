@@ -13,7 +13,7 @@ class Transport extends Model
     public $translatedAttributes = ['name', 'description'];
 
     protected $fillable = [
-        'name', 'picture', 'description',  'cost'
+        'name', 'picture', 'description', 'cost'
     ];
 
     protected $filter = [
@@ -33,5 +33,10 @@ class Transport extends Model
     public function basket_item()
     {
         return $this->morphOne(BasketItem::class);
+    }
+
+    public function pictures()
+    {
+        return $this->morphMany(Picture::class, 'picture');
     }
 }

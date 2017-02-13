@@ -9,6 +9,8 @@
     display: block;
     overflow: hidden;" v-html="item.description"></td>
                 <td>{{item.created_at}}</td>
+                <td class="text-center">{{item.pictures.length}}</td>
+                <td class="text-center">{{isVideo(item)}}</td>
                 <td>
                     <router-link class="edit-modal btn btn-success" :to="'/event/' + item.id + '/edit'">
                         <span class="glyphicon glyphicon-edit"></span> {{localization.edit}}
@@ -41,6 +43,8 @@
                     {title: localization.picture, key: 'picture', sort: false},
                     {title: localization.description, key: 'description', parent_column:'event_translations', sort: true},
                     {title: localization.created_at, key: 'created_at', parent_column: 'events', sort: true},
+                    {title: localization.count_pictures, key: 'pictures', parent_column: 'events', sort: false},
+                    {title: localization.video, key: 'video', parent_column: 'events', sort: false},
                     {title: localization.actions, sort: false}
                 ],
                 filter: [
@@ -53,6 +57,13 @@
             DataViewer
         },
         methods: {
+            isVideo(item){
+                if (item.video){
+                    return 'True'
+                }else{
+                    return 'False'
+                }
+            },
             deleteItem(item){
                 var vm = this
                 axios.delete(`/api/${this.resource}/${item}`)

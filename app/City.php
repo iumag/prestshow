@@ -44,4 +44,8 @@ class City extends Model
     {
         return $this->morphMany(BasketItem::class, 'entity');
     }
+
+    public function pictures(){
+        return $this->morphMany(Picture::class, 'picture');
+    }
 }

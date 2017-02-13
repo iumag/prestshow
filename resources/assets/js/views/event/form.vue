@@ -30,17 +30,27 @@
                             </div>
                         </div>
                     </div>
-                    <div class="row" id="test">
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>{{localization.video}}</label>
+                                <input type="text" name="video" class="form-control" v-model="form.video">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div v-for="(picture,index) in pictures" class="row" id="test">
                         <div class="col-sm-11">
                             <div class="form-group">
                                 <label class="control-label">{{localization.picture}}</label>
-                                <input name="input4[]" type="file" class="input-4 file-loading" data-show-preview="false">
+                                <input name="pictures[][picture]" type="file" class="input-4 file-loading">
 
                             </div>
                         </div>
                         <div class="col-sm-1" style="margin-top: 26px">
                             <div class="form-group">
-                                <a @click="addPicture()" class="btn btn-success">+</a>
+                                <a v-if="picture.plus" @click="addPicture(picture)" class="btn btn-success">+</a>
+                                <a v-else @click="pictures.splice(index,1)" class="btn btn-danger">-</a>
                             </div>
                         </div>
                     </div>
@@ -74,18 +84,7 @@
                 redirect: '/event',
                 store: '/api/event',
                 method: 'post',
-                picture_add: ` <div class="col-sm-11">
-                            <div class="form-group">
-                                <label class="control-label">Picture</label>
-                                <input name="input4[]" type="file" class="input-4 file-loading" data-show-preview="false">
-
-                            </div>
-                        </div>
-                        <div class="col-sm-1" style="margin-top: 26px">
-                            <div class="form-group">
-                                <a @click="addPicture()" class="btn btn-success">+</a>
-                            </div>
-                        </div>`,
+                pictures: [],
                 localization: localization
             }
         },
@@ -95,18 +94,28 @@
                 this.initialize = '/api/event/' + this.$route.params.id + '/edit'
                 this.store = '/api/event/' + this.$route.params.id
             }
+            this.pictures.push({
+                plus: true
+            });
+            console.log(this.pictures)
             this.fetchData()
         },
         mounted(){
-            $(".input-4").fileinput({showCaption: false, showUpload: false});
+            $(".input-4").fileinput({showCaption: false, showUpload: false, showRemove: false});
         },
         watch: {
             '$route': 'fetchData'
         },
         methods: {
-            addPicture(){
-                $('#test').append(this.picture_add)
-                $(".input-4").fileinput({showCaption: false, showUpload: false});
+            addPicture(picture){
+                picture.plus = false
+                this.pictures.push({
+                    plus: true
+                });
+                setTimeout(function(){
+                    $(".input-4").fileinput({showCaption: false, showUpload: false});
+                }, 100);
+
             },
             fetchData() {
                 var vm = this
