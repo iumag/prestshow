@@ -154,13 +154,14 @@ class EventController extends Controller
                 if ($picture['picture']->isValid()) {
                     $name = $id . '_' . date('dmY') . '_' . $picture['picture']->getClientOriginalName();
                     $picture['picture']->move('../public/img/event/pictures', $name);
-                }
 
-                Picture::create([
-                    'picture_id' => $id,
-                    'picture_type' => 'event',
-                    'link' => $name
-                ]);
+
+                    Picture::create([
+                        'picture_id' => $id,
+                        'picture_type' => 'event',
+                        'link' => $name
+                    ]);
+                }
             }
         }
 

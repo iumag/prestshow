@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\City;
+use App\Picture;
 use Illuminate\Http\Request;
 use App\Hotel;
 use Illuminate\Support\Facades\DB;
@@ -14,7 +15,7 @@ class HotelController extends Controller
 
         return response()
             ->json([
-                'model' => Hotel::with('city')->filterPaginateOrder()
+                'model' => Hotel::with('city')->with('pictures')->filterPaginateOrder()
             ]);
     }
 
@@ -63,8 +64,27 @@ class HotelController extends Controller
         $hotel = Hotel::create([
             'cost' => $request->get('cost'),
             'city_id' => $request->get('city_id'),
-            'picture' => $name
+            'picture' => $name,
+            'video' => $request->get('video')
         ]);
+
+        $pictures = $request->file('pictures');
+
+
+        if (isset($pictures)) {
+            foreach ($pictures as $picture) {
+                if ($picture['picture']->isValid()) {
+                    $name = $hotel->id . '_' . date('dmY') . '_' . $picture['picture']->getClientOriginalName();
+                    $picture['picture']->move('../public/img/hotel/pictures', $name);
+                }
+
+                Picture::create([
+                    'picture_id' => $hotel->id,
+                    'picture_type' => 'hotel',
+                    'link' => $name
+                ]);
+            }
+        }
 
         $hotel->translateOrNew($language)->name = $request->get('name');
         $hotel->translateOrNew($language)->description = $request->get('description');
@@ -135,8 +155,27 @@ class HotelController extends Controller
         $hotel->update([
             'cost' => $request->get('cost'),
             'city_id' => $request->get('city_id'),
-            'picture' => $name
+            'picture' => $name,
+            'video' => $request->get('video')
         ]);
+
+        $pictures = $request->file('pictures');
+
+        if (isset($pictures)) {
+            foreach ($pictures as $picture) {
+
+                if ($picture['picture']->isValid()) {
+                    $name = $id . '_' . date('dmY') . '_' . $picture['picture']->getClientOriginalName();
+                    $picture['picture']->move('../public/img/hotel/pictures', $name);
+                }
+
+                Picture::create([
+                    'picture_id' => $id,
+                    'picture_type' => 'hotel',
+                    'link' => $name
+                ]);
+            }
+        }
 
         $hotel->translateOrNew($language)->name = $request->get('name');
         $hotel->translateOrNew($language)->description = $request->get('description');

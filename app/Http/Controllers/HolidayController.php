@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Picture;
 use Illuminate\Http\Request;
 use App\Holiday;
 
@@ -12,7 +13,7 @@ class HolidayController extends Controller
 
         return response()
             ->json([
-                'model' => Holiday::filterPaginateOrder()
+                'model' => Holiday::with('pictures')->filterPaginateOrder()
             ]);
     }
 
@@ -51,8 +52,27 @@ class HolidayController extends Controller
 
         $holiday = Holiday::create([
             'cost' => $request->get('cost'),
-            'picture' => $name
+            'picture' => $name,
+            'video' => $request->get('video')
         ]);
+
+        $pictures = $request->file('pictures');
+
+
+        if (isset($pictures)) {
+            foreach ($pictures as $picture) {
+                if ($picture['picture']->isValid()) {
+                    $name = $holiday->id . '_' . date('dmY') . '_' . $picture['picture']->getClientOriginalName();
+                    $picture['picture']->move('../public/img/holiday/pictures', $name);
+                }
+
+                Picture::create([
+                    'picture_id' => $holiday->id,
+                    'picture_type' => 'holiday',
+                    'link' => $name
+                ]);
+            }
+        }
 
         $holiday->translateOrNew($language)->name = $request->get('name');
         $holiday->translateOrNew($language)->description = $request->get('description');
@@ -117,8 +137,27 @@ class HolidayController extends Controller
 
         $holiday->update([
             'cost' => $request->get('cost'),
-            'picture' => $name
+            'picture' => $name,
+            'video' => $request->get('video')
         ]);
+
+        $pictures = $request->file('pictures');
+
+        if (isset($pictures)) {
+            foreach ($pictures as $picture) {
+
+                if ($picture['picture']->isValid()) {
+                    $name = $id . '_' . date('dmY') . '_' . $picture['picture']->getClientOriginalName();
+                    $picture['picture']->move('../public/img/holiday/pictures', $name);
+                }
+
+                Picture::create([
+                    'picture_id' => $id,
+                    'picture_type' => 'holiday',
+                    'link' => $name
+                ]);
+            }
+        }
 
         $holiday->translateOrNew($language)->name = $request->get('name');
         $holiday->translateOrNew($language)->description = $request->get('description');

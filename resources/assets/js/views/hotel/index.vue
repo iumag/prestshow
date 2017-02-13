@@ -11,6 +11,8 @@
     overflow: hidden;" v-html="item.description"></td>
                 <td>{{item.cost}}</td>
                 <td>{{item.created_at}}</td>
+                <td class="text-center">{{item.pictures.length}}</td>
+                <td class="text-center">{{isVideo(item)}}</td>
                 <td>
                     <router-link class="edit-modal btn btn-success" :to="'/hotel/' + item.id + '/edit'">
                         <span class="glyphicon glyphicon-edit"></span> {{localization.edit}}
@@ -45,6 +47,8 @@
                     {title: localization.description, key: 'description', sort: true},
                     {title: localization.cost, key: 'cost', sort: true},
                     {title: localization.created_at, key: 'created_at', sort: true},
+                    {title: localization.count_pictures, key: 'pictures', parent_column: 'events', sort: false},
+                    {title: localization.video, key: 'video', parent_column: 'events', sort: false},
                     {title: localization.actions, sort: false}
                 ],
                 filter: [
@@ -58,6 +62,13 @@
             DataViewer
         },
         methods: {
+            isVideo(item){
+                if (item.video){
+                    return 'True'
+                }else{
+                    return 'False'
+                }
+            },
             deleteItem(item){
                 var vm = this
                 axios.delete(`/api/${this.resource}/${item}`)

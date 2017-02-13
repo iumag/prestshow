@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Picture;
 use Illuminate\Http\Request;
 use App\Photographer;
 
@@ -11,7 +12,7 @@ class PhotographerController extends Controller
     {
         return response()
             ->json([
-                'model' => Photographer::filterPaginateOrder()
+                'model' => Photographer::with('pictures')->filterPaginateOrder()
             ]);
     }
 
@@ -50,8 +51,27 @@ class PhotographerController extends Controller
 
         $photographer = Photographer::create([
             'cost' => $request->get('cost'),
-            'picture' => $name
+            'picture' => $name,
+            'video' => $request->get('video')
         ]);
+
+        $pictures = $request->file('pictures');
+
+
+        if (isset($pictures)) {
+            foreach ($pictures as $picture) {
+                if ($picture['picture']->isValid()) {
+                    $name = $photographer->id . '_' . date('dmY') . '_' . $picture['picture']->getClientOriginalName();
+                    $picture['picture']->move('../public/img/photographer/pictures', $name);
+                }
+
+                Picture::create([
+                    'picture_id' => $photographer,
+                    'picture_type' => 'photographer',
+                    'link' => $name
+                ]);
+            }
+        }
 
         $photographer->translateOrNew($language)->name = $request->get('name');
         $photographer->translateOrNew($language)->description = $request->get('description');
@@ -114,8 +134,27 @@ class PhotographerController extends Controller
 
         $photographer->update([
             'cost' => $request->get('cost'),
-            'picture' => $name
+            'picture' => $name,
+            'video' => $request->get('video')
         ]);
+
+        $pictures = $request->file('pictures');
+
+        if (isset($pictures)) {
+            foreach ($pictures as $picture) {
+
+                if ($picture['picture']->isValid()) {
+                    $name = $id . '_' . date('dmY') . '_' . $picture['picture']->getClientOriginalName();
+                    $picture['picture']->move('../public/img/photographer/pictures', $name);
+                }
+
+                Picture::create([
+                    'picture_id' => $id,
+                    'picture_type' => 'photographer',
+                    'link' => $name
+                ]);
+            }
+        }
 
         $photographer->translateOrNew($language)->name = $request->get('name');
         $photographer->translateOrNew($language)->description = $request->get('description');

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Picture;
 use Illuminate\Http\Request;
 use App\Transport;
 
@@ -12,7 +13,7 @@ class TransportController extends Controller
 
         return response()
             ->json([
-                'model' => Transport::filterPaginateOrder()
+                'model' => Transport::with('pictures')->filterPaginateOrder()
             ]);
     }
 
@@ -51,8 +52,27 @@ class TransportController extends Controller
 
         $transport = Transport::create([
             'cost' => $request->get('cost'),
-            'picture' => $name
+            'picture' => $name,
+            'video' => $request->get('video')
         ]);
+
+        $pictures = $request->file('pictures');
+
+
+        if (isset($pictures)) {
+            foreach ($pictures as $picture) {
+                if ($picture['picture']->isValid()) {
+                    $name = $transport->id . '_' . date('dmY') . '_' . $picture['picture']->getClientOriginalName();
+                    $picture['picture']->move('../public/img/transport/pictures', $name);
+                }
+
+                Picture::create([
+                    'picture_id' => $transport->id,
+                    'picture_type' => 'transport',
+                    'link' => $name
+                ]);
+            }
+        }
 
         $transport->translateOrNew($language)->name = $request->get('name');
         $transport->translateOrNew($language)->description = $request->get('description');
@@ -114,8 +134,27 @@ class TransportController extends Controller
 
         $transport->update([
             'cost' => $request->get('cost'),
-            'picture' => $name
+            'picture' => $name,
+            'video' => $request->get('video')
         ]);
+
+        $pictures = $request->file('pictures');
+
+        if (isset($pictures)) {
+            foreach ($pictures as $picture) {
+
+                if ($picture['picture']->isValid()) {
+                    $name = $id . '_' . date('dmY') . '_' . $picture['picture']->getClientOriginalName();
+                    $picture['picture']->move('../public/img/transport/pictures', $name);
+                }
+
+                Picture::create([
+                    'picture_id' => $id,
+                    'picture_type' => 'transport',
+                    'link' => $name
+                ]);
+            }
+        }
 
         $transport->translateOrNew($language)->name = $request->get('name');
         $transport->translateOrNew($language)->description = $request->get('description');

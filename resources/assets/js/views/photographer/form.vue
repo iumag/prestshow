@@ -36,6 +36,30 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <div class="form-group">
+                                <label>{{localization.video}}</label>
+                                <input type="text" name="video" class="form-control" v-model="form.video">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div v-for="(picture,index) in pictures" class="row" id="test">
+                        <div class="col-sm-11">
+                            <div class="form-group">
+                                <label class="control-label">{{localization.picture}}</label>
+                                <input name="pictures[][picture]" type="file" class="input-4 file-loading">
+
+                            </div>
+                        </div>
+                        <div class="col-sm-1" style="margin-top: 26px">
+                            <div class="form-group">
+                                <a v-if="picture.plus" @click="addPicture(picture)" class="btn btn-success">+</a>
+                                <a v-else @click="pictures.splice(index,1)" class="btn btn-danger">-</a>
+                            </div>
+                        </div>
+                    </div>
                     <button class="btn btn-success">{{localization.save}}</button>
                 </form>
             </div>
@@ -62,8 +86,12 @@
                 redirect: '/photographer',
                 store: '/api/photographer',
                 method: 'post',
+                pictures: [],
                 localization: localization
             }
+        },
+        mounted(){
+            $(".input-4").fileinput({showCaption: false, showUpload: false, showRemove: false});
         },
         beforeMount() {
             if (this.$route.meta.mode === 'edit') {
@@ -71,12 +99,25 @@
                 this.initialize = '/api/photographer/' + this.$route.params.id + '/edit'
                 this.store = '/api/photographer/' + this.$route.params.id
             }
+            this.pictures.push({
+                plus: true
+            });
             this.fetchData()
         },
         watch: {
             '$route': 'fetchData'
         },
         methods: {
+            addPicture(picture){
+                picture.plus = false
+                this.pictures.push({
+                    plus: true
+                });
+                setTimeout(function(){
+                    $(".input-4").fileinput({showCaption: false, showUpload: false});
+                }, 100);
+
+            },
             fetchData() {
                 var vm = this
                 axios.get(this.initialize)

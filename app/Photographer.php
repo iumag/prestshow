@@ -13,11 +13,11 @@ class Photographer extends Model
     public $translatedAttributes = ['name', 'description'];
 
     protected $fillable = [
-        'name', 'picture', 'description', 'cost'
+        'name', 'picture', 'description', 'cost', 'video'
     ];
 
     protected $filter = [
-        'id', 'name', 'picture', 'description', 'cost', 'created_at'
+        'id', 'name', 'picture', 'description', 'cost', 'created_at', 'video'
     ];
 
     public static function initalize()
@@ -26,7 +26,8 @@ class Photographer extends Model
             'name' => '',
             'picture' => '',
             'description' => '',
-            'cost' => ''
+            'cost' => '',
+            'video' => ''
         ];
     }
 

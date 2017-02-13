@@ -13,11 +13,11 @@ class Hotel extends Model
     public $translatedAttributes = ['name', 'description'];
 
     protected $fillable = [
-        'name', 'picture', 'description', 'city_id', 'cost'
+        'name', 'picture', 'description', 'city_id', 'cost', 'video'
     ];
 
     protected $filter = [
-        'id', 'name', 'city_id', 'cost', 'picture', 'description', 'created_at',
+        'id', 'name', 'city_id', 'cost', 'picture', 'description', 'created_at', 'video',
         'city.id', 'city.name', 'city.picture', 'city.description', 'city.cost', 'city.created_at'
     ];
 
@@ -28,7 +28,8 @@ class Hotel extends Model
             'cost' => '',
             'picture' => '',
             'description' => '',
-            'city_id' => 'Select'
+            'city_id' => 'Select',
+            'video' => ''
         ];
     }
 
