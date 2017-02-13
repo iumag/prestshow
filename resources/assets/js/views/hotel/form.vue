@@ -19,7 +19,7 @@
                                 <label>City</label>
                                 <select class="form-control" name="city_id" v-model="form.city_id">
                                     <option>Select</option>
-                                    <option v-for="city in option.cities" :value="city.id">{{city.name}}</option>
+                                    <option v-for="city in option.cities" :value="city.city_id">{{city.name}}</option>
                                 </select>
                                 <small class="text-danger" v-if="errors.hotel">{{errors.city_id[0]}}</small>
                             </div>

@@ -12,6 +12,7 @@
 */
 
 Route::get('/', function () {
+    Session::set('locale', 'pl');
     return view('index');
 });
 

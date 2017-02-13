@@ -5,7 +5,9 @@
                 <td>{{item.id}}</td>
                 <td>{{item.name}}</td>
                 <td><img width=100 height=100 :src="'/img/event/' + item.picture"></td>
-                <td v-html="item.description"></td>
+                <td style="height: 100px;
+    display: block;
+    overflow: hidden;" v-html="item.description"></td>
                 <td>{{item.created_at}}</td>
                 <td>
                     <router-link class="edit-modal btn btn-success" :to="'/event/' + item.id + '/edit'">
@@ -34,11 +36,11 @@
                 resource: 'event',
                 showfooter: true,
                 thead: [
-                    {title: 'Id', key: 'id', sort: true},
-                    {title: localization.event, key: 'name', sort: true},
+                    {title: 'Id', key: 'id', parent_column: 'events', sort: true},
+                    {title: localization.event, key: 'name', parent_column:'event_translations', sort: true},
                     {title: localization.picture, key: 'picture', sort: false},
-                    {title: localization.description, key: 'description', sort: true},
-                    {title: localization.created_at, key: 'created_at', sort: true},
+                    {title: localization.description, key: 'description', parent_column:'event_translations', sort: true},
+                    {title: localization.created_at, key: 'created_at', parent_column: 'events', sort: true},
                     {title: localization.actions, sort: false}
                 ],
                 filter: [

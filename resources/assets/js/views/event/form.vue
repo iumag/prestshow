@@ -33,7 +33,7 @@
                     <div class="row" id="test">
                         <div class="col-sm-11">
                             <div class="form-group">
-                                <label class="control-label">Picture</label>
+                                <label class="control-label">{{localization.picture}}</label>
                                 <input name="input4[]" type="file" class="input-4 file-loading" data-show-preview="false">
 
                             </div>

@@ -14,7 +14,7 @@
                                    style="top: 21px;left: 42%;margin-left: 459px;display: block;position: fixed;height: 20px;width: 28px;"></a>
 
             </div>
-            <a class="nonblock nontext anim_swing clip_frame" id="u7620" href="index.html#glowna"><!-- image --><img
+            <a class="nonblock nontext anim_swing clip_frame" id="u7620" href="#cena"><!-- image --><img
                     class="block" id="u7620_img" src="images/shopping-cart%20(1).png" alt="" width="31"
                     height="31"/></a>
         </div>

@@ -50,7 +50,7 @@
                     </div>
                 </div>
             </transition>
-            <div class="ThumbGroup clearfix grpelem" id="u15223" @click="show_description = !show_description">
+            <div class="ThumbGroup clearfix grpelem" id="u15223" @click="showModal()">
                 <!-- none box -->
                 <div class="popup_anchor">
                     <div class="Thumb popup_element rounded-corners clearfix" id="u15226"><!-- group -->
@@ -124,6 +124,9 @@
                         console.log(error)
                     })
 
+            },
+            showModal(){
+                this.$parent.$emit('modalHotel', this.item_hotel);
             },
             ShowMethod(){
                 this.$parent.$emit('getHotel', this.item_hotel);

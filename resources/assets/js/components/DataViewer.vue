@@ -40,7 +40,7 @@
                     <thead>
                     <tr>
                         <th v-for="item in thead">
-                            <div class="dataviewer-th" @click="sort(item.key)" v-if="item.sort">
+                            <div class="dataviewer-th" @click="sort(item.key, item.parent_column)" v-if="item.sort">
                                 <span>{{item.title}}</span>
                                 <span v-if="params.column === item.key">
                                     <span v-if="params.direction === 'asc'">&#x25B2;</span>
@@ -105,6 +105,7 @@
                     page: 1,
                     search_column: 'id',
                     search_operator: 'equal_to',
+                    parent_column: 'events',
                     search_query_1: '',
                     search_query_2: ''
                 },
@@ -139,7 +140,7 @@
                     this.fetchData()
                 }
             },
-            sort(column) {
+            sort(column, parent_table) {
                 if (column === this.params.column) {
                     if (this.params.direction === 'desc') {
                         this.params.direction = 'asc'
@@ -148,6 +149,7 @@
                     }
                 } else {
                     this.params.column = column
+                    this.params.parent_column = parent_table
                     this.params.direction = 'asc'
                 }
                 this.fetchData()
@@ -165,7 +167,7 @@
             },
             buildURL() {
                 var p = this.params
-                return `${this.source}?column=${p.column}&direction=${p.direction}&per_page=${p.per_page}&page=${p.page}&search_column=${p.search_column}&search_operator=${p.search_operator}&search_query_1=${p.search_query_1}&search_query_2=${p.search_query_2}`
+                return `${this.source}?column=${p.column}&direction=${p.direction}&per_page=${p.per_page}&page=${p.page}&search_column=${p.search_column}&search_operator=${p.search_operator}&search_query_1=${p.search_query_1}&search_query_2=${p.search_query_2}&parent_column=${p.parent_column}`
             }
         }
     }

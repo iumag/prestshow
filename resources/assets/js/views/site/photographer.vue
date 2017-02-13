@@ -10,7 +10,7 @@
         <a class="anchor_item grpelem" id="fotograf"></a>
 
         <div class="wrap" style="
-    margin-top: 335px;
+    margin-top: 403px;
 ">
             <transition-group name="photographer-complete" tag="div">
                 <div class="photowrap photographer-complete-item"  v-bind:key="item" v-for="item in model.data">
