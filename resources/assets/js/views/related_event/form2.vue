@@ -18,6 +18,19 @@
                                 <small class="text-danger" v-if="errors.city_id">{{errors.city_id[0]}}</small>
                             </div>
                         </div>
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>{{localization.holiday}}</label>
+                                <select class="form-control" name="holiday_id" v-model="form.holiday_id">
+                                    <option>Select</option>
+                                    <option v-for="holiday in option.holidays" :value="holiday.holiday_id">
+                                        {{holiday.name}}
+                                    </option>
+                                </select>
+                                <small class="text-danger" v-if="errors.holiday_id">{{errors.holiday_id[0]}}</small>
+                            </div>
+                        </div>
+
 
                     </div>
                     <div class="row" v-for="event in option.events">
@@ -25,12 +38,14 @@
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" id="exampleInputEmail1" v-model="event.name"
                                        disabled>
-                                <input v-if="event.check != false" type="hidden" name="event[][event_id]" v-model="event.event_id">
+                                <input v-if="event.check != false" type="hidden" name="event[][event_id]"
+                                       v-model="event.event_id">
                             </div>
                             <div class="col-sm-1">
                                 <input v-if="event.check === false" disabled type="text" class="form-control"
                                        :placeholder="localization.cost">
-                                <input v-else type="text" class="form-control" name="cost[][cost]" :placeholder="localization.cost">
+                                <input v-else type="text" class="form-control" name="cost[][cost]"
+                                       :placeholder="localization.cost">
                             </div>
                             <div class="col-sm-1">
                                 <input type="checkbox" class="form-control" @click="event.check = !event.check">

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Picture;
 use Illuminate\Http\Request;
 use App\Transport;
+use Illuminate\Support\Facades\DB;
 
 class TransportController extends Controller
 {
@@ -13,16 +14,23 @@ class TransportController extends Controller
 
         return response()
             ->json([
-                'model' => Transport::with('pictures')->filterPaginateOrder()
+                'model' => Transport::with('pictures')->with('city')->filterPaginateOrder()
             ]);
     }
 
     public function create()
     {
+        $language = app()->getLocale();
+
         return response()
             ->json([
                 'form' => Transport::initalize(),
-                'option' => []
+                'option' => [
+                    'cities' => DB::table('cities')
+                        ->join('city_translations', 'cities.id', '=', 'city_translations.city_id')
+                        ->where('city_translations.locale','=',$language)
+                        ->get()
+                ]
             ]);
     }
 
@@ -33,7 +41,8 @@ class TransportController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'picture' => 'required|image',
-            'cost' => 'required|numeric|min:0'
+            'cost' => 'required|numeric|min:0',
+            'city_id' => 'required|exists:cities,id',
         ]);
 
         $image = $request->file('picture');
@@ -53,7 +62,8 @@ class TransportController extends Controller
         $transport = Transport::create([
             'cost' => $request->get('cost'),
             'picture' => $name,
-            'video' => $request->get('video')
+            'video' => $request->get('video'),
+            'city_id' => $request->get('city_id')
         ]);
 
         $pictures = $request->file('pictures');
@@ -97,13 +107,19 @@ class TransportController extends Controller
 
     public function edit($id)
     {
+        $language = app()->getLocale();
 
         $transport = Transport::findOrFail($id);
 
         return response()
             ->json([
                 'form' => $transport,
-                'option' => ''
+                'option' => [
+                    'cities' => DB::table('cities')
+                        ->join('city_translations', 'cities.id', '=', 'city_translations.city_id')
+                        ->where('city_translations.locale','=',$language)
+                        ->get()
+                ]
             ]);
     }
 
@@ -115,6 +131,7 @@ class TransportController extends Controller
             'name' => 'required',
             'picture' => 'image',
             'cost' => 'required|numeric|min:0',
+            'city_id' => 'required|exists:cities,id',
         ]);
 
         $image = $request->file('picture');
@@ -135,7 +152,8 @@ class TransportController extends Controller
         $transport->update([
             'cost' => $request->get('cost'),
             'picture' => $name,
-            'video' => $request->get('video')
+            'video' => $request->get('video'),
+            'city_id' => $request->get('city_id'),
         ]);
 
         $pictures = $request->file('pictures');

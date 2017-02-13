@@ -14,7 +14,7 @@ class RelatedEventController extends Controller
     {
         return response()
             ->json([
-                'model' => RelatedEvent::with('city', 'event')->filterPaginateOrder()
+                'model' => RelatedEvent::with('city', 'event', 'holiday')->filterPaginateOrder()
             ]);
     }
 
@@ -33,7 +33,11 @@ class RelatedEventController extends Controller
                     'events' => DB::table('events')
                         ->join('event_translations', 'events.id', '=', 'event_translations.event_id')
                         ->where('event_translations.locale', '=', $language)
-                        ->get()
+                        ->get(),
+                    'holidays' => DB::table('holidays')
+                        ->join('holiday_translations', 'holidays.id', '=', 'holiday_translations.holiday_id')
+                        ->where('holiday_translations.locale', '=', $language)
+                        ->get(),
                 ]
             ]);
     }
@@ -55,6 +59,7 @@ class RelatedEventController extends Controller
 
                 $related_event = RelatedEvent::create([
                     'city_id' => $request->get('city_id'),
+                    'holiday_id' => $request->get('holiday_id'),
                     'event_id' => $event['event_id'],
                     'cost' => $costs[$index]['cost']
                 ]);
@@ -108,7 +113,11 @@ class RelatedEventController extends Controller
                     'events' => DB::table('events')
                         ->join('event_translations', 'events.id', '=', 'event_translations.event_id')
                         ->where('event_translations.locale', '=', $language)
-                        ->get()
+                        ->get(),
+                    'holidays' => DB::table('holidays')
+                        ->join('holiday_translations', 'holidays.id', '=', 'holiday_translations.holiday_id')
+                        ->where('holiday_translations.locale', '=', $language)
+                        ->get(),
                 ]
             ]);
     }
@@ -118,7 +127,7 @@ class RelatedEventController extends Controller
         $this->validate($request, [
             'city_id' => 'required|exists:cities,id',
             'event_id' => 'required|exists:events,id',
-            'cost' => 'required|numeric|min:0'
+            'cost' => 'required|numeric|min:0',
         ]);
 
         $related_event = RelatedEvent::findOrFail($id);

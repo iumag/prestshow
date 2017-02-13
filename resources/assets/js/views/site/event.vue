@@ -76,6 +76,9 @@
         props: {
             city_id: {
                 type: Number
+            },
+            holiday_id:{
+                type: Number
             }
         },
         data() {
@@ -89,9 +92,11 @@
                     per_page: 10000,
                     page: 1,
                     search_column: 'city_id',
+                    search_column2: 'holiday_id',
                     search_operator: 'equal_to',
                     search_query_1: this.city_id,
-                    search_query_2: ''
+                    search_query_2: '',
+                    search_query_3: this.holiday_id
                 },
                 total: 0,
                 wrap_left: "wrap_left",
@@ -105,6 +110,10 @@
         updated() {
             if (this.city_id != this.params.search_query_1) {
                 this.params.search_query_1 = this.city_id
+                this.fetchData()
+            }
+            if(this.holiday_id != this.params.search_query_3){
+                this.params.search_query_3 = this.holiday_id
                 this.fetchData()
             }
         },
@@ -150,7 +159,7 @@
             },
             buildURL() {
                 var p = this.params
-                return `/api/related_event?per_page=${p.per_page}&column=${p.column}&direction=${p.direction}&page=${p.page}&search_column=${p.search_column}&search_operator=${p.search_operator}&search_query_1=${p.search_query_1}&search_query_2=${p.search_query_2}`
+                return `/api/related_event?per_page=${p.per_page}&column=${p.column}&direction=${p.direction}&page=${p.page}&search_column=${p.search_column}&search_operator=${p.search_operator}&search_query_1=${p.search_query_1}&search_query_2=${p.search_query_2}&search_query_3=${p.search_query_3}&search_column2=${p.search_column2}`
             }
         }
     }

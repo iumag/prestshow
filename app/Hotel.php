@@ -47,4 +47,9 @@ class Hotel extends Model
     {
         return $this->morphMany(Picture::class, 'picture');
     }
+
+    public function event()
+    {
+        return $this->HasMany(Event::class);
+    }
 }

@@ -5,6 +5,8 @@
                 <td>{{item.id}}</td>
                 <td>{{item.event.name}}</td>
                 <td>{{item.city.name}}</td>
+                <td v-if="item.holiday">{{item.holiday.name}}</td>
+                <td v-else></td>
                 <td>{{item.cost}}</td>
                 <td>{{item.created_at}}</td>
                 <td>
@@ -37,6 +39,7 @@
                     {title: 'Id', key: 'id', sort: true},
                     {title: localization.event, key: 'event', sort: true},
                     {title: localization.city, key: 'city', sort: true},
+                    {title: localization.holiday, key: 'holiday', sort: true},
                     {title: localization.cost, key: 'cost', sort: true},
                     {title: localization.created_at, key: 'created_at', sort: true},
                     {title: localization.actions, sort: false}
@@ -44,7 +47,8 @@
                 filter: [
                     'id', 'city_id', 'event_id', 'cost', 'created_at',
                     'city.id', 'city.city', 'city.picture', 'city.description', 'city.cost', 'city.created_at',
-                    'event.id', 'event.event', 'event.picture', 'event.description', 'event.created_at'
+                    'event.id', 'event.event', 'event.picture', 'event.description', 'event.created_at',
+                    'holiday.id', 'holiday.name', 'holiday.picture', 'holiday.description', 'holiday.created_at'
                 ],
                 localization: localization
         }

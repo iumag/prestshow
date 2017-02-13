@@ -13,11 +13,11 @@ class Transport extends Model
     public $translatedAttributes = ['name', 'description'];
 
     protected $fillable = [
-        'name', 'picture', 'description', 'cost', 'video'
+        'name', 'picture', 'description', 'cost', 'video',  'city_id'
     ];
 
     protected $filter = [
-        'id', 'name', 'picture', 'description', 'cost', 'created_at', 'video'
+        'id', 'name', 'picture', 'description', 'cost', 'created_at', 'video', 'city_id'
     ];
 
     public static function initalize()
@@ -39,5 +39,10 @@ class Transport extends Model
     public function pictures()
     {
         return $this->morphMany(Picture::class, 'picture');
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
     }
 }

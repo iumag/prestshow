@@ -33,6 +33,14 @@
                                 <input type="text" class="form-control" v-model="form.cost">
                                 <small class="text-danger" v-if="errors.cost">{{errors.cost[0]}}</small>
                             </div>
+                            <div class="form-group">
+                                <label>{{localization.holiday}}</label>
+                                <select class="form-control" v-model="form.holiday_id">
+                                    <option>Select</option>
+                                    <option v-for="holiday in option.holidays" :value="holiday.holiday_id">{{holiday.name}}</option>
+                                </select>
+                                <small class="text-danger" v-if="errors.holiday_id">{{errors.holiday_id[0]}}</small>
+                            </div>
                         </div>
 
                     </div>

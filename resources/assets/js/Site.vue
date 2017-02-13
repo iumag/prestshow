@@ -79,7 +79,7 @@
                     <city v-if="showElement['city']" ref="city"></city>
                 </transition>
                 <transition name="eventdiv">
-                    <event v-if="showElement['event']" :city_id="city.id" ref="event"></event>
+                    <event v-if="showElement['event']" :holiday_id="holiday.id" :city_id="city.id" ref="event"></event>
                 </transition>
                 <is-hotel v-if="showElement['is_hotel']"></is-hotel>
                 <hotel v-if="showElement['hotel']" :city_id="city.id" ref="hotel"></hotel>
@@ -88,7 +88,7 @@
                 <is-transport v-if="showElement['is_transport']"></is-transport>
 
 
-                <transport v-if="showElement['transport']" ref="transport"></transport>
+                <transport v-if="showElement['transport']" :city_id="city.id" ref="transport"></transport>
 
 
                 <div v-show="showElement['cena']" class="clearfix colelem" id="pcena"><!-- group -->

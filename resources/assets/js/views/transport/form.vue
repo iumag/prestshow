@@ -15,6 +15,14 @@
                                 <input type="text" name="name" class="form-control" v-model="form.name">
                                 <small class="text-danger" v-if="errors.name">{{errors.name[0]}}</small>
                             </div>
+                            <div class="form-group">
+                                <label>City</label>
+                                <select class="form-control" name="city_id" v-model="form.city_id">
+                                    <option>Select</option>
+                                    <option v-for="city in option.cities" :value="city.city_id">{{city.name}}</option>
+                                </select>
+                                <small class="text-danger" v-if="errors.hotel">{{errors.city_id[0]}}</small>
+                            </div>
                         </div>
                         <div class="col-sm-4">
                             <div class="form-group">

@@ -22,8 +22,10 @@ trait FilterPaginateOrder {
             'direction' => 'required|in:asc,desc',
             'search_operator' => 'required|in:'.implode(',', array_keys($this->operators)),
             'search_column' => 'required|in:'.implode(',', $this->filter),
+            'search_column2' => 'in:'.implode(',', $this->filter),
             'search_query_1' => 'max:255',
-            'search_query_2' => 'max:255'
+            'search_query_2' => 'max:255',
+            'search_query_3' => 'max:255'
         ]);
         if($v->fails()) {
             //for debug
@@ -31,6 +33,7 @@ trait FilterPaginateOrder {
         }
         return $query->orderBy($request->column, $request->direction)
             ->where(function($query) use ($request) {
+
                 // check if search query is empty
                 if($request->has('search_query_1')) {
                     // determine the type of search_column
@@ -47,12 +50,22 @@ trait FilterPaginateOrder {
                         });
                     } else {
                         // regular column
-                        return $this->buildQuery(
-                            $request->search_column,
-                            $request->search_operator,
-                            $request,
-                            $query
-                        );
+                        if(!$request->has('search_query_3')) {
+                            return $this->buildQuery(
+                                $request->search_column,
+                                $request->search_operator,
+                                $request,
+                                $query
+                            );
+                        }else{
+                            return $this->buildQuery(
+                                $request->search_column,
+                                $request->search_operator,
+                                $request,
+                                $query,
+                                $request->search_column2
+                            );
+                        }
                     }
                 }
             })
@@ -62,7 +75,8 @@ trait FilterPaginateOrder {
     {
         return strpos($request->search_column, '.') !== false;
     }
-    protected function buildQuery($column, $operator, $request, $query)
+
+    protected function buildQuery($column, $operator, $request, $query, $column2 = null)
     {
         switch ($operator) {
             case 'equal_to':
@@ -72,6 +86,9 @@ trait FilterPaginateOrder {
             case 'less_than_or_equal_to':
             case 'greater_than_or_equal_to':
                 $query->where($column, $this->operators[$operator], $request->search_query_1);
+                if ($column2 != null){
+                    $query->where($column2, $this->operators[$operator], $request->search_query_3);
+                }
                 break;
             case 'in':
                 $query->whereIn($column, explode(',', $request->search_query_1));

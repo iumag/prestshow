@@ -36,6 +36,11 @@ class City extends Model
         return $this->HasMany(Hotel::class);
     }
 
+    public function transport()
+    {
+        return $this->HasMany(Transport::class);
+    }
+
     public function related_event()
     {
         return $this->HasMany(RelatedEvent::class);

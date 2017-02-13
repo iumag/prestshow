@@ -134,7 +134,7 @@ class HotelController extends Controller
             'name' => 'required',
             'picture' => 'image',
             'city_id' => 'required|exists:cities,id',
-            'cost' => 'required|numeric|min:0'
+            'cost' => 'required|numeric|min:0',
         ]);
 
         $image = $request->file('picture');
