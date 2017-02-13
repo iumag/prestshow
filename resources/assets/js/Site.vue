@@ -300,7 +300,7 @@
         <div v-show="modal" class="dm-overlay" id="win1">
             <div class="dm-table">
                 <div class="dm-cell">
-                    <div class="dm-modal">
+                    <div style="border-radius: 0;" class="dm-modal">
                         <div class="dm-modal-desc">
                             <span class="modal_cost">{{modal_item.cost}} ZL</span>
                             <img title="Do koszyka" @click="showModal(modal_item)" class="block" id="u18674_img"
@@ -310,6 +310,14 @@
                         <div v-if="!modal_item.event" class="name_modal"><p>{{modal_item.name}}</p></div>
                         <div v-else class="name_modal"><p>{{modal_item.event.name}}</p></div>
                         <div class="desc_modal" v-html="modal_item.description"></div>
+                        <div class="index-modal-photo">  <a :href="modal_photo" data-lightbox="image-1" :data-title="modal_item.name"><img width="350" :src="modal_photo"></a></div>
+                        <div class="modal-wrap">
+                            <div @click="modal_photo = picture_dop.link" class="modal_picture" v-for="picture_dop in modal_item.pictures" v-if="modal_item.pictures">
+                                <img height="50px" width="50px" :src="picture_dop.link">
+                            </div>
+                        </div>
+                        <div class="index-modal-photo"><iframe width="350" height="250" :src="modal_item.video" frameborder="0"
+                                allowfullscreen></iframe></div>
                     </div>
                 </div>
             </div>
@@ -352,6 +360,7 @@
                 success_bye: false,
                 modal_item: '',
                 modal_scroll: '',
+                modal_photo: '',
                 errorcart: 'errorcart',
                 showElement: {
                     city: false,
@@ -442,31 +451,37 @@
             })
             this.$on('modalHoliday', function (element) {
                 this.modal_item = element
+                this.modal_photo = element.pictures[0].link
                 this.modal = true
                 this.modal_scroll = 'city'
             })
             this.$on('modalEvent', function (element) {
                 this.modal_item = element
+                this.modal_photo = element.pictures[0].link
                 this.modal = true
                 this.modal_scroll = 'is_hotel'
             })
             this.$on('modalPhotographer', function (element) {
                 this.modal_item = element
+                this.modal_photo = element.pictures[0].link
                 this.modal = true
                 this.modal_scroll = 'is_transport'
             })
             this.$on('modalTransport', function (element) {
                 this.modal_item = element
+                this.modal_photo = element.pictures[0].link
                 this.modal = true
                 this.modal_scroll = 'cena'
             })
             this.$on('modalCity', function (element) {
                 this.modal_item = element
+                this.modal_photo = element.pictures[0].link
                 this.modal = true
                 this.modal_scroll = 'event'
             })
             this.$on('modalHotel', function (element) {
                 this.modal_item = element
+                this.modal_photo = element.pictures[0].link
                 this.modal = true
                 this.modal_scroll = 'photographer'
             })
@@ -502,7 +517,7 @@
                 if (element === 'transport') {
                     x = -10
                 }
-                if(element === 'photographer'){
+                if (element === 'photographer') {
                     x = -100
                 }
                 setTimeout(function () {

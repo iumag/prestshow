@@ -81,7 +81,7 @@ class HotelController extends Controller
                 Picture::create([
                     'picture_id' => $hotel->id,
                     'picture_type' => 'hotel',
-                    'link' => $name
+                    'link' => '/img/hotel/pictures/' . $name
                 ]);
             }
         }
@@ -172,7 +172,7 @@ class HotelController extends Controller
                 Picture::create([
                     'picture_id' => $id,
                     'picture_type' => 'hotel',
-                    'link' => $name
+                    'link' => '/img/hotel/pictures/' . $name
                 ]);
             }
         }

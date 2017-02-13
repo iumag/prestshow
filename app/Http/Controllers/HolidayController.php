@@ -69,7 +69,7 @@ class HolidayController extends Controller
                 Picture::create([
                     'picture_id' => $holiday->id,
                     'picture_type' => 'holiday',
-                    'link' => $name
+                    'link' => '/img/holiday/pictures/' . $name
                 ]);
             }
         }
@@ -154,7 +154,7 @@ class HolidayController extends Controller
                 Picture::create([
                     'picture_id' => $id,
                     'picture_type' => 'holiday',
-                    'link' => $name
+                    'link' => '/img/holiday/pictures/' . $name
                 ]);
             }
         }

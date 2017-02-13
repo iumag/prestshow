@@ -21,6 +21,7 @@
 
     <title>Без имени 3</title>
     <!-- CSS -->
+    <link href="{{asset('css/lightbox.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('css/site_global.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('css/index.css')}}" id="pagesheet"/>
     <!-- Other scripts -->
@@ -137,7 +138,8 @@
 <script src="scripts/require.js" type="text/javascript" async data-main="scripts/museconfig.js" onload="if (requirejs) requirejs.onError = function(requireType, requireModule) { if (requireType && requireType.toString && requireType.toString().indexOf && 0 <= requireType.toString().indexOf('#scripterror')) window.Muse.assets.check(); }" onerror="window.Muse.assets.check();"></script>
 
 <!--HTML Widget code-->
-<script type="text/javascript" src="{{asset('js/site.js')}}"></script>
+<script src="{{asset('js/site.js')}}"></script>
+<script type="text/javascript" src="{{asset('js/lightbox.min.js')}}"></script>
 <script>
     $(document).ready(function(){
         $('#test').css('height',$(window).height());

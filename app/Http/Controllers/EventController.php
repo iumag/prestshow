@@ -76,7 +76,7 @@ class EventController extends Controller
                 Picture::create([
                     'picture_id' => $event->id,
                     'picture_type' => 'event',
-                    'link' => $name
+                    'link' => '/img/event/pictures/' . $name
                 ]);
             }
         }
@@ -159,7 +159,7 @@ class EventController extends Controller
                     Picture::create([
                         'picture_id' => $id,
                         'picture_type' => 'event',
-                        'link' => $name
+                        'link' => '/img/event/pictures/' . $name
                     ]);
                 }
             }

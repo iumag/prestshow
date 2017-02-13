@@ -68,7 +68,7 @@ class PhotographerController extends Controller
                 Picture::create([
                     'picture_id' => $photographer,
                     'picture_type' => 'photographer',
-                    'link' => $name
+                    'link' => '/img/photographer/pictures/' . $name
                 ]);
             }
         }
@@ -151,7 +151,7 @@ class PhotographerController extends Controller
                 Picture::create([
                     'picture_id' => $id,
                     'picture_type' => 'photographer',
-                    'link' => $name
+                    'link' => '/img/photographer/pictures/' . $name
                 ]);
             }
         }

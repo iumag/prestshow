@@ -70,7 +70,7 @@ class CityController extends Controller
                 Picture::create([
                     'picture_id' => $city->id,
                     'picture_type' => 'city',
-                    'link' => $name
+                    'link' => '/img/city/pictures/' . $name
                 ]);
             }
         }
@@ -156,7 +156,7 @@ class CityController extends Controller
                 Picture::create([
                     'picture_id' => $id,
                     'picture_type' => 'city',
-                    'link' => $name
+                    'link' => '/img/city/pictures/' . $name
                 ]);
             }
         }

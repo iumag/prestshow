@@ -69,7 +69,7 @@ class TransportController extends Controller
                 Picture::create([
                     'picture_id' => $transport->id,
                     'picture_type' => 'transport',
-                    'link' => $name
+                    'link' => '/img/transport/pictures/' . $name
                 ]);
             }
         }
@@ -151,7 +151,7 @@ class TransportController extends Controller
                 Picture::create([
                     'picture_id' => $id,
                     'picture_type' => 'transport',
-                    'link' => $name
+                    'link' => '/img/transport/pictures/' . $name
                 ]);
             }
         }
