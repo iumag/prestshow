@@ -31,7 +31,7 @@
                                 <small class="text-danger" v-if="errors.cost">{{errors.cost[0]}}</small>
                             </div>
                         </div>
-                        <load-image></load-image>
+                        <load-image :picture="'/img/transport/' + form.picture">></load-image>
                         <small class="text-danger" v-if="errors.picture">{{errors.picture[0]}}</small>
                     </div>
                     <div class="row">

@@ -16,7 +16,7 @@
                                 <small class="text-danger" v-if="errors.name">{{errors.name[0]}}</small>
                             </div>
                         </div>
-                        <load-image></load-image>
+                        <load-image :picture="'/img/event/' + form.picture">></load-image>
                         <small class="text-danger" v-if="errors.picture">{{errors.picture[0]}}</small>
                     </div>
                     <div class="row">

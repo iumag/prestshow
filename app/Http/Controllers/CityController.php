@@ -176,6 +176,9 @@ class CityController extends Controller
     {
         $city = City::findOrFail($id);
 
+        Picture::wherePictureId($city->id)
+            ->delete();
+
         $city->delete();
 
         return response()

@@ -174,6 +174,9 @@ class HolidayController extends Controller
     {
         $holiday = Holiday::findOrFail($id);
 
+        Picture::wherePictureId($holiday->id)
+            ->delete();
+
         $holiday->delete();
 
         return response()

@@ -5,7 +5,7 @@
             <tr v-for="(item,index) in props.model.data">
                 <td>{{item.id}}</td>
                 <td>{{item.name}}</td>
-                <td><img width=100 height=100 :src="'/img/event/' + item.picture"></td>
+                <td><img :src="'/img/event/' + item.picture"></td>
                 <td style="height: 100px;
     display: block;
     overflow: hidden;" v-html="item.description"></td>

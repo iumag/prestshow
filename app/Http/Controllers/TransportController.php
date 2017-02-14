@@ -189,6 +189,9 @@ class TransportController extends Controller
     {
         $transport = Transport::findOrFail($id);
 
+        Picture::wherePictureId($transport->id)
+            ->delete();
+
         $transport->delete();
 
         return response()

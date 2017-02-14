@@ -171,6 +171,9 @@ class PhotographerController extends Controller
     {
         $photographer = Photographer::findOrFail($id);
 
+        Picture::wherePictureId($photographer->id)
+            ->delete();
+
         $photographer->delete();
 
         return response()

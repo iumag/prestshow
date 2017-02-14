@@ -192,6 +192,9 @@ class HotelController extends Controller
     {
         $hotel = Hotel::findOrFail($id);
 
+        Picture::wherePictureId($hotel->id)
+            ->delete();
+
         $hotel->delete();
 
         return response()

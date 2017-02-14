@@ -181,6 +181,9 @@ class EventController extends Controller
     {
         $event = Event::findOrFail($id);
 
+        Picture::wherePictureId($event->id)
+            ->delete();
+
         $event->delete();
 
         return response()
