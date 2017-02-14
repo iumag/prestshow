@@ -109,7 +109,7 @@ class TransportController extends Controller
     {
         $language = app()->getLocale();
 
-        $transport = Transport::findOrFail($id);
+        $transport = Transport::with('pictures')->findOrFail($id);
 
         return response()
             ->json([

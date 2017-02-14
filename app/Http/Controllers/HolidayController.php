@@ -99,7 +99,7 @@ class HolidayController extends Controller
     {
 
 
-        $holiday = Holiday::findOrFail($id);
+        $holiday = Holiday::with('pictures')->findOrFail($id);
         return response()
             ->json([
                 'form' => $holiday,

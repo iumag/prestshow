@@ -45,6 +45,14 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-3" v-for="(picture,index) in form.pictures">
+                            <a :href="picture.link" data-lightbox="image-1" :data-title="form.name"> <img
+                                    :src="picture.link" width="200" height="200" class="img-thumbnail"></a>
+                            <a class="btn btn-danger" @click="deleteItem(picture.id);form.pictures.splice(index,1)">-</a>
+                        </div>
+
+                    </div>
                     <div v-for="(picture,index) in pictures" class="row" id="test">
                         <div class="col-sm-11">
                             <div class="form-group">
@@ -141,6 +149,15 @@
                     })
                     .catch(function (error) {
                         Vue.set(vm.$data, 'errors', error.response.data)
+                    })
+            },
+            deleteItem(id){
+                axios.delete('/delete_picture/'+id)
+                    .then(function (response){
+                        console.log(response)
+                    })
+                    .catch(function (error){
+                        console.log(error)
                     })
             }
         },

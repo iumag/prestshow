@@ -100,7 +100,7 @@ class CityController extends Controller
     public function edit($id)
     {
 
-        $city = City::findOrFail($id);
+        $city = City::with('pictures')->findOrFail($id);
 
         return response()
             ->json([

@@ -110,7 +110,7 @@ class HotelController extends Controller
     public function edit($id)
     {
 
-        $hotel = Hotel::findOrFail($id);
+        $hotel = Hotel::with('pictures')->findOrFail($id);
 
         $language = app()->getLocale();
 

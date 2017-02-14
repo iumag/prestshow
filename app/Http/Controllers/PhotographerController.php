@@ -97,7 +97,7 @@ class PhotographerController extends Controller
     public function edit($id)
     {
 
-        $photographer = Photographer::findOrFail($id);
+        $photographer = Photographer::with('pictures')->findOrFail($id);
 
         return response()
             ->json([

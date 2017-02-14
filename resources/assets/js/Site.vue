@@ -207,7 +207,7 @@
                                                 <div id="u15539" class="clearfix colelem">
                                                     <div @click="delete_entity(index, event)" id="u15541"
                                                          class="rounded-corners clearfix grpelem">
-                                                        <div id="u15540-4" class="clearfix grpelem"><p>+</p></div>
+                                                        <div id="u15540-4" class="clearfix grpelem"><p>-</p></div>
                                                     </div>
                                                 </div>
                                                 </p>
@@ -224,7 +224,7 @@
                                                 <div id="u15539" class="clearfix colelem">
                                                     <div @click="delete_item('hotel')" id="u15541"
                                                          class="rounded-corners clearfix grpelem">
-                                                        <div id="u15540-4" class="clearfix grpelem"><p>+</p></div>
+                                                        <div id="u15540-4" class="clearfix grpelem"><p>-</p></div>
                                                     </div>
                                                 </div>
                                                 </p>
@@ -241,7 +241,7 @@
                                                 <div id="u15539" class="clearfix colelem">
                                                     <div @click="delete_item('transport')" id="u15541"
                                                          class="rounded-corners clearfix grpelem">
-                                                        <div id="u15540-4" class="clearfix grpelem"><p>+</p></div>
+                                                        <div id="u15540-4" class="clearfix grpelem"><p>-</p></div>
                                                     </div>
                                                 </div>
                                                 </p>
@@ -311,14 +311,34 @@
                         <div v-else class="name_modal"><p>{{modal_item.event.name}}</p></div>
                         <div v-if="modal_item.event" class="desc_modal" v-html="modal_item.event.description"></div>
                         <div v-else class="desc_modal" v-html="modal_item.description"></div>
-                        <div class="index-modal-photo">  <a :href="modal_photo" data-lightbox="image-1" :data-title="modal_item.name"><img width="350" :src="modal_photo"></a></div>
-                        <div class="modal-wrap">
-                            <div @click="modal_photo = picture_dop.link" class="modal_picture" v-for="picture_dop in modal_item.pictures" v-if="modal_item.pictures">
+                        <div v-if="modal_photo" class="index-modal-photo"><a :href="modal_photo" data-lightbox="image-1"
+                                                                             :data-title="modal_item.name"><img
+                                width="350" :src="modal_photo"></a></div>
+                        <div class="modal-wrap" v-if="modal_item.event">
+
+                            <div v-for="picture_dop in modal_item.event.pictures"
+                                 @click="modal_photo = picture_dop.link" class="modal_picture">
                                 <img height="50px" width="50px" :src="picture_dop.link">
                             </div>
+
                         </div>
-                        <div class="index-modal-photo"><iframe width="350" height="250" :src="modal_item.video" frameborder="0"
-                                allowfullscreen></iframe></div>
+                        <div class="modal-wrap" v-if="modal_item.pictures">
+                            <div @click="modal_photo = picture_dop.link" class="modal_picture"
+                                 v-for="picture_dop in modal_item.pictures">
+                                <img height="50px" width="50px" :src="picture_dop.link">
+                            </div>
+
+                        </div>
+                        <div v-if="modal_item.video" class="index-modal-photo">
+                            <iframe width="350" height="250" :src="modal_item.video" frameborder="0"
+                                    allowfullscreen></iframe>
+                        </div>
+                        <div v-if="modal_item.event">
+                            <div class="index-modal-photo">
+                                <iframe width="350" height="250" :src="modal_item.event.video" frameborder="0"
+                                        allowfullscreen></iframe>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -451,38 +471,56 @@
                 this.events = element
             })
             this.$on('modalHoliday', function (element) {
+                this.modal_photo = ''
                 this.modal_item = element
-                this.modal_photo = element.pictures[0].link
+                if (element.pictures.length != 0) {
+                    this.modal_photo = element.pictures[0].link
+                }
                 this.modal = true
                 this.modal_scroll = 'city'
             })
             this.$on('modalEvent', function (element) {
+                this.modal_photo = ''
                 this.modal_item = element
-                this.modal_photo = element.event.pictures[0].link
+                if (element.event.pictures.length != 0) {
+                    this.modal_photo = element.event.pictures[0].link
+                }
                 this.modal = true
                 this.modal_scroll = 'is_hotel'
             })
             this.$on('modalPhotographer', function (element) {
+                this.modal_photo = ''
                 this.modal_item = element
-                this.modal_photo = element.pictures[0].link
+                if (element.pictures.length != 0) {
+                    this.modal_photo = element.pictures[0].link
+                }
                 this.modal = true
                 this.modal_scroll = 'is_transport'
             })
             this.$on('modalTransport', function (element) {
+                this.modal_photo = ''
                 this.modal_item = element
-                this.modal_photo = element.pictures[0].link
+                if (element.pictures.length != 0) {
+                    this.modal_photo = element.pictures[0].link
+                }
                 this.modal = true
                 this.modal_scroll = 'cena'
             })
             this.$on('modalCity', function (element) {
+                this.modal_photo = ''
                 this.modal_item = element
-                this.modal_photo = element.pictures[0].link
+                if (element.pictures.length != 0) {
+                    this.modal_photo = element.pictures[0].link
+                }
                 this.modal = true
                 this.modal_scroll = 'event'
             })
             this.$on('modalHotel', function (element) {
+                this.modal_photo = ''
                 this.modal_item = element
-                this.modal_photo = element.pictures[0].link
+                if (element.pictures.length != 0) {
+                    this.modal_photo = element.pictures[0].link
+                }
                 this.modal = true
                 this.modal_scroll = 'photographer'
             })

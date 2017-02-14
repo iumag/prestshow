@@ -70,6 +70,8 @@ Route::get('/admin/index', 'AdminController@index');
 
 Route::get('/language/get', 'LanguageController@getLanguage');
 
+Route::delete('/delete_picture/{id}', 'PictureController@deletePicture');
+
 
 Route::post('/language', array (
     'Middleware' => 'LanguageSwitcher',
