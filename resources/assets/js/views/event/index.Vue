@@ -1,5 +1,6 @@
 <template>
-    <data-viewer :showfooter="showfooter" :source="source" :thead="thead" :filter="filter" :create="create" :title="title">
+    <data-viewer :showfooter="showfooter" :source="source" :thead="thead" :filter="filter" :create="create"
+                 :title="title">
         <template scope="props">
             <tr v-for="(item,index) in props.model.data">
                 <td>{{item.id}}</td>
@@ -10,12 +11,13 @@
     overflow: hidden;" v-html="item.description"></td>
                 <td>{{item.created_at}}</td>
                 <td class="text-center">{{item.pictures.length}}</td>
-                <td class="text-center">{{isVideo(item)}}</td>
+                <td v-html="isVideo(item)" class="text-center"></td>
                 <td>
                     <router-link class="edit-modal btn btn-success" :to="'/event/' + item.id + '/edit'">
                         <span class="glyphicon glyphicon-edit"></span> {{localization.edit}}
                     </router-link>
-                    <button class="edit-modal btn btn-danger" @click="deleteItem(item.id,index);props.model.data.splice(index,1);props.model.total <= 10 ? showfooter = false : showfooter = true;">
+                    <button class="edit-modal btn btn-danger"
+                            @click="deleteItem(item.id,index);props.model.data.splice(index,1);props.model.total <= 10 ? showfooter = false : showfooter = true;">
                         <span class="glyphicon glyphicon-trash"></span> {{localization.delete}}
                     </button>
                 </td>
@@ -39,9 +41,14 @@
                 showfooter: true,
                 thead: [
                     {title: 'Id', key: 'id', parent_column: 'events', sort: true},
-                    {title: localization.event, key: 'name', parent_column:'event_translations', sort: true},
+                    {title: localization.event, key: 'name', parent_column: 'event_translations', sort: true},
                     {title: localization.picture, key: 'picture', sort: false},
-                    {title: localization.description, key: 'description', parent_column:'event_translations', sort: true},
+                    {
+                        title: localization.description,
+                        key: 'description',
+                        parent_column: 'event_translations',
+                        sort: true
+                    },
                     {title: localization.created_at, key: 'created_at', parent_column: 'events', sort: true},
                     {title: localization.count_pictures, key: 'pictures', parent_column: 'events', sort: false},
                     {title: localization.video, key: 'video', parent_column: 'events', sort: false},
@@ -58,10 +65,10 @@
         },
         methods: {
             isVideo(item){
-                if (item.video){
-                    return 'True'
-                }else{
-                    return 'False'
+                if (item.video) {
+                    return `<span class="glyphicon success glyphicon-ok text-success"></span>`
+                } else {
+                    return `<span class="glyphicon glyphicon-remove text-danger"></span>`
                 }
             },
             deleteItem(item){

@@ -12,7 +12,7 @@
                 <td>{{item.cost}}</td>
                 <td>{{item.created_at}}</td>
                 <td class="text-center">{{item.pictures.length}}</td>
-                <td class="text-center">{{isVideo(item)}}</td>
+                <td v-html="isVideo(item)" class="text-center"></td>
                 <td>
                     <router-link class="edit-modal btn btn-success" :to="'/city/' + item.id + '/edit'">
                         <span class="glyphicon glyphicon-edit"></span> {{localization.edit}}
@@ -63,9 +63,9 @@
         methods: {
             isVideo(item){
                 if (item.video){
-                    return 'True'
+                    return `<span class="glyphicon success glyphicon-ok text-success"></span>`
                 }else{
-                    return 'False'
+                    return `<span class="glyphicon glyphicon-remove text-danger"></span>`
                 }
             },
             deleteItem(item){

@@ -19,7 +19,7 @@
                 <div class="clearfix grpelem holiday event-complete-item" v-for="(item,index) in model.data"
                      v-bind:key="item"
                      v-if="(index<n*15 && n===1) || (n>1 && index>=(n-1)*15)"><!-- group -->
-                    <div v-if="item.description" id="pamphletu16085" @click="showModal(item)"><!-- none box -->
+                    <div v-if="item.event.description" id="pamphletu16085" @click="showModal(item)"><!-- none box -->
                         <div class="ThumbGroup clearfix grpelem" id="u16107"><!-- none box -->
                             <div class="popup_anchor">
                                 <div class="Thumb popup_element rounded-corners clearfix wp-tab-active" id="u16108"
@@ -56,7 +56,7 @@
                     </div>
                 </div>
             </div>
-            <a v-if="n != 1" class="nonblock nontext anim_swing clip_frame grpelem" id="u9420" @click="Scroll(n)">
+            <a v-if="(total > 1) && (total!=n)" class="nonblock nontext anim_swing clip_frame grpelem" id="u9420" @click="Scroll(n)">
                 <!-- image --><img
                     class="block" id="u9420_img" src="images/down-arrow-crop-u9420.png?crc=4075218507" alt="" width="52"
                     height="31"></a>

@@ -309,7 +309,8 @@
                         </div>
                         <div v-if="!modal_item.event" class="name_modal"><p>{{modal_item.name}}</p></div>
                         <div v-else class="name_modal"><p>{{modal_item.event.name}}</p></div>
-                        <div class="desc_modal" v-html="modal_item.description"></div>
+                        <div v-if="modal_item.event" class="desc_modal" v-html="modal_item.event.description"></div>
+                        <div v-else class="desc_modal" v-html="modal_item.description"></div>
                         <div class="index-modal-photo">  <a :href="modal_photo" data-lightbox="image-1" :data-title="modal_item.name"><img width="350" :src="modal_photo"></a></div>
                         <div class="modal-wrap">
                             <div @click="modal_photo = picture_dop.link" class="modal_picture" v-for="picture_dop in modal_item.pictures" v-if="modal_item.pictures">
@@ -457,7 +458,7 @@
             })
             this.$on('modalEvent', function (element) {
                 this.modal_item = element
-                this.modal_photo = element.pictures[0].link
+                this.modal_photo = element.event.pictures[0].link
                 this.modal = true
                 this.modal_scroll = 'is_hotel'
             })

@@ -32,7 +32,7 @@
                                 <label>{{localization.description}}</label>
                                 <small class="text-danger" v-if="errors.description">{{errors.description[0]}}</small>
                                 <ckeditor v-model="form.description" name="description" :height="'300px'"
-                                          :toolbar="[['Format']]"></ckeditor>
+                                          ></ckeditor>
                             </div>
                         </div>
                     </div>

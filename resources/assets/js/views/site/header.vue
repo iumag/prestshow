@@ -9,9 +9,9 @@
 
                 <a href="/pl"><img
                         src="https://im0-tub-ru.yandex.net/i?id=ffa3a652e171ce99e19ce864ff1b44fb&amp;n=33&amp;h=215&amp;w=323"
-                        style="top: 22px;left: 42%;margin-left: 423px;display: block;position: fixed;width: 28px;height: 19px;"></a>
+                        class="poland"></a>
                 <a href="/en"><img src="https://www.vipkeys.net/img/eng.png"
-                                   style="top: 21px;left: 42%;margin-left: 459px;display: block;position: fixed;height: 20px;width: 28px;"></a>
+                                   class="english"></a>
 
             </div>
             <a class="nonblock nontext anim_swing clip_frame" id="u7620" href="#cena"><!-- image --><img

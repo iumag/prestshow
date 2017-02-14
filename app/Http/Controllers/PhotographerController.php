@@ -66,7 +66,7 @@ class PhotographerController extends Controller
                 }
 
                 Picture::create([
-                    'picture_id' => $photographer,
+                    'picture_id' => $photographer->id,
                     'picture_type' => 'photographer',
                     'link' => '/img/photographer/pictures/' . $name
                 ]);

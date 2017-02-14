@@ -10,6 +10,16 @@
 
 <script>
     export default {
+        props: {
+            picture: {
+                type: String
+            },
+        },
+        data(){
+          return{
+              picture_load: '/img/default_avatar_male.jpg'
+          }
+        },
         mounted() {
             $("#avatar-2").fileinput({
                 overwriteInitial: true,
@@ -23,10 +33,14 @@
                 removeTitle: 'Cancel or reset changes',
                 elErrorContainer: '#kv-avatar-errors-2',
                 msgErrorClass: 'alert alert-block alert-danger',
-                defaultPreviewContent: '<img src="/img/default_avatar_male.jpg" alt="Your Avatar" style="width:32px"><h6 class="text-muted">Click to select</h6>',
+                defaultPreviewContent: '<img src="/img/default_avatar_male.jpg" id="picture" alt="Your Avatar" style="width:32px"><h6 class="text-muted">Click to select</h6>',
                 layoutTemplates: {main2: '{preview} {remove} {browse}'},
                 allowedFileExtensions: ["jpg", "png", "gif"]
             });
+        },
+        beforeMount(){
+            this.picture_load = this.picture;
+            console.log(this.picture_load);
         }
     }
 </script>

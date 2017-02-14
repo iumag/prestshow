@@ -12,14 +12,15 @@
                     <a class="navbar-brand" href="#">{{localization.site_name}}</a>
                 </div>
                 <div class="navbar-collapse collapse">
-                    <form action="/language" id="language" method="post">
-                        <select name="locale">
-                            <option v-if="language === 'pl'" selected value="pl">Poland</option>
-                            <option v-else value="pl">Poland</option>
-                            <option v-if="language === 'en'" selected value="en">English</option>
-                            <option v-else value="en">English</option>
+
+                    <form action="/language" id="language" class="navbar-left" method="post" style="
+    margin-top: 6px;
+">
+                        <select class="selectpicker" name="locale">
+                            <option value="pl">Poland</option>
+                            <option value="en">English</option>
                         </select>
-                        <input type="submit" value="Submit">
+                        <input type="submit" class="btn btn-success" value="Submit">
                     </form>
                     <ul class="nav navbar-nav navbar-right">
                         <li>
@@ -69,6 +70,14 @@
         },
         beforeMount() {
             this.getLanguage()
+            $('.selectpicker').selectpicker({
+                style: 'btn-info',
+                size: 4
+            });
+            setTimeout(function(){
+                $('.selectpicker').selectpicker('val', this.language);
+            }.bind(this), 500)
+
         },
         methods: {
             getLanguage() {

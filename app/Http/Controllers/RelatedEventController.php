@@ -14,7 +14,7 @@ class RelatedEventController extends Controller
     {
         return response()
             ->json([
-                'model' => RelatedEvent::with('city', 'event', 'holiday')->filterPaginateOrder()
+                'model' => RelatedEvent::with('city', 'event.pictures', 'holiday')->filterPaginateOrder()
             ]);
     }
 

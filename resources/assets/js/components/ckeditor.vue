@@ -18,7 +18,17 @@
                 default: '200px',
             },
             toolbar: {
-                type: Array
+                type: Array,
+                default: () => [
+                    ['Format'],
+                    ['Bold', 'Italic', 'Underline'],
+                    ['Undo', 'Redo'], ['PasteText'],
+                    [ 'NumberedList', 'BulletedList'],
+                    ['Table'],
+                    ['JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock'],
+                    ['Blockquote', 'Link'],
+                    [ 'Styles', 'Format', 'Font', 'FontSize' ]
+                ]
             },
             language: {
                 type: String,
@@ -39,12 +49,12 @@
             const ckeditorId = this.id
 
             const ckeditorConfig = {
-
+                toolbar: this.toolbar,
                 language: this.language,
                 height: this.height,
                 extraPlugins: this.extraplugins
             }
-
+            console.log(ckeditorConfig.toolbar)
             CKEDITOR.replace(ckeditorId, ckeditorConfig)
 
             CKEDITOR.instances[ckeditorId].setData(this.value)
