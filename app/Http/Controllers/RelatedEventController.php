@@ -42,6 +42,52 @@ class RelatedEventController extends Controller
             ]);
     }
 
+    public function GetNewEvent($city_id, $holiday_id)
+    {
+
+        $language = app()->getLocale();
+
+        $new_events = array();
+
+        $events = DB::table('events')
+            ->select('event_id as id', 'event_translations.name')
+            ->join('event_translations', 'events.id', '=', 'event_translations.event_id')
+            ->where('event_translations.locale', '=', $language)->get();
+
+        $related_events = DB::table('events')
+            ->select('events.id', 'event_translations.name')
+            ->join('event_translations', 'events.id', '=', 'event_translations.event_id')
+            ->join('related_events', 'events.id', '=', 'related_events.event_id')
+            ->where('event_translations.locale', '=', $language)
+            ->where('city_id', $city_id)
+            ->where('holiday_id', $holiday_id)
+            //->unionAll($events)
+            ->get();
+
+        //var_dump($related_events);
+        $i = 0;
+        // Поиск уже сохраненных Events и удаление их из массива
+        foreach ($events as $event){
+            foreach($related_events as $related_event){
+                if ($event==$related_event){
+                   unset($events[$i]);
+                   break;
+                }
+            }
+            $i++;
+        }
+
+
+        $i = 0;
+
+
+
+        return response()
+            ->json([
+                'new_events' => $events
+            ]);
+    }
+
     public function store(Request $request)
     {
 //        event.*.event_id' => 'required|exists:events,id',

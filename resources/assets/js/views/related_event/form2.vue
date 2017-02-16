@@ -11,7 +11,7 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label>City</label>
-                                <select class="form-control" name="city_id" v-model="form.city_id">
+                                <select @change="getEvents()" class="form-control" name="city_id" v-model="form.city_id">
                                     <option>Select</option>
                                     <option v-for="city in option.cities" :value="city.city_id">{{city.name}}</option>
                                 </select>
@@ -21,7 +21,16 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label>{{localization.holiday}}</label>
-                                <select class="form-control" name="holiday_id" v-model="form.holiday_id">
+                                <select @change="getEvents()" v-if="form.city_id != 'Select'" class="form-control"
+                                        name="holiday_id"
+                                        v-model="form.holiday_id">
+                                    <option>Select</option>
+                                    <option v-for="holiday in option.holidays" :value="holiday.holiday_id">
+                                        {{holiday.name}}
+                                    </option>
+                                </select>
+                                <select v-else disabled class="form-control" name="holiday_id"
+                                        v-model="form.holiday_id">
                                     <option>Select</option>
                                     <option v-for="holiday in option.holidays" :value="holiday.holiday_id">
                                         {{holiday.name}}
@@ -33,7 +42,7 @@
 
 
                     </div>
-                    <div class="row" v-for="event in option.events">
+                    <div v-if="form.holiday_id != 'Select'" class="row" v-for="event in new_events">
                         <div class="form-group">
                             <div class="col-sm-4">
                                 <input type="text" class="form-control" id="exampleInputEmail1" v-model="event.name"
@@ -68,6 +77,7 @@
             var localization = language.data().language
             return {
                 form: {},
+                new_events: {},
                 errors: {},
                 option: {},
                 title: 'Create',
@@ -75,7 +85,9 @@
                 redirect: '/related_event',
                 store: '/api/related_event',
                 method: 'post',
-                localization: localization
+                get_event: '',
+                localization: localization,
+                holiday_id: ''
             }
         },
         beforeMount() {
@@ -89,6 +101,9 @@
         },
         watch: {
             '$route': 'fetchData'
+        },
+        updated(){
+          console.log(this.new_events);
         },
         methods: {
             fetchData() {
@@ -118,6 +133,19 @@
                     .catch(function (error) {
                         Vue.set(vm.$data, 'errors', error.response.data)
                     })
+            },
+            getEvents(){
+                if((this.form.holiday_id != 'Select') && (this.form.city_id !='Select')) {
+                    this.get_event = '/api/related_event/getNewEvents/city-' + this.form.city_id + '/holiday-' + this.form.holiday_id;
+                    var vm = this
+                    axios.get(this.get_event)
+                        .then(function (response) {
+                            Vue.set(vm.$data, 'new_events', response.data.new_events)
+                        })
+                        .catch(function (error) {
+                            console.log(error)
+                        })
+                }
             }
         }
     }

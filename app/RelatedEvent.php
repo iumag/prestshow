@@ -25,6 +25,7 @@ class RelatedEvent extends Model
         return [
             'city_id' => 'Select',
             'event_id' => 'Select',
+            'holiday_id' => 'Select',
             'cost' => ''
         ];
     }
