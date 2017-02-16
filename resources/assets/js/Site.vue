@@ -82,6 +82,7 @@
                     <event v-if="showElement['event']" :holiday_id="holiday.id" :city_id="city.id" ref="event"></event>
                 </transition>
                 <is-hotel v-if="showElement['is_hotel']"></is-hotel>
+
                 <hotel v-if="showElement['hotel']" :city_id="city.id" ref="hotel"></hotel>
                 <photographer v-if="showElement['photographer']" ref="photographer"></photographer>
 
@@ -358,7 +359,7 @@
 </template>
 
 <script>
-    require('es6-promise').polyfill();
+
     import SiteHeader from './views/site/header.vue'
     import Holiday from './views/site/holiday.vue'
     import City from './views/site/city.vue'
@@ -371,6 +372,7 @@
     import Photographer from './views/site/photographer.vue'
     import axios from 'axios'
     import Vue from 'vue'
+    require('es6-promise').polyfill();
     export default {
         props: ['showCity'],
         components: {SiteHeader, Holiday, City, Event, IsHotel, Hotel, IsTransport, Transport, Cena, Photographer},
@@ -557,10 +559,13 @@
                     x = -10
                 }
                 if (element === 'photographer') {
-                    x = -100
+                    x = 50
                 }
                 if(element === 'event'){
                     x = 60
+                }
+                if(($(window).width()<=1025) && (element === 'photographer')){
+                    x = 200
                 }
                 setTimeout(function () {
                     $("html,body").animate({scrollTop: $(elm).offset().top - x}, 1000)

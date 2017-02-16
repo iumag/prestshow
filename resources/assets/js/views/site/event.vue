@@ -100,8 +100,7 @@
                 },
                 total: 0,
                 wrap_left: "wrap_left",
-                wrap: "wrap",
-                total: 0
+                wrap: "wrap"
             }
         },
         beforeMount() {

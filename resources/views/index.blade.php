@@ -4,7 +4,7 @@
 
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
     <meta name="generator" content="2015.2.1.352"/>
-     <meta name="viewport" content="user-scalable=no">
+    <meta name="viewport" content="user-scalable=no">
     <!-- <meta name="viewport" content="width=device-width"> -->
 
     <script type="text/javascript">
@@ -150,25 +150,29 @@
         $('#buttonu7617').css('margin-top',$(window).height()/3);
     });
 
-        $(window).on("scroll", function () {
-            if ($(window).width() >= 1024) {
-                var scrolled = $(this).scrollTop();
-                if (scrolled > 107) {
-                    $('#u10537').css('height', '39px');
-                    $('#u24096_img').css('height', '35px');
-                    $('#u7620').css('top', '3px');
-                    $('.poland').css('top', '10px');
-                    $('.english').css('top', '10px');
-                }
-                if (scrolled <= 107) {
-                    $('#u10537').css('height', '62px');
-                    $('#u24096_img').css('height', '58px');
-                    $('#u7620').css('top', '17px');
-                    $('.poland').css('top', '22px');
-                    $('.english').css('top', '22px');
-                }
+    $(window).on("scroll", function () {
+        if ($(window).width() >= 1024) {
+            var scrolled = $(this).scrollTop();
+            if (scrolled > 107) {
+                $('#u10537').css('height', '39px');
+                $('#u24096_img').css('height', '35px');
+                $('#u24096_img').attr('src', '/images/new2.png');
+                $('#u24096_img').css('width', '106px');
+                $('#u7620').css('top', '3px');
+                $('.poland').css('top', '10px');
+                $('.english').css('top', '10px');
             }
-        });
+            if (scrolled <= 107) {
+                $('#u10537').css('height', '62px');
+                $('#u24096_img').css('height', '58px');
+                $('#u24096_img').attr('src', '/images/new.png');
+                $('#u24096_img').css('width', '175px');
+                $('#u7620').css('top', '17px');
+                $('.poland').css('top', '22px');
+                $('.english').css('top', '22px');
+            }
+        }
+    });
 
 </script>
 </html>

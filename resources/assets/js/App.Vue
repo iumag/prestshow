@@ -59,7 +59,7 @@
     import axios from 'axios'
     import Vue from 'vue'
     import language from './language'
-
+    require('es6-promise').polyfill();
     export default{
         data() {
             var localization = language.data().language

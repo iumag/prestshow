@@ -9,31 +9,31 @@
                 </div>
             </div>
         </div>
-
         <div class="SlideShowWidget clearfix grpelem" id="slideshowu8584"><!-- none box -->
-            <transition name="sliderhotel">
-            <div class="popup_anchor" id="u8601popup">
-                <div class="SlideShowContentPanel clearfix" id="u8601"><!-- stack box -->
-                    <div class="SSSlide rounded-corners clip_frame grpelem" id="u8602"><!-- image -->
-                        <img class="block ImageInclude" id="u8602_img"
-                             :src="image" alt=""/>
+                <div class="popup_anchor" id="u8601popup">
+                    <div class="SlideShowContentPanel clearfix" id="u8601"><!-- stack box -->
+                        <div class="SSSlide rounded-corners clip_frame grpelem" id="u8602"><!-- image -->
+                            <img class="block ImageInclude" id="u8602_img"
+                                 :src="image" alt=""/>
+                        </div>
+
+
                     </div>
-
-
                 </div>
-            </div>
-            </transition>
 
             <div class="popup_anchor" id="u8586popup">
                 <div class="SSSlideLinks clearfix" id="u8586"><!-- horizontal-rows box -->
-                    <div @click="ChangeItem(item)"
-                         class="hotelitem SSSlideLink rounded-corners clip_frame clearfix grpelem"
-                         v-for="item in model.data"><!-- image -->
-                        <img class="position_content" :src="'img/hotel/' + item.picture" alt="" width="131"
-                             height="117"/>
-                    </div>
+                    <transition-group name="list-complete" tag="div">
+                        <div v-bind:key="item" @click="ChangeItem(item)"
+                             class="hotelitem SSSlideLink rounded-corners clip_frame clearfix grpelem list-complete-item"
+                             v-for="item in model.data"><!-- image -->
+                            <img class="position_content" :src="'img/hotel/' + item.picture" alt="" width="131"
+                                 height="117"/>
+                        </div>
+                    </transition-group>
                 </div>
             </div>
+
         </div>
         <a @click="ShowMethod()" class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
            id="buttonu8626"><!-- container box -->
