@@ -48,7 +48,7 @@
                                 <input type="text" class="form-control" id="exampleInputEmail1" v-model="event.name"
                                        disabled>
                                 <input v-if="event.check != false" type="hidden" name="event[][event_id]"
-                                       v-model="event.event_id">
+                                       v-model="event.id">
                             </div>
                             <div class="col-sm-1">
                                 <input v-if="event.check === false" disabled type="text" class="form-control"
@@ -102,9 +102,6 @@
         watch: {
             '$route': 'fetchData'
         },
-        updated(){
-          console.log(this.new_events);
-        },
         methods: {
             fetchData() {
                 var vm = this
@@ -140,6 +137,12 @@
                     var vm = this
                     axios.get(this.get_event)
                         .then(function (response) {
+                            var array = $.map(response.data.new_events, function(value, index) {
+                                return [value];
+                            });
+                            array.forEach(function (item, i, arr) {
+                                item.check = false
+                            });
                             Vue.set(vm.$data, 'new_events', response.data.new_events)
                         })
                         .catch(function (error) {
