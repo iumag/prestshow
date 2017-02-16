@@ -23,12 +23,12 @@
                     <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7622"
                        href="#glowna"><!-- simple frame --></a>
                     <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7623"
-                       href="#swieta"><!-- simple frame --></a>
+                       href="#uroczystosci"><!-- simple frame --></a>
                     <a v-show="showElement['city']" class="nonblock nontext anim_swing rounded-corners pinned-colelem"
                        id="u7624"
                        href="#miasto"><!-- simple frame --></a>
                     <a class="nonblock nontext Button anim_swing rounded-corners clearfix colelem" id="buttonu7617"
-                       href="#swieta"><!-- container box -->
+                       href="#uroczystosci"><!-- container box -->
                         <div class="clearfix grpelem" id="u7618-4"><!-- content -->
                             <p>
                                 Co chcesz zorganizować?
@@ -95,7 +95,7 @@
                     <a class="anchor_item grpelem" id="cena"></a>
                     <div class="browser_width grpelem" id="u16514-bw">
                         <div id="u16514"><!-- column -->
-                            <div class="clearfix" id="u16514_align_to_page">
+                            <div id="u16514_align_to_page" v-bind:class="[showElement['transport']===false ? 'paddingalign' : '', 'clearfix']">
                                 <div class="clearfix colelem" id="u15557-4"><!-- content -->
                                     <p>cena</p>
                                 </div>
@@ -214,7 +214,7 @@
                                                 <input type="hidden" name="related_event[]" :value="event.id">
                                             </div>
                                         </div>
-                                        <div class="clearfix colelem" id="u15535"><!-- group -->
+                                        <div v-if="showElement['hotel']" class="clearfix colelem" id="u15535"><!-- group -->
                                             <div class="clearfix grpelem" id="u15536-4"><!-- content -->
                                                 <p>Hotel:</p>
                                             </div>
@@ -231,7 +231,7 @@
                                                 <input type="hidden" name="hotel" :value="hotel.id">
                                             </div>
                                         </div>
-                                        <div class="clearfix colelem" id="u19760"><!-- group -->
+                                        <div v-if="showElement['transport']" class="clearfix colelem" id="u19760"><!-- group -->
                                             <div class="clearfix grpelem" id="u19762-4"><!-- content -->
                                                 <p>Transport:</p>
                                             </div>
@@ -297,7 +297,7 @@
         </div>
         <!-- JS includes -->
 
-        <div v-show="modal" class="dm-overlay" id="win1">
+        <div @click="closeModal(modal_scroll, modal_item)" v-show="modal" class="dm-overlay" id="win1">
             <div class="dm-table">
                 <div class="dm-cell">
                     <div style="border-radius: 0;" class="dm-modal">
@@ -395,12 +395,12 @@
                 },
                 scrollElement: {
                     city: '#miasto',
-                    event: '#atrakcji',
+                    event: '#u8547-4',
                     is_hotel: '#nocleg',
                     hotel: '#hotel',
-                    photographer: '#fotograf',
+                    photographer: '#u23383-4',
                     is_transport: '#po-transporcie',
-                    transport: '#pu16487',
+                    transport: '.transport-wrap2',
                     cena: '#cena'
                 },
                 holiday: {
@@ -558,6 +558,9 @@
                 }
                 if (element === 'photographer') {
                     x = -100
+                }
+                if(element === 'event'){
+                    x = 60
                 }
                 setTimeout(function () {
                     $("html,body").animate({scrollTop: $(elm).offset().top - x}, 1000)

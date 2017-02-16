@@ -1,6 +1,6 @@
 <template>
     <div class="clearfix colelem" id="pswieta"><!-- group -->
-        <a class="anchor_item grpelem" id="swieta"></a>
+        <a class="anchor_item grpelem" id="uroczystosci"></a>
         <div class="browser_width grpelem" id="u7669-bw">
             <div class="pointer_cursor" id="u7669"><!-- column -->
                 <a class="block anim_swing"></a>
