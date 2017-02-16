@@ -77,11 +77,6 @@ class RelatedEventController extends Controller
             $i++;
         }
 
-
-        $i = 0;
-
-
-
         return response()
             ->json([
                 'new_events' => $events
@@ -97,6 +92,7 @@ class RelatedEventController extends Controller
         if (is_array($events)) {
             $this->validate($request, [
                 'city_id' => 'required|exists:cities,id',
+                'holiday_id' => 'required|exists:holidays,id',
                 'event.*.event_id' => 'required|exists:events,id',
                 'cost.*.cost' => 'required|numeric|min:0'
             ]);
@@ -173,6 +169,7 @@ class RelatedEventController extends Controller
         $this->validate($request, [
             'city_id' => 'required|exists:cities,id',
             'event_id' => 'required|exists:events,id',
+            'holiday_id' => 'required|exists:holidays,id',
             'cost' => 'required|numeric|min:0',
         ]);
 
