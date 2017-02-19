@@ -18,13 +18,13 @@
                                     <a v-if="item.description" class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
                                        id="buttonu24047"><!-- container box -->
                                         <div class="clearfix grpelem" id="u24048-4" @click="showModal(item)">
-                                            <!-- content --><p>Czytać więcej</p>
+                                            <!-- content --><p>Czytaj wiece</p>
                                         </div>
                                     </a>
                                     <a @click="ShowMethod(item)"
                                        class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
                                        id="buttonu19832"><!-- container box -->
-                                        <div class="clearfix grpelem" id="u19833-4"><!-- content --><p>Wybrać</p></div>
+                                        <div class="clearfix grpelem" id="u19833-4"><!-- content --><p>Wybierz</p></div>
                                     </a>
                                     <div class="clearfix grpelem" id="u19250-4"><!-- content -->
                                         <p>{{item.name}}</p>

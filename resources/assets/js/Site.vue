@@ -96,10 +96,13 @@
                     <a class="anchor_item grpelem" id="cena"></a>
                     <div class="browser_width grpelem" id="u16514-bw">
                         <div id="u16514"><!-- column -->
-                            <div id="u16514_align_to_page" v-bind:class="[showElement['transport']===false ? 'paddingalign' : '', 'clearfix']">
+                            <div id="u16514_align_to_page"
+                                 v-bind:class="[showElement['transport']===false ? 'paddingalign' : '', 'clearfix']">
                                 <div class="clearfix colelem" id="u15557-4"><!-- content -->
-                                    <p>cena</p>
+                                    <p>PRZYPUSZCZALNA CENA* </p>
                                 </div>
+                                <div class="clearfix colelem" id="cenadesk"><p>*Cena zależna jest od ilości osób
+                                    uczestniczących w imprezie, doboru atrakcji oraz terminu</p></div>
                                 <form id="form_data" class="form" @submit.prevent="save">
                                     <div class="clearfix colelem" id="pppu15527-4"><!-- group -->
 
@@ -171,6 +174,13 @@
                                         </div>
 
                                     </div>
+                                    <div class="clearfix grpelem" id="u16847-4"><!-- content -->
+                                        <img src="/images/phone-call.png" style="
+    float: left;padding-right: 10px;
+">
+                                        <p>W celu dokładnej rezerwacji skorzystaj z formularza lub dzwoń: <a
+                                                class="tellink" href="tel:669740574">669 74 05 74</a></p>
+                                    </div>
                                     <div class="clearfix grpelem" id="ppu15527-4"><!-- column -->
                                         <div class="clearfix colelem" id="pu15527-4"><!-- group -->
                                             <div class="clearfix grpelem" id="u15527-4"><!-- content -->
@@ -215,7 +225,8 @@
                                                 <input type="hidden" name="related_event[]" :value="event.id">
                                             </div>
                                         </div>
-                                        <div v-if="showElement['hotel']" class="clearfix colelem" id="u15535"><!-- group -->
+                                        <div v-if="showElement['hotel']" class="clearfix colelem" id="u15535">
+                                            <!-- group -->
                                             <div class="clearfix grpelem" id="u15536-4"><!-- content -->
                                                 <p>Hotel:</p>
                                             </div>
@@ -232,7 +243,8 @@
                                                 <input type="hidden" name="hotel" :value="hotel.id">
                                             </div>
                                         </div>
-                                        <div v-if="showElement['transport']" class="clearfix colelem" id="u19760"><!-- group -->
+                                        <div v-if="showElement['transport']" class="clearfix colelem" id="u19760">
+                                            <!-- group -->
                                             <div class="clearfix grpelem" id="u19762-4"><!-- content -->
                                                 <p>Transport:</p>
                                             </div>
@@ -272,9 +284,6 @@
                                         <div class="clearfix grpelem" id="u15538-4"><!-- content -->
                                             <p>{{getAllCost}} ZL</p>
                                         </div>
-                                        <div class="clearfix grpelem" id="u16847-4"><!-- content -->
-                                            <p>Także możesz się skontaktować z menadżerem telefonicznie: +123123123</p>
-                                        </div>
                                     </div>
 
                                 </form>
@@ -297,24 +306,31 @@
             <![endif]-->
         </div>
         <!-- JS includes -->
-
-        <div @click="closeModal(modal_scroll, modal_item)" v-show="modal" class="dm-overlay" id="win1">
+        <!--@click="closeModal(modal_scroll, modal_item)"-->
+        <div v-show="modal" class="dm-overlay" id="win1">
             <div class="dm-table">
-                <div class="dm-cell">
+                <div @click.self="closeModal(modal_scroll, modal_item)" class="dm-cell">
                     <div style="border-radius: 0;" class="dm-modal">
                         <div class="dm-modal-desc">
-                            <span class="modal_cost">{{modal_item.cost}} ZL</span>
-                            <img title="Do koszyka" @click="showModal(modal_item)" class="block" id="u18674_img"
-                                 v-bind:src="[modal_item.show ? cart_img2 : cart_img1]" alt="" width="32" height="32">
+                            <span v-if="modal_scroll !== 'city'" class="modal_cost">{{modal_item.cost}} ZL</span>
+                            <a href="javascript:void(0)" data-hint="Do koszyka" class="hint--top-left"><img
+                                    @click="showModal(modal_item)" class="block" id="u18674_img"
+                                    v-bind:src="[modal_item.show ? cart_img2 : cart_img1]" alt="" width="32"
+                                    height="32"></a>
                             <a @click="closeModal(modal_scroll, modal_item)" class="close"></a>
                         </div>
                         <div v-if="!modal_item.event" class="name_modal"><p>{{modal_item.name}}</p></div>
                         <div v-else class="name_modal"><p>{{modal_item.event.name}}</p></div>
                         <div v-if="modal_item.event" class="desc_modal" v-html="modal_item.event.description"></div>
                         <div v-else class="desc_modal" v-html="modal_item.description"></div>
-                        <div v-if="modal_photo" class="index-modal-photo"><a :href="modal_photo" data-lightbox="image-1"
-                                                                             :data-title="modal_item.name"><img
-                                width="350" :src="modal_photo"></a></div>
+                        <div v-if="modal_photo" class="index-modal-photo">
+                            <div @click="ChangePhoto(2)" class="prevmodal"></div>
+                            <a :href="modal_photo" data-lightbox="image-1"
+                               :data-title="modal_item.name"><img
+                                    width="350" :src="modal_photo"></a>
+                            <div @click="ChangePhoto(1)" class="nextmodal"></div>
+                        </div>
+
                         <div class="modal-wrap" v-if="modal_item.event">
 
                             <div v-for="picture_dop in modal_item.event.pictures"
@@ -429,7 +445,8 @@
                 store: '/api/basket',
                 method: 'post',
                 cart_img1: 'images/shopping-cart (1)2.png',
-                cart_img2: 'images/shopping-cart-verified-symbol.png'
+                cart_img2: 'images/shopping-cart-verified-symbol.png',
+                index_photo: 0
             }
         },
         computed: {
@@ -528,9 +545,23 @@
             })
         },
         methods: {
+            ChangePhoto(add){
+                console.log(this.modal_item.pictures.length)
+                console.log(this.index_photo)
+
+                if ((add === 1) && (this.modal_item.pictures.length - 1 > this.index_photo)) {
+                    this.index_photo++
+                }
+                if ((add === 2) && (this.modal_item.pictures.length > this.index_photo) && (this.index_photo > 0)) {
+                    this.index_photo--
+                }
+                this.modal_photo = this.modal_item.pictures[this.index_photo].link
+            },
             closeModal(element, item){
                 this.modal = false
-                this.showElement[element] = true
+                if (this.modal_item.show) {
+                    this.showElement[element] = true
+                }
                 if ((element != 'is_hotel') && (this.modal_item.show == true)) {
                     this.scroll(element)
                     console.log(this.modal_item.show)
@@ -556,16 +587,19 @@
                     x = 30
                 }
                 if (element === 'transport') {
-                    x = -10
+                    x = 380
                 }
                 if (element === 'photographer') {
-                    x = 50
-                }
-                if(element === 'event'){
-                    x = 60
-                }
-                if(($(window).width()<=1025) && (element === 'photographer')){
                     x = 200
+                }
+                if (element === 'event') {
+                    x = 40
+                }
+                if (($(window).width() <= 1367) && (element === 'photographer')) {
+                    x = 150
+                }
+                if (($(window).width() <= 1367) && (element === 'transport')) {
+                    x = 210
                 }
                 setTimeout(function () {
                     $("html,body").animate({scrollTop: $(elm).offset().top - x}, 1000)
@@ -600,7 +634,7 @@
                     this.showElement['cena'] = false
                     console.log(this.showElement['cena'])
                     setTimeout(function () {
-                        $("html,body").animate({scrollTop: $('#atrakcji').offset().top}, 1000)
+                        $("html,body").animate({scrollTop: $('#u8547-4').offset().top - 60}, 1000)
                     }, 1000);
                 }
             },

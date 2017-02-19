@@ -37,7 +37,7 @@
         </div>
         <a @click="ShowMethod()" class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
            id="buttonu8626"><!-- container box -->
-            <div class="clearfix grpelem" id="u8627-4"><!-- content --><p>WYBRAĆ</p></div>
+            <div class="clearfix grpelem" id="u8627-4"><!-- content --><p>WYBIERZ</p></div>
         </a>
         <div class="PamphletWidget clearfix grpelem" id="pamphletu15202"><!-- none box -->
             <transition name="sliderhotel">

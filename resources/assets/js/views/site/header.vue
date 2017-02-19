@@ -8,9 +8,9 @@
                 <img class="block" id="u24096_img" src="images/new.png" alt="" width="175" height="58"/>
 
                 <a href="/pl"><img
-                        src="https://im0-tub-ru.yandex.net/i?id=ffa3a652e171ce99e19ce864ff1b44fb&amp;n=33&amp;h=215&amp;w=323"
+                        src="/images/pl.jpg"
                         class="poland"></a>
-                <a href="/en"><img src="https://www.vipkeys.net/img/eng.png"
+                <a href="/en"><img src="/images/eng.png"
                                    class="english"></a>
 
             </div>

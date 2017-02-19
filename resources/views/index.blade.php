@@ -24,6 +24,7 @@
     <link href="{{asset('css/lightbox.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('css/site_global.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('css/index.css')}}" id="pagesheet"/>
+    <link rel="stylesheet" type="text/css" href="{{asset('css/hint.min.css')}}"/>
     <!-- Other scripts -->
     <script type="text/javascript">
         var __adobewebfontsappname__ = "muse";

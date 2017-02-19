@@ -12,35 +12,35 @@
                 <div class="wrap">
                     <div class="clearfix grpelem holiday"
                          v-for="(item,index) in model.data" v-bind:key="item"><!-- group -->
+                        <div v-if="item.show === true" class="Container rounded-corners clearfix grpelem wp-panel wp-panel-active"
+                             id="u12112" role="tabpanel" aria-labelledby="u12117"><!-- group -->
+                            <div class="rounded-corners grpelem" id="u12113"><!-- simple frame --></div>
+                        </div>
                         <div v-if="item.description" id="pamphletu16085" @click="showModal(item)">
                             <div id="u16107" class="ThumbGroup clearfix grpelem">
                                 <div class="popup_anchor">
-                                    <div id="u16108" role="button" tabindex="0" aria-haspopup="true"
+                                    <a href="javascript:void(0)" data-hint="Informacja" id="u16108" role="button" tabindex="0" aria-haspopup="true"
                                          aria-controls="u16087"
-                                         class="Thumb popup_element rounded-corners clearfix wp-tab-active">
+                                         class="hint--top-right humb popup_element rounded-corners clearfix wp-tab-active">
                                         <div id="u16109" class="clip_frame grpelem"><img id="u16109_img"
                                                                                          src="images/inform.png?crc=157975575"
                                                                                          alt="" width="78" height="59"
                                                                                          class="block"></div>
-                                    </div>
+                                    </a>
                                 </div>
                             </div>
                             <div id="u16086popup" class="popup_anchor"></div>
                             <div class="popup_anchor"></div>
                         </div>
-                        <div  @click="ShowMethod(item)" v-if="item.show === false" :data-cost="item.cost"
-                             class="pointer_cursor rounded-corners clearfix grpelem" id="u10782">
+                        <div  @click="ShowMethod(item)" :data-cost="item.cost"
+                              id="u10782" v-bind:class="[item.show ? 'itemopacity' : '', 'pointer_cursor rounded-corners clearfix grpelem']">
                             <!-- column -->
                             <!-- image --><div id="u10915"><img class="block" id="u10915_img"
-                                                :src="'img/holiday/' + item.picture"
-                                                                      alt="" width="39" height="38"/></div>
+                                                                :src="'img/holiday/' + item.picture"
+                                                                alt="" width="39" height="38"/></div>
                             <p class="nonblock nontext anim_swing clearfix colelem"
                                id="u10914-4"
                             ><!-- content -->{{item.name}}</p>
-                        </div>
-                        <div v-else class="Container rounded-corners clearfix grpelem wp-panel wp-panel-active"
-                             id="u12112" role="tabpanel" aria-labelledby="u12117"><!-- group -->
-                            <div class="rounded-corners grpelem" id="u12113"><!-- simple frame --></div>
                         </div>
                     </div>
                 </div>

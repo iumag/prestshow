@@ -8,18 +8,18 @@
                 <div class="transportwrap transport-complete-item" v-bind:key="item" v-for="item in model.data">
                     <div v-if="item.description" @click="showModal(item)" class="PamphletWidget clearfix grpelem"
                          id="pamphletu17791"><!-- none box -->
-                        <div class="ThumbGroup clearfix grpelem" id="u17810"><!-- none box -->
+                        <a href="javascript:void(0)" data-hint="Informacja" class="hint--top-right ThumbGroup clearfix grpelem" id="u17810"><!-- none box -->
                             <div class="popup_anchor">
                                 <div class="Thumb popup_element rounded-corners clearfix wp-tab-active" id="u17811"
                                      role="button" tabindex="0" aria-haspopup="true" aria-controls="u17796">
                                     <!-- group -->
                                     <div class="clip_frame grpelem" id="u17812"><!-- image -->
-                                        <img class="block" id="u17812_img" src="images/info.png?crc=3898747697" alt=""
-                                             width="28" height="45">
+                                        <img class="block" id="u17812_img" src="images/info2.png" alt=""
+                                             width="28" height="23">
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </a>
                         <div class="popup_anchor" id="u17795popup">
 
                         </div>

@@ -20,7 +20,6 @@
             toolbar: {
                 type: Array,
                 default: () => [
-                    ['Format'],
                     ['Bold', 'Italic', 'Underline'],
                     ['Undo', 'Redo'], ['PasteText'],
                     [ 'NumberedList', 'BulletedList'],
