@@ -8,8 +8,7 @@
                 <td><img :src="'/img/event/' + item.picture"></td>
                 <td style="height: 100px;
     display: block;
-    overflow: hidden;" v-html="item.description"></td>
-                <td>{{item.created_at}}</td>
+    overflow: hidden;width: 388px;" v-html="item.description"></td>
                 <td class="text-center">{{item.pictures.length}}</td>
                 <td v-html="isVideo(item)" class="text-center"></td>
                 <td>
@@ -49,7 +48,6 @@
                         parent_column: 'event_translations',
                         sort: true
                     },
-                    {title: localization.created_at, key: 'created_at', parent_column: 'events', sort: true},
                     {title: localization.count_pictures, key: 'pictures', parent_column: 'events', sort: false},
                     {title: localization.video, key: 'video', parent_column: 'events', sort: false},
                     {title: localization.actions, sort: false}

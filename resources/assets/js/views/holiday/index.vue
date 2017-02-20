@@ -8,9 +8,8 @@
                 <td><img :src="'/img/holiday/' + item.picture"></td>
                 <td style="height: 100px;
     display: block;
-    overflow: hidden;" v-html="item.description"></td>
+    overflow: hidden;width: 388px;" v-html="item.description"></td>
                 <td>{{item.cost}}</td>
-                <td>{{item.created_at}}</td>
                 <td class="text-center">{{item.pictures.length}}</td>
                 <td v-html="isVideo(item)" class="text-center"></td>
                 <td class="text-center">{{item.sort}}</td>
@@ -47,10 +46,9 @@
                     {title: localization.picture, key: 'picture', sort: false},
                     {title: localization.description, key: 'description', sort: false},
                     {title: localization.cost, key: 'cost', sort: true},
-                    {title: localization.created_at, key: 'created_at', sort: true},
                     {title: localization.count_pictures, key: 'pictures', parent_column: 'events', sort: false},
                     {title: localization.video, key: 'video', parent_column: 'events', sort: false},
-                    {title: localization.sort, key: 'sort', parent_column: 'events', sort: false},
+                    {title: localization.sort, key: 'sort', parent_column: 'events', sort: true},
                     {title: localization.actions, sort: false}
                 ],
                 filter: [
