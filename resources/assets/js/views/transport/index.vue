@@ -14,6 +14,7 @@
                 <td>{{item.created_at}}</td>
                 <td class="text-center">{{item.pictures.length}}</td>
                 <td v-html="isVideo(item)" class="text-center"></td>
+                <td class="text-center">{{item.sort}}</td>
                 <td>
                     <router-link class="edit-modal btn btn-success" :to="'/transport/' + item.id + '/edit'">
                         <span class="glyphicon glyphicon-edit"></span> {{localization.edit}}
@@ -51,6 +52,7 @@
                     {title: localization.created_at, key: 'created_at', sort: true},
                     {title: localization.count_pictures, key: 'pictures', parent_column: 'events', sort: false},
                     {title: localization.video, key: 'video', parent_column: 'events', sort: false},
+                    {title: localization.sort, key: 'sort', parent_column: 'events', sort: false},
                     {title: localization.actions, sort: false}
                 ],
                 filter: [

@@ -34,6 +34,7 @@ class HolidayController extends Controller
             'name' => 'required',
             'picture' => 'required|image',
             'cost' => 'required|numeric|min:0',
+            'sort' => 'required|numeric|min:1'
         ]);
 
         $image = $request->file('picture');
@@ -53,7 +54,8 @@ class HolidayController extends Controller
         $holiday = Holiday::create([
             'cost' => $request->get('cost'),
             'picture' => $name,
-            'video' => $request->get('video')
+            'video' => $request->get('video'),
+            'sort' => $request->get('sort'),
         ]);
 
         $pictures = $request->file('pictures');
@@ -115,6 +117,7 @@ class HolidayController extends Controller
             'name' => 'required',
             'picture' => 'image',
             'cost' => 'required|numeric|min:0',
+            'sort' => 'required|numeric|min:1'
         ]);
 
         $holiday = Holiday::findOrFail($id);
@@ -138,7 +141,8 @@ class HolidayController extends Controller
         $holiday->update([
             'cost' => $request->get('cost'),
             'picture' => $name,
-            'video' => $request->get('video')
+            'video' => $request->get('video'),
+            'sort' => $request->get('sort'),
         ]);
 
         $pictures = $request->file('pictures');

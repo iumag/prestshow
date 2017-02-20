@@ -9,6 +9,7 @@
                 <td v-else></td>
                 <td>{{item.cost}}</td>
                 <td>{{item.created_at}}</td>
+                <td class="text-center">{{item.sort}}</td>
                 <td>
                     <router-link class="edit-modal btn btn-success" :to="'/related_event/' + item.id + '/edit'">
                         <span class="glyphicon glyphicon-edit"></span> {{localization.edit}}
@@ -42,6 +43,7 @@
                     {title: localization.holiday, key: 'holiday', sort: true},
                     {title: localization.cost, key: 'cost', sort: true},
                     {title: localization.created_at, key: 'created_at', sort: true},
+                    {title: localization.sort, key: 'sort', parent_column: 'events', sort: false},
                     {title: localization.actions, sort: false}
                 ],
                 filter: [

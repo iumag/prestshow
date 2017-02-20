@@ -13,11 +13,11 @@ class Transport extends Model
     public $translatedAttributes = ['name', 'description'];
 
     protected $fillable = [
-        'name', 'picture', 'description', 'cost', 'video',  'city_id'
+        'name', 'picture', 'description', 'cost', 'video',  'city_id', 'sort'
     ];
 
     protected $filter = [
-        'id', 'name', 'picture', 'description', 'cost', 'created_at', 'video', 'city_id'
+        'id', 'name', 'picture', 'description', 'cost', 'created_at', 'video', 'city_id', 'sort'
     ];
 
     public static function initalize()
@@ -27,7 +27,8 @@ class Transport extends Model
             'picture' => '',
             'description' => '',
             'cost' => '',
-            'video' => ''
+            'video' => '',
+            'sort' => 1
         ];
     }
 

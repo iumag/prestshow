@@ -13,11 +13,11 @@ class City extends Model
     public $translatedAttributes = ['name', 'description'];
 
     protected $fillable = [
-        'name', 'picture', 'description', 'cost', 'video'
+        'name', 'picture', 'description', 'cost', 'video', 'status', 'sort'
     ];
 
     protected $filter = [
-        'id', 'name', 'picture', 'description', 'cost', 'created_at', 'video'
+        'id', 'name', 'picture', 'description', 'cost', 'created_at', 'video', 'status', 'sort'
     ];
 
     public static function initalize()
@@ -27,7 +27,9 @@ class City extends Model
             'picture' => '',
             'description' => '',
             'cost' => '',
-            'video' => ''
+            'video' => '',
+            'sort' => 1,
+            'status' => 1
         ];
     }
 

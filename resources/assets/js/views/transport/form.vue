@@ -35,6 +35,15 @@
                         <small class="text-danger" v-if="errors.picture">{{errors.picture[0]}}</small>
                     </div>
                     <div class="row">
+                        <div class="col-sm-1">
+                            <div class="form-group">
+                                <label>{{localization.sort}}</label>
+                                <input type="text" name="sort" class="form-control text-center" v-model="form.sort">
+                                <small class="text-danger" v-if="errors.sort">{{errors.sort[0]}}</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-sm-12">
                             <div class="form-group">
                                 <label>{{localization.description}}</label>

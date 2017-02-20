@@ -2,17 +2,18 @@
     <data-viewer :showfooter="showfooter" :source="source" :thead="thead" :filter="filter" :create="create"
                  :title="title">
         <template scope="props">
-            <tr v-for="(item,index) in props.model.data">
+            <tr v-bind:class="[item.status ? 'success' : 'danger']" v-for="(item,index) in props.model.data">
                 <td>{{item.id}}</td>
                 <td>{{item.name}}</td>
                 <td><img width=100 height=100 :src="'/img/city/' + item.picture"></td>
-                <td style="height: 100px;
+                <td style="height: 115px;
     display: block;
     overflow: hidden;" v-html="item.description"></td>
                 <td>{{item.cost}}</td>
                 <td>{{item.created_at}}</td>
                 <td class="text-center">{{item.pictures.length}}</td>
                 <td v-html="isVideo(item)" class="text-center"></td>
+                <td class="text-center">{{item.sort}}</td>
                 <td>
                     <router-link class="edit-modal btn btn-success" :to="'/city/' + item.id + '/edit'">
                         <span class="glyphicon glyphicon-edit"></span> {{localization.edit}}
@@ -49,6 +50,7 @@
                     {title: localization.created_at, key: 'created_at', sort: true},
                     {title: localization.count_pictures, key: 'pictures', parent_column: 'events', sort: false},
                     {title: localization.video, key: 'video', parent_column: 'events', sort: false},
+                    {title: localization.sort, key: 'sort', parent_column: 'events', sort: false},
                     {title: localization.actions, sort: false}
                 ],
                 filter: [

@@ -13,11 +13,11 @@ class Holiday extends Model
     public $translatedAttributes = ['name', 'description'];
 
     protected $fillable = [
-        'name', 'picture', 'description', 'cost', 'video'
+        'name', 'picture', 'description', 'cost', 'video', 'sort'
     ];
 
     protected $filter = [
-        'id', 'name', 'picture', 'description', 'cost', 'created_at', 'video'
+        'id', 'name', 'picture', 'description', 'cost', 'created_at', 'video', 'sort'
     ];
 
     public static function initalize()
@@ -27,7 +27,8 @@ class Holiday extends Model
             'picture' => '',
             'description' => '',
             'cost' => '',
-            'video' => ''
+            'video' => '',
+            'sort' => 1
         ];
     }
 

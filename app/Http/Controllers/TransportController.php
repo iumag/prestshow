@@ -43,6 +43,7 @@ class TransportController extends Controller
             'picture' => 'required|image',
             'cost' => 'required|numeric|min:0',
             'city_id' => 'required|exists:cities,id',
+            'sort' => 'required|numeric|min:1'
         ]);
 
         $image = $request->file('picture');
@@ -63,7 +64,8 @@ class TransportController extends Controller
             'cost' => $request->get('cost'),
             'picture' => $name,
             'video' => $request->get('video'),
-            'city_id' => $request->get('city_id')
+            'city_id' => $request->get('city_id'),
+            'sort' => $request->get('sort')
         ]);
 
         $pictures = $request->file('pictures');
@@ -132,6 +134,7 @@ class TransportController extends Controller
             'picture' => 'image',
             'cost' => 'required|numeric|min:0',
             'city_id' => 'required|exists:cities,id',
+            'sort' => 'required|numeric|min:1'
         ]);
 
         $image = $request->file('picture');
@@ -154,6 +157,7 @@ class TransportController extends Controller
             'picture' => $name,
             'video' => $request->get('video'),
             'city_id' => $request->get('city_id'),
+            'sort' => $request->get('sort'),
         ]);
 
         $pictures = $request->file('pictures');

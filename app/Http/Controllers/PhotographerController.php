@@ -32,7 +32,8 @@ class PhotographerController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'picture' => 'required|image',
-            'cost' => 'required|numeric|min:0'
+            'cost' => 'required|numeric|min:0',
+            'sort' => 'required|numeric|min:1'
         ]);
 
         $image = $request->file('picture');
@@ -52,7 +53,8 @@ class PhotographerController extends Controller
         $photographer = Photographer::create([
             'cost' => $request->get('cost'),
             'picture' => $name,
-            'video' => $request->get('video')
+            'video' => $request->get('video'),
+            'sort' => $request->get('sort'),
         ]);
 
         $pictures = $request->file('pictures');
@@ -115,6 +117,7 @@ class PhotographerController extends Controller
             'name' => 'required',
             'picture' => 'image',
             'cost' => 'required|numeric|min:0',
+            'sort' => 'required|numeric|min:1'
         ]);
 
         $image = $request->file('picture');
@@ -135,7 +138,8 @@ class PhotographerController extends Controller
         $photographer->update([
             'cost' => $request->get('cost'),
             'picture' => $name,
-            'video' => $request->get('video')
+            'video' => $request->get('video'),
+            'sort' => $request->get('sort'),
         ]);
 
         $pictures = $request->file('pictures');

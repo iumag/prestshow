@@ -1658,6 +1658,15 @@ div#u10782 {
     filter: alpha(opacity=30);
 }
 
+.disabledbutton {
+    background-color: #787878!important;
+    cursor: not-allowed!important;
+}
+
+.disabledfoto{
+    filter: grayscale(100%);
+}
+
 #buttonu24059 {
     z-index: 627;
     width: 174px;
@@ -7328,7 +7337,7 @@ body {
         min-height: 1800px;
     }
 
-    #ppu15527-4 {margin-top: 700px;}
+    #ppu15527-4 {margin-top: 59px;/* clear: both; */}
 
     .poland{
         margin-left: 261px;
@@ -7875,7 +7884,7 @@ body {
     /* block 8 end*/
     /* block 9 start */
     #u15557-4 {
-        font-size: 110px;
+        font-size: 91px;
     }
 
     #pppu15527-4 {
@@ -7888,7 +7897,7 @@ body {
     }
 
     #u16514 {
-        height: 2000px;
+        /* height: 2000px; */
     }
 
     /*forma */
@@ -7981,6 +7990,7 @@ body {
         color: #FFFFFF;
         position: relative;
         left: 15px;
+        line-height: 52px;
     }
 
     #u15541 {
@@ -7990,7 +8000,7 @@ body {
 
     #u16847-4 {
         z-index: 117;
-        width: 510px;
+        width: 531px;
         min-height: 102px;
         background-color: transparent;
         font-size: 45px;
@@ -7998,11 +8008,16 @@ body {
         font-family: coda, sans-serif;
         font-weight: 400;
         position: relative;
-        margin-right: -10000px;
+        margin-right: 235px;
+        /* float: none; */
+        margin-top: 641px;
+        /* float: left; */
     }
 
     #u15559 {
-        left: -80px;
+        left: -47px;
+        align-content: center;
+        justify-content: center;
     }
 
     #u15533-5 {
@@ -8046,11 +8061,18 @@ body {
 
     #u15557-4 {
         top: 36px;
+        line-height: 118px;
     }
 
     #u15580-4 {
         width: 700px;
         height: 70px;
+    }
+
+    #cenadesk{
+        top: 65px;
+        font-size: 24px;
+        margin-bottom: 19px;
     }
 
     #widgetu15578:hover #u15580-4 * {
@@ -8139,6 +8161,7 @@ body {
     #u15567-13 {
         margin-top: 352px;
         font-size: 37px;
+        margin-left: 0px;
     }
 
     /*forma edn */

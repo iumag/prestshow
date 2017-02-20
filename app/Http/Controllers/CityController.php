@@ -32,10 +32,13 @@ class CityController extends Controller
     {
         $language = app()->getLocale();
 
+        $status = 0;
+
         $this->validate($request, [
             'name' => 'required',
             'picture' => 'required|image',
             'cost' => 'required|numeric|min:0',
+            'sort' => 'required|numeric|min:1'
         ]);
 
         $image = $request->file('picture');
@@ -52,10 +55,16 @@ class CityController extends Controller
             $name = '';
         }
 
+        if($request->get('status')){
+            $status = 1;
+        }
+
         $city = City::create([
             'cost' => $request->get('cost'),
             'picture' => $name,
-            'video' => $request->get('video')
+            'video' => $request->get('video'),
+            'sort' => $request->get('sort'),
+            'status' => $status
         ]);
 
         $pictures = $request->file('pictures');
@@ -113,11 +122,14 @@ class CityController extends Controller
     {
         $language = app()->getLocale();
 
+        $status = 0;
+
 
         $this->validate($request, [
             'name' => 'required',
             'picture' => 'image',
             'cost' => 'required|numeric|min:0',
+            'sort' => 'required|numeric|min:1'
         ]);
 
         $image = $request->file('picture');
@@ -135,12 +147,18 @@ class CityController extends Controller
             $name = $city->picture;
         }
 
+        if($request->get('status')){
+            $status = 1;
+        }
+
         $city->update([
             'name' => $request->get('name'),
             'cost' => $request->get('cost'),
             'description' => $request->get('description'),
             'video' => $request->get('video'),
-            'picture' => $name
+            'picture' => $name,
+            'sort' => $request->get('sort'),
+            'status' => $status
         ]);
 
         $pictures = $request->file('pictures');

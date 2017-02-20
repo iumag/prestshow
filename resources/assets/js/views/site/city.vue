@@ -15,21 +15,38 @@
                                  class="clearfix grpelem city list-complete-item"><!-- group -->
                                 <div class="gradient rounded-corners clip_frame clearfix grpelem citywrap">
                                     <!-- image -->
-                                    <a v-if="item.description" class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
-                                       id="buttonu24047"><!-- container box -->
-                                        <div class="clearfix grpelem" id="u24048-4" @click="showModal(item)">
-                                            <!-- content --><p>Czytaj wiece</p>
-                                        </div>
-                                    </a>
-                                    <a @click="ShowMethod(item)"
+                                    <div v-if="item.status">
+                                        <a v-if="item.description"
+                                           class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
+                                           id="buttonu24047"><!-- container box -->
+                                            <div class="clearfix grpelem" id="u24048-4" @click="showModal(item)">
+                                                <!-- content --><p>Czytaj wiece</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <div v-else>
+                                        <a
+                                                class="disabledbutton nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
+                                                id="buttonu24047"><!-- container box -->
+                                            <div class="clearfix grpelem" id="u24048-4">
+                                                <!-- content --><p>Czytaj wiece</p>
+                                            </div>
+                                        </a>
+                                    </div>
+                                    <a v-if="item.status" @click="ShowMethod(item)"
                                        class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
+                                       id="buttonu19832"><!-- container box -->
+                                        <div class="clearfix grpelem" id="u19833-4"><!-- content --><p>Wybierz</p></div>
+                                    </a>
+                                    <a v-else
+                                       class="disabledbutton nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
                                        id="buttonu19832"><!-- container box -->
                                         <div class="clearfix grpelem" id="u19833-4"><!-- content --><p>Wybierz</p></div>
                                     </a>
                                     <div class="clearfix grpelem" id="u19250-4"><!-- content -->
                                         <p>{{item.name}}</p>
                                     </div>
-                                    <img class="position_content" id="u19243_img" :src="'img/city/'+item.picture" alt=""
+                                    <img v-bind:class="[item.status ? '' : 'disabledfoto', 'position_content']" id="u19243_img" :src="'img/city/'+item.picture" alt=""
                                          width="407" height="268"/>
                                 </div>
                             </div>
@@ -51,8 +68,8 @@
                     data: []
                 },
                 params: {
-                    column: 'id',
-                    direction: 'desc',
+                    column: 'sort',
+                    direction: 'asc',
                     per_page: 10,
                     page: 1,
                     search_column: 'id',

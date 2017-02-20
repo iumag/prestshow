@@ -82,8 +82,8 @@
                     data: [],
                 },
                 params: {
-                    column: 'id',
-                    direction: 'desc',
+                    column: 'sort',
+                    direction: 'asc',
                     per_page: 10,
                     page: 1,
                     search_column: 'city_id',

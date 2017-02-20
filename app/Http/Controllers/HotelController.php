@@ -44,7 +44,8 @@ class HotelController extends Controller
             'name' => 'required',
             'picture' => 'required|image',
             'city_id' => 'required|exists:cities,id',
-            'cost' => 'required|numeric|min:0'
+            'cost' => 'required|numeric|min:0',
+            'sort' => 'required|numeric|min:1'
         ]);
 
         $image = $request->file('picture');
@@ -65,7 +66,8 @@ class HotelController extends Controller
             'cost' => $request->get('cost'),
             'city_id' => $request->get('city_id'),
             'picture' => $name,
-            'video' => $request->get('video')
+            'video' => $request->get('video'),
+            'sort' => $request->get('sort'),
         ]);
 
         $pictures = $request->file('pictures');
@@ -135,6 +137,7 @@ class HotelController extends Controller
             'picture' => 'image',
             'city_id' => 'required|exists:cities,id',
             'cost' => 'required|numeric|min:0',
+            'sort' => 'required|numeric|min:1'
         ]);
 
         $image = $request->file('picture');
@@ -156,7 +159,8 @@ class HotelController extends Controller
             'cost' => $request->get('cost'),
             'city_id' => $request->get('city_id'),
             'picture' => $name,
-            'video' => $request->get('video')
+            'video' => $request->get('video'),
+            'sort' => $request->get('sort'),
         ]);
 
         $pictures = $request->file('pictures');

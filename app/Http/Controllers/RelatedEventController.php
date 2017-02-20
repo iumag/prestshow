@@ -94,7 +94,8 @@ class RelatedEventController extends Controller
                 'city_id' => 'required|exists:cities,id',
                 'holiday_id' => 'required|exists:holidays,id',
                 'event.*.event_id' => 'required|exists:events,id',
-                'cost.*.cost' => 'required|numeric|min:0'
+                'cost.*.cost' => 'required|numeric|min:0',
+                'sort.*.sort' => 'required|numeric|min:1'
             ]);
 
             foreach ($events as $event) {
@@ -115,7 +116,8 @@ class RelatedEventController extends Controller
             $this->validate($request, [
                 'city_id' => 'required|exists:cities,id',
                 'event_id' => 'required|exists:events,id',
-                'cost' => 'required|numeric|min:0'
+                'cost' => 'required|numeric|min:0',
+                'sort' => 'required|numeric|min:1'
             ]);
 
             $related_event = RelatedEvent::create($request->all());
@@ -171,6 +173,7 @@ class RelatedEventController extends Controller
             'event_id' => 'required|exists:events,id',
             'holiday_id' => 'required|exists:holidays,id',
             'cost' => 'required|numeric|min:0',
+            'sort' => 'required|numeric|min:1'
         ]);
 
         $related_event = RelatedEvent::findOrFail($id);

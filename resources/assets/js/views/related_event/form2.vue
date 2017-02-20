@@ -55,6 +55,10 @@
                                        :placeholder="localization.cost">
                                 <input v-else type="text" class="form-control" name="cost[][cost]"
                                        :placeholder="localization.cost">
+                                <input v-if="event.check === false" disabled type="text" class="form-control"
+                                       :placeholder="localization.sort">
+                                <input v-else type="text" class="form-control" name="sort[][sort]"
+                                       :placeholder="localization.sort">
                             </div>
                             <div class="col-sm-1">
                                 <input type="checkbox" class="form-control" @click="event.check = !event.check">
