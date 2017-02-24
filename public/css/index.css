@@ -5368,6 +5368,10 @@ div#u10782 {
     padding-top: 799px;
 }
 
+.pcenampadding2{
+    padding-top: 109px;
+}
+
 #ppu15527-4 {
     z-index: 0;
     /* width: 0.01px; */
@@ -6800,12 +6804,14 @@ body {
 
 .list-complete-enter:nth-child(2n) {
     opacity: 0;
-    transform: translateX(360px);
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
 }
 
 .list-complete-enter {
     opacity: 0;
-    transform: translateX(-360px);
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
 }
 
 .list-complete-leave-active {
@@ -7178,6 +7184,12 @@ body {
     }
 }
 
+@media (min-width: 1150px) and (max-width: 1400px){
+    #u7622, #u7623, #u7624, #u7625, #u7626, #u7627, #u7628, #u19811, #u19814, #istransportpage, #transportpage {
+        display: block!important;
+    }
+}
+
 /* Portrait tablets and medium desktops */
 @media (min-width: 1025px) and (max-width: 1400px) {
     #u15541 {
@@ -7238,7 +7250,7 @@ body {
     }
 
     #u7622, #u7623, #u7624, #u7625, #u7626, #u7627, #u7628, #u19811, #u19814, #istransportpage, #transportpage {
-        display: none
+        display: none;
     }
 
     #u7669_align_to_page {
@@ -8296,7 +8308,7 @@ body {
     /* dich kruglaia*/
     #prodow1 {
         padding-top: 1897px !important;
-        width: 1060px !important;
+        width: 1039px !important;
         height: 1580px !important;
         display: block;
         margin-left: 21px;
@@ -8344,7 +8356,7 @@ body {
 
     body {
         overflow-x: hidden;
-
+        -webkit-text-size-adjust: none;
     }
 
 }

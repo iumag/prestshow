@@ -2,7 +2,7 @@
     <div id="site">
 
         <!--HTML Widget code-->
-        <video id="bgvidu7616" loop preload="auto" muted poster="assets/videopng.png" autoplay
+        <video v-if="width_screen>=1000" id="bgvidu7616" loop preload="auto" muted poster="assets/videopng.png" autoplay
                style="position: fixed; right: 0; bottom: 0; min-width: 100%; min-height: 100%; width: auto; height: auto; z-index: -1000; background: url(assets/videopng.png) no-repeat; background-size: cover;">
             <source src="assets/videoweb.webm" type="video/webm">
             <source src="assets/videomp.mp4" type="video/mp4">
@@ -121,8 +121,8 @@
 
 
                 <div v-show="showElement['cena']" id="pcena"
-                     v-bind:class="[((showElement['transport']===false) && (width_screen <= 1000)) ? 'pcenampadding' : '', 'clearfix colelem']">
-                    ><!-- group -->
+                     v-bind:class="[((showElement['transport']===false) && (width_screen <= 1000)) ? 'pcenampadding' : ((showElement['transport']===false) && (width_screen >= 1000)) ? 'pcenampadding2' : '', 'clearfix colelem']">
+                    <!-- group -->
                     <a class="anchor_item grpelem" id="cena"></a>
                     <div class="browser_width grpelem" id="u16514-bw">
                         <div id="u16514"><!-- column -->
@@ -484,7 +484,9 @@
         },
         updated(){
             this.width_screen = $(window).width()
-            console.log(this.width_screen)
+        },
+        beforeMount(){
+            this.width_screen = $(window).width()
         },
         computed: {
             getAllCost(){
@@ -648,7 +650,7 @@
                     x = 140
                 }
                 if (($(window).width() <= 1000) && (element === 'holiday')) {
-                    x = 100
+                    x = 50
                 }
 
                 setTimeout(function () {
