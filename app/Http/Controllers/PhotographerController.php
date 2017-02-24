@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Picture;
 use Illuminate\Http\Request;
 use App\Photographer;
+use Illuminate\Support\Facades\DB;
 
 class PhotographerController extends Controller
 {
@@ -12,16 +13,23 @@ class PhotographerController extends Controller
     {
         return response()
             ->json([
-                'model' => Photographer::with('pictures')->filterPaginateOrder()
+                'model' => Photographer::with('pictures')->with('city')->filterPaginateOrder()
             ]);
     }
 
     public function create()
     {
+        $language = app()->getLocale();
+
         return response()
             ->json([
                 'form' => Photographer::initalize(),
-                'option' => []
+                'option' => [
+                    'cities' => DB::table('cities')
+                        ->join('city_translations', 'cities.id', '=', 'city_translations.city_id')
+                        ->where('city_translations.locale','=',$language)
+                        ->get()
+                ]
             ]);
     }
 
@@ -33,6 +41,7 @@ class PhotographerController extends Controller
             'name' => 'required',
             'picture' => 'required|image',
             'cost' => 'required|numeric|min:0',
+            'city_id' => 'required|exists:cities,id',
             'sort' => 'required|numeric|min:1'
         ]);
 
@@ -53,6 +62,7 @@ class PhotographerController extends Controller
         $photographer = Photographer::create([
             'cost' => $request->get('cost'),
             'picture' => $name,
+            'city_id' => $request->get('city_id'),
             'video' => $request->get('video'),
             'sort' => $request->get('sort'),
         ]);
@@ -101,10 +111,17 @@ class PhotographerController extends Controller
 
         $photographer = Photographer::with('pictures')->findOrFail($id);
 
+        $language = app()->getLocale();
+
         return response()
             ->json([
                 'form' => $photographer,
-                'option' => ''
+                'option' => [
+                    'cities' => DB::table('cities')
+                        ->join('city_translations', 'cities.id', '=', 'city_translations.city_id')
+                        ->where('city_translations.locale','=',$language)
+                        ->get()
+                ]
             ]);
     }
 
@@ -117,6 +134,7 @@ class PhotographerController extends Controller
             'name' => 'required',
             'picture' => 'image',
             'cost' => 'required|numeric|min:0',
+            'city_id' => 'required|exists:cities,id',
             'sort' => 'required|numeric|min:1'
         ]);
 
@@ -138,6 +156,7 @@ class PhotographerController extends Controller
         $photographer->update([
             'cost' => $request->get('cost'),
             'picture' => $name,
+            'city_id' => $request->get('city_id'),
             'video' => $request->get('video'),
             'sort' => $request->get('sort'),
         ]);

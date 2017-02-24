@@ -105,6 +105,7 @@ html {
     position: fixed;
     top: 114px;
     right: 49px;
+    cursor: pointer;
 }
 
 #u7622:hover {
@@ -124,6 +125,7 @@ html {
     position: fixed;
     top: 173px;
     right: 49px;
+    cursor: pointer;
 }
 
 #u7622.MuseLinkActive, #u7623:hover {
@@ -143,6 +145,7 @@ html {
     position: fixed;
     top: 230px;
     right: 49px;
+    cursor: pointer;
 }
 
 #u7623.MuseLinkActive, #u7624:hover {
@@ -163,6 +166,7 @@ html {
     margin-left: 289px;
     margin-top: 395px;
     position: absolute;
+    cursor: pointer;
 }
 
 #buttonu7617:hover {
@@ -227,6 +231,7 @@ html {
     position: fixed;
     top: 294px;
     right: 49px;
+    cursor: pointer;
 }
 
 #u7624.MuseLinkActive, #u7625:hover {
@@ -246,6 +251,7 @@ html {
     position: fixed;
     top: 352px;
     right: 49px;
+    cursor: pointer;
 }
 
 #u7625.MuseLinkActive, #u7626:hover {
@@ -265,6 +271,7 @@ html {
     position: fixed;
     top: 408px;
     right: 49px;
+    cursor: pointer;
 }
 
 #u7626.MuseLinkActive, #u7627:hover {
@@ -284,6 +291,7 @@ html {
     position: fixed;
     top: 469px;
     right: 49px;
+    cursor: pointer;
 }
 
 #u7627.MuseLinkActive, #u7628:hover {
@@ -5356,6 +5364,10 @@ div#u10782 {
     transition: opacity .6s;
 }
 
+.pcenampadding{
+    padding-top: 799px;
+}
+
 #ppu15527-4 {
     z-index: 0;
     /* width: 0.01px; */
@@ -5377,7 +5389,7 @@ div#u10782 {
 }
 
 .paddingalign {
-    padding-top: 230px !important;
+    padding-top: 111px !important;
 }
 
 #u15527-4 {
@@ -6771,6 +6783,7 @@ body {
     position: fixed;
     top: 536px;
     right: 49px;
+    cursor: pointer;
 }
 
 #transportpage {
@@ -6782,6 +6795,7 @@ body {
     position: fixed;
     top: 601px;
     right: 49px;
+    cursor: pointer;
 }
 
 .list-complete-enter:nth-child(2n) {
@@ -7777,6 +7791,7 @@ body {
         background-color: #000000;
         -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=31)";
         filter: alpha(opacity=31); */
+        margin-top: 203px;
     }
 
     #u15744 {

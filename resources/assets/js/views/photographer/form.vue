@@ -7,7 +7,7 @@
             </div>
             <div class="panel-body">
                 <form class="form" id="form_data" @submit.prevent="save">
-                    <input type="hidden" name="_method" value="put" v-if = "title === 'Edit'" />
+                    <input type="hidden" name="_method" value="put" v-if="title === 'Edit'"/>
                     <div class="row">
                         <div class="col-sm-4">
                             <div class="form-group">
@@ -27,6 +27,16 @@
                         <small class="text-danger" v-if="errors.picture">{{errors.picture[0]}}</small>
                     </div>
                     <div class="row">
+                        <div class="col-sm-4">
+                            <div class="form-group">
+                                <label>City</label>
+                                <select class="form-control" name="city_id" v-model="form.city_id">
+                                    <option>Select</option>
+                                    <option v-for="city in option.cities" :value="city.city_id">{{city.name}}</option>
+                                </select>
+                                <small class="text-danger" v-if="errors.hotel">{{errors.city_id[0]}}</small>
+                            </div>
+                        </div>
                         <div class="col-sm-1">
                             <div class="form-group">
                                 <label>{{localization.sort}}</label>
@@ -41,7 +51,7 @@
                                 <label>{{localization.description}}</label>
                                 <small class="text-danger" v-if="errors.description">{{errors.description[0]}}</small>
                                 <ckeditor v-model="form.description" name="description" :height="'300px'"
-                                          ></ckeditor>
+                                ></ckeditor>
                             </div>
                         </div>
                     </div>
@@ -58,7 +68,8 @@
                         <div class="col-sm-3" v-for="(picture,index) in form.pictures">
                             <a :href="picture.link" data-lightbox="image-1" :data-title="form.name"> <img
                                     :src="picture.link" width="200" height="200" class="img-thumbnail"></a>
-                            <a class="btn btn-danger" @click="deleteItem(picture.id);form.pictures.splice(index,1)">-</a>
+                            <a class="btn btn-danger"
+                               @click="deleteItem(picture.id);form.pictures.splice(index,1)">-</a>
                         </div>
 
                     </div>
@@ -130,7 +141,7 @@
                 this.pictures.push({
                     plus: true
                 });
-                setTimeout(function(){
+                setTimeout(function () {
                     $(".input-4").fileinput({showCaption: false, showUpload: false});
                 }, 100);
 
@@ -161,11 +172,11 @@
                     })
             },
             deleteItem(id){
-                axios.delete('/delete_picture/'+id)
-                    .then(function (response){
+                axios.delete('/delete_picture/' + id)
+                    .then(function (response) {
                         console.log(response)
                     })
-                    .catch(function (error){
+                    .catch(function (error) {
                         console.log(error)
                     })
             }

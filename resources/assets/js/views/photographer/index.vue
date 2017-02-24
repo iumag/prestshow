@@ -5,6 +5,8 @@
             <tr v-for="(item,index) in props.model.data">
                 <td>{{item.id}}</td>
                 <td>{{item.name}}</td>
+                <td v-if="item.city">{{item.city.name}}</td>
+                <td v-else></td>
                 <td><img width=100 height=100 :src="'/img/photographer/' + item.picture"></td>
                 <td style="height: 100px;
     display: block;
@@ -43,6 +45,7 @@
                 thead: [
                     {title: 'Id', key: 'id', sort: true},
                     {title: localization.photographer, key: 'name', sort: true},
+                    {title: localization.city, key: 'city', sort: true},
                     {title: localization.picture, key: 'picture', sort: false},
                     {title: localization.description, key: 'description', sort: true},
                     {title: localization.cost, key: 'cost', sort: true},

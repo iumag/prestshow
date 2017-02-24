@@ -13,11 +13,11 @@ class Photographer extends Model
     public $translatedAttributes = ['name', 'description'];
 
     protected $fillable = [
-        'name', 'picture', 'description', 'cost', 'video', 'sort'
+        'name', 'picture', 'description', 'cost', 'video', 'sort', 'city_id',
     ];
 
     protected $filter = [
-        'id', 'name', 'picture', 'description', 'cost', 'created_at', 'video', 'sort'
+        'id', 'name', 'picture', 'description', 'cost', 'created_at', 'video', 'sort', 'city_id',
     ];
 
     public static function initalize()
@@ -28,13 +28,19 @@ class Photographer extends Model
             'description' => '',
             'cost' => '',
             'video' => '',
-            'sort' => 1
+            'sort' => 1,
+            'city_id' => 'Select'
         ];
     }
 
     public function basket_item()
     {
         return $this->morphOne(BasketItem::class);
+    }
+
+    public function city()
+    {
+        return $this->belongsTo(City::class);
     }
 
     public function pictures()
