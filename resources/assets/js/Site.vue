@@ -25,12 +25,15 @@
                     </div>
                     <site-header></site-header>
                     <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7622"
-                       href="#glowna"><!-- simple frame --></a>
+                       @click="scroll('home')"><!-- simple frame --></a>
                     <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7623"
-                       href="#uroczystosci"><!-- simple frame --></a>
-                    <a v-show="showElement['city']" class="nonblock nontext anim_swing rounded-corners pinned-colelem"
+                       @click="scroll('holiday')"><!-- simple frame --></a>
+                    <a v-if="showElement['city']" class="nonblock nontext anim_swing rounded-corners pinned-colelem"
                        id="u7624"
-                       href="#miasto"><!-- simple frame --></a>
+                       @click="scroll('city')"><!-- simple frame --></a>
+                    <a v-else style="background-color: black; cursor: not-allowed"
+                       class="nonblock nontext anim_swing rounded-corners pinned-colelem"
+                       id="u7624"><!-- simple frame --></a>
                     <a class="nonblock nontext Button anim_swing rounded-corners clearfix colelem" id="buttonu7617"
                        @click="scroll('holiday')"><!-- container box -->
                         <div class="clearfix grpelem" id="u7618-4"><!-- content -->
@@ -39,19 +42,31 @@
                             </p>
                         </div>
                     </a>
-                    <a v-show="showElement['event']" class="nonblock nontext anim_swing rounded-corners pinned-colelem"
+                    <a v-if="showElement['event']" class="nonblock nontext anim_swing rounded-corners pinned-colelem"
                        id="u7625"
-                       href="#atrakcji"><!-- simple frame --></a>
-                    <a v-show="showElement['is_hotel']"
+                       @click="scroll('event')"><!-- simple frame --></a>
+                    <a v-else style="background-color: black; cursor: not-allowed"
+                       class="nonblock nontext anim_swing rounded-corners pinned-colelem"
+                       id="u7625"><!-- simple frame --></a>
+                    <a v-if="showElement['is_hotel']"
                        class="nonblock nontext anim_swing rounded-corners pinned-colelem"
                        id="u7626"
-                       href="#nocleg"><!-- simple frame --></a>
-                    <a v-show="showElement['hotel']" class="nonblock nontext anim_swing rounded-corners pinned-colelem"
+                       @click="scroll('is_hotel')"><!-- simple frame --></a>
+                    <a v-else style="background-color: black; cursor: not-allowed"
+                       class="nonblock nontext anim_swing rounded-corners pinned-colelem"
+                       id="u7626"><!-- simple frame --></a>
+                    <a v-if="showElement['hotel']" class="nonblock nontext anim_swing rounded-corners pinned-colelem"
                        id="u7627"
-                       href="#hotel"><!-- simple frame --></a>
-                    <a v-show="showElement['photographer']"
+                       @click="scroll('hotel')"><!-- simple frame --></a>
+                    <a v-else style="background-color: black; cursor: not-allowed"
+                       class="nonblock nontext anim_swing rounded-corners pinned-colelem"
+                       id="u7627"><!-- simple frame --></a>
+                    <a v-if="showElement['photographer']"
                        class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7628"
-                       href="#fotograf"><!-- simple frame --></a>
+                       @click="scroll('photographer')"><!-- simple frame --></a>
+                    <a v-else style="background-color: black; cursor: not-allowed"
+                       class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7628">
+                        <!-- simple frame --></a>
 
 
                     <div class="size_fixed colelem" id="u15365"><!-- custom html -->
@@ -64,15 +79,24 @@
                         </div>
 
                     </div>
-                    <a v-show="showElement['is_transport']"
+                    <a v-if="showElement['is_transport']"
                        class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="istransportpage"
-                       href="#po-transporcie"><!-- simple frame --></a>
-                    <a v-show="showElement['transport']"
+                       @click="scroll('is_transport')"><!-- simple frame --></a>
+                    <a v-else style="background-color: black; cursor: not-allowed"
+                       class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="istransportpage">
+                        <!-- simple frame --></a>
+                    <a v-if="showElement['transport']"
                        class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="transportpage"
-                       href="#pu16487"><!-- simple frame --></a>
+                       @click="scroll('transport')"><!-- simple frame --></a>
+                    <a v-else style="background-color: black; cursor: not-allowed"
+                       class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="transportpage">
+                        <!-- simple frame --></a>
                     <a v-if="showElement['cena']" class="nonblock nontext anim_swing rounded-corners pinned-colelem"
                        id="u19814"
-                       href="#cena"><!-- simple frame --></a>
+                       @click="scroll('cena')"><!-- simple frame --></a>
+                    <a v-else style="background-color: black; cursor: not-allowed"
+                       class="nonblock nontext anim_swing rounded-corners pinned-colelem"
+                       id="u19814"><!-- simple frame --></a>
                 </div>
                 <holiday ref="holiday"></holiday>
                 <transition
@@ -88,7 +112,7 @@
                 <is-hotel v-if="showElement['is_hotel']"></is-hotel>
 
                 <hotel v-if="showElement['hotel']" :city_id="city.id" ref="hotel"></hotel>
-                <photographer v-if="showElement['photographer']" ref="photographer"></photographer>
+                <photographer v-if="showElement['photographer']" :city_id="city.id" ref="photographer"></photographer>
 
                 <is-transport v-if="showElement['is_transport']"></is-transport>
 
@@ -96,7 +120,9 @@
                 <transport v-if="showElement['transport']" :city_id="city.id" ref="transport"></transport>
 
 
-                <div v-show="showElement['cena']" class="clearfix colelem" id="pcena"><!-- group -->
+                <div v-show="showElement['cena']" id="pcena"
+                     v-bind:class="[((showElement['transport']===false) && (width_screen <= 1000)) ? 'pcenampadding' : '', 'clearfix colelem']">
+                    ><!-- group -->
                     <a class="anchor_item grpelem" id="cena"></a>
                     <div class="browser_width grpelem" id="u16514-bw">
                         <div id="u16514"><!-- column -->
@@ -416,6 +442,7 @@
                     cena: false
                 },
                 scrollElement: {
+                    home: '#glowna',
                     holiday: '#uroczystosci',
                     city: '#miasto',
                     event: '#u8547-4',
@@ -451,8 +478,13 @@
                 method: 'post',
                 cart_img1: 'images/shopping-cart (1)2.png',
                 cart_img2: 'images/shopping-cart-verified-symbol.png',
-                index_photo: 0
+                index_photo: 0,
+                width_screen: 0,
             }
+        },
+        updated(){
+            this.width_screen = $(window).width()
+            console.log(this.width_screen)
         },
         computed: {
             getAllCost(){
