@@ -70,8 +70,8 @@ class RelatedEventController extends Controller
         foreach ($events as $event){
             foreach($related_events as $related_event){
                 if ($event==$related_event){
-                   unset($events[$i]);
-                   break;
+                    unset($events[$i]);
+                    break;
                 }
             }
             $i++;
@@ -88,6 +88,7 @@ class RelatedEventController extends Controller
 //        event.*.event_id' => 'required|exists:events,id',
         $events = $request->get('event');
         $costs = $request->get('cost');
+        $sorts = $request->get('sort');
         $index = 0;
         if (is_array($events)) {
             $this->validate($request, [
@@ -104,7 +105,8 @@ class RelatedEventController extends Controller
                     'city_id' => $request->get('city_id'),
                     'holiday_id' => $request->get('holiday_id'),
                     'event_id' => $event['event_id'],
-                    'cost' => $costs[$index]['cost']
+                    'cost' => $costs[$index]['cost'],
+                    'sort' => $sorts[$index]['sort']
                 ]);
                 $index++;
             }

@@ -20,7 +20,7 @@
                                            class="nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
                                            id="buttonu24047"><!-- container box -->
                                             <div class="clearfix grpelem" id="u24048-4" @click="showModal(item)">
-                                                <!-- content --><p>Czytaj wiece</p>
+                                                <!-- content --><p>Czytaj więce</p>
                                             </div>
                                         </a>
                                     </div>
@@ -29,7 +29,7 @@
                                                 class="disabledbutton nonblock nontext Button anim_swing rounded-corners clearfix grpelem"
                                                 id="buttonu24047"><!-- container box -->
                                             <div class="clearfix grpelem" id="u24048-4">
-                                                <!-- content --><p>Czytaj wiece</p>
+                                                <!-- content --><p>Czytaj więce</p>
                                             </div>
                                         </a>
                                     </div>

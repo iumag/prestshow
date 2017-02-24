@@ -149,6 +149,19 @@
     $(window).resize(function() {
         $('#test').css('height',$(window).height());
         $('#buttonu7617').css('margin-top',$(window).height()/3);
+        if($(window).width() <=1000) {
+            $('#u11635-bw').css('display', 'none');
+            $('#u15327-bw').css('display', 'none');
+            $('#ppatrakcji').css('background', 'transparent url(../images/pexels-photo-225224.jpg) no-repeat center center');
+            $('#ppatrakcji').css('background-size', 'cover');
+            $('#ppatrakcji').css('width', 'initial');
+
+        }else{
+            $('#u11635-bw').css('display', 'block');
+            $('#u15327-bw').css('display', 'block');
+            $('#ppatrakcji').css('background', 'none');
+            $('#ppatrakcji').css('width', '0.01px');
+        }
     });
 
     $(window).on("scroll", function () {
@@ -176,4 +189,5 @@
     });
 
 </script>
+
 </html>

@@ -1,5 +1,5 @@
 <template>
-    <div class="clearfix colelem" id="ppatrakcji"><!-- group -->
+    <div class="clearfix colelem" id="ppatrakcji" style="background: none"><!-- group -->
         <div class="clearfix grpelem" id="u8547-4"><!-- content -->
             <p>Atrakcje</p>
         </div>
@@ -16,7 +16,7 @@
         <div v-for="n in total">
             <div :id="'prodow'+n" class="wrap wrap-padding" :data-test="n"
                  v-bind:class="[n===1 ? wrap_left : '', wrap]">
-                <div class="clearfix grpelem holiday event-complete-item" v-for="(item,index) in model.data"
+                <div class="clearfix grpelem holiday" v-for="(item,index) in model.data"
                      v-bind:key="item"
                      v-if="(index<n*15 && n===1) || (n>1 && index>=(n-1)*15)"><!-- group -->
                     <div v-if="item.show === true" @click="ShowMethod(item)"
@@ -104,6 +104,21 @@
         },
         beforeMount() {
             this.fetchData()
+        },
+        mounted(){
+            if($(window).width() <=1000) {
+                $('#u11635-bw').css('display', 'none');
+                $('#u15327-bw').css('display', 'none');
+                $('#ppatrakcji').css('background', 'transparent url(../images/pexels-photo-225224.jpg) no-repeat center center');
+                $('#ppatrakcji').css('background-size', 'cover');
+                $('#ppatrakcji').css('width', 'initial');
+
+            }else{
+                $('#u11635-bw').css('display', 'block');
+                $('#u15327-bw').css('display', 'block');
+                $('#ppatrakcji').css('background', 'none');
+                $('#ppatrakcji').css('width', '0.01px');
+            }
         },
         updated() {
             if (this.city_id != this.params.search_query_1) {

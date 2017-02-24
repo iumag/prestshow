@@ -3,8 +3,10 @@
         <template scope="props">
             <tr v-for="(item,index) in props.model.data">
                 <td>{{item.id}}</td>
-                <td>{{item.event.name}}</td>
-                <td>{{item.city.name}}</td>
+                <td v-if="item.event">{{item.event.name}}</td>
+                <td v-else></td>
+                <td v-if="item.city">{{item.city.name}}</td>
+                <td v-else></td>
                 <td v-if="item.holiday">{{item.holiday.name}}</td>
                 <td v-else></td>
                 <td>{{item.cost}}</td>

@@ -7,3 +7,7 @@ const site = new Vue({
     components: {Site},
     template: `<site></site>`
 })
+
+document.addEventListener('DOMContentLoaded', function () {
+   site.$mount('#site')
+})

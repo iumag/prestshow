@@ -7,6 +7,10 @@
             <source src="assets/videoweb.webm" type="video/webm">
             <source src="assets/videomp.mp4" type="video/mp4">
         </video>
+        <div id="backsitephone">
+
+        </div>
+
         <span style="opacity: .05">
   <div style="background-image: url(assets/pattern-dots.png);position:fixed;opacity: 0.8;left: 0px;top: 0px;width: 100%;height: 100%;z-index: -999;"></div>
 </span>
@@ -28,7 +32,7 @@
                        id="u7624"
                        href="#miasto"><!-- simple frame --></a>
                     <a class="nonblock nontext Button anim_swing rounded-corners clearfix colelem" id="buttonu7617"
-                       href="#uroczystosci"><!-- container box -->
+                       @click="scroll('holiday')"><!-- container box -->
                         <div class="clearfix grpelem" id="u7618-4"><!-- content -->
                             <p>
                                 Co chcesz zorganizować?
@@ -412,6 +416,7 @@
                     cena: false
                 },
                 scrollElement: {
+                    holiday: '#uroczystosci',
                     city: '#miasto',
                     event: '#u8547-4',
                     is_hotel: '#nocleg',
@@ -598,9 +603,22 @@
                 if (($(window).width() <= 1367) && (element === 'photographer')) {
                     x = 150
                 }
+                if (($(window).width() <= 1367) && (element === 'holiday')) {
+                    x = -10
+                }
                 if (($(window).width() <= 1367) && (element === 'transport')) {
                     x = 210
                 }
+                if (($(window).width() <= 1000) && (element === 'city')) {
+                    x = 100
+                }
+                if (($(window).width() <= 1000) && (element === 'event')) {
+                    x = 140
+                }
+                if (($(window).width() <= 1000) && (element === 'holiday')) {
+                    x = 100
+                }
+
                 setTimeout(function () {
                     $("html,body").animate({scrollTop: $(elm).offset().top - x}, 1000)
                 }, 1000);
