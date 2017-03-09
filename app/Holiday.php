@@ -13,11 +13,11 @@ class Holiday extends Model
     public $translatedAttributes = ['name', 'description'];
 
     protected $fillable = [
-        'name', 'picture', 'description', 'cost', 'video', 'sort'
+        'name', 'picture', 'description', 'cost', 'video', 'sort', 'picture_app'
     ];
 
     protected $filter = [
-        'id', 'name', 'picture', 'description', 'cost', 'created_at', 'video', 'sort'
+        'id', 'name', 'picture', 'description', 'cost', 'created_at', 'video', 'sort', 'picture_app'
     ];
 
     public static function initalize()

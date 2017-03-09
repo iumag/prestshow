@@ -37,7 +37,8 @@ export default {
                 video: 'Video',
                 count_pictures: 'pictures',
                 sort: 'Sort',
-                status: 'Status'
+                status: 'Status',
+                picture_app: 'Picture Application'
             }
         }
     }

@@ -31,7 +31,7 @@
                                      role="button" tabindex="0" aria-haspopup="true" aria-controls="u16087">
                                     <!-- group -->
                                     <div class="clip_frame grpelem" id="u16109"><!-- image -->
-                                        <img title="Do koszyka" class="block" id="u16109_img" src="images/inform.png?crc=157975575" alt=""
+                                        <img class="block" id="u16109_img" src="images/inform.png?crc=157975575" alt=""
                                              width="78" height="59">
                                     </div>
                                 </div>

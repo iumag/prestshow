@@ -8,9 +8,3 @@ const app = new Vue({
     template: `<app></app>`,
     router
 })
-
-// const site = new Vue({
-//     el: '#site',
-//     components: {Site},
-//     template: `<site></site>`
-// })

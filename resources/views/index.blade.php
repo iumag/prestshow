@@ -24,6 +24,86 @@
     <link href="{{asset('css/lightbox.min.css')}}" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{asset('css/site_global.css')}}"/>
     <link rel="stylesheet" type="text/css" href="{{asset('css/index.css')}}" id="pagesheet"/>
+    <!--[if IE 9]>
+    <style type="text/css">
+        #u11635-bw{
+            display: none!important;
+        }
+        #u15327-bw{
+            display: none!important;
+        }
+        html{
+            overflow-x: hidden;
+        }
+    </style>
+    <![endif]-->
+    <style type="text/css">
+        @-moz-document url-prefix() {
+            #patrakcji{
+                margin-top: -700px;
+            }
+
+            .wrap-padding{
+                padding-top: 272px;
+                padding-left: 60px;
+            }
+
+            #ppatrakcji{
+                filter: none;
+            }
+
+
+        }
+
+        @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+            #patrakcji{
+                margin-top: -1700px;
+            }
+
+            .wrap-padding{
+                padding-left: 60px;
+            }
+
+            html{
+                overflow-x: hidden;
+            }
+
+            #cityie{
+                display: inline-block;
+            }
+
+            .hotelie{
+                display: inline-block!important;
+            }
+
+            #pu15524-4{
+                width: 100%;
+            }
+
+            #ppu15527-4{
+                margin-top: 113px;
+            }
+
+        }
+
+        @supports (-ms-ime-align:auto) {
+            #patrakcji{
+                margin-top: -828px;
+            }
+
+            .wrap-padding{
+                padding-left: 60px;
+            }
+
+            #ppatrakcji{
+                filter: none;
+            }
+
+
+        }
+        }
+    </style>
+
     <link rel="stylesheet" type="text/css" href="{{asset('css/hint.min.css')}}"/>
     <!-- Other scripts -->
     <script type="text/javascript">

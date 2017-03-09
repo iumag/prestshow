@@ -77,6 +77,14 @@
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-sm-11">
+                            <label class="control-label">{{localization.picture_app}}</label>
+                            <a v-if="form.picture_app" :href="'/img/holiday/application/' + form.picture_app" data-lightbox="image-1" :data-title="'Picture Application'"> <img
+                                    :src="'/img/holiday/application/' + form.picture_app" width="200" height="200" class="img-thumbnail"></a>
+                            <input name="picture_app" type="file" class="input-4 file-loading">
+                        </div>
+                    </div>
                     <button class="btn btn-success">{{localization.save}}</button>
                 </form>
             </div>

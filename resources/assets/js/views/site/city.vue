@@ -9,7 +9,7 @@
                         <p>GDZIE?</p>
                     </div>
 
-                    <div class="wrap">
+                    <div class="wrap" id="cityie">
                         <transition-group name="list-complete" tag="div">
                             <div v-for="item in model.data" v-bind:key="item"
                                  class="clearfix grpelem city list-complete-item"><!-- group -->

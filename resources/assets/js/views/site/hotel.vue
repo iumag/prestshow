@@ -22,7 +22,7 @@
                 </div>
 
             <div class="popup_anchor" id="u8586popup">
-                <div class="SSSlideLinks clearfix" id="u8586"><!-- horizontal-rows box -->
+                <div class="SSSlideLinks clearfix hotelie" id="u8586"><!-- horizontal-rows box -->
                     <transition-group name="list-complete" tag="div">
                         <div v-bind:key="item" @click="ChangeItem(item)"
                              class="hotelitem SSSlideLink rounded-corners clip_frame clearfix grpelem list-complete-item"

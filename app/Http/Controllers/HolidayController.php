@@ -33,11 +33,26 @@ class HolidayController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'picture' => 'required|image',
+            'picture_app' => 'required|image',
             'cost' => 'required|numeric|min:0',
             'sort' => 'required|numeric|min:1'
         ]);
 
         $image = $request->file('picture');
+
+        $picture_app = $request->file('picture_app');
+
+        if (isset($picture_app)) {
+            if ($picture_app->isValid()) {
+
+                $name_picture_app = $picture_app->getClientOriginalName();
+
+                $picture_app->move('../public/img/holiday/application', $name_picture_app);
+
+            }
+        } else {
+            $name_picture_app = '';
+        }
 
         if (isset($image)) {
             if ($image->isValid()) {
@@ -56,6 +71,7 @@ class HolidayController extends Controller
             'picture' => $name,
             'video' => $request->get('video'),
             'sort' => $request->get('sort'),
+            'picture_app' => $name_picture_app
         ]);
 
         $pictures = $request->file('pictures');
@@ -116,6 +132,7 @@ class HolidayController extends Controller
         $this->validate($request, [
             'name' => 'required',
             'picture' => 'image',
+         
             'cost' => 'required|numeric|min:0',
             'sort' => 'required|numeric|min:1'
         ]);
@@ -123,6 +140,21 @@ class HolidayController extends Controller
         $holiday = Holiday::findOrFail($id);
 
         $image = $request->file('picture');
+
+
+        $picture_app = $request->file('picture_app');
+
+        if (isset($picture_app)) {
+            if ($picture_app->isValid()) {
+
+                $name_picture_app = $picture_app->getClientOriginalName();
+
+                $picture_app->move('../public/img/holiday/application', $name_picture_app);
+
+            }
+        } else {
+            $name_picture_app = $holiday->picture_app;
+        }
 
 
         if (isset($image)) {
@@ -143,6 +175,7 @@ class HolidayController extends Controller
             'picture' => $name,
             'video' => $request->get('video'),
             'sort' => $request->get('sort'),
+            'picture_app' =>  $name_picture_app
         ]);
 
         $pictures = $request->file('pictures');

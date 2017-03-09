@@ -198,7 +198,7 @@
                                                 <div v-if="errors.FIO || errors.email || errors.phone || errors.message"
                                                      class="error_desc">Wypełnij wszystkie pola
                                                 </div>
-                                                <button class="submit-btn NoWrap grpelem" id="u15567-13">ZAMÓWIĆ
+                                                <button class="submit-btn NoWrap grpelem" id="u15567-13">ZAMAWIAM
                                                 </button>
                                             </div>
                                         </div>
@@ -381,7 +381,7 @@
                                     allowfullscreen></iframe>
                         </div>
                         <div v-if="modal_item.event">
-                            <div class="index-modal-photo">
+                            <div v-if="modal_item.event.video" class="index-modal-photo">
                                 <iframe width="350" height="250" :src="modal_item.event.video" frameborder="0"
                                         allowfullscreen></iframe>
                             </div>
@@ -651,6 +651,10 @@
                 }
                 if (($(window).width() <= 1000) && (element === 'holiday')) {
                     x = 50
+                }
+
+                if((/^((?!chrome|android).)*safari/i.test(navigator.userAgent)) && (element === 'event')){
+                    x = 60
                 }
 
                 setTimeout(function () {
