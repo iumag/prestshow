@@ -19,7 +19,7 @@
                             </div>
                             <div class="form-group">
                                 <label>{{localization.event}}</label>
-                                <select @change="getEvents()"  v-if="form.city_id != 'Select' && form.holiday_id != 'Select'" class="form-control" v-model="form.event_id">
+                                <select v-if="form.city_id != 'Select' && form.holiday_id != 'Select'" class="form-control" v-model="form.event_id">
                                     <option>Select</option>
                                     <option v-for="event in new_events" :value="event.event_id">{{event.name}}</option>
                                 </select>
