@@ -361,14 +361,7 @@
                             <div @click="ChangePhoto(1)" class="nextmodal"></div>
                         </div>
 
-                        <div class="modal-wrap" v-if="modal_item.event">
-
-                            <div v-for="picture_dop in modal_item.event.pictures"
-                                 @click="modal_photo = picture_dop.link" class="modal_picture">
-                                <img height="50px" width="50px" :src="picture_dop.link">
-                            </div>
-
-                        </div>
+                       
                         <div class="modal-wrap" v-if="modal_item.pictures">
                             <div @click="modal_photo = picture_dop.link" class="modal_picture"
                                  v-for="picture_dop in modal_item.pictures">
@@ -540,6 +533,9 @@
             this.$on('modalEvent', function (element) {
                 this.modal_photo = ''
                 this.modal_item = element
+                if (this.modal_item.event){
+                    this.modal_item.pictures = this.modal_item.event.pictures
+                }
                 if (element.event.pictures.length != 0) {
                     this.modal_photo = element.event.pictures[0].link
                 }
@@ -585,15 +581,26 @@
         },
         methods: {
             ChangePhoto(add){
-                console.log(this.modal_item.pictures.length)
-                console.log(this.index_photo)
+                if (this.modal_item.event){
+                    this.modal_item.pictures = this.modal_item.event.pictures
+                }
+                if (add === 1) {
+                    if ((this.modal_item.pictures.length - 1 > this.index_photo)) {
 
-                if ((add === 1) && (this.modal_item.pictures.length - 1 > this.index_photo)) {
-                    this.index_photo++
+                        this.index_photo++
+                    }else{
+                        this.index_photo = 0;
+                    }
                 }
-                if ((add === 2) && (this.modal_item.pictures.length > this.index_photo) && (this.index_photo > 0)) {
-                    this.index_photo--
+
+                if (add === 2){
+                    if((this.modal_item.pictures.length > this.index_photo) && (this.index_photo > 0)) {
+                        this.index_photo--
+                    }else{
+                        this.index_photo = 1;
+                    }
                 }
+
                 this.modal_photo = this.modal_item.pictures[this.index_photo].link
             },
             closeModal(element, item){

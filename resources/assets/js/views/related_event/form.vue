@@ -19,13 +19,13 @@
                             </div>
                             <div class="form-group">
                                 <label>{{localization.event}}</label>
-                                <select v-if="form.city_id != 'Select' && form.holiday_id != 'Select'" class="form-control" v-model="form.event_id">
+                                <select id="eventselect" v-if="form.city_id != 'Select' && form.holiday_id != 'Select'" class="form-control" v-model="form.event_id">
                                     <option>Select</option>
-                                    <option v-for="event in new_events" :value="event.event_id">{{event.name}}</option>
+                                    <option v-for="(event,index) in option.events" :data-id="index" :value="event.event_id">{{event.name}}</option>
                                 </select>
-                                <select v-else disabled class="form-control" v-model="form.event_id">
+                                <select  id="eventselect"  v-else disabled class="form-control" v-model="form.event_id">
                                     <option>Select</option>
-                                    <option v-for="event in option.events" :value="event.event_id">{{event.name}}</option>
+                                    <option v-for="(event,index) in option.events" :data-id="index" :value="event.event_id">{{event.name}}</option>
                                 </select>
                                 <small class="text-danger" v-if="errors.event_id">{{errors.event_id[0]}}</small>
                             </div>
@@ -102,6 +102,10 @@
                 this.method = 'put'
             }
             this.fetchData()
+            setTimeout(function () {
+                this.getEvents()
+            }.bind(this), 1000);
+
         },
         watch: {
             '$route': 'fetchData'
@@ -134,8 +138,9 @@
                     })
             },
             getEvents(){
-                if((this.form.holiday_id != 'Select') && (this.form.city_id !='Select')) {
-                    this.get_event = '/api/related_event/getNewEvents/city-' + this.form.city_id + '/holiday-' + this.form.holiday_id;
+                if((this.form.holiday_id != 'Select') && (this.form.city_id !='Select') || (this.$route.meta.mode === 'edit')) {
+                    console.log(this.form)
+                    this.get_event = '/api/related_event/getNewEvents/city-' + this.form.city_id + '/holiday-' + this.form.holiday_id + '/edit_news-' + this.form.id;
                     var vm = this
                     axios.get(this.get_event)
                         .then(function (response) {

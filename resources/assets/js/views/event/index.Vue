@@ -40,13 +40,13 @@
                 showfooter: true,
                 thead: [
                     {title: 'Id', key: 'id', parent_column: 'events', sort: true},
-                    {title: localization.event, key: 'name', parent_column: 'event_translations', sort: true},
+                    {title: localization.event, key: 'name', parent_column: 'event_translations', sort: false},
                     {title: localization.picture, key: 'picture', sort: false},
                     {
                         title: localization.description,
                         key: 'description',
                         parent_column: 'event_translations',
-                        sort: true
+                        sort: false
                     },
                     {title: localization.count_pictures, key: 'pictures', parent_column: 'events', sort: false},
                     {title: localization.video, key: 'video', parent_column: 'events', sort: false},

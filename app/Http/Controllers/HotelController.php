@@ -12,7 +12,7 @@ class HotelController extends Controller
 {
     public function index()
     {
-
+        $language = app()->getLocale();
         return response()
             ->json([
                 'model' => Hotel::with('city')->with('pictures')->filterPaginateOrder()

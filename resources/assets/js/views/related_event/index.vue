@@ -1,5 +1,5 @@
 <template>
-    <data-viewer :showfooter="showfooter" :source="source" :thead="thead" :filter="filter" :create="create" :title="title">
+    <data-viewer :showfooter="showfooter" :source="source" :thead="thead" :filter="filter" :create="create" :title="title" :entity="entity">
         <template scope="props">
             <tr v-for="(item,index) in props.model.data">
                 <td>{{item.id}}</td>
@@ -39,21 +39,31 @@
                 showfooter: true,
                 thead: [
                     {title: 'Id', key: 'id', sort: true},
-                    {title: localization.event, key: 'event', sort: true},
-                    {title: localization.city, key: 'city', sort: true},
-                    {title: localization.holiday, key: 'holiday', sort: true},
+                    {title: localization.event, key: 'event', sort: false},
+                    {title: localization.city, key: 'city', sort: false},
+                    {title: localization.holiday, key: 'holiday', sort: false},
                     {title: localization.cost, key: 'cost', sort: true},
                     {title: localization.sort, key: 'sort', parent_column: 'events', sort: true},
                     {title: localization.actions, sort: false}
                 ],
                 filter: [
-                    'id', 'city_id', 'event_id', 'cost', 'created_at',
-                    'city.id', 'city.city', 'city.picture', 'city.description', 'city.cost', 'city.created_at',
-                    'event.id', 'event.event', 'event.picture', 'event.description', 'event.created_at',
-                    'holiday.id', 'holiday.name', 'holiday.picture', 'holiday.description', 'holiday.created_at'
+                    {entity_data: [
+                        {value: 'city.name', name: 'City Name'},
+                    ], show: false, entity: 'city'},
+                    {entity_data: [
+                        {value: 'holiday.name', name: 'Holiday Name'}
+                    ], show: false, entity: 'holiday'},
+                    {entity_data: [
+                        {value: 'event.name', name: 'Event Name'}
+                    ], show: false, entity: 'event'},
+                ],
+                entity: [
+                    {name: 'city', show: false},
+                    {name: 'holiday', show: false},
+                    {name: 'event', show: false}
                 ],
                 localization: localization
-        }
+            }
         },
         components: {
             DataViewer

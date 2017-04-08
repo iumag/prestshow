@@ -1,39 +1,63 @@
 <template>
     <div>
-        <h1 class="page-header">Dashboard</h1>
+        <h1 class="page-header" style="margin-top: 79px;">Aleevent</h1>
         <div class="panel panel-default">
             <div class="panel-heading">
                 <span class="panel-title">{{title}}</span>
                 <div>
-                    <router-link :to="create" class="btn btn-primary btn-sm" v-if="title != 'Basket'">{{localization.create}}
+                    <router-link :to="create" class="btn btn-primary btn-sm" v-if="title != 'Basket'">
+                        {{localization.create}}
+
                     </router-link>
-                    <router-link :to="'/related_event/create_all'" class="btn btn-success btn-sm" v-if="title === 'Related Event'">{{localization.create_all}}
+                    <router-link :to="'/related_event/create_all'" class="btn btn-success btn-sm"
+                                 v-if="title === 'Related Event'">{{localization.create_all}}
+
                     </router-link>
-                    <button class="btn btn-default btn-sm" @click="showFilter = !showFilter">F</button>
+                    <button class="btn btn-default btn-sm" v-if="entity" @click="showFilter = !showFilter">F</button>
                 </div>
             </div>
             <div class="panel-body">
                 <div class="filter" v-if="showFilter">
-                    <div class="filter-column">
-                        <select class="form-control" v-model="params.search_column">
-                            <option v-for="column in filter" :value="column">{{column}}</option>
-                        </select>
+                    <div v-for="(ent,index) in entity" class="col-sm-2">
+                        <a v-if="!ent.show" @click="opensearch(ent, index)" class="btn btn-success">+</a>
+                        <a v-else @click="opensearch(ent, index)" class="btn btn-danger">-</a>
+                        {{ent.name}}
+                        <div v-if="ent.show">
+                        <div class="filter-input">
+                        <input type="text" class="form-control" v-model="params.search_query_arr[index]"
+                            @keyup.enter="fetchData" placeholder="Search">
+                        </div>
+                        <!--<div class="filter-input">-->
+                            <!--<input type="text" class="form-control" v-model="params.search_query_arr[index]"-->
+                                   <!--@keyup.enter="fetchData" placeholder="Search">-->
+                        <!--</div>-->
                     </div>
-                    <div class="filter-operator">
-                        <select class="form-control" v-model="params.search_operator">
-                            <option v-for="(value, key) in operators" :value="key">{{value}}</option>
-                        </select>
                     </div>
-                    <div class="filter-input">
-                        <input type="text" class="form-control" v-model="params.search_query_1"
-                               @keyup.enter="fetchData" placeholder="Search">
-                    </div>
+                    <br/>
+                    <!--<div class="filter-column">-->
+                        <!--<div v-if="entity.show" v-for="(entity,index) in filter">-->
+                            <!--<select class="form-control" v-model="params.search_column_arr[index]">-->
+                                <!--<option v-for="ent in entity.entity_data" :value="ent.value">{{ent.name}}</option>-->
+                            <!--</select>-->
+                            <!--<div class="filter-input">-->
+                                <!--<input type="text" class="form-control" v-model="params.search_query_arr[index]"-->
+                                       <!--@keyup.enter="fetchData" placeholder="Search">-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                    <!--<div class="filter-operator">-->
+                    <!--<select class="form-control" v-model="params.search_operator">-->
+                    <!--<option v-for="(value, key) in operators" :value="key">{{value}}</option>-->
+                    <!--</select>-->
+                    <!--</div>-->
+
                     <div class="filter-input" v-if="params.search_operator === 'between'">
                         <input type="text" class="form-control" v-model="params.search_query_2"
                                @keyup.enter="fetchData" placeholder="Search">
                     </div>
                     <div class="filter-btn">
-                        <button class="btn btn-primary btn-sm btn-block" @click="fetchData">{{localization.filter}}</button>
+                        <button class="btn btn-primary btn-sm btn-block" @click="fetchData">{{localization.filter}}
+                        </button>
                     </div>
                 </div>
                 <table class="table table-striped">
@@ -89,7 +113,7 @@
     import axios from 'axios'
     import language from '../language'
     export default {
-        props: ['source', 'thead', 'filter', 'create', 'title', 'showfooter'],
+        props: ['source', 'thead', 'filter', 'create', 'title', 'showfooter', 'entity'],
         data() {
             var localization = language.data().language
             return {
@@ -105,9 +129,14 @@
                     page: 1,
                     search_column: 'id',
                     search_operator: 'equal_to',
-                    parent_column: 'events',
+                    parent_column: 'event_translations',
                     search_query_1: '',
-                    search_query_2: ''
+                    search_query_2: '',
+                    search_column_arr: [],
+                    search_query_arr: [],
+                    event: '',
+                    city: '',
+                    holiday: ''
                 },
                 operators: {
                     equal_to: '=',
@@ -126,6 +155,11 @@
         },
         beforeMount() {
             this.fetchData()
+            this.filter.forEach(function(item, i, arr) {
+                console.log(this.filter[i])
+                this.params.search_column_arr.push("");
+                this.params.search_query_arr.push("");
+            }.bind(this));
         },
         methods: {
             next() {
@@ -167,7 +201,55 @@
             },
             buildURL() {
                 var p = this.params
-                return `${this.source}?column=${p.column}&direction=${p.direction}&per_page=${p.per_page}&page=${p.page}&search_column=${p.search_column}&search_operator=${p.search_operator}&search_query_1=${p.search_query_1}&search_query_2=${p.search_query_2}&parent_column=${p.parent_column}`
+                //return `${this.source}?column=${p.column}&direction=${p.direction}&per_page=${p.per_page}&page=${p.page}&search_column=${p.search_column}&search_operator=${p.search_operator}&search_query_1=${p.search_query_1}&search_query_2=${p.search_query_2}&parent_column=${p.parent_column}`
+                return `${this.source}?column=${p.column}&direction=${p.direction}&per_page=${p.per_page}&page=${p.page}&search_column=${p.search_column}&search_operator=${p.search_operator}&search_query_1=${p.search_query_1}&search_query_2=${p.search_query_2}&search_column_arr=${p.search_column_arr}&search_query_arr=${p.search_query_arr}`
+            },
+            opensearch(ent, indexQ){
+                ent.show = !ent.show
+                    switch(ent.name) {
+                        case 'event':
+                            if (ent.show) {
+                                this.params.search_column_arr[indexQ] = 'event.name';
+                            }else{
+                                this.params.search_column_arr.find(function (element, index, array) {
+                                    if ('event.name' === element) {
+                                        this.params.search_column_arr[indexQ] = ' '
+                                    }
+                                }.bind(this));
+                            }
+                            break;
+                        case 'holiday':
+                            if (ent.show) {
+                                this.params.search_column_arr[indexQ] = 'holiday.name';
+                            }else{
+                                this.params.search_column_arr.find(function (element, index, array) {
+                                    if ('holiday.name' === element) {
+                                        this.params.search_column_arr[indexQ] = ' '
+                                    }
+                                }.bind(this));
+                            }
+                            break;
+                        case 'city':
+                            if(ent.show){
+                                this.params.search_column_arr[indexQ] = 'city.name';
+                            }else{
+                                this.params.search_column_arr.find(function (element, index, array) {
+                                    if ('city.name' === element) {
+                                        this.params.search_column_arr[indexQ] = ' '
+                                    }
+                                }.bind(this));
+                            }
+                            break;
+                    }
+                    if(!ent.show){
+                        this.params.search_query_arr[indexQ] = ' '
+                    }
+                console.log(this.params.seaech_column_arr);
+                this.filter.find(function (element, index, array) {
+                    if (ent.name === element.entity) {
+                        ent.show ? element.show = true : element.show = false;
+                    }
+                });
             }
         }
     }

@@ -42,7 +42,7 @@
                 showfooter: true,
                 thead: [
                     {title: 'Id', key: 'id', sort: true},
-                    {title: localization.holiday, key: 'name', sort: true},
+                    {title: localization.holiday, key: 'name', sort: false},
                     {title: localization.picture, key: 'picture', sort: false},
                     {title: localization.description, key: 'description', sort: false},
                     {title: localization.cost, key: 'cost', sort: true},

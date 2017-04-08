@@ -1,5 +1,5 @@
 <template>
-    <data-viewer :showfooter="showfooter" :source="source" :thead="thead" :filter="filter" :create="create"
+    <data-viewer :showfooter="showfooter" :source="source" :thead="thead" :filter="filter" :create="create" :entity="entity"
                  :title="title">
         <template scope="props">
             <tr v-for="(item,index) in props.model.data">
@@ -44,10 +44,10 @@
                 showfooter: true,
                 thead: [
                     {title: 'Id', key: 'id', sort: true},
-                    {title: localization.photographer, key: 'name', sort: true},
-                    {title: localization.city, key: 'city', sort: true},
+                    {title: localization.photographer, key: 'name', sort: false},
+                    {title: localization.city, key: 'city', sort: false},
                     {title: localization.picture, key: 'picture', sort: false},
-                    {title: localization.description, key: 'description', sort: true},
+                    {title: localization.description, key: 'description', sort: false},
                     {title: localization.cost, key: 'cost', sort: true},
                     {title: localization.count_pictures, key: 'pictures', parent_column: 'events', sort: false},
                     {title: localization.video, key: 'video', parent_column: 'events', sort: false},
@@ -55,7 +55,12 @@
                     {title: localization.actions, sort: false}
                 ],
                 filter: [
-                    'id', 'name', 'picture', 'description', 'cost'
+                    {entity_data: [
+                        {value: 'city.name', name: 'City Name'},
+                    ]}
+                ],
+                entity: [
+                    {name: 'city', show: false}
                 ],
                 localization: localization
             }

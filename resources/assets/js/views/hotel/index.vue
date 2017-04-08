@@ -1,5 +1,5 @@
 <template>
-    <data-viewer :showfooter="showfooter" :source="source" :thead="thead" :filter="filter" :create="create"
+    <data-viewer :showfooter="showfooter" :source="source" :thead="thead" :filter="filter" :create="create" :entity="entity"
                  :title="title">
         <template scope="props">
             <tr v-for="(item,index) in props.model.data">
@@ -42,20 +42,24 @@
                 resource: 'hotel',
                 showfooter: true,
                 thead: [
-                    {title: 'Id', key: 'id', sort: true},
-                    {title: localization.hotel, key: 'name', sort: true},
-                    {title: localization.city, key: 'city', sort: true},
+                    {title: 'Id', key: 'id', entity: 'hotel', sort: true},
+                    {title: localization.hotel, key: 'name', entity: 'hotels', sort: false},
+                    {title: localization.city, key: 'city', entity: 'cities', sort: false},
                     {title: localization.picture, key: 'picture', sort: false},
-                    {title: localization.description, key: 'description', sort: true},
-                    {title: localization.cost, key: 'cost', sort: true},
-                    {title: localization.count_pictures, key: 'pictures', parent_column: 'events', sort: false},
+                    {title: localization.description, key: 'description', entity: 'hotels', sort: false},
+                    {title: localization.cost, key: 'cost', sort: true, entity: 'hotels'},
+                    {title: localization.count_pictures, key: 'pictures', sort: false},
                     {title: localization.video, key: 'video', parent_column: 'events', sort: false},
                     {title: localization.sort, key: 'sort', parent_column: 'events', sort: true},
                     {title: localization.actions, sort: false}
                 ],
                 filter: [
-                    'id', 'hotel', 'picture', 'description', 'cost',
-                    'city.id', 'city.city', 'city.picture', 'city.description', 'city.cost'
+                    {entity_data: [
+                        {value: 'city.name', name: 'City Name'},
+                    ]}
+                ],
+                entity: [
+                    {name: 'city', show: false}
                 ],
                 localization: localization
             }
