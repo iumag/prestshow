@@ -72,7 +72,7 @@ Route::get('/language/get', 'LanguageController@getLanguage');
 
 Route::delete('/delete_picture/{id}', 'PictureController@deletePicture');
 
-Route::get('/api/related_event/getNewEvents/city-{city_id}/holiday-{holiday_id}/edit_news-{edit_id}', 'RelatedEventController@GetNewEvent');
+Route::get('/api/related_event/getNewEvents/city-{city_id}/holiday-{holiday_id}', 'RelatedEventController@GetNewEvent');
 
 
 Route::post('/language', array (

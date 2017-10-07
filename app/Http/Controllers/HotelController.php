@@ -12,7 +12,6 @@ class HotelController extends Controller
 {
     public function index()
     {
-        $language = app()->getLocale();
         return response()
             ->json([
                 'model' => Hotel::with('city')->with('pictures')->filterPaginateOrder()
@@ -21,17 +20,13 @@ class HotelController extends Controller
 
     public function create()
     {
-        $language = app()->getLocale();
-
+        $city = new City();
 
         return response()
             ->json([
                 'form' => Hotel::initalize(),
                 'option' => [
-                    'cities' => DB::table('cities')
-                        ->join('city_translations', 'cities.id', '=', 'city_translations.city_id')
-                        ->where('city_translations.locale','=',$language)
-                        ->get()
+                    'cities' => $city->getCities()
                 ]
             ]);
     }
@@ -114,16 +109,13 @@ class HotelController extends Controller
 
         $hotel = Hotel::with('pictures')->findOrFail($id);
 
-        $language = app()->getLocale();
+        $city = new City();
 
         return response()
             ->json([
                 'form' => $hotel,
                 'option' => [
-                    'cities' => DB::table('cities')
-                        ->join('city_translations', 'cities.id', '=', 'city_translations.city_id')
-                        ->where('city_translations.locale','=',$language)
-                        ->get()
+                    'cities' => $city->getCities()
                 ]
             ]);
     }

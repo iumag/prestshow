@@ -34,12 +34,12 @@
                 </thead>
                 <tbody>
                 <tr v-for="item in model.items" v-if="item.entity_type!='related_event'">
-                    <td>{{item.entity_type}}</td>
+                    <td>{{enitity_type[item.entity_type]}}</td>
                     <td>{{item.entity.name}}</td>
                     <td>{{item.entity.cost}}</td>
                 </tr>
                 <tr v-for="item in event.items" v-if="item.entity">
-                    <td>{{item.entity_type}}</td>
+                    <td>{{enitity_type[item.entity_type]}}</td>
                     <td>{{item.entity.event.name}}</td>
                     <td>{{item.entity.cost}}</td>
                 </tr>
@@ -61,10 +61,19 @@
     import Vue from 'vue'
     import axios from 'axios'
     import language from '../../language'
+
     export default {
         name: 'BasketShow',
-        data(){
+        data() {
             var localization = language.data().language
+            var enitity_type = {
+                'city' : 'Miasto',
+                'holiday' :  'Uroczystość',
+                'hotel' :  'Hotel',
+                'related_event' :  'Atrakcje',
+                'transport' : 'Transport',
+                'photographer' : 'Photographer',
+            }
             return {
                 model: {
                     customer: {},
@@ -74,7 +83,8 @@
                 resource: 'basket',
                 redirect: '/',
                 index: -1,
-                localization: localization
+                localization: localization,
+                enitity_type: enitity_type
             }
         },
         beforeMount() {
@@ -88,14 +98,14 @@
                 return this.model.items.reduce(function (carry, item) {
                     if (item.entity) {
                         return carry + parseFloat(item.entity.cost)
-                    }else{
-                        return carry+0
+                    } else {
+                        return carry + 0
                     }
                 }, 0)
             }
         },
         methods: {
-            remove(){
+            remove() {
                 var vm = this
                 axios.delete(`/api/${this.resource}/${this.$route.params.id}`)
                     .then(function (response) {

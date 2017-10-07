@@ -4,11 +4,20 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Support\FilterPaginateOrder;
+use Illuminate\Support\Facades\DB;
 
 class City extends Model
 {
     use \Dimsav\Translatable\Translatable;
     use FilterPaginateOrder;
+
+    public static $language;
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        self::$language = app()->getLocale();
+    }
 
     public $translatedAttributes = ['name', 'description'];
 
@@ -60,5 +69,13 @@ class City extends Model
 
     public function pictures(){
         return $this->morphMany(Picture::class, 'picture');
+    }
+
+    public function getCities()
+    {
+        return DB::table('cities')
+            ->join('city_translations', 'cities.id', '=', 'city_translations.city_id')
+            ->where('city_translations.locale', '=', self::$language)
+            ->get();
     }
 }

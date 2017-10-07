@@ -4,10 +4,19 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Support\FilterPaginateOrder;
+use Illuminate\Support\Facades\DB;
 
 class RelatedEvent extends Model
 {
     use FilterPaginateOrder;
+
+    public static $language;
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        self::$language = app()->getLocale();
+    }
 
     protected $fillable = [
         'city_id', 'event_id', 'cost', 'holiday_id', 'sort'
@@ -50,5 +59,17 @@ class RelatedEvent extends Model
     public function basket_item()
     {
         return $this->morphOne(BasketItem::class);
+    }
+
+    public function getRelatedEvents($cityId, $holidayId)
+    {
+        return DB::table('events')
+            ->select('events.id', 'event_translations.name')
+            ->join('event_translations', 'events.id', '=', 'event_translations.event_id')
+            ->join('related_events', 'events.id', '=', 'related_events.event_id')
+            ->where('event_translations.locale', '=', self::$language)
+            ->where('city_id', $cityId)
+            ->where('holiday_id', $holidayId)
+            ->get();
     }
 }

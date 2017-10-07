@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\City;
 use App\Picture;
 use Illuminate\Http\Request;
 use App\Photographer;
@@ -19,16 +20,12 @@ class PhotographerController extends Controller
 
     public function create()
     {
-        $language = app()->getLocale();
-
+        $city = new City();
         return response()
             ->json([
                 'form' => Photographer::initalize(),
                 'option' => [
-                    'cities' => DB::table('cities')
-                        ->join('city_translations', 'cities.id', '=', 'city_translations.city_id')
-                        ->where('city_translations.locale','=',$language)
-                        ->get()
+                    'cities' => $city->getCities()
                 ]
             ]);
     }
@@ -111,16 +108,13 @@ class PhotographerController extends Controller
 
         $photographer = Photographer::with('pictures')->findOrFail($id);
 
-        $language = app()->getLocale();
+        $city = new City();
 
         return response()
             ->json([
                 'form' => $photographer,
                 'option' => [
-                    'cities' => DB::table('cities')
-                        ->join('city_translations', 'cities.id', '=', 'city_translations.city_id')
-                        ->where('city_translations.locale','=',$language)
-                        ->get()
+                    'cities' => $city->getCities()
                 ]
             ]);
     }

@@ -15,7 +15,7 @@
                         <span class="glyphicon glyphicon-edit"></span> {{localization.show}}
                     </router-link>
                     <button class="edit-modal btn btn-danger"
-                            @click="deleteItem(item.id,index);props.model.data.splice(index,1);props.model.total <= 10 ? showfooter = false : showfooter = true;">
+                            @click="deleteItem(item.id,index, props.model.data); props.model.total <= 10 ? showfooter = false : showfooter = true">
                         <span class="glyphicon glyphicon-trash"></span> {{localization.delete}}
                     </button>
                 </td>
@@ -63,17 +63,21 @@
             DataViewer
         },
         methods: {
-            deleteItem(item){
+            deleteItem(item, index, modal){
+                var isConfirm = confirm('Are you sure?');
+                if (!isConfirm) return false;
                 var vm = this
                 axios.delete(`/api/${this.resource}/${item}`)
                     .then(function (response) {
                         if (response.data.deleted) {
-
+                            modal.splice(index,1)
                         }
                     })
                     .catch(function (error) {
                         console.log(error)
+                        return false
                     })
+
             }
         }
     }

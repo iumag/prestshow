@@ -23,7 +23,7 @@
                         </div>
                         <a class="anchor_item grpelem" id="glowna"></a>
                     </div>
-                    <site-header></site-header>
+                    <site-header :cena="getAllCost"></site-header>
                     <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7622"
                        @click="scroll('home')"><!-- simple frame --></a>
                     <a class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7623"
@@ -61,12 +61,7 @@
                     <a v-else style="background-color: black; cursor: not-allowed"
                        class="nonblock nontext anim_swing rounded-corners pinned-colelem"
                        id="u7627"><!-- simple frame --></a>
-                    <a v-if="showElement['photographer']"
-                       class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7628"
-                       @click="scroll('photographer')"><!-- simple frame --></a>
-                    <a v-else style="background-color: black; cursor: not-allowed"
-                       class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="u7628">
-                        <!-- simple frame --></a>
+
 
 
                     <div class="size_fixed colelem" id="u15365"><!-- custom html -->
@@ -79,18 +74,6 @@
                         </div>
 
                     </div>
-                    <a v-if="showElement['is_transport']"
-                       class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="istransportpage"
-                       @click="scroll('is_transport')"><!-- simple frame --></a>
-                    <a v-else style="background-color: black; cursor: not-allowed"
-                       class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="istransportpage">
-                        <!-- simple frame --></a>
-                    <a v-if="showElement['transport']"
-                       class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="transportpage"
-                       @click="scroll('transport')"><!-- simple frame --></a>
-                    <a v-else style="background-color: black; cursor: not-allowed"
-                       class="nonblock nontext anim_swing rounded-corners pinned-colelem" id="transportpage">
-                        <!-- simple frame --></a>
                     <a v-if="showElement['cena']" class="nonblock nontext anim_swing rounded-corners pinned-colelem"
                        id="u19814"
                        @click="scroll('cena')"><!-- simple frame --></a>
@@ -112,12 +95,12 @@
                 <is-hotel v-if="showElement['is_hotel']"></is-hotel>
 
                 <hotel v-if="showElement['hotel']" :city_id="city.id" ref="hotel"></hotel>
-                <photographer v-if="showElement['photographer']" :city_id="city.id" ref="photographer"></photographer>
+                <!--<photographer v-if="showElement['photographer']" :city_id="city.id" ref="photographer"></photographer>-->
 
-                <is-transport v-if="showElement['is_transport']"></is-transport>
+                <!--<is-transport v-if="showElement['is_transport']"></is-transport>-->
 
 
-                <transport v-if="showElement['transport']" :city_id="city.id" ref="transport"></transport>
+                <!--<transport v-if="showElement['transport']" :city_id="city.id" ref="transport"></transport>-->
 
 
                 <div v-show="showElement['cena']" id="pcena"
@@ -228,7 +211,7 @@
                                             </div>
                                             <div class="clearfix grpelem" id="u15526-4"><!-- content -->
                                                 <div class="entityitem">{{holiday.name}}</div>
-                                                <div class="spaceitem">{{holiday.cost}} ZL</div>
+                                                <div class="spaceitem" style="display:none">{{holiday.cost}} ZL</div>
 
                                                 </p>
                                                 <input type="hidden" name="holiday" :value="holiday.id">
@@ -237,7 +220,7 @@
                                         <div class="clearfix colelem" id="u15528"><!-- column -->
                                             <div class="clearfix colelem" id="pu15532-4"><!-- group -->
                                                 <div class="clearfix grpelem" id="u15532-4"><!-- content -->
-                                                    <p>Atrakcji:</p>
+                                                    <p>Atrakcje:</p>
                                                 </div>
                                             </div>
                                             <div class="clearfix grpelem" id="u15526-4"
@@ -291,25 +274,25 @@
                                                 <input type="hidden" name="transport" :value="transport.id">
                                             </div>
                                         </div>
-                                        <div class="clearfix colelem" id="u19772"><!-- group -->
-                                            <div class="clearfix grpelem" id="u19774-4"><!-- content -->
-                                                <p>Fotograf:</p>
-                                            </div>
-                                            <div class="clearfix grpelem" id="u15526-4"><!-- content -->
-                                                <div class="entityitem">{{photographer.name}}</div>
-                                                <div class="spaceitem">{{photographer.cost}} ZL</div>
+                                        <!--<div class="clearfix colelem" id="u19772">&lt;!&ndash; group &ndash;&gt;-->
+                                            <!--<div class="clearfix grpelem" id="u19774-4">&lt;!&ndash; content &ndash;&gt;-->
+                                                <!--<p>Fotograf:</p>-->
+                                            <!--</div>-->
+                                            <!--<div class="clearfix grpelem" id="u15526-4">&lt;!&ndash; content &ndash;&gt;-->
+                                                <!--<div class="entityitem">{{photographer.name}}</div>-->
+                                                <!--<div class="spaceitem">{{photographer.cost}} ZL</div>-->
 
-                                                </p>
-                                                <input type="hidden" name="photographer" :value="photographer.id">
-                                            </div>
-                                        </div>
+                                                <!--</p>-->
+                                                <!--<input type="hidden" name="photographer" :value="photographer.id">-->
+                                            <!--</div>-->
+                                        <!--</div>-->
                                     </div>
                                     <div class="clearfix colelem" id="pu15533-5"><!-- group -->
                                         <div class="rounded-corners clearfix grpelem" id="u15533-5"><!-- content -->
-                                            <p><span id="u15533">&nbsp;&nbsp;&nbsp;&nbsp; SUMA </span></p>
+                                            <p><span id="u15533">SUMA</span></p>
                                         </div>
                                         <div class="rounded-corners clearfix grpelem" id="u15534-3"><!-- content -->
-                                            <p>&nbsp;</p>
+                                            <p></p>
                                         </div>
                                         <div class="clearfix grpelem" id="u15538-4"><!-- content -->
                                             <p>{{getAllCost}} ZL</p>

@@ -19,13 +19,18 @@
                             </div>
                             <div class="form-group">
                                 <label>{{localization.event}}</label>
-                                <select id="eventselect" v-if="form.city_id != 'Select' && form.holiday_id != 'Select'" class="form-control" v-model="form.event_id">
+                                <select id="eventselect" v-if="form.city_id != 'Select' && form.holiday_id != 'Select'"
+                                        class="form-control" v-model="form.event_id">
                                     <option>Select</option>
-                                    <option v-for="(event,index) in option.events" :data-id="index" :value="event.event_id">{{event.name}}</option>
+                                    <option v-for="(event,index) in option.events" :data-id="index"
+                                            :value="event.event_id">{{event.name}}
+                                    </option>
                                 </select>
-                                <select  id="eventselect"  v-else disabled class="form-control" v-model="form.event_id">
+                                <select id="eventselect" v-else disabled class="form-control" v-model="form.event_id">
                                     <option>Select</option>
-                                    <option v-for="(event,index) in option.events" :data-id="index" :value="event.event_id">{{event.name}}</option>
+                                    <option v-for="(event,index) in option.events" :data-id="index"
+                                            :value="event.event_id">{{event.name}}
+                                    </option>
                                 </select>
                                 <small class="text-danger" v-if="errors.event_id">{{errors.event_id[0]}}</small>
                             </div>
@@ -34,9 +39,12 @@
                         <div class="col-sm-4">
                             <div class="form-group">
                                 <label>{{localization.holiday}}</label>
-                                <select @change="getEvents()" v-if="form.city_id != 'Select'" class="form-control" v-model="form.holiday_id">
+                                <select @change="getEvents()" v-if="form.city_id != 'Select'" class="form-control"
+                                        v-model="form.holiday_id">
                                     <option>Select</option>
-                                    <option v-for="holiday in option.holidays" :value="holiday.holiday_id">{{holiday.name}}</option>
+                                    <option v-for="holiday in option.holidays" :value="holiday.holiday_id">
+                                        {{holiday.name}}
+                                    </option>
                                 </select>
                                 <select v-else disabled class="form-control" name="holiday_id"
                                         v-model="form.holiday_id">
@@ -49,7 +57,8 @@
                             </div>
                             <div class="form-group">
                                 <label>{{localization.cost}}</label>
-                                <input v-if="form.city_id != 'Select' && form.holiday_id != 'Select'" type="text" class="form-control" v-model="form.cost">
+                                <input v-if="form.city_id != 'Select' && form.holiday_id != 'Select'" type="text"
+                                       class="form-control" v-model="form.cost">
                                 <input v-else disabled type="text" class="form-control" v-model="form.cost">
                                 <small class="text-danger" v-if="errors.cost">{{errors.cost[0]}}</small>
                             </div>
@@ -58,15 +67,16 @@
                             <div class="col-sm-1">
                                 <div class="form-group">
                                     <label>{{localization.sort}}</label>
-                                    <input v-if="form.city_id != 'Select' && form.holiday_id != 'Select'" type="text" name="sort" class="form-control text-center" v-model="form.sort">
-                                    <input v-else disabled type="text" name="sort" class="form-control text-center" v-model="form.sort">
+                                    <input v-if="form.city_id != 'Select' && form.holiday_id != 'Select'" type="text"
+                                           name="sort" class="form-control text-center" v-model="form.sort">
+                                    <input v-else disabled type="text" name="sort" class="form-control text-center"
+                                           v-model="form.sort">
                                     <small class="text-danger" v-if="errors.sort">{{errors.sort[0]}}</small>
                                 </div>
                             </div>
                         </div>
                     </div>
                     <button class="btn btn-success">{{localization.save}}</button>
-            </div>
             </form>
         </div>
     </div>
@@ -76,7 +86,8 @@
     import Vue from 'vue'
     import axios from 'axios'
     import language from '../../language'
-    export default{
+
+    export default {
         name: 'RelatedForm',
         data() {
             var localization = language.data().language
@@ -110,7 +121,7 @@
         watch: {
             '$route': 'fetchData'
         },
-        update(){
+        update() {
             console.log(this.new_events)
         },
         methods: {
@@ -137,14 +148,14 @@
                         Vue.set(vm.$data, 'errors', error.response.data)
                     })
             },
-            getEvents(){
-                if((this.form.holiday_id != 'Select') && (this.form.city_id !='Select') || (this.$route.meta.mode === 'edit')) {
+            getEvents() {
+                if ((this.form.holiday_id != 'Select') && (this.form.city_id != 'Select') || (this.$route.meta.mode === 'edit')) {
                     console.log(this.form)
                     this.get_event = '/api/related_event/getNewEvents/city-' + this.form.city_id + '/holiday-' + this.form.holiday_id + '/edit_news-' + this.form.id;
                     var vm = this
                     axios.get(this.get_event)
                         .then(function (response) {
-                            var array = $.map(response.data.new_events, function(value, index) {
+                            var array = $.map(response.data.new_events, function (value, index) {
                                 return [value];
                             });
                             array.forEach(function (item, i, arr) {

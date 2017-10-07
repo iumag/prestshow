@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\City;
 use App\Event;
+use App\Holiday;
 use Illuminate\Http\Request;
 use App\RelatedEvent;
 use Illuminate\Support\Facades\DB;
@@ -20,56 +21,38 @@ class RelatedEventController extends Controller
 
     public function create()
     {
-        $language = app()->getLocale();
-
+        $city = new City();
+        $event = new Event();
+        $holiday = new Holiday();
         return response()
             ->json([
                 'form' => RelatedEvent::initalize(),
                 'option' => [
-                    'cities' => DB::table('cities')
-                        ->join('city_translations', 'cities.id', '=', 'city_translations.city_id')
-                        ->where('city_translations.locale', '=', $language)
-                        ->get(),
-                    'events' => DB::table('events')
-                        ->join('event_translations', 'events.id', '=', 'event_translations.event_id')
-                        ->where('event_translations.locale', '=', $language)
-                        ->get(),
-                    'holidays' => DB::table('holidays')
-                        ->join('holiday_translations', 'holidays.id', '=', 'holiday_translations.holiday_id')
-                        ->where('holiday_translations.locale', '=', $language)
-                        ->get(),
+                    'cities' => $city->getCities(),
+                    'events' => $event->getEvents(),
+                    'holidays' => $holiday->getHolidays(),
                 ]
             ]);
     }
 
-    public function GetNewEvent($city_id, $holiday_id)
+    public function GetNewEvent($cityId, $holidayId)
     {
 
         $language = app()->getLocale();
 
-        $new_events = array();
+        $relatedEvent = new RelatedEvent();
+        $event = new Event();
 
-        $events = DB::table('events')
-            ->select('event_id as id', 'event_translations.name')
-            ->join('event_translations', 'events.id', '=', 'event_translations.event_id')
-            ->where('event_translations.locale', '=', $language)->get();
+        $events = $event->getEvents();
 
-        $related_events = DB::table('events')
-            ->select('events.id', 'event_translations.name')
-            ->join('event_translations', 'events.id', '=', 'event_translations.event_id')
-            ->join('related_events', 'events.id', '=', 'related_events.event_id')
-            ->where('event_translations.locale', '=', $language)
-            ->where('city_id', $city_id)
-            ->where('holiday_id', $holiday_id)
-            //->unionAll($events)
-            ->get();
+        $relatedEvents = $relatedEvent->getRelatedEvents($cityId, $holidayId);
 
         //var_dump($related_events);
         $i = 0;
         // Поиск уже сохраненных Events и удаление их из массива
         foreach ($events as $event){
-            foreach($related_events as $related_event){
-                if ($event==$related_event){
+            foreach($relatedEvents as $relatedEvent){
+                if ($event==$relatedEvent){
                     unset($events[$i]);
                     break;
                 }
@@ -146,24 +129,17 @@ class RelatedEventController extends Controller
     {
         $related_event = RelatedEvent::findOrFail($id);
 
-        $language = app()->getLocale();
+        $city = new City();
+        $event = new Event();
+        $holiday = new Holiday();
 
         return response()
             ->json([
                 'form' => $related_event,
                 'option' => [
-                    'cities' => DB::table('cities')
-                        ->join('city_translations', 'cities.id', '=', 'city_translations.city_id')
-                        ->where('city_translations.locale', '=', $language)
-                        ->get(),
-                    'events' => DB::table('events')
-                        ->join('event_translations', 'events.id', '=', 'event_translations.event_id')
-                        ->where('event_translations.locale', '=', $language)
-                        ->get(),
-                    'holidays' => DB::table('holidays')
-                        ->join('holiday_translations', 'holidays.id', '=', 'holiday_translations.holiday_id')
-                        ->where('holiday_translations.locale', '=', $language)
-                        ->get(),
+                    'cities' => $city->getCities(),
+                    'events' => $event->getEvents(),
+                    'holidays' => $holiday->getHolidays(),
                 ]
             ]);
     }

@@ -5,7 +5,8 @@
             <tr v-for="(item,index) in props.model.data">
                 <td>{{item.id}}</td>
                 <td>{{item.name}}</td>
-                <td>{{item.city.name}}</td>
+                <td v-if="item.city">{{item.city.name}}</td>
+                <td v-else></td>
                 <td><img width=100 height=100 :src="'/img/hotel/' + item.picture"></td>
                 <td style="height: 100px;
     display: block;
@@ -19,7 +20,7 @@
                         <span class="glyphicon glyphicon-edit"></span> {{localization.edit}}
                     </router-link>
                     <button class="edit-modal btn btn-danger"
-                            @click="deleteItem(item.id,index);props.model.data.splice(index,1);props.model.total <= 10 ? showfooter = false : showfooter = true;">
+                            @click="deleteItem(item.id,index, props.model.data); props.model.total <= 10 ? showfooter = false : showfooter = true">
                         <span class="glyphicon glyphicon-trash"></span> {{localization.delete}}
                     </button>
                 </td>
@@ -75,12 +76,14 @@
                     return `<span class="glyphicon glyphicon-remove text-danger"></span>`
                 }
             },
-            deleteItem(item){
+            deleteItem(item, index, modal){
+                var isConfirm = confirm('Are you sure?');
+                if (!isConfirm) return false;
                 var vm = this
                 axios.delete(`/api/${this.resource}/${item}`)
                     .then(function (response) {
                         if (response.data.deleted) {
-
+                            modal.splice(index,1)
                         }
                     })
                     .catch(function (error) {

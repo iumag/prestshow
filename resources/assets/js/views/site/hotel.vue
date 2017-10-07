@@ -130,7 +130,7 @@
             },
             ShowMethod(){
                 this.$parent.$emit('getHotel', this.item_hotel);
-                this.$parent.$emit('loadElement', 'photographer');
+                this.$parent.$emit('loadElement', 'cena');
             },
             buildURL() {
                 var p = this.params

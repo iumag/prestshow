@@ -4,11 +4,20 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Support\FilterPaginateOrder;
+use Illuminate\Support\Facades\DB;
 
 class Holiday extends Model
 {
     use FilterPaginateOrder;
     use \Dimsav\Translatable\Translatable;
+
+    public static $language;
+
+    public function __construct(array $attributes = [])
+    {
+        parent::__construct($attributes);
+        self::$language = app()->getLocale();
+    }
 
     public $translatedAttributes = ['name', 'description'];
 
@@ -40,5 +49,13 @@ class Holiday extends Model
     public function pictures()
     {
         return $this->morphMany(Picture::class, 'picture');
+    }
+
+    public function getHolidays()
+    {
+        return DB::table('holidays')
+            ->join('holiday_translations', 'holidays.id', '=', 'holiday_translations.holiday_id')
+            ->where('holiday_translations.locale', '=', self::$language)
+            ->get();
     }
 }

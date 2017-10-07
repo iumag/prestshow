@@ -88,10 +88,9 @@ html {
 
 #u7620 {
     z-index: 819;
-    width: 31px;
     background-color: transparent;
     position: fixed;
-    top: 17px;
+    top: 19px;
     left: 50%;
     margin-left: 459px;
 }
@@ -103,7 +102,7 @@ html {
     background-color: #E22F19;
     border-radius: 100px;
     position: fixed;
-    top: 66px;
+    top: 162px;
     right: 49px;
     cursor: pointer;
 }
@@ -123,7 +122,7 @@ html {
     background-color: #E22F19;
     border-radius: 100px;
     position: fixed;
-    top: 116px;
+    top: 210px;
     right: 49px;
     cursor: pointer;
 }
@@ -143,7 +142,7 @@ html {
     background-color: #E22F19;
     border-radius: 100px;
     position: fixed;
-    top: 173px;
+    top: 261px;
     right: 49px;
     cursor: pointer;
 }
@@ -229,7 +228,7 @@ html {
     background-color: #E22F19;
     border-radius: 100px;
     position: fixed;
-    top: 222px;
+    top: 314px;
     right: 49px;
     cursor: pointer;
 }
@@ -249,7 +248,7 @@ html {
     background-color: #E22F19;
     border-radius: 100px;
     position: fixed;
-    top: 275px;
+    top: 365px;
     right: 49px;
     cursor: pointer;
 }
@@ -269,7 +268,7 @@ html {
     background-color: #E22F19;
     border-radius: 100px;
     position: fixed;
-    top: 332px;
+    top: 420px;
     right: 49px;
     cursor: pointer;
 }
@@ -341,7 +340,7 @@ html {
     background-color: #E22F19;
     border-radius: 100px;
     position: fixed;
-    top: 575px;
+    top: 472px;
     right: 49px;
 }
 
@@ -2333,6 +2332,7 @@ div#u10782 {
     animation: fade .8s;
     background: #F2F2F2 url(../images/pattern-89ds.jpg) repeat left top;
     border-radius: 70px 0px 70px 0px;
+    min-width: 650px;
 }
 
 .dm-modal img {
@@ -3778,7 +3778,7 @@ div#u10782 {
 #u8582 {
     z-index: 287;
     min-height: 182px;
-    padding-bottom: 791px;
+    padding-bottom: 723px;
     background: #F1F1F1 url("../images/pattern-89ds.jpg") repeat left top;
 }
 
@@ -4432,7 +4432,7 @@ div#u10782 {
     min-height: 65px;
     background-color: transparent;
     text-align: center;
-    font-size: 48px;
+    font-size: 33px;
     line-height: 58px;
     color: #FFFFFF;
     font-family: coda, sans-serif;
@@ -4440,7 +4440,7 @@ div#u10782 {
     position: relative;
     /* margin-right: -10000px; */
     margin-top: -69px;
-    left: 165px;
+    left: 149px;
 }
 
 #u17937-4 {
@@ -5393,7 +5393,7 @@ div#u10782 {
 }
 
 .paddingalign {
-    padding-top: 111px !important;
+    padding-top: 66px !important;
 }
 
 #u15527-4 {
@@ -6536,15 +6536,16 @@ div#u10782 {
     width: 100px;
     background-color: transparent;
     text-align: left;
-    font-size: 30px;
+    font-size: 22px;
     line-height: 36px;
     color: #FFFFFF;
     font-family: coda, sans-serif;
     font-weight: 400;
     position: relative;
-    margin-right: -10000px;
+    /* margin-right: -10000px; */
     margin-top: 24px;
     left: 820px;
+    /* padding-right: 40px; */
 }
 
 #u16847-4 {
@@ -7393,6 +7394,7 @@ body {
 
     #ppu15527-4 {
         margin-top: 59px; /* clear: both; */
+        margin-left: 45px;
     }
 
     .poland {
@@ -7994,7 +7996,7 @@ body {
     }
 
     #u15532-4 {
-        width: 187px;
+        width: 236px;
         font-size: 50px;
     }
 

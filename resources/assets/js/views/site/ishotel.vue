@@ -27,7 +27,7 @@
                 if (change) {
                     this.$parent.$emit('loadElement', 'hotel');
                 } else {
-                    this.$parent.$emit('loadElement', 'photographer');
+                    this.$parent.$emit('loadElement', 'cena');
                 }
             }
         }
