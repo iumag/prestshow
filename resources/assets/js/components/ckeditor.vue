@@ -53,7 +53,6 @@
                 height: this.height,
                 extraPlugins: this.extraplugins
             }
-            console.log(ckeditorConfig.toolbar)
             CKEDITOR.replace(ckeditorId, ckeditorConfig)
 
             CKEDITOR.instances[ckeditorId].setData(this.value)

@@ -11,7 +11,7 @@
 
         <div class="wrap photographer">
             <transition-group name="photographer-complete" tag="div">
-                <div class="photowrap photographer-complete-item" id="cityie"  v-bind:key="item" v-for="item in model.data">
+                <div class="photowrap photographer-complete-item" id="cityie"  v-bind:key="item.id" v-for="item in model.data">
                     <a class="nonblock nontext anim_swing clearfix grpelem" id="texttr">
                         <!-- content --><p>{{item.name}}</p></a>
                     <div v-if="item.description" @click="showModal(item)" class="PamphletWidget clearfix grpelem" id="pamphletu17790"><!-- none box -->
@@ -114,7 +114,6 @@
                     return carry
                 }, 0)
                 this.total = result
-                console.log(this.total)
             },
             buildURL() {
                 var p = this.params

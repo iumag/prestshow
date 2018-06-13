@@ -24,7 +24,7 @@
             <div class="popup_anchor" id="u8586popup">
                 <div class="SSSlideLinks clearfix hotelie" id="u8586"><!-- horizontal-rows box -->
                     <transition-group name="list-complete" tag="div">
-                        <div v-bind:key="item" @click="ChangeItem(item)"
+                        <div v-bind:key="item.id" @click="ChangeItem(item)"
                              class="hotelitem SSSlideLink rounded-corners clip_frame clearfix grpelem list-complete-item"
                              v-for="item in model.data"><!-- image -->
                             <img class="position_content" :src="'img/hotel/' + item.picture" alt="" width="131"
@@ -117,7 +117,6 @@
                         vm.$data.description = response.data.model.data[0].description
                         vm.$data.image = 'img/hotel/' + picture
                         vm.$data.item_hotel = response.data.model.data[0]
-                        //console.log( response.data.model.data[0].show)
                         Vue.set(vm.$data, 'model', response.data.model)
                     })
                     .catch(function (error) {

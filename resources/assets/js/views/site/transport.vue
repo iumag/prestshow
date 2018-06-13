@@ -5,7 +5,7 @@
         </div>
         <div class="wrap transport-wrap2">
             <transition-group name="transport-complete" tag="div">
-                <div class="transportwrap transport-complete-item" id="cityie" v-bind:key="item" v-for="item in model.data">
+                <div class="transportwrap transport-complete-item" id="cityie" v-bind:key="item.id" v-for="item in model.data">
                     <div v-if="item.description" @click="showModal(item)" class="PamphletWidget clearfix grpelem"
                          id="pamphletu17791"><!-- none box -->
                         <a href="javascript:void(0)" data-hint="Informacja" class="hint--top-right ThumbGroup clearfix grpelem" id="u17810"><!-- none box -->
@@ -120,7 +120,6 @@
                     return carry
                 }, 0)
                 this.total = result
-                console.log(this.total)
             }
         }
     }

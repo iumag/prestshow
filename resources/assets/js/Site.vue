@@ -504,6 +504,9 @@
             this.$on('getEvent', function (element) {
                 this.events = element
             })
+            this.$on('update-event-cost', function () {
+                this.events = []
+            })
             this.$on('modalHoliday', function (element) {
                 this.modal_photo = ''
                 this.modal_item = element
@@ -593,7 +596,6 @@
                 }
                 if ((element != 'is_hotel') && (this.modal_item.show == true)) {
                     this.scroll(element)
-                    console.log(this.modal_item.show)
                 }
                 if ((this.showElement['photographer'] == true) && (element == 'is_hotel')) {
                     this.showElement['cena'] = true
@@ -678,7 +680,6 @@
                 this.$refs.event.ShowMethod(event)
                 if (this.events.length == 0) {
                     this.showElement['cena'] = false
-                    console.log(this.showElement['cena'])
                     setTimeout(function () {
                         $("html,body").animate({scrollTop: $('#u8547-4').offset().top - 60}, 1000)
                     }, 1000);

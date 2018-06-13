@@ -39,7 +39,6 @@
             });
             setTimeout(function(){
                 this.picture_load = this.picture;
-                console.log( this.picture)
                 $('#picture').attr('src', this.picture)
             }.bind(this), 2000)
         },

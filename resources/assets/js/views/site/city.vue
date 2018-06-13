@@ -11,7 +11,7 @@
 
                     <div class="wrap" id="cityie">
                         <transition-group name="list-complete" tag="div">
-                            <div v-for="item in model.data" v-bind:key="item"
+                            <div v-for="item in model.data" v-bind:key="item.id"
                                  class="clearfix grpelem city list-complete-item"><!-- group -->
                                 <div class="gradient rounded-corners clip_frame clearfix grpelem citywrap">
                                     <!-- image -->
@@ -129,7 +129,6 @@
                     return carry
                 }, 0)
                 this.total = result
-                console.log(this.total)
             }
         }
     }

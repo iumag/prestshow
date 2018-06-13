@@ -156,7 +156,6 @@
         beforeMount() {
             this.fetchData()
             this.filter.forEach(function(item, i, arr) {
-                console.log(this.filter[i])
                 this.params.search_column_arr.push("");
                 this.params.search_query_arr.push("");
             }.bind(this));
@@ -244,7 +243,6 @@
                     if(!ent.show){
                         this.params.search_query_arr[indexQ] = ' '
                     }
-                console.log(this.params.seaech_column_arr);
                 this.filter.find(function (element, index, array) {
                     if (ent.name === element.entity) {
                         ent.show ? element.show = true : element.show = false;

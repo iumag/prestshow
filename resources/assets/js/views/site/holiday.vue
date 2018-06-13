@@ -11,7 +11,7 @@
                 </div>
                 <div class="wrap">
                     <div class="clearfix grpelem holiday"
-                         v-for="(item,index) in model.data" v-bind:key="item"><!-- group -->
+                         v-for="(item,index) in model.data" v-bind:key="item.id"><!-- group -->
                         <div v-if="item.show === true" class="Container rounded-corners clearfix grpelem wp-panel wp-panel-active"
                              id="u12112" role="tabpanel" aria-labelledby="u12117"><!-- group -->
                             <div class="rounded-corners grpelem" id="u12113"><!-- simple frame --></div>
@@ -113,12 +113,6 @@
                     return carry
                 }, 0)
                 this.total = result
-                console.log(this.total)
-            },
-            Test() {
-                return this.model.data.reduce(function (carry, item) {
-                    console.log(item.show)
-                }, 0)
             },
             buildURL() {
                 var p = this.params

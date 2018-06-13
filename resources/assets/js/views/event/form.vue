@@ -105,7 +105,6 @@
             this.pictures.push({
                 plus: true
             });
-            console.log(this.pictures)
             this.fetchData()
         },
         mounted(){

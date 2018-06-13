@@ -121,9 +121,6 @@
         watch: {
             '$route': 'fetchData'
         },
-        update() {
-            console.log(this.new_events)
-        },
         methods: {
             fetchData() {
                 var vm = this
@@ -150,7 +147,6 @@
             },
             getEvents() {
                 if ((this.form.holiday_id != 'Select') && (this.form.city_id != 'Select') || (this.$route.meta.mode === 'edit')) {
-                    console.log(this.form)
                     this.get_event = '/api/related_event/getNewEvents/city-' + this.form.city_id + '/holiday-' + this.form.holiday_id + '/edit_news-' + this.form.id;
                     var vm = this
                     axios.get(this.get_event)

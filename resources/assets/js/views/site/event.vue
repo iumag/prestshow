@@ -17,7 +17,7 @@
             <div :id="'prodow'+n" class="wrap wrap-padding" :data-test="n"
                  v-bind:class="[n===1 ? wrap_left : '', wrap]">
                 <div class="clearfix grpelem holiday" v-for="(item,index) in model.data"
-                     v-bind:key="item"
+                     v-bind:key="item.id"
                      v-if="(index<n*15 && n===1) || (n>1 && index>=(n-1)*15)"><!-- group -->
                     <div v-if="item.show === true" @click="ShowMethod(item)"
                          class="Container rounded-corners clearfix grpelem wp-panel wp-panel-active"
@@ -27,7 +27,9 @@
                     <div v-if="item.event.description" id="pamphletu16085" @click="showModal(item)"><!-- none box -->
                         <div class="ThumbGroup clearfix grpelem" id="u16107"><!-- none box -->
                             <div class="popup_anchor">
-                                <div href="javascript:void(0)" data-hint="Informacja" class="hint--top-right Thumb popup_element rounded-corners clearfix wp-tab-active" id="u16108"
+                                <div href="javascript:void(0)" data-hint="Informacja"
+                                     class="hint--top-right Thumb popup_element rounded-corners clearfix wp-tab-active"
+                                     id="u16108"
                                      role="button" tabindex="0" aria-haspopup="true" aria-controls="u16087">
                                     <!-- group -->
                                     <div class="clip_frame grpelem" id="u16109"><!-- image -->
@@ -44,7 +46,9 @@
 
                         </div>
                     </div>
-                    <div @click="ShowMethod(item)" v-bind:class="[item.show ? 'itemopacity' : '', 'pointer_cursor rounded-corners clearfix grpelem']" id="u10782"><!-- column -->
+                    <div @click="ShowMethod(item)"
+                         v-bind:class="[item.show ? 'itemopacity' : '', 'pointer_cursor rounded-corners clearfix grpelem']"
+                         id="u10782"><!-- column -->
 
                         <a class="nonblock nontext anim_swing clip_frame colelem" id="u10915"
                            Z><!-- image --><img class="block" id="u10915_img"
@@ -55,7 +59,8 @@
                     </div>
                 </div>
             </div>
-            <a v-if="(total > 1) && (total!=n)" class="nonblock nontext anim_swing clip_frame grpelem" id="u9420" @click="Scroll(n)">
+            <a v-if="(total > 1) && (total!=n)" class="nonblock nontext anim_swing clip_frame grpelem" id="u9420"
+               @click="Scroll(n)">
                 <!-- image --><img
                     class="block" id="u9420_img" src="images/down-arrow-crop-u9420.png?crc=4075218507" alt="" width="52"
                     height="31"></a>
@@ -71,12 +76,13 @@
 
     import axios from 'axios'
     import Vue from 'vue'
+
     export default {
         props: {
             city_id: {
                 type: Number
             },
-            holiday_id:{
+            holiday_id: {
                 type: Number
             }
         },
@@ -105,33 +111,39 @@
         beforeMount() {
             this.fetchData()
         },
-        mounted(){
-            if($(window).width() <=1000) {
+        mounted() {
+            if ($(window).width() <= 1000) {
                 $('#u11635-bw').css('display', 'none');
                 $('#u15327-bw').css('display', 'none');
                 $('#ppatrakcji').css('background', 'transparent url(../images/pexels-photo-225224.jpg) no-repeat center center');
                 $('#ppatrakcji').css('background-size', 'cover');
                 $('#ppatrakcji').css('width', 'initial');
 
-            }else{
+            } else {
                 $('#u11635-bw').css('display', 'block');
                 $('#u15327-bw').css('display', 'block');
                 $('#ppatrakcji').css('background', 'none');
                 $('#ppatrakcji').css('width', '0.01px');
             }
         },
-        updated() {
-            if (this.city_id != this.params.search_query_1) {
-                this.params.search_query_1 = this.city_id
-                this.fetchData()
-            }
-            if(this.holiday_id != this.params.search_query_3){
-                this.params.search_query_3 = this.holiday_id
-                this.fetchData()
+        watch:{
+            'city_id'(value) {
+                if (value != this.params.search_query_1) {
+                    this.params.search_query_1 = value
+                    this.fetchData()
+                    this.$parent.$emit('update-event-cost')
+                }
+            },
+            'holiday_id'(value) {
+                if (value != this.params.search_query_3) {
+                    this.params.search_query_3 = value
+                    this.fetchData()
+                    this.$parent.$emit('update-event-cost')
+                }
             }
         },
         methods: {
-            showModal(item){
+            showModal(item) {
                 this.$parent.$emit('modalEvent', item);
             },
             fetchData() {
@@ -146,14 +158,13 @@
                             total_round = 1
                         }
                         vm.$data.total = total_round
-                        console.log(vm.$data.total)
                         Vue.set(vm.$data, 'model', response.data.model)
                     })
                     .catch(function (error) {
                         console.log(error)
                     })
             },
-            ShowMethod(item){
+            ShowMethod(item) {
                 item.show = !item.show
                 let items = [];
                 this.model.data.forEach(function (item2) {
@@ -164,10 +175,10 @@
                 this.$parent.$emit('getEvent', items);
                 this.$parent.$emit('loadElement', 'is_hotel');
             },
-            scrollh(){
+            scrollh() {
                 this.$parent.scroll('is_hotel')
             },
-            Scroll(n){
+            Scroll(n) {
                 $("html,body").animate({scrollTop: $("#prodow" + (n + 1)).offset().top}, 1000)
             },
             buildURL() {
